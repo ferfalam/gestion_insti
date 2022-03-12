@@ -9,7 +9,7 @@ class General extends Model
 {
     use HasFactory;
 
-    // semestre_annee, semestre_cycle, annee_etude, type_enseignant/apprenant/UE/composition/
+    // semestre_annee, semestre_cycle, annee_etude, type_enseignant/apprenant/personnel/UE/composition/stage/, nature_UE
 
     protected $fillable = [
         'name',

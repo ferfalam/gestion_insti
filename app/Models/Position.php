@@ -5,13 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Status extends Model
+class Position extends Model
 {
     use HasFactory;
 
+    //chefService/Adjoint, collaborateur, chefCollaborateur, chefDivision, responsableClasse/Adjoint
+
     protected $fillable = [
         'name',
-        'notation', //integer
         'description',
     ];
 }

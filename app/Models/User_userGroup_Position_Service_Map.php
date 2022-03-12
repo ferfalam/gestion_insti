@@ -5,13 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Status extends Model
+class User_userGroup_Position_Service_Map extends Model
 {
     use HasFactory;
-
     protected $fillable = [
-        'name',
-        'notation', //integer
-        'description',
+        'userId',
+        'userGroupId',
+        'serviceId',
+        'positionId,'
     ];
 }
