@@ -13,6 +13,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+Auth::routes();
+
+Route::group(["prefix"=>"gestion_salle", "as"=>"gestion_salle."], function ()
+{
+    Route::get('/', "GestionSalleDeClasse\SalleController@index")->name("index");
 });
+
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
