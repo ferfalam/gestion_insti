@@ -14,6 +14,16 @@
                     </div>
                 </div>
             </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header">Gestion d'Authentification des Attestations et Classement</div>
+
+                    <div class="card-body">
+                        <p class="card-text">Vous serez redirigé vers la section de Gestion d'Authentification des Attestations et Classement de l'insti.</p>
+                        <a href="{{ route('gestion_authClass.index') }}" class="btn btn-primary w-25" style="float: right"><i class="fa-solid fa-arrow-right-long"></i></a>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 @endsection
