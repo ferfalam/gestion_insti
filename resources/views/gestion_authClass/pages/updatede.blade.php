@@ -30,7 +30,7 @@
                         </div>
                     </div>
                     <div class="col">
-                        <div class="form-group"><label for="contact"><strong>Contact</strong></label><input class="form-control" type="contact" placeholder="" name="contact">
+                        <div class="form-group"><label for="contact"><strong>Contact</strong></label><input class="form-control" type="contact" placeholder="{{$demande->contact}}" name="contact">
                             <span style="color: red">@error('Contact') {{$message}}@enderror</span>
                         </div>
                     </div>

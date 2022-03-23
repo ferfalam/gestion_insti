@@ -4,6 +4,10 @@ namespace App\Http\Controllers\GestionAuthAttClassement;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+// use App\Imports\EmployeeImport;
+use App\Models\GestionAuthAttClassement\MoyenneImport; 
+use Maatwebsite\Excel\Facades\Excel;
+use App\Models\GestionAuthAttClassement\MoyenneExport;
 
 class FileController extends Controller
 {
@@ -23,12 +27,12 @@ class FileController extends Controller
     */
     public function exportIntoExcel()
     {
-        return Excel::download(new EmployeeExport, 'Employee.xlsx');
+        return Excel::download(new MoyenneExport, 'Employee.xlsx');
     }
 
     public function exportIntoCSV()
     {
-        return Excel::download(new EmployeeExport, 'Employee.csv');
+        return Excel::download(new MoyenneExport, 'Employee.csv');
     }
 
     /**
@@ -36,19 +40,20 @@ class FileController extends Controller
     */
     public function importIntoCSV()
     {
-      return  Excel::import(new MoyImport,'employeelist.csv');
+      return  Excel::import(new MoyenneImport,'employeelist.csv');
 
         return back();
     }
 
     public function ImportForm(){
-        return view('pages/ficheDeliberation');
+        return view('gestion_authClass.pages/ficheDeliberation');
     }
 
     public function Import(Request $request){
 
-        Excel::import(new EmployeeImport,$request->file);
-        return "Record are imported successfully!";
+        Excel::import(new MoyenneImport,$request->file);
+        // return "Record are imported successfully!";
+        return redirect()->back();
     }
 
 }

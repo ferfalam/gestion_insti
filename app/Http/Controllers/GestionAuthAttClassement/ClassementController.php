@@ -3,7 +3,11 @@
 namespace App\Http\Controllers\GestionAuthAttClassement;
 
 use App\Http\Controllers\Controller;
+use App\Models\GestionAuthAttClassement\Moyenne;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\Redirect;
 
 class ClassementController extends Controller
 {
@@ -27,7 +31,7 @@ class ClassementController extends Controller
     public function create()
     {
  
-         $moyenne=DB::select('SELECT * FROM Moyenne Order by moy_generale DESC');
+         $moyenne=DB::select('SELECT * FROM Moyennes Order by moy_generale DESC');
          return view('gestion_authClass.pages.classement', ['moyenne' => $moyenne]);
  
     }

@@ -29,16 +29,24 @@ Route::group(["prefix"=>"gestion_authClass", "as"=>"gestion_authClass."], functi
     Route::get('/', "GestionAuthAttClassement\AuthClassController@index")->name("index");
     Route::get('/profile', "GestionAuthAttClassement\AuthClassController@profile")->name("profile");
    
+    Route::get('/demande', function () {
+        return view('gestion_authClass.pages/demande');
+    })->name('demande');
+    
+    Route::get('/demandeaff', function () {
+        return view('gestion_authClass.pages/demandeaff');
+    })->name('demandeaff');
     
     // Route::get('/updatede/{id}','App\Http\Controllers\DemandeeController@show')->middleware(['auth'])->name('showd');
-    Route::get('/demande', "GestionAuthAttClassement\DemandeAuthController@index1")->name("demande");
-    Route::get('/demandeaff', "GestionAuthAttClassement\DemandeAuth@demaff")->name("demandeaff");
+    // Route::get('/demande', "GestionAuthAttClassement\DemandeAuthController@index1")->name("demande");
+    Route::post('/listdemande','GestionAuthAttClassement\DemandeAuthController@store')->name('dem');
+    // Route::get('/demandeaff', "GestionAuthAttClassement\DemandeAuth@demaff")->name("demandeaff");
     Route::get('/updatede/{id}', 'GestionAuthAttClassement\DemandeAuthController@show')->name('edit');
     Route::get('/demandeaff/{id}', 'GestionAuthAttClassement\DemandeAuthController@edit')->name('medit');
     Route::get('/update/{id}', 'GestionAuthAttClassement\DemandeAuthController@show2')->name('edit2');
     Route::post('/updatede/{id}', 'GestionAuthAttClassement\DemandeAuthController@update')->name('update');
     Route::get('/listdemande','GestionAuthAttClassement\DemandeAuthController@create')->name('listdemande');   
-    Route::post('/listdemande','GestionAuthAttClassement\DemandeAuthController@store')->name('dem'); 
+     
     Route::get('/demande_r','GestionAuthAttClassement\DemandeAuthController@index')->name('demande_r');
     
 
@@ -47,7 +55,9 @@ Route::group(["prefix"=>"gestion_authClass", "as"=>"gestion_authClass."], functi
     Route::post('/classement','GestionAuthAttClassement\ClassementController@store')->name('dam');
     
     
-    Route::get('/pages/ficheDeliberation','GestionAuthAttClassement\FileController@ImportForm')->name('deliber');
+    Route::get('/ficheDeliberation','GestionAuthAttClassement\FileController@ImportForm')->name('deliber');
+    Route::post('/import','GestionAuthAttClassement\FileController@Import')->name('employee.import');
+    Route::get('/export-excel','GestionAuthAttClassement\FileController@exportIntoExcel')->name('export-excel');
     // Route::get('pages/ficheDeliberation', [FileController::class, 'ImportForm'])->name('deliber');
     // Route::post('/import', [FileController::class, 'Import'])->name('employee.import');
     // Route::get('/export-excel', [FileController::class, 'exportIntoExcel'])->name('export-excel');

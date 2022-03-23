@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateMoyenneTable extends Migration
+class CreateMoyennesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateMoyenneTable extends Migration
      */
     public function up()
     {
-        Schema::create('moyenne', function (Blueprint $table) {
+        Schema::create('moyennes', function (Blueprint $table) {
             $table->id('id');
             $table->string('name');
             $table->string('genre');
@@ -34,6 +34,6 @@ class CreateMoyenneTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('moyenne');
+        Schema::dropIfExists('moyennes');
     }
 }

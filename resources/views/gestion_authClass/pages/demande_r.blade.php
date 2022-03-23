@@ -37,7 +37,7 @@
                             <td> {{explode(' ',$demandes->created_at)[1]}}</td>
                             <td>
                                 <button class="btn btn-primary btn-sm" type="submit">
-                                    <a href="{{route('gestion_authClass.edit2',$demandes->id)}}">Voir</a>
+                                    <a href="{{route('gestion_authClass.edit2',$demandes->id)}}" style="color:white ;text-decoration:none">Voir</a>
                                 </button>
                             </td>
                         </tr>

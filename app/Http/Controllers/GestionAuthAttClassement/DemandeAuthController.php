@@ -6,6 +6,10 @@ use App\Models\GestionAuthAttClassement\Demande;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+use Illuminate\Mail\Mailable;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Redirect;
+
 class DemandeAuthController extends Controller
 {
      /**
@@ -61,19 +65,21 @@ class DemandeAuthController extends Controller
      public function store(Request $request)
      {
  
+       
          $request->validate([
-             'last_name'=>['required'],
-             'first_name'=>['required'],
-             'email'=>['required'],
-             'contact'=>['required'],
-             'entite' =>['required'],
-             'status'=>['required'],
-             'piece'=>['required','image'],
-             'objet'=>['required'],
-             'redaction'=>['required'],
+             'last_name',
+             'first_name',
+             'email',
+             'contact',
+             'entite' ,
+             'status',
+             'piece',
+             'objet',
+             'redaction',
          ]);
- 
-        $path= request('piece')->store('avatars');
+        
+        //  dd($request->last_name);
+        // $path= request('piece')->store('avatars');
  
          $details=[
              'name_d'=>$request->last_name,
@@ -103,9 +109,9 @@ class DemandeAuthController extends Controller
  
          $demande->save();
  
-         Mail::to('dagilles84@gmail.com')->send(new TestMail($details));
+        //  Mail::to('dagilles84@gmail.com')->send(new TestMail($details));
  
-          return redirect('listdemande')->with('success');
+          return redirect()->route('gestion_authClass.listdemande')->with('success');
  
      }
  
@@ -168,7 +174,7 @@ class DemandeAuthController extends Controller
  
          $demande->update($request->all());
  
-         return redirect('listdemande')->with('success');
+         return redirect('gestion_authClass.listdemande')->with('success');
      }
  
      /**
