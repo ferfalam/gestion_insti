@@ -58,12 +58,7 @@ Route::group(["prefix"=>"gestion_authClass", "as"=>"gestion_authClass."], functi
     Route::get('/ficheDeliberation','GestionAuthAttClassement\FileController@ImportForm')->name('deliber');
     Route::post('/import','GestionAuthAttClassement\FileController@Import')->name('employee.import');
     Route::get('/export-excel','GestionAuthAttClassement\FileController@exportIntoExcel')->name('export-excel');
-    // Route::get('pages/ficheDeliberation', [FileController::class, 'ImportForm'])->name('deliber');
-    // Route::post('/import', [FileController::class, 'Import'])->name('employee.import');
-    // Route::get('/export-excel', [FileController::class, 'exportIntoExcel'])->name('export-excel');
-    
-    
-    
+        
     
     Route::get('/send-mail', [\App\Http\Controllers\MailController::class, 'sendMail'])->middleware(['auth'])->name('send-mail');
 });
