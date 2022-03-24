@@ -43,7 +43,7 @@
                         </tr>
 
                         @empty
-                        <li><h1>Aucun evenement en cours</h1></li>
+                        <li><h1>Aucune demande en cours</h1></li>
 
                 @endforelse
 
