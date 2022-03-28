@@ -19,20 +19,20 @@
                         </div>
                     </li>
                     <li class="nav-item dropdown no-arrow">
-                        {{-- @php
+                        @php
                             $profil=DB::table('profiles')->where('user_id',Auth::user()->id)->first();
                             $table=$profil->image;
-                        @endphp --}}
+                        @endphp
                         <div class="nav-item dropdown no-arrow">
                             <a class="dropdown-toggle nav-link" aria-expanded="false" data-toggle="dropdown" href="#">
                                 <span class="d-none d-lg-inline mr-2 text-gray-600 small"> JSON
                                 </span>
-                                {{-- {{ $profil->prenom.' '.$profil->nom }} --}}
-                                {{-- @if($table!=null)
+                                {{ $profil->prenom.' '.$profil->nom }}
+                                @if($table!=null)
                                 <img class="border rounded-circle img-profile" id="profileImgNav" src="{{$table}}" name="profileImgNav">
-                                @else --}}
+                                @else
                                 <img class="border rounded-circle img-profile" id="profileImgNav" src="assets/img/logoEnseignants.jpg" name="profileImgNav">
-                                {{-- @endif --}}
+                                @endif
                             </a>
                             <div class="dropdown-menu shadow dropdown-menu-right animated--grow-in"><a class="dropdown-item" href="/profile"><i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Profile</a>
                                 <div class="dropdown-divider"></div><a class="dropdown-item" href="/deconnexion"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>&nbsp;Deconnexion</a>
