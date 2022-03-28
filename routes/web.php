@@ -80,3 +80,39 @@ Route::group(["prefix"=>"gestion_entreprises_stage", "as"=>"gestion_entreprises_
 
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+//Gestion deroulement cours
+
+Route::group(["prefix"=>"gestion_deroulement_cours", "as"=>"gestion_deroulement_cours."], function ()
+{
+
+    Route::get('/', "GestionDeroulementCours\HomeController@index")->name('accueil');
+
+    Route::get('/formCours', 'GestionDeroulementCours\FormulaireDeroulementCoursController@createFiche')->name('formulaire_Deroulement_Cours');
+
+    Route::post('/formCours', 'GestionDeroulementCours\FormulaireDeroulementCoursController@store')->name('saveFicheEtudiant');
+
+    Route::put('/formCours', 'GestionDeroulementCours\FormulaireDeroulementCoursController@update')->name('updateFicheEtudiant');
+
+    Route::get('/ficheDeCoursSortant', 'GestionDeroulementCours\FormulaireDeroulementCoursController@readFicheDefinitive')->name('retraitFicheEtudiant');
+
+    Route::get('/ficheDeCoursEnseignant', 'GestionDeroulementCours\FormulaireDeroulementCoursController@readFicheDefinitive')->name('RetraitFicheEnseignantGlobal');
+
+    // a revoir
+    Route::get('/nouveauGroupePedagogique', 'GestionDeroulementCours\SaveModuleController@createGroupePedagogique')->name('newField');
+
+    Route::post('/nouveauGroupePedagogique', 'GestionDeroulementCours\SaveModuleController@storeGroupePedagogique')->name('saveNewGroup');
+
+    Route::get('/nouvelleFiliere', 'GestionDeroulementCours\SaveModuleController@createFiliere')->name('newFields');
+
+    Route::post('/nouvelleFiliere', 'GestionDeroulementCours\SaveModuleController@storeFiliere')->name('saveNewField');
+
+    // Route::get('/accueil', function()
+    // {
+    //     return view('gestionDeroulementCours/accueil');
+    // })->name('accueil');
+
+});
+
+
+
