@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\GestionSalleDeClasse\SheduleController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,6 +23,8 @@ Auth::routes();
 Route::group(["prefix"=>"gestion_salle", "as"=>"gestion_salle."], function ()
 {
     Route::get('/', "GestionSalleDeClasse\SalleController@index")->name("index");
+    Route::resource('shedule', "GestionSalleDeClasse\SheduleController");
+    Route::resource('class_shedule', "GestionSalleDeClasse\ClassSheduleController");
 });
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
