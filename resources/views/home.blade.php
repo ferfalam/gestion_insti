@@ -22,6 +22,7 @@
                         <p class="card-text">Vous serez redirigé vers la section de gestion des enseignants et des
                             Missions d'enseignement de l'insti.</p>
                         <a href="{{ route('gestion_enseignant.show') }}" class="btn btn-primary w-25" style="float: right"><i class="fa-solid fa-arrow-right-long"></i></a>
+                    </div>
                 </div>
             </div>
 
