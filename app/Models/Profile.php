@@ -19,7 +19,7 @@ class Profile extends Model
         'com_diploma',
         'com_registrationNumber',
         'com_phoneNumber', 
-        'com_address'
+        'com_address',
         'com_parentFullname', 
         'com_parentGivenName',
         'com_parentPhoneNumber',

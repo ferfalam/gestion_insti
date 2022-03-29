@@ -14,4 +14,6 @@ class Status extends Model
         'notation', //integer
         'description',
     ];
+
+    public $timestamps = false;
 }
