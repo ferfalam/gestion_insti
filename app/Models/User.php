@@ -21,7 +21,7 @@ class User extends Authenticatable
         'pseudo',
         'email',
         'password',
-        'statusId,'
+        'statusId'
     ];
 
     /**
@@ -42,4 +42,8 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    function conseils(){
+        return $this->hasMany(Conseil::class);
+    }
 }
