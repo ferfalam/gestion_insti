@@ -17,8 +17,8 @@ class CreateUserUserGroupPositionServiceMapsTable extends Migration
             $table->id();
             $table->foreignId('userId')->constrained('users');
             $table->foreignId('userGroupId')->constrained('user_groups');
-            $table->foreignId('serviceId')->constrained('services');
-            $table->foreignId('positionId')->constrained('positions');
+            $table->foreignId('serviceId')->nullable()->constrained('services');
+            $table->foreignId('positionId')->nullable()->constrained('positions');
         //     'userId'
         // '',
         // '',

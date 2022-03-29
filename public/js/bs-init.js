@@ -4,4 +4,6 @@ $(document).ready(function(){
 		this.chart = new Chart($(elem), $(elem).data('bs-chart'));
 	});
 
+	AOS.init({ disable: 'mobile' });
+	$('[data-bs-tooltip]').tooltip();
 });
