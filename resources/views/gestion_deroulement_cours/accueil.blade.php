@@ -3,26 +3,16 @@
 @section('title') Accueil @endsection
 
 @section('style_for_file_point')
-
     <style>
-
-        .description{
-            margin : 2%;
-            padding : 1%;
-        }
-        #content-wrapper h2{
+        #content-wrapper h2 {
             padding-top: 12px;
         }
-        
     </style>
 
 @endsection
 
-
-
 @section('main')
-    
-    <div class="container">
+
         <div class="d-flex flex-column" id="content-wrapper">
 
                 <br>
@@ -34,7 +24,7 @@
                                 une version numérique des cahiers de textes suite aux fiches de déroulement remplies.
                             </p>
 
-                                {!!  $number = rand(0,3) !!}
+                                {{-- {!!  $number = rand(0,3) !!}
 
                                 <br>
                                 
@@ -42,7 +32,7 @@
                                     <p> Aucune fiche Créée </p>                     
                                 @else
                                         Get All {{ Str::plural('Fiche',$number) }} {{ Str::plural('crée', $number) }}
-                                @endif
+                                @endif --}}
                                     
                             
                             <ul>
@@ -55,6 +45,10 @@
 
                                 <li> <a href="{{ route('gestion_deroulement_cours.RetraitFicheEnseignantGlobal') }}"> Retirer fiche Enseignant Global </a> </li>
                 
+                                <li> <a href="{{ route('gestion_deroulement_cours.newField') }}"> Integrer un nouveau groupe Pedagogique  </a> </li>
+
+                                <li> <a href="{{ route('gestion_deroulement_cours.newFields') }}"> Integrer une nouvelle filiere </a> </li>
+
                             </ul>
 
                            
@@ -65,6 +59,4 @@
         </div>
 
         
-
-    </div>
 @endsection

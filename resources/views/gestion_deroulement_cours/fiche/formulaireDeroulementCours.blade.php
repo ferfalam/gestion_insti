@@ -11,16 +11,26 @@
         .retourAccueil{
 
             padding-left : 70px ;
-    
+            padding-bottom: 12px;
+        }
+        #content-wrapper h2{
+
+            padding: 23px;
+            margin-bottom: 12px;
+        }
+        .error{
+            font-size : 17px;
+            color:rgb(204, 75, 75);
+            font-style: italic;
         }
     </style>
 @endsection
 
 @section('main')
 
+    
         <div class="d-flex flex-column" id="content-wrapper">
-            <div id="content"><div class="register-photo">
-        <div class="form-container shadow">
+            
 
             <form data-bs-hover-animate="pulse" method="post" action="{{ route('gestion_deroulement_cours.saveFicheEtudiant') }}" novalidate>
                 {{ csrf_field() }}
@@ -29,8 +39,14 @@
 
                 <div class="form-group">
                     <div class="form-row">
-                        <div class="col"><input class="form-control" type="text" data-aos="fade-right" data-aos-duration="700" data-aos-delay="600" name="surname" placeholder="Nom" required=""></div>
-                        <div class="col"><input class="form-control" type="text" data-aos="fade-left" data-aos-duration="700" data-aos-delay="600" name="name" placeholder="Prenoms" required=""></div>
+                        <div class="col">
+                            <input class="form-control" type="text" data-aos="fade-right" data-aos-duration="700" data-aos-delay="600" name="surname" placeholder="Nom" required="">
+                            {!! $errors->first('surname', '<span class="error"> :message </span>') !!}
+                        </div>
+                        <div class="col">
+                            <input class="form-control" type="text" data-aos="fade-left" data-aos-duration="700" data-aos-delay="600" name="name" placeholder="Prenoms" required="">
+                            {!! $errors->first('name', '<span class="error"> :message </span>') !!}
+                        </div>
                     </div>
                 </div>
 
@@ -48,7 +64,8 @@
                                         @endforeach
 
                                     </optgroup>
-                            </select>   
+                            </select>
+                            {!! $errors->first('yearstudy', '<span class="error"> :message </span>') !!}   
                         </div>
                     </div>
                 </div>
@@ -67,7 +84,9 @@
                                             </option>
                                         @endforeach
                                     </optgroup>
-                                </select>
+                            </select>
+                            {!! $errors->first('filiere', '<span class="error"> :message </span>') !!}
+
                         </div>
 
                         <div class="col" data-aos="fade-left" data-aos-duration="700" data-aos-delay="600">
@@ -83,13 +102,18 @@
 
                                     </optgroup>
                                 </select>
+                                {!! $errors->first('ue', '<span class="error"> :message </span>') !!}
                         </div>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <div class="form-row">
-                        <div class="col"><label style="font-weight: normal;"> Date de déroulement </label><input class="form-control" type="date" data-aos="fade-right" data-aos-duration="700" data-aos-delay="600" name="date" required=""></div>
+                        <div class="col">
+                            <label style="font-weight: normal;"> Date de déroulement </label>
+                            <input class="form-control" type="date" data-aos="fade-right" data-aos-duration="700" data-aos-delay="600" name="date" required="">
+                            {!! $errors->first('date', '<span class="error"> :message </span>') !!}
+                        </div>
                     </div>
                 </div>
 
@@ -99,8 +123,10 @@
                         <div class="col">
                         De
                             <input class="form-control" type="time" data-aos="fade-right" data-aos-duration="700" data-aos-delay="600" name="starttime" placeholder="De" required=""> <br>
+                            {!! $errors->first('starttime', '<span class="error"> :message </span>') !!}
                         A 
                             <input class="form-control" type="time" data-aos="fade-right" data-aos-duration="700" data-aos-delay="600" name="endtime" placeholder="A" required=""> 
+                            {!! $errors->first('endtime', '<span class="error"> :message </span>') !!}
                         </div>
                     </div>
                 </div>
@@ -120,14 +146,18 @@
 
                                 </optgroup>
                             </select>
+                            {!! $errors->first('semester', '<span class="error"> :message </span>') !!}
                         </div>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <div class="form-row">
-                        <div class="col"><label style="font-weight: normal;"> Observation </label><input class="form-control" type="text-area" data-aos="fade-right" data-aos-duration="700" data-aos-delay="600" name="date" required=""></div>
-                    </div>
+                        <div class="col"><label style="font-weight: normal;"> Observation </label>
+                            <input class="form-control" type="text-area" data-aos="fade-right" data-aos-duration="700" data-aos-delay="600" name="observation" required="">
+                            {!! $errors->first('observation', '<span class="error"> :message </span>') !!}
+                        </div>
+                        </div>
                 </div>
 
                 <div class="form-group">
@@ -138,9 +168,9 @@
 
             </form>
 
+            <br>
+            <li class="retourAccueil" >  <a href="{{ route('gestion_deroulement_cours.accueil') }}"> Annuler </a></li>
+       
         </div>
-
-        <br>
-        <li class="retourAccueil" >  <a href="{{ route('gestion_deroulement_cours.accueil') }}"> Annuler </a></li>
 
 @endsection

@@ -57,12 +57,12 @@
 
                             <tbody>
                                 <tr>
-                                    <td>  </td>
-                                    <td>  </td>
-                                    <td>  </td>
-                                    <td>  </td>
-                                    <td>  </td>
-                                    <td>  </td>
+                                    <td> Informatique et Telecommuncation </td>
+                                    <td> 3eme annee </td>
+                                    <td> Developpement d'application mobile </td>
+                                    <td> 72h </td>
+                                    <td> 67h </td>
+                                    <td> 4 </td>
                                 </tr>
                             </tbody> 
 

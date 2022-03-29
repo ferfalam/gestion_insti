@@ -65,8 +65,7 @@
                                     <td> 03:23:PM </td>
                                     <td> 07:23:PM </td>
                                     <td> 
-                                        04 
-                                        {{.}} heures 
+                                        04 heures 
                                     </td>
                                 </tr>
                             </tbody> 
@@ -102,9 +101,10 @@
                     <strong> Signature <sub> Enseignant </sub> : </strong>
                    
                     </br></br>
-
-                    <a href="{{ route('gestion_deroulement_cours.accueil') }}" style="float : right" >
-                        <button type="button" class="btn btn-primary"> Envoyer </button>
+                    
+                
+                    <a href="{{ route('gestion_deroulement_cours.downloadFiche') }}" style="float : right" >
+                        <button type="button" class="btn btn-primary"> Importer sous PDF </button>
                     </a>
                     </br>
                 </div>

@@ -5,15 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Field extends Model
+class Ue extends Model
 {
-    
+    use HasFactory;
 
     protected $fillable = [
-        'systemName',
         'name',
-        'abbreviation',
-        'description',
-        'offer', // fichier à discuter
+        'abbreviation', //integer
+        'code',
     ];
 }

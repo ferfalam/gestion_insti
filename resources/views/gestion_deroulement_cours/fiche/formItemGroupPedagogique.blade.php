@@ -8,6 +8,7 @@
         {
             text-align : center ;
         }
+
         .description{
             margin : 2%;
             padding : 1%;
@@ -19,9 +20,12 @@
             border : 2px solid #e3e6f0;
         }
         .retourAccueil{
-
             padding-left : 70px ;
-
+        }
+        .error{
+            font-size : 17px;
+            color:rgb(204, 75, 75);
+            font-style: italic;
         }
         </style>
 @endsection
@@ -34,15 +38,38 @@
 
             <form data-bs-hover-animate="pulse" method="post" action="{{ route('gestion_deroulement_cours.saveNewGroup') }}" novalidate>
                 {{ csrf_field() }} 
-                
+
                 <h2 class="text-center" data-aos="fade-down" data-aos-duration="600" data-aos-delay="400" style="font-size: 29px;"><strong> <br> Nouveau Groupe Pedagogique </strong></h2>
+                    
+                
+                    <div class="form-group">
+
+                        @if ( count($groupPedagogique) == 0 )
+                            <label for="fields"> <strong class="wordgrp"> Liste des Groupes pedagogiques existantes </strong> </label> <br>
+                        @else
+                            <label for="fields"> <strong class="wordgrp"> Liste des Groupes pedagogiques existantes </strong> </label> <br>
+                    
+                            <select class="form-control" id="fields" name="groupPedag" required="" onChange='ajout_input(this.form)'>
+                                <optgroup label="Groupe Pedagogique">
+                                    @foreach($groupPedagogique as $grpPedag)
+                                        <option>
+                                            {!!$grpPedag->name!!}
+                                        </option>
+                                    @endforeach
+                                </optgroup>
+                            </select>
+                        @endif
+                    </div>
+                    
                     <div class="form-group" >
                         <label for="dsgn"> Designation </label> <br>
                         <div class="form-row">
-                            <div class="col"><input class="form-control" id="dsgn" type="text" data-aos="fade-right" data-aos-duration="700" data-aos-delay="600" name="nameGP" required=""></div>
+                            <div class="col">
+                                <input class="form-control" id="dsgn" type="text" data-aos="fade-right" data-aos-duration="700" data-aos-delay="600" name="nameGP" required="">
+                                {!! $errors->first('designation', '<span class="error"> :message </span>') !!}
+                            </div>
                         </div>
                     </div>
-
                     {{-- <div class="form-group">
                         <label for="fields"> Option <strong> Filiere(s) </strong> </label> <br>
                             <script type="text/javascript">
@@ -68,14 +95,15 @@
                                         @endforeach
                                     </optgroup>
                                 </select>
-                           
-                        
                     </div> --}}
 
                     <div class="form-group">
                         <label style="font-weight: normal;"> Description </label>
                         <div class="form-row">
-                            <div class="col"><input class="form-control" type="text-area" data-aos="fade-right" data-aos-duration="700" data-aos-delay="600" name="description" required=""></div>
+                            <div class="col">
+                                <input class="form-control" type="text-area" data-aos="fade-right" data-aos-duration="700" data-aos-delay="600" name="description" required="">
+                                {!! $errors->first('description', '<span class="error"> :message </span>') !!}
+                            </div>
                         </div>
                     </div>
 

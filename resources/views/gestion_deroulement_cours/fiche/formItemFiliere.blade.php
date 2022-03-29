@@ -19,9 +19,12 @@
             border : 2px solid #e3e6f0;
         }
         .retourAccueil{
-
             padding-left : 70px ;
-
+        }
+        .error{
+            font-size : 17px;
+            color:rgb(204, 75, 75);
+            font-style: italic;
         }
         </style>
 @endsection
@@ -37,27 +40,35 @@
             <form data-bs-hover-animate="pulse" method="post" action="{{ route('gestion_deroulement_cours.saveNewField') }}" novalidate>
                 {{ csrf_field() }} 
                 
-                <h2 class="text-center" data-aos="fade-down" data-aos-duration="600" data-aos-delay="400" style="font-size: 29px;"><strong> <br> Nouvelle Filiere </strong></h2>
-                    
+                <h2 class="text-center" data-aos="fade-down" data-aos-duration="600" data-aos-delay="400" style="font-size: 29px;"><strong> <br> Nouvelle Filiere </strong></h2>    
+                
                 <div class="form-group">
-                    <label for="fields"> <strong> Liste des Filieres existantes </strong> </label> <br>
+
+                    @if ( count($filieres) == 0)
+                        <label for="fields"> <strong> Aucune filiere enrégistrée </strong> </label> <br>
+                    @else
+                        <label for="fields"> <strong> Liste des Filieres existantes </strong> </label> <br>
                 
                         <select class="form-control" id="fields" name="filiere" required="" onChange='ajout_input(this.form)'>
                             <optgroup label="Filière">
                                 @foreach($filieres as $one_filiere)
                                     <option>
-                                        {!!$one_filiere->appelation!!}
+                                        {!!$one_filiere->name!!}
                                     </option>
                                 @endforeach
                             </optgroup>
                         </select>
+                    @endif
                 </div>
                 
                 
                     <div class="form-group" >
                         <label for="dsgn"> Appelation </label> <br>
                         <div class="form-row">
-                            <div class="col"><input class="form-control" id="dsgn" type="text" data-aos="fade-right" data-aos-duration="700" data-aos-delay="600" name="appelation" required=""></div>
+                            <div class="col">
+                                <input class="form-control" id="dsgn" type="text" data-aos="fade-right" data-aos-duration="700" data-aos-delay="600" name="appelation" required="">
+                                {!! $errors->first('appelation', '<span class="error"> :message </span>') !!}
+                            </div>
                         </div>
                     </div>
 
@@ -67,14 +78,20 @@
                             <div class="col" data-aos="fade-right" data-aos-duration="700" data-aos-delay="600">
                                 <label style="font-weight: normal;" id="name_sys"> Nom Systeme </label>
                                 <div class="form-row">
-                                    <div class="col"><input class="form-control" id="name_sys" type="text" data-aos="fade-right" data-aos-duration="700" data-aos-delay="600" name="nameSys" required=""></div>
+                                    <div class="col">
+                                        <input class="form-control" id="name_sys" type="text" data-aos="fade-right" data-aos-duration="700" data-aos-delay="600" name="nameSys" required="">
+                                        {!! $errors->first('nameSys', '<span class="error"> :message </span>') !!}
+                                    </div>
                                 </div>
                             </div>
     
                             <div class="col" data-aos="fade-left" data-aos-duration="700" data-aos-delay="600">
                                 <label style="font-weight: normal;" id="abrv"> Abreviation </label>
                                 <div class="form-row">
-                                    <div class="col"><input class="form-control" id="abrv" type="text" data-aos="fade-right" data-aos-duration="700" data-aos-delay="600" name="abreviation" required=""></div>
+                                    <div class="col">
+                                        <input class="form-control" id="abrv" type="text" data-aos="fade-right" data-aos-duration="700" data-aos-delay="600" name="abreviation" required="">
+                                        {!! $errors->first('abreviation', '<span class="error"> :message </span>') !!}
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -84,7 +101,10 @@
                     <div class="form-group">
                         <label style="font-weight: normal;"> Description </label>
                         <div class="form-row">
-                            <div class="col"><input class="form-control" type="text-area" data-aos="fade-right" data-aos-duration="700" data-aos-delay="600" name="description" required=""></div>
+                            <div class="col">
+                                <input class="form-control" type="text-area" data-aos="fade-right" data-aos-duration="700" data-aos-delay="600" name="description" required="">
+                                {!! $errors->first('description', '<span class="error"> :message </span>') !!}
+                            </div>
                         </div>
                     </div>
 

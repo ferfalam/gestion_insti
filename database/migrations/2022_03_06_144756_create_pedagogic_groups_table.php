@@ -19,6 +19,7 @@ class CreatePedagogicGroupsTable extends Migration
             $table->foreignId('fieldId')->constrained('fields');
             $table->foreignId('academicYearId')->constrained('academic_years');
             $table->foreignId('studyYearId')->constrained('generals');
+            $table->text('description');
             //$table->timestamps();
         });
     }

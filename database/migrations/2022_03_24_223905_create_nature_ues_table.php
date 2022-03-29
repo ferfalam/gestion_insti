@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTypeUESTable extends Migration
+class CreateNatureUesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class CreateTypeUESTable extends Migration
      */
     public function up()
     {
-        Schema::create('type_u_e_s', function (Blueprint $table) {
+        Schema::create('nature_ues', function (Blueprint $table) {
             $table->id();
-            $table->string('designation');
+            $table->string('appelation');
             $table->timestamps();
         });
     }
@@ -27,6 +27,6 @@ class CreateTypeUESTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('type_u_e_s');
+        Schema::dropIfExists('nature_u_e_s');
     }
 }

@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\GestionDeroulementCours;
 
+use App\Models\Field;
 use Illuminate\Http\Request;
+use App\Models\PedagogicGroup;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
@@ -28,10 +30,11 @@ class SaveModuleController extends Controller
     public function createFiliere( Request $request)
     {
 
-        $filieres = DB::select('select appelation from filieres');
+        $filieres = Field::all() ;
+        // $filieres = DB::select('select appelation from filieres');
         // Get the information from the database
 
-        return view ('gestionDeroulementCours/formItemFiliere', compact('filieres'));
+        return view ('gestion_deroulement_cours.fiche.formItemFiliere', compact('filieres'));
     }
 
     /**
@@ -52,15 +55,17 @@ class SaveModuleController extends Controller
             ]
         ]);
 
-        /* NameOfModel::create(
+        Field::create(
             [
-                'attributes' => $request->nameInForm,
-                'title' => $request-> title
+                'name' => $request->appelation,
+                'systemName' => $request->nameSys,
+                'abbreviation' => $request->abreviation,
+                'description' => $request->description,
+                'offer' => null
             ]
-        );*/
-        
-        // return redirect('/accueil');
-        return view('gestionDeroulementCours/formItemFiliere');
+        );
+     
+        return view('gestion_deroulement_cours.fiche.formItemFiliere');
     }
 
 
@@ -71,12 +76,11 @@ class SaveModuleController extends Controller
      */
     public function createGroupePedagogique( Request $request)
     {
-        $filieres = DB::select('select appelation from filieres');
-
+        $groupPedagogique = PedagogicGroup::all() ;
 
         // Get the information from the database
 
-        return view ('gestionDeroulementCours/formItemGroupPedagogique', compact('filieres'));
+        return view ('gestion_deroulement_cours.fiche.formItemGroupPedagogique', compact('groupPedagogique'));
     }
 
     /**
@@ -95,6 +99,13 @@ class SaveModuleController extends Controller
             ]
         ]);
 
+        $designation = $request->input('nameGP');
+        $description = $request->input('description');
+
+        $data=array('name'=>$designation,"description"=>$description);
+        DB::table('pedagogic_groups')->insert($data);
+
+
         // Insere in Database
 
         /* NameOfModel::create(
@@ -105,7 +116,7 @@ class SaveModuleController extends Controller
         );*/
         
         // return redirect('/accueil');
-        return view('gestionDeroulementCours/formItemGroupPedagogique');
+        return view('gestion_deroulement_cours.fiche.formItemGroupPedagogique');
     }
 
     

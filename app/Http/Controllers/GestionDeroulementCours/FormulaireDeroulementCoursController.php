@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\GestionDeroulementCours;
 
+use App\Models\Ue;
 use App\Models\Field;
 use App\Models\AcademicYear;
 use Illuminate\Http\Request;
@@ -27,7 +28,7 @@ class FormulaireDeroulementCoursController extends Controller
 
         $annee_detude = AcademicYear::all() ;
         $filieres = Field::all() ;
-        // $ues = U_E_S::all() ;
+        $ues = Ue::all() ;
         $acad_semestre = AcademicSemester::all() ;
         $groupe_pedagogique = PedagogicGroup::all();
 
@@ -78,12 +79,22 @@ class FormulaireDeroulementCoursController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function readFicheDefinitive( Request $request)
+    public function readFicheCourseExecute ( Request $request)
     {
         // Get the information from the database
-        return view ('gestion_deroulement_cours.accueil');
+        return view ('gestion_deroulement_cours.fiche.ficheDeCoursSortant');
     }
 
+    /**
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function readFicheAllCourseTeacher( Request $request)
+    {
+        // Get the information from the database
+        return view ('gestion_deroulement_cours.fiche.ficheDeCoursEnseignant');
+    }
+    
     /**
      *
      * @return \Illuminate\Http\Response
