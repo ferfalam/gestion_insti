@@ -14,11 +14,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-
-    <div class="container">
-        <div class="row">
             <div class="col-md-4">
                 <div class="card">
                     <div class="card-header">Gestion des enseignants et Mission d'enseignement</div>

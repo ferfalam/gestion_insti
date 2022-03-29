@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
-Route::group(["prefix"=>"gestion_salle", "as"=>"gestion_salle."], function ()
+Route::group(["prefix"=>"gestion_salle", "as"=>"gestion_salle.", "middleware" => "auth"], function ()
 {
     Route::get('/', "GestionSalleDeClasse\SalleController@index")->name("index");
     Route::resource('shedule', "GestionSalleDeClasse\SheduleController");
@@ -28,7 +28,8 @@ Route::group(["prefix"=>"gestion_salle", "as"=>"gestion_salle."], function ()
 });
 
 
-Route::group(["prefix"=>"gestion_enseignant", "as"=>"gestion_enseignant."], function ()
+
+Route::group(["prefix"=>"gestion_enseignant", "as"=>"gestion_enseignant.","middleware" => "auth"], function ()
 {
 
     //Route::get('/', [App\Http\Controllers\GestionDesEnseignants\ConnexionController::class,'affichage'])->name("index");

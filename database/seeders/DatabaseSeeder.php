@@ -20,7 +20,7 @@ class DatabaseSeeder extends Seeder
 
          $status=Status::create(['name'=>'Bloquer','notation'=>1,'description'=>"Description diu status créer"]);
          $user=User::create(['pseudo'=>"chola Patrick",'email'=>"chola@gmail.com",'password'=>Hash::make('12345678'),'statusId'=>1]);
-         
+
 
     }
 }

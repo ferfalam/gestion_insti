@@ -15,7 +15,7 @@ class CreateProfilesTable extends Migration
     {
         Schema::create('profiles', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('userId')->constrained('users');
+            $table->foreignId('user_id')->constrained('users');
             $table->string('com_fullname')->min(2);
             $table->string('com_givenName')->min(3);
             $table->string('com_gender');
@@ -29,9 +29,9 @@ class CreateProfilesTable extends Migration
             $table->string('com_parentGivenName');
             $table->integer('com_parentPhoneNumber'); //à voir
             $table->foreignId('app_fieldId')->constrained('fields');
-            //$table->string('app_pedagogicGroupId'); #problématique 
+            //$table->string('app_pedagogicGroupId'); #problématique
             $table->foreignId('app_typeId')->constrained('generals');
-            $table->string('ens_principalSpeciality')->nullable(); 
+            $table->string('ens_principalSpeciality')->nullable();
             $table->string('ens_aditionalSpeciality')->nullable();
             $table->string('ens_RIB')->nullable();
             $table->foreignId('ens_typeId')->constrained('generals');
