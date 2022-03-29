@@ -5,13 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Ue extends Model
+class AcademicSemester extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'name',
-        'abbreviation', //integer
-        'code',
+        'designation',
+        'calendar', //fichier
+        'startDate',
+        'endDate',
+        'observation',
     ];
 }

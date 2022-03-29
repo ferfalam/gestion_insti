@@ -14,5 +14,6 @@ class PedagogicGroup extends Model
         'fieldId',
         'academicYearId',
         'studyYearId',
+        'description',
     ];
 }
