@@ -5,9 +5,9 @@ namespace App\Http\Controllers\GestionAuthAttClassement;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 // use App\Imports\EmployeeImport;
-use App\Models\GestionAuthAttClassement\MoyenneImport; 
+use App\Models\MoyenneImport; 
 use Maatwebsite\Excel\Facades\Excel;
-use App\Models\GestionAuthAttClassement\MoyenneExport;
+use App\Models\MoyenneExport;
 
 class FileController extends Controller
 {
