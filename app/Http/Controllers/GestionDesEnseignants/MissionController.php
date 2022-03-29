@@ -9,27 +9,28 @@ class MissionController extends Controller
 {
     public function affichage()
     {
-        if(auth()->guest()){
-            return view('index', [
-                'vTitle'=> 'Connexion'
+        // if(auth()->guest()){
+        //     return view('index', [
+        //         'vTitle'=> 'Connexion'
+        //     ]);
+        // }
+        // if(Auth::user()->email=='admin@insti.com'){
+            //$profile=profile::all();
+            return view('gestion_enseignants.missionAdmin', [
+                'vTitle'=>'Mission'
+                // 'profile'=>$profile,
             ]);
-        }
-        if(Auth::user()->email=='admin@insti.com'){
-            $profile=profile::all();
-            return view('missionAdmin', [
-                'profile'=>$profile,
-            ]);
-        }else{
+        // }else{
 
-            $profil=DB::table('profiles')->where('user_id',Auth::user()->id)->first();
-            $sqlTable= "select * from tableau_missions where Nom_enseignant ='"."".$profil->nom." ".$profil->prenom."'";
-            $table=DB::select($sqlTable);
+        //     $profil=DB::table('profiles')->where('user_id',Auth::user()->id)->first();
+        //     $sqlTable= "select * from tableau_missions where Nom_enseignant ='"."".$profil->nom." ".$profil->prenom."'";
+        //     $table=DB::select($sqlTable);
 
 
-            return view('mission',[
-                'table'=> $table,
-            ]);
-        }
+        //     return view('gestion_enseignants.mission',[
+        //         'table'=> $table,
+        //     ]);
+        // }
 
     }
 

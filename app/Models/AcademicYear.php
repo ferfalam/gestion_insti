@@ -16,4 +16,5 @@ class AcademicYear extends Model
         'endDate',
         'observation',
     ];
+    public $timestamps = false;
 }

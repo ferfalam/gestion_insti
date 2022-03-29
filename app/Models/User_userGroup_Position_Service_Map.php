@@ -15,4 +15,5 @@ class User_userGroup_Position_Service_Map extends Model
         'serviceId',
         'positionId'
     ];
+    public $timestamps = false;
 }

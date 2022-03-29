@@ -8,39 +8,47 @@
                 </a>
                 <hr class="sidebar-divider my-0">
                 <ul class="navbar-nav text-light" id="accordionSidebar">
-                    <li class="nav-item"><a class="nav-link" href="/programme"><i class="fas fa-table"></i><span>Programme</span></a><a class="nav-link" href="/mission"><i class="fas fa-table"></i><span>Mission</span></a></li>
-                    @if (Auth::user()->email=='admin@insti.com')
-                        <li class="nav-item"><a class="nav-link" href="/programmerCours"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" class="bi bi-table">
-                            <path fill-rule="evenodd" d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm15 2h-4v3h4V4zm0 4h-4v3h4V8zm0 4h-4v3h3a1 1 0 0 0 1-1v-2zm-5 3v-3H6v3h4zm-5 0v-3H1v2a1 1 0 0 0 1 1h3zm-4-4h4V8H1v3zm0-4h4V4H1v3zm5-3v3h4V4H6zm4 4H6v3h4V8z"></path>
-                        </svg><span>&nbsp;Programmer Cours</span></a><a class="nav-link" href="/programmerMission"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" class="bi bi-table">
-                            <path fill-rule="evenodd" d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm15 2h-4v3h4V4zm0 4h-4v3h4V8zm0 4h-4v3h3a1 1 0 0 0 1-1v-2zm-5 3v-3H6v3h4zm-5 0v-3H1v2a1 1 0 0 0 1 1h3zm-4-4h4V8H1v3zm0-4h4V4H1v3zm5-3v3h4V4H6zm4 4H6v3h4V8z"></path>
-                        </svg><span>&nbsp;Programmer Mission</span></a><a class="nav-link" href="/ajouterProf"><i class="material-icons">add_box</i><span>Inscrire Enseignants</span></a>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('gestion_enseignant.show_programme') }}"><i class="fas fa-table"></i><span>Programme</span></a>
+                        <a class="nav-link" href="{{ route('gestion_enseignant.show_mission') }}"><i class="fas fa-table"></i><span>Mission</span></a>
+                    </li>
+                    {{-- @if (Auth::user()->email=='admin@insti.com') --}}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('gestion_enseignant.show') }}"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" class="bi bi-table">
+                                <path fill-rule="evenodd" d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm15 2h-4v3h4V4zm0 4h-4v3h4V8zm0 4h-4v3h3a1 1 0 0 0 1-1v-2zm-5 3v-3H6v3h4zm-5 0v-3H1v2a1 1 0 0 0 1 1h3zm-4-4h4V8H1v3zm0-4h4V4H1v3zm5-3v3h4V4H6zm4 4H6v3h4V8z"></path>
+                                </svg><span>&nbsp;Programmer Cours</span>
+                            </a>
+                            <a class="nav-link" href="{{ route('gestion_enseignant.show_programmerMission') }}"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" class="bi bi-table">
+                                <path fill-rule="evenodd" d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm15 2h-4v3h4V4zm0 4h-4v3h4V8zm0 4h-4v3h3a1 1 0 0 0 1-1v-2zm-5 3v-3H6v3h4zm-5 0v-3H1v2a1 1 0 0 0 1 1h3zm-4-4h4V8H1v3zm0-4h4V4H1v3zm5-3v3h4V4H6zm4 4H6v3h4V8z"></path>
+                                </svg><span>&nbsp;Programmer Mission</span>
+                            </a>
+                        <a class="nav-link" href="{{ route('gestion_enseignant.show_prof') }}"><i class="material-icons">add_box</i><span>Inscrire Enseignants</span></a>
                         </li>
-                    @endif
-                    <li class="nav-item"><a class="nav-link active" href="/profile"><i class="fas fa-user"></i>Profil</a></li>
+                    {{-- @endif --}}
+                    <li class="nav-item"><a class="nav-link active" href="{{ route('gestion_enseignant.show_profil') }}"><i class="fas fa-user"></i>Profil</a></li>
                 </ul>
                 <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button></div>
             </div>
         </nav>
         @include('gestion_enseignants.navbar')
                 <div class="container-fluid">
-                    @include('flash::message')
+                    {{-- @include('flash::message') --}}
                     <h3 class="text-dark mb-4" data-aos="fade-left" data-aos-duration="600">Profil</h3>
                     <div class="row mb-3" data-aos="slide-up" data-aos-duration="600">
                         <div class="col-lg-4">
                             <div class="card mb-3">
                                 <div class="card-body text-center shadow" id="profile">
-                                    @php
+                                    {{-- @php
                                     $profil=DB::table('profiles')->where('user_id',Auth::user()->id)->first();
                                     $table=$profil->image
                                     @endphp
                                     @if($table!=null)
                                     <img class="rounded-circle mb-3 mt-4" id="profileImage" src="{{$table}}" width="160" height="160" name="profileImage">
-                                    @else
-                                    <img class="rounded-circle mb-3 mt-4" id="profileImage" src="assets/img/logoEnseignants.jpg" width="160" height="160" name="profileImage">
-                                    @endif
+                                    @else --}}
+                                    <img class="rounded-circle mb-3 mt-4" id="profileImage" src="/gestion_des_enseignants/assets/img/logoEnseignants.jpg" width="160" height="160" name="profileImage">
+                                    {{-- @endif --}}
                                     <div id="btnP" class="mb-3">
-                                        <form enctype="multipart/form-data" method="POST" action="{{route('image.upload.post')}}">
+                                        <form enctype="multipart/form-data" method="POST" action="{{route('gestion_enseignant.image_upload_post')}}">
                                             @csrf
                                             <input type="file" id="imageUpload" name="imageUpload" placeholder="Changer Photo">
                                             @if ($errors->has('imageUpload'))
@@ -115,31 +123,31 @@
                                         <div class="card-body">
                                             <form method="POST"  action="/profilInfo">
                                                 @csrf
-                                                @php
+                                                {{-- @php
                                                     $profil=DB::table('profiles')->where('user_id',Auth::user()->id)->first();
-                                                @endphp
+                                                @endphp --}}
                                                 <div class="form-row">
                                                     <div class="col">
-                                                        <div class="form-group"><label for="first_name"><strong>Nom</strong><br></label><input class="form-control" type="text" value="{{$profil->nom}}" name="first_name" required></div>
+                                                        <div class="form-group"><label for="first_name"><strong>Nom</strong><br></label><input class="form-control" type="text" value="" name="first_name" required></div>
                                                     </div>
                                                     <div class="col">
-                                                           <div class="form-group"><label for="last_name"><strong>Prenoms</strong><br></label><input class="form-control" type="text" value="{{$profil->prenom}}" name="last_name" required></div>
+                                                           <div class="form-group"><label for="last_name"><strong>Prenoms</strong><br></label><input class="form-control" type="text" value="" name="last_name" required></div>
                                                     </div>
                                                 </div>
                                                 <div class="form-row">
                                                     <div class="col">
-                                                            <div class="form-group"><label for="email"><strong>Date de naissance&nbsp;</strong></label><input class="form-control" type="date" value="{{$profil->birthday}}" name="birthday" required></div>
+                                                            <div class="form-group"><label for="email"><strong>Date de naissance&nbsp;</strong></label><input class="form-control" type="date" value="" name="birthday" required></div>
                                                     </div>
                                                     <div class="col">
-                                                        <div class="form-group"><label for="address"><strong>Addresse</strong></label><input class="form-control" type="text" value="{{$profil->adresse}}" name="adresse" required></div>
+                                                        <div class="form-group"><label for="address"><strong>Addresse</strong></label><input class="form-control" type="text" value="" name="adresse" required></div>
                                                     </div>
                                                 </div>
                                                 <div class="form-row">
                                                         <div class="col">
-                                                            <div class="form-group"><label for="city"><strong>Numero matricule</strong></label><input class="form-control" type="text" value="{{$profil->num_mat}}" name="mat" required></div>
+                                                            <div class="form-group"><label for="city"><strong>Numero matricule</strong></label><input class="form-control" type="text" value="" name="mat" required></div>
                                                         </div>
                                                         <div class="col">
-                                                            <div class="form-group"><label for="country"><strong>Numero de telephone </strong></label><input class="form-control" type="text" value="{{$profil->num_tel}}" name="phone" required></div>
+                                                            <div class="form-group"><label for="country"><strong>Numero de telephone </strong></label><input class="form-control" type="text" value="" name="phone" required></div>
                                                         </div>
                                                 </div>
                                                 <div class="form-group"><button class="btn btn-primary btn-sm" type="submit">Enregistrer</button></div>

@@ -25,7 +25,7 @@ class CreateMissionsTable extends Migration
             $table->string('grade');
             $table->string('ue');
             $table->foreignId('pedagogicGroupsId')->constrained('pedagogic_groups');
-            $table->foreignId('academicYearsId')->constrained('academic_years');
+            $table->string('academicYear');
             $table->string('missionHeure');
             $table->string('missionDuree');
             $table->date('startDate');
