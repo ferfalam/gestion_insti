@@ -81,11 +81,8 @@
                                 <label style="font-weight: normal;"> Filière Associee </label>
                                 <select class="form-control" name="filiere" required="">
                                         <optgroup label="Filière">
-    
-                                            @foreach($field as $one_filiere)
-                                                <option>
-                                                    {!!$one_filiere->name!!}
-                                                </option>
+                                            @foreach(DB::table("fields")->get() as $one_filiere)
+                                                <option value='{{$one_filiere->id}}' selected=''> {{ $one_filiere->name }} </option>
                                             @endforeach
                                         </optgroup>
                                 </select>
@@ -96,10 +93,8 @@
                                 <label style="font-weight: normal;"> Annee Academique </label>
                                 <select class="form-control" name="academicYear" required="">
                                     <optgroup label="Annee Academique">
-                                        @foreach($academicYear as $acadYear)
-                                            <option>
-                                                {!!$acadYear->name!!}
-                                            </option>
+                                        @foreach(DB::table("academic_years")->get() as $academicYear)
+                                            <option value='{{$academicYear->id}}' selected=''> {{ $academicYear->name }} </option>
                                         @endforeach
                                     </optgroup>
                                 </select>
@@ -110,12 +105,11 @@
                                 <label style="font-weight: normal;"> Annee D'etude </label>
                                 <select class="form-control" name="anneeStudy" required="">
                                     <optgroup label="Study year">
-                                        @foreach($studyYear as $studyYear)
-                                            <option>
-                                                {!!$studyYear->name!!}
-                                            </option>
+                                        @foreach(DB::table("generals")->get() as $studyYear)
+                                            <option value='{{$studyYear->id}}' selected=''> {{ $studyYear->name }} </option>
                                         @endforeach
                                     </optgroup>
+                                    
                                 </select>
                                 {!! $errors->first('annee d\'etude', '<span class="error"> :message </span>') !!}
                             </div>

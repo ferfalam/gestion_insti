@@ -70,11 +70,8 @@ class SaveModuleController extends Controller
     public function createGroupePedagogique( Request $request)
     {
         $groupPedagogique = PedagogicGroup::all() ;
-        $field = Field::all();
-        $academicYear = AcademicYear::all() ;
-        $studyYear = General::all();
 
-        return view ('gestion_deroulement_cours.fiche.formItemGroupPedagogique', compact('groupPedagogique', 'studyYear', 'academicYear', 'field'));
+        return view ('gestion_deroulement_cours.fiche.formItemGroupPedagogique', compact('groupPedagogique'));
     }
 
     /**
@@ -93,6 +90,8 @@ class SaveModuleController extends Controller
             'anneeStudy' => 'required',
         ]);
 
+       
+
         $groupPedag = PedagogicGroup::create(
             [
                 'name' => $request->nameGP,
@@ -102,12 +101,12 @@ class SaveModuleController extends Controller
                 'studyYearId' => $request->anneeStudy,
             ]
         );
-        dd($groupPedag);
+
         event(new Registered($groupPedag));
         $this->message = "Nouveau Groupe pedagogique ajouté avec succès";
         $this->success = true;
   
-        return view('gestion_deroulement_cours.fiche.formItemGroupPedagogique');
+        return view('gestion_deroulement_cours.accueil');
     }
 
     
