@@ -125,9 +125,9 @@ Route::group(["prefix"=>"gestion_entreprises_stage", "as"=>"gestion_entreprises_
     Route::get('/',[App\Http\Controllers\GestionDesEntreprisesDeStage\HomeController::class, 'index'])->name("index");
 
     //TODO replace
-    Route::get('/login', [App\Http\Controllers\GestionDesEntreprisesDeStage\Auth\AuthenticatedSessionController::class, 'create'])
-        ->middleware('guest')
-        ->name('login');
+//    Route::get('/login', [App\Http\Controllers\GestionDesEntreprisesDeStage\Auth\AuthenticatedSessionController::class, 'create'])
+//        ->middleware('guest')
+//        ->name('login');
 
     Route::post('/login', [App\Http\Controllers\GestionDesEntreprisesDeStage\Auth\AuthenticatedSessionController::class, 'store'])
         ->middleware('guest')->name("login");
