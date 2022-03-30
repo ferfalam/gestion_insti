@@ -7,5 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Evaluation_type extends Model
 {
-    use HasFactory;
+
+    protected $fillable = [
+        'designation',
+        'description',
+    ];
 }

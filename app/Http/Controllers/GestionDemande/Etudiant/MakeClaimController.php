@@ -29,7 +29,7 @@ class MakeClaimController extends Controller
 
        
 
-        return view('gestion_demandes.etudiants.faire_demande_reclamation'
+        return view('gestion_demandes_reclamation_evaluation.etudiants.faire_demande_reclamation'
          ,compact('academic_semesters','ues','evaluation_types')
         );
 

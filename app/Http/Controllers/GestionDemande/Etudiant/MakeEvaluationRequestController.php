@@ -30,7 +30,7 @@ class MakeEvaluationRequestController extends Controller
 
        
 
-        return view('gestion_demandes.etudiants.faire_demande_evaluation'
+        return view('gestion_demandes_reclamation_evaluation.etudiants.faire_demande_evaluation'
          ,compact('academic_semesters','ues','evaluation_types')
         );
 

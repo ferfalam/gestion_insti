@@ -1,4 +1,4 @@
-@extends('gestion_demandes.personnels.dashboard')
+@extends('gestion_demandes_reclamation_evaluation.personnels.dashboard')
 
 @section('main')
 

@@ -56,13 +56,13 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('reclamation') }}">
+                                <a class="nav-link" href="{{ route('gestion_demandes_reclamation_evaluation.reclamation') }}">
                                     <i class="fas fa-user"></i>
                                     <span>Demande de reclamations</span>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('evaluation') }}">
+                                <a class="nav-link" href="{{ route('gestion_demandes_reclamation_evaluation.evaluation') }}">
                                     <i class="fas fa-table"></i>
                                     <span>Demande d'evaluation</span>
                                 </a>
@@ -205,7 +205,7 @@
                                             class="dropdown-item" href="#"><i
                                                 class="fas fa-list fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Activity
                                             log</a>
-                                        <div class="dropdown-divider"></div><a class="dropdown-item" href="{{route('logout')}}"><i
+                                        <div class="dropdown-divider"></div><a class="dropdown-item" href=""><i
                                                 class="fas fa-sign-out-alt fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Logout</a>
                                     </div>
                                 </div>

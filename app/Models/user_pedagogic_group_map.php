@@ -7,5 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class user_pedagogic_group_map extends Model
 {
-    use HasFactory;
+    protected $fillable = [
+        'user_Id',
+        'pedagogic_group_Id',
+    ];
 }

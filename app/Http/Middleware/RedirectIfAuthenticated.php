@@ -25,17 +25,17 @@ class RedirectIfAuthenticated
         foreach ($guards as $guard) {
             if (Auth::guard($guard)->check()) {
                 $idUser = Auth::user()->id;
-                $idUserRole = DB::table('user_user_group__position__service__maps')->where('user_Id', $idUser)->value('userGroup_Id');
+                $idUserRole = DB::table('user_user_group__position__service__maps')->where('userId', $idUser)->value('userGroupId');
 
                 $userRole = DB::table('user_groups')->where('id', $idUserRole)->value('name');
 
                 
                 switch ($userRole){
                     case 'Etudiant':
-                        return redirect()->route('dashboard_etudiant');
+                        return redirect()->route('gestion_demandes_reclamation_evaluation.dashboard_etudiant');
                         break;
                     case 'Personnel':
-                        return redirect()->route('dashboard_personnel');
+                        return redirect()->route('gestion_demandes_reclamation_evaluation.dashboard_personnel');
                         break;
                     default:
                         return redirect()->route('home');
