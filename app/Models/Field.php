@@ -16,5 +16,4 @@ class Field extends Model
         'description',
         'offer', // fichier à discuter
     ];
-    public $timestamps = false;
 }

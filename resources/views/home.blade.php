@@ -3,24 +3,7 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <div class="col-md-4">
-                <div class="card">
-                    <div class="card-header">Gestion des salles et emploi du temps</div>
-
-                    <div class="card-body">
-                        <p class="card-text">Vous serez redirigé vers la section de gestion de salle de classe et des
-                            emploi du temps de l'insti.</p>
-                        <a href="{{ route('login') }}" class="btn btn-primary w-25" style="float: right"><i class="fa-solid fa-arrow-right-long"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-    <div class="container">
-        <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-4 mb-2">
                 <div class="card">
                     <div class="card-header">Gestion des salles et emploi du temps</div>
 
@@ -31,7 +14,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4 mb-2">
                 <div class="card">
                     <div class="card-header">Gestion des enseignants et Mission d'enseignement</div>
 
@@ -44,7 +27,7 @@
             </div>
 
 
-            <div class="col-md-4">
+            <div class="col-md-4 mb-2">
                 <div class="card">
                     <div class="card-header">Gestion d'Authentification des Attestations et Classement</div>
 
@@ -55,7 +38,7 @@
                 </div>
             </div>
 
-            <div class="col-md-4">
+            <div class="col-md-4 mb-2">
                 <div class="card">
                     <div class="card-header">Gestion des entreprises de stage</div>
 
@@ -65,7 +48,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4 mb-2">
                 <div class="card">
                     <div class="card-header">Gestion du déroulement des cours</div>
 
@@ -75,7 +58,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4 mb-2">
                 <div class="card">
                     <div class="card-header">Gestion des conseils de discipline et plaintes</div>
 

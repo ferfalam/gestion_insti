@@ -22,27 +22,27 @@ class RedirectIfAuthenticated
     {
         $guards = empty($guards) ? [null] : $guards;
 
-        foreach ($guards as $guard) {
-            if (Auth::guard($guard)->check()) {
-                $idUser = Auth::user()->id;
-                $idUserRole = DB::table('user_user_group__position__service__maps')->where('user_Id', $idUser)->value('userGroup_Id');
+        // foreach ($guards as $guard) {
+        //     if (Auth::guard($guard)->check()) {
+        //         $idUser = Auth::user()->id;
+        //         $idUserRole = DB::table('user_user_group__position__service__maps')->where('user_Id', $idUser)->value('userGroup_Id');
 
-                $userRole = DB::table('user_groups')->where('id', $idUserRole)->value('name');
+        //         $userRole = DB::table('user_groups')->where('id', $idUserRole)->value('name');
 
-                
-                switch ($userRole){
-                    case 'Etudiant':
-                        return redirect()->route('dashboard_etudiant');
-                        break;
-                    case 'Personnel':
-                        return redirect()->route('dashboard_personnel');
-                        break;
-                    default:
-                        return redirect()->route('home');
-                        break;
-                }
-            }
-        }
+
+        //         switch ($userRole){
+        //             case 'Etudiant':
+        //                 return redirect()->route('dashboard_etudiant');
+        //                 break;
+        //             case 'Personnel':
+        //                 return redirect()->route('dashboard_personnel');
+        //                 break;
+        //             default:
+        //                 return redirect()->route('home');
+        //                 break;
+        //         }
+        //     }
+        // }
 
         return $next($request);
     }

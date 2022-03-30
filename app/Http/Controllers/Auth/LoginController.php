@@ -32,24 +32,24 @@ class LoginController extends Controller
 
     public function redirectTo(){
         $idUser = Auth::user()->id;
-        $idUserRole = DB::table('user_user_group__position__service__maps')->where('user_Id', $idUser)->value('userGroup_Id');
+        // $idUserRole = DB::table('user_user_group__position__service__maps')->where('user_Id', $idUser)->value('userGroup_Id');
 
-        $userRole = DB::table('user_groups')->where('id', $idUserRole)->value('name');
+        // $userRole = DB::table('user_groups')->where('id', $idUserRole)->value('name');
 
 
-        switch ($userRole){
-            case 'Etudiant':
-                return route('dashboard_etudiant');
-                break;
-            case 'Personnel':
-                return route('dashboard_personnel');
-                break;
-            default:
-                return route('home');
-                break;
-        }
+        // switch ($userRole){
+        //     case 'Etudiant':
+        //         return route('dashboard_etudiant');
+        //         break;
+        //     case 'Personnel':
+        //         return route('dashboard_personnel');
+        //         break;
+        //     default:
+        //         return route('home');
+        //         break;
+        // }
     }
-    
+
 
     public function logout(){
         Auth::logout();

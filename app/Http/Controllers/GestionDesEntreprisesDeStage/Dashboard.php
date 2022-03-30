@@ -6,7 +6,7 @@ use App\Models\Entreprises;
 use App\Models\Stages;
 use App\Models\User;
 use App\Models\User_userGroup_Position_Service_Map;
-use App\Models\userGroup;
+use App\Models\UserGroup;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -65,7 +65,7 @@ class Dashboard extends Controller
         $id = Auth::id();
         $interns = null;
 
-        $this->userGroup = userGroup::find(User_userGroup_Position_Service_Map::where("userId", $id)->first()->userGroupId)->name;
+        $this->userGroup = UserGroup::find(User_userGroup_Position_Service_Map::where("userId", $id)->first()->userGroupId)->name;
         if ($this->userGroup == "partenaire") {
             $username = DB::table("entreprises")->where("user_id", $id)->value('designation');
             $interns = $this->getInterns();
