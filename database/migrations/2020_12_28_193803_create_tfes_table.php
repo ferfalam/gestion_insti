@@ -14,9 +14,9 @@ class CreateTfesTable extends Migration
     public function up()
     {
         Schema::enableForeignKeyConstraints();
-        Schema::create('tves', function (Blueprint $table) {
+        Schema::create('tfes', function (Blueprint $table) {
             $table->id();
-            $table->foreign('document_id')->references('id')->on('documents')->onDelete('cascade');
+            $table->foreignId('document_id')->references('id')->on('documents')->onDelete('cascade');
             $table->string('theme');
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
