@@ -5,6 +5,10 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\GestionConseilPedagogique\CouncilControler;
+use App\Http\Controllers\GestionDeliberation\IndexController;
+use App\Http\Controllers\GestionDeliberation\EnregistrerDeliberationsController;
+use App\Http\Controllers\GestionDeliberation\DeliberationInfosController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -184,6 +188,20 @@ Route::group(["prefix"=>"gestion_entreprises_stage", "as"=>"gestion_entreprises_
         ->name('students.add_intern');
 });
 
+
+Route::group(["prefix"=>"gestion_deliberation", "as"=>"gestion_deliberation."], function ()
+{
+
+    Route::middleware('auth')->group(function () {
+        Route::get('/', "GestionDeliberation\IndexController@index")->name("index");
+        Route::post('/search', "GestionDeliberation\IndexController@recherche")->name("search");
+        Route::get('/enregistrerDeliberation', "GestionDeliberation\EnregistrerDeliberationsController@create")->name('nouvelledeliberation');
+        Route::post('/enregistrerDeliberation', "GestionDeliberation\EnregistrerDeliberationsController@store")->name('enregistrerdeliberation');
+        Route::post('/delibinfos', "GestionDeliberation\DeliberationInfosController@index")->name('delibinfos');
+        Route::post('/ouvrir', "GestionDeliberation\DeliberationInfosController@show")->name('ouvrir');
+        Route::post('/voir', "GestionDeliberation\IndexController@show")->name('voir');
+    });
+});
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
