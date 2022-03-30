@@ -15,17 +15,12 @@ class FormulaireDeroulementCoursController extends Controller
 {
 
     /**
-      *
+      * Create fiche de remplissage des cours
       * @return \Illuminate\Http\Response
       */
     public function createFiche()
     {
-        // $annee_detude = DB::select('select appelation from academic_years');
-        // $filieres = DB::select('select appelation from fields');
-        // $ues = DB::select('select appelation from u_e_s');
-        // $acad_semestre = DB::select('select designation from academic_semesters');
-        //$groupe_pedagogique = DB::select('select designation from educational_groups') ;
-
+       
         $annee_detude = AcademicYear::all() ;
         $filieres = Field::all() ;
         $ues = Ue::all() ;
@@ -36,7 +31,7 @@ class FormulaireDeroulementCoursController extends Controller
     }
 
     /**
-      *
+      * Validation and save in database 
       * @return \Illuminate\Http\Response
       */
     public function store(Request $request)
@@ -60,13 +55,12 @@ class FormulaireDeroulementCoursController extends Controller
             ]
         );*/
         
-        // return redirect('/accueil');
         return view('gestion_deroulement_cours.fiche.ficheDeCoursSortant');
     }
 
     /**
-     * Show a list of all of the application information's FicheDeroulementCours .
-     *
+     * .
+     * Remodify the tuple
      * @return \Illuminate\Http\Response
      */
     public function update()
@@ -94,16 +88,6 @@ class FormulaireDeroulementCoursController extends Controller
         // Get the information from the database
         return view ('gestion_deroulement_cours.fiche.ficheDeCoursEnseignant');
     }
-    
-    /**
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-      
-    }
-
     
 }
 

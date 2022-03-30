@@ -31,7 +31,6 @@ Route::group(["prefix"=>"gestion_salle", "as"=>"gestion_salle.", "middleware" =>
 });
 
 
-
 Route::group(["prefix"=>"gestion_enseignant", "as"=>"gestion_enseignant.","middleware" => "auth"], function ()
 {
 
@@ -154,7 +153,6 @@ Route::group(["prefix"=>"gestion_entreprises_stage", "as"=>"gestion_entreprises_
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-//Gestion deroulement cours
 
 Route::group(["prefix"=>"gestion_deroulement_cours", "as"=>"gestion_deroulement_cours."], function ()
 {

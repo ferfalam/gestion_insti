@@ -7,6 +7,10 @@
         #content-wrapper h2 {
             padding-top: 12px;
         }
+
+        .description {
+            font-size:20px;
+        }
     </style>
 
 @endsection
