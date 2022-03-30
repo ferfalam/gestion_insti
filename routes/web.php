@@ -38,7 +38,7 @@ Route::group(["prefix"=>"gestion_salle", "as"=>"gestion_salle.", "middleware" =>
 });
 
 
-Route::group(["prefix"=>"gestion_demandes_reclamation_evaluation", "as"=>"gestion_demandes_reclamation_evaluation."], function ()
+Route::group(["prefix"=>"gestion_demandes_reclamation_evaluation", "as"=>"gestion_demandes_reclamation_evaluation.", "middleware" => "auth"], function ()
 {
     Route::get('/etudiant',[App\Http\Controllers\GestionDemande\Etudiant\DashboardController::class, 'index'])->name("dashboard_etudiant");
     Route::get('/personnel',[App\Http\Controllers\GestionDemande\Personnel\DashboardController::class, 'index'])->name("dashboard_personnel");
@@ -193,7 +193,7 @@ Route::group(["prefix"=>"gestion_entreprises_stage", "as"=>"gestion_entreprises_
 });
 
 
-Route::group(["prefix"=>"gestion_deliberation", "as"=>"gestion_deliberation."], function ()
+Route::group(["prefix"=>"gestion_deliberation", "as"=>"gestion_deliberation.", "middleware" => "auth"], function ()
 {
 
     Route::middleware('auth')->group(function () {
@@ -210,7 +210,7 @@ Route::group(["prefix"=>"gestion_deliberation", "as"=>"gestion_deliberation."], 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
-Route::group(["prefix"=>"gestion_deroulement_cours", "as"=>"gestion_deroulement_cours."], function ()
+Route::group(["prefix"=>"gestion_deroulement_cours", "as"=>"gestion_deroulement_cours.", "middleware" => "auth"], function ()
 {
 
     Route::get('/', "GestionDeroulementCours\HomeController@index")->name('accueil');

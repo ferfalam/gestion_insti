@@ -20,8 +20,7 @@ use App\Models\user_pedagogic_group_map;
 use App\Models\ShortcutsRequest;
 use App\Models\AcademicSemester;
 use App\Models\Evaluation_type;
-
-
+use App\Models\Profile;
 
 class DatabaseSeeder extends Seeder
 {
@@ -34,6 +33,8 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
 
+
+
          $status=Status::create(['name'=>'Bloquer','notation'=>1,'description'=>"Description diu status créer"]);
 
          $user=User::create(['pseudo'=>"admin",'email'=>"admin@insti.com",'password'=>Hash::make('12345678'),'statusId'=>1]);
@@ -41,14 +42,13 @@ class DatabaseSeeder extends Seeder
          $user=User::create(['pseudo'=>"enseignant",'email'=>"leo@gmail.com",'password'=>Hash::make('12345678'),'statusId'=>1]);
          $user=User::create(['pseudo'=>"etudiant",'email'=>"etudiant@gmail.com",'password'=>Hash::make('12345678'),'statusId'=>1]);
 
-
          $field=Field::create(["systemName"=>"Maintenace des systèmes","name"=>" MS1","abbreviation"=>"MS1","description"=>" filiere","offer"=>"filiere"]);
          $field=Field::create(["systemName"=>"Génie mecanique et productique ","name"=>" GMP1","abbreviation"=>"GMP1","description"=>" filiere","offer"=>"filiere"]);
          $field=Field::create(["systemName"=>"Génie energetique","name"=>" GE1","abbreviation"=>"GE1","description"=>" filiere","offer"=>"filiere"]);
          $field=Field::create(["systemName"=>"Genie electrique et informatique","name"=>" GEI1","abbreviation"=>"GEI1","description"=>" filiere","offer"=>"filiere"]);
 
          $academic_years=AcademicYear::create(['name'=>"Academique","calendar"=>"Calendrier de l'année en cours","startDate"=>"2019-02-18","endDate"=>"2019-08-18","observation"=>"un observateur"]);
-        
+
 
         // semestre_annee, semestre_cycle, annee_etude, type_enseignant/apprenant/personnel/UE/composition/stage/, nature_UE
          $generals=General::create(["name"=>"semestre 1","systemName"=>"1","content_type"=>"UE","content_tag"=>"nature_UE"]);
@@ -56,8 +56,8 @@ class DatabaseSeeder extends Seeder
          $generals=General::create(["name"=>"semestre 3","systemName"=>"1","content_type"=>"UE","content_tag"=>"nature_UE"]);
          $generals=General::create(["name"=>"semestre 4","systemName"=>"2","content_type"=>"UE","content_tag"=>"nature_UE"]);
 
-        
-        
+
+
          $pedagogic_groups=PedagogicGroup::create(["name"=>"MS1","fieldId"=>"1","academicYearId"=>"1","studyYearId"=>"1","description"=>"MS1"]);
          $pedagogic_groups=PedagogicGroup::create(["name"=>"GMP1","fieldId"=>"2","academicYearId"=>"1","studyYearId"=>"1","description"=>"GMP1"]);
          $pedagogic_groups=PedagogicGroup::create(["name"=>"GE1","fieldId"=>"3","academicYearId"=>"1","studyYearId"=>"1","description"=>"GE1"]);
@@ -119,6 +119,25 @@ class DatabaseSeeder extends Seeder
        $evaluation_types=Evaluation_type::create(["designation"=>"Reprise","description"=>""]);
        $evaluation_types=Evaluation_type::create(["designation"=>"Rattrappage","description"=>""]);
 
+        $profil = Profile::create([
+            'user_id' => "2",
+            "com_fullname" => "Enseignant",
+            "com_givenName" => "Insti",
+            "com_gender" => "M",
+            "com_birthdate" => "2019-02-18",
+            "com_birthPlace" => "Lokossa",
+            "com_diploma" => "Ing",
+            "com_registrationNumber" => "00002",
+            "com_phoneNumber" => "90998656",
+            "com_address" => "Lokossa Insti",
+            "com_parentFullname" => "Parent Enseignant",
+            "com_parentGivenName" => "Parent ",
+            "com_parentPhoneNumber" => "68587412",
+            "app_fieldId" => "4",
+            "app_typeId" => "1",
+            "ens_typeId" => "2",
+            "pers_typeId" => "3",
+        ]);
 
     }
 }
