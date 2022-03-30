@@ -8,7 +8,10 @@
         </a>
         <hr class="sidebar-divider my-0">
         <ul class="navbar-nav text-light" id="accordionSidebar">
-            <li class="nav-item"><a class="nav-link active" href="/programme"><i class="fas fa-table"></i><span>Programme</span></a><a class="nav-link" href="/mission"><i class="fas fa-table"></i><span>Mission</span></a></li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('gestion_enseignant.show_programme') }}"><i class="fas fa-table"></i><span>Programme</span></a>
+                <a class="nav-link" href="{{ route('gestion_enseignant.show_mission') }}"><i class="fas fa-table"></i><span>Mission</span></a>
+            </li>
 
             <li class="nav-item"><a class="nav-link" href="/profile"><i class="fas fa-user"></i>Profil</a></li>
         </ul>

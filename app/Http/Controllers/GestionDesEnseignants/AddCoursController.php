@@ -7,7 +7,11 @@ use Illuminate\Http\Request;
 
 class AddCoursController extends Controller
 {
+    public function show(){
 
+        return view('gestion_enseignants.addCours', ['vTitle'=> 'AddCours']);
+    
+        }
 	    public function affichage()
     {
         if(auth()->guest()){

@@ -2,23 +2,18 @@
 
 namespace App\Http\Controllers\GestionDesEnseignants;
 
-use App\Http\Controllers\Controller;
+use App\Models\Qualite;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class AddMissionController extends Controller
 {
     public function affichage(){
-        $profile=profile::all();
-        $qualite=qualite::all();
-        $ue=UE::all();
-        $group=GroupePedagogique::all();
-         return view('addMission',[
-             'vtitle'=>'Mission',
-             'profile'=>$profile,
-             'qualite'=>$qualite,
-             'ue'=>$ue,
-             'group'=>$group,
-         ]);
+        // $profile=profile::all();
+         $qualite=Qualite::all();
+        // $ue=UE::all();
+        // $group=GroupePedagogique::all();
+         return view('gestion_enseignants.addMission',['vTitle'=>'Mission',"qualite"=>$qualite]);
     }
     public function traitement()
     {

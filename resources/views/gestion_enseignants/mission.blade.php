@@ -8,9 +8,11 @@
                 </a>
                 <hr class="sidebar-divider my-0">
                 <ul class="navbar-nav text-light" id="accordionSidebar">
-                    <li class="nav-item"><a class="nav-link" href="/programme"><i class="fas fa-table"></i><span>Programme</span></a><a class="nav-link active" href="/mission"><i class="fas fa-table"></i><span>Mission</span></a></li>
-
-                    <li class="nav-item"><a class="nav-link" href="/profile"><i class="fas fa-user"></i>Profil</a></li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('gestion_enseignant.show_programme') }}"><i class="fas fa-table"></i><span>Programme</span></a>
+                        <a class="nav-link" href="{{ route('gestion_enseignant.show_mission') }}"><i class="fas fa-table"></i><span>Mission</span></a>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('gestion_enseignant.show_profil') }}"><i class="fas fa-user"></i>Profil</a></li>
                 </ul>
                 <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button></div>
             </div>
@@ -39,6 +41,7 @@
             </tr>
         </thead>
         <tbody>
+            @isset($table)
             @foreach ($table as $table)
                 <tr>
                     <td class="text-center">{{ $table->qualite }}</td>
@@ -56,6 +59,7 @@
                     <td class="text-center">{{ $table->dateJourRetour }}</td>
                 </tr>
             @endforeach
+            @endisset
         </tbody>
     </table>
 </div></div>

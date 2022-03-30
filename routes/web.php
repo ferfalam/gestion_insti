@@ -34,28 +34,51 @@ Route::group(["prefix"=>"gestion_salle", "as"=>"gestion_salle.", "middleware" =>
 
 Route::group(["prefix"=>"gestion_enseignant", "as"=>"gestion_enseignant.","middleware" => "auth"], function ()
 {
-
+    //affichage
     //Route::get('/', [App\Http\Controllers\GestionDesEnseignants\ConnexionController::class,'affichage'])->name("index");
-    Route::get('/programmerCours/show',[App\Http\Controllers\GestionDesEnseignants\ProgrammeController::class,'show'])->name("show");
+    Route::get('/programmerCours/show',[App\Http\Controllers\GestionDesEnseignants\AddCoursController::class,'show'])->name("show");
+
+    Route::get('/programme',[App\Http\Controllers\GestionDesEnseignants\ProgrammeController::class,'affichage'])->name('show_programme');
+    Route::post('/programme',[App\Http\Controllers\GestionDesEnseignants\ProgrammeController::class,'traitement'])->name("programme");
+
+    Route::get('/programmerCours',[App\Http\Controllers\GestionDesEnseignants\AddCoursController::class,'affichage'])->name("show_programmerCours");
+    Route::post('/programmerCours',[App\Http\Controllers\GestionDesEnseignants\AddCoursController::class,'traitement'])->name('create_programmerCours');
 
     //Route::view('/programmerCours','addCours');
-    Route::get('/ajouterProf','App\Http\Controllers\AddProfController@affichage');
-    Route::post('/ajouterProf','App\Http\Controllers\AddProfController@traitement');
-    Route::get('/programmerMission','App\Http\Controllers\AddMissionController@affichage');
-    Route::post('/programmerMission','App\Http\Controllers\AddMissionController@traitement');
-    Route::get('/programmerCours','App\Http\Controllers\AddCoursController@affichage');
-    Route::post('/programmerCours','App\Http\Controllers\AddCoursController@traitement');
-    Route::get('/profile','App\Http\Controllers\ProfileController@affichage');
-    Route::post('/profilPass','App\Http\Controllers\ProfileController@traitement1');
-    Route::post('/profilInfo','App\Http\Controllers\ProfileController@traitement2');
-    Route::get('/programme','App\Http\Controllers\ProgrammeController@affichage');
-    Route::post('/programme','App\Http\Controllers\ProgrammeController@traitement');
-    Route::get('/mission','App\Http\Controllers\MissionController@affichage');
-    Route::post('/mission','App\Http\Controllers\MissionController@traitement');
-    Route::get('/pdfM', 'App\Http\Controllers\MissionController@generate')->name('pdf');
-    Route::get('/pdfT', 'App\Http\Controllers\ProgrammeController@generate')->name('pdf');
-    Route::post('image-upload','App\Http\Controllers\ImageUploadController@imageUploadPost')->name('image.upload.post');
+    Route::get('/ajouterProf',[App\Http\Controllers\GestionDesEnseignants\AddProfController::class,"affichage"])->name('show_prof');
 
+    Route::post('/ajouterProf',[App\Http\Controllers\GestionDesEnseignants\AddProfController::class,"traitement"])->name('store_prof');
+
+    Route::get('/programmerMission',[App\Http\Controllers\GestionDesEnseignants\AddMissionController::class,"affichage"])->name('show_programmerMission');
+
+    Route::post('/programmerMission',[App\Http\Controllers\GestionDesEnseignants\AddMissionController::class,"traitement"])->name('store_programmerMission');
+
+
+    Route::get('/profile',[App\Http\Controllers\GestionDesEnseignants\ProfilController::class,"affichage"])->name('show_profil');
+
+    Route::post('/profilPass',[App\Http\Controllers\GestionDesEnseignants\ProfilController::class,"traitement1"])->name('show_profil_pass');
+
+    Route::post('/profilInfo',[App\Http\Controllers\GestionDesEnseignants\ProfilController::class,"traitement2"])->name('show_profil_info');
+
+
+    Route::get('/mission',[App\Http\Controllers\GestionDesEnseignants\MissionController::class,"affichage"])->name('show_mission');
+
+    Route::post('/mission',[App\Http\Controllers\GestionDesEnseignants\MissionController::class,"traitement"])->name('store_mission');
+
+    Route::get('/pdfM',[App\Http\Controllers\GestionDesEnseignants\MissionController::class,"generate"])->name('mission_pdf');
+
+    Route::get('/pdfT',[App\Http\Controllers\GestionDesEnseignants\ProgrammeController::class,"generate"])->name('programme_pdf');
+
+    Route::post('/image-upload',[App\Http\Controllers\GestionDesEnseignants\ImageUploadController::class,"imageUploadPost"])->name('image_upload_post');
+
+    // Route::get('/profile','App\Http\Controllers\ProfileController@affichage');
+    // Route::post('/profilPass','App\Http\Controllers\ProfileController@traitement1');
+    // Route::post('/profilInfo','App\Http\Controllers\ProfileController@traitement2');
+    // Route::get('/mission','App\Http\Controllers\MissionController@affichage');
+    // Route::post('/mission','App\Http\Controllers\MissionController@traitement');
+    // Route::get('/pdfM', 'App\Http\Controllers\MissionController@generate')->name('pdf');
+    // Route::get('/pdfT', 'App\Http\Controllers\ProgrammeController@generate')->name('pdf');
+    // Route::post('image-upload','App\Http\Controllers\ImageUploadController@imageUploadPost')->name('image.upload.post');
 });
 
 Route::group(["prefix"=>"gestion_authClass", "as"=>"gestion_authClass.", "middleware" => "auth"], function ()

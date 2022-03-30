@@ -8,4 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Qualite extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'name'
+   ];
 }
