@@ -19,7 +19,9 @@ class DatabaseSeeder extends Seeder
         // \App\Models\User::factory(10)->create();
 
          $status=Status::create(['name'=>'Bloquer','notation'=>1,'description'=>"Description diu status créer"]);
+         $status=Status::create(['name'=>'Admin','notation'=>2,'description'=>"Description diu status admin"]);
          $user=User::create(['pseudo'=>"chola Patrick",'email'=>"chola@gmail.com",'password'=>Hash::make('12345678'),'statusId'=>1]);
+         $user=User::create(['pseudo'=>"chola Patrick00",'email'=>"chola00@gmail.com",'password'=>Hash::make('12345678'),'statusId'=>2]);
 
 
     }

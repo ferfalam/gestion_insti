@@ -192,5 +192,33 @@ Route::group(["prefix"=>"gestion_deroulement_cours", "as"=>"gestion_deroulement_
 
 });
 
+Route::group(["prefix"=>"gestion_conseils_plaintes", "as"=>"gestion_conseils_plaintes.", "middleware" => "auth"], function ()
+{
+    Route::get('/', 'GestionConseilsPlaintes\PlainteController@show')->name('index');
+
+    Route::post('/nouvelle_plainte', 'GestionConseilsPlaintes\PlainteController@create')->name('nouvelle_plainte');
+    Route::post('/nouvelle_convocation', 'GestionConseilsPlaintes\ConvocationController@create')->name('nouvelle_convocation');
+    Route::post('/nouveau_conseil/{id}', 'GestionConseilsPlaintes\ConseilController@create')->name('nouveau_conseil');
+
+    Route::post('/edition', 'GestionConseilsPlaintes\PlainteController@update')->name('validation');
+    Route::post('/suppression', 'GestionConseilsPlaintes\PlainteController@destroy')->name('suppression');
+
+    Route::get('/formulaire_plainte', 'GestionConseilsPlaintes\PlainteController@form')->name('formulaire_plainte');
+    Route::get('/formulaire_convocation', 'GestionConseilsPlaintes\ConvocationController@form')->name('formulaire_convocation');
+    Route::get('/plainte/{id}/formulaire_conseil', 'GestionConseilsPlaintes\ConseilController@form')->name('formulaire_conseil');
+    Route::get('/formulaire_rapport', 'GestionConseilsPlaintes\RapportController@form')->name('formulaire_rapport');
+
+    Route::get('/plainte/{id}', 'GestionConseilsPlaintes\PlainteController@view')->name('vue_plainte');
+    Route::get('/convocation/{id}', 'GestionConseilsPlaintes\ConvocationController@view')->name('vue_convocation');
+
+    Route::get('/convocations', 'GestionConseilsPlaintes\ConvocationController@show')->name('liste_convocations');
+    Route::get('/plaintes', 'GestionConseilsPlaintes\PlainteController@show')->name('liste_plaintes');
+    Route::get('/conseils', 'GestionConseilsPlaintes\ConseilController@show')->name('liste_conseils');
+    Route::get('/rapport', 'GestionConseilsPlaintes\RapportController@show')->name('liste_rapports');
+
+    Route::get('autocomplete', 'GestionConseilsPlaintes\SearchController@autocomplete')->name('autocomplete');
+
+});
+
 
 

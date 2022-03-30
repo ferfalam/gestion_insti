@@ -59,7 +59,7 @@ class FormulaireDeroulementCoursController extends Controller
                 'title' => $request-> title
             ]
         );*/
-        
+
         // return redirect('/accueil');
         return view('gestion_deroulement_cours.fiche.ficheDeCoursSortant');
     }
@@ -94,17 +94,17 @@ class FormulaireDeroulementCoursController extends Controller
         // Get the information from the database
         return view ('gestion_deroulement_cours.fiche.ficheDeCoursEnseignant');
     }
-    
+
     /**
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-      
+
     }
 
-    
+
 }
 
 ?>

@@ -58,6 +58,16 @@
                     </div>
                 </div>
             </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header">Gestion des conseils de discipline et plaintes</div>
+
+                    <div class="card-body">
+                        <p class="card-text">Vous serez redirigé vers la section de Gestion des conseils de discipline et plaintes de l'insti.</p>
+                        <a href="{{ route('gestion_conseils_plaintes.index') }}" class="btn btn-primary w-25" style="float: right"><i class="fa-solid fa-arrow-right-long"></i></a>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 @endsection
