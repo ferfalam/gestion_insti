@@ -83,10 +83,8 @@ Route::group(["prefix"=>"gestion_authClass", "as"=>"gestion_authClass.", "middle
     Route::get('/demande_r','GestionAuthAttClassement\DemandeAuthController@index')->name('demande_r');
 
 
-
     Route::get('/classement','GestionAuthAttClassement\ClassementController@create')->name('classement');
     Route::post('/classement','GestionAuthAttClassement\ClassementController@store')->name('dam');
-
 
     Route::get('/ficheDeliberation','GestionAuthAttClassement\FileController@ImportForm')->name('deliber');
     Route::post('/import','GestionAuthAttClassement\FileController@Import')->name('employee.import');
