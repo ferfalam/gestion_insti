@@ -45,7 +45,6 @@ Route::group(["prefix"=>"gestion_salle", "as"=>"gestion_salle.", "middleware" =>
 });
 
 
-
 Route::group(["prefix"=>"gestion_enseignant", "as"=>"gestion_enseignant.","middleware" => "auth"], function ()
 {
     //affichage
@@ -121,10 +120,8 @@ Route::group(["prefix"=>"gestion_authClass", "as"=>"gestion_authClass.", "middle
     Route::get('/demande_r','GestionAuthAttClassement\DemandeAuthController@index')->name('demande_r');
 
 
-
     Route::get('/classement','GestionAuthAttClassement\ClassementController@create')->name('classement');
     Route::post('/classement','GestionAuthAttClassement\ClassementController@store')->name('dam');
-
 
     Route::get('/ficheDeliberation','GestionAuthAttClassement\FileController@ImportForm')->name('deliber');
     Route::post('/import','GestionAuthAttClassement\FileController@Import')->name('employee.import');
@@ -205,7 +202,6 @@ Route::group(["prefix"=>"gestion_deliberation", "as"=>"gestion_deliberation."], 
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-//Gestion deroulement cours
 
 Route::group(["prefix"=>"gestion_deroulement_cours", "as"=>"gestion_deroulement_cours."], function ()
 {

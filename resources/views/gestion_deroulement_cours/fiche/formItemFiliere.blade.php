@@ -119,5 +119,11 @@
         </div>
         <br>
         <li class="retourAccueil" >  <a href="{{ route('gestion_deroulement_cours.accueil') }}"> Annuler </a></li>
-
+        
+       
+    @if(isset($message))
+        <script>
+            toastr.success("{{$message}}", 'Succès')
+        </script>
+    @endif
 @endsection

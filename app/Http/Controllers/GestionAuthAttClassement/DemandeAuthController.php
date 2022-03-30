@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\GestionAuthAttClassement;
 
-use App\Models\GestionAuthAttClassement\Demande;
+use App\Models\Demande;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 

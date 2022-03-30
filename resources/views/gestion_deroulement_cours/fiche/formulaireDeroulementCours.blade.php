@@ -59,7 +59,7 @@
 
                                         @foreach($annee_detude as $anne_etude)
                                             <option>
-                                                {!!$anne_etude->appelation!!}
+                                                {!!$anne_etude->name!!}
                                             </option>
                                         @endforeach
 
@@ -80,7 +80,7 @@
 
                                         @foreach($filieres as $one_filiere)
                                             <option>
-                                                {!!$one_filiere->appelation!!}
+                                                {!!$one_filiere->name!!}
                                             </option>
                                         @endforeach
                                     </optgroup>
@@ -96,7 +96,7 @@
 
                                         @foreach($ues as $ue)
                                             <option>
-                                                {!!$ue->appelation!!}
+                                                {!!$ue->name!!}
                                             </option>
                                         @endforeach
 

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Field extends Model
 {
-    
+    public $timestamps = false;
 
     protected $fillable = [
         'systemName',
