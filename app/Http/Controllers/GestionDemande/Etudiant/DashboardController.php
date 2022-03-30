@@ -12,6 +12,6 @@ class DashboardController extends Controller
     }
 
     public function index(){
-        return view('gestion_demandes.etudiants.dashboard');
+        return view('gestion_demandes_reclamation_evaluation.etudiants.dashboard');
     }
 }

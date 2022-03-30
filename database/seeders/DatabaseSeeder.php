@@ -16,6 +16,12 @@ use App\Models\PedagogicGroup;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User_userGroup_Position_Service_Map;
+use App\Models\user_pedagogic_group_map;
+use App\Models\ShortcutsRequest;
+use App\Models\AcademicSemester;
+use App\Models\Evaluation_type;
+
+
 
 class DatabaseSeeder extends Seeder
 {
@@ -33,6 +39,8 @@ class DatabaseSeeder extends Seeder
          $user=User::create(['pseudo'=>"admin",'email'=>"admin@insti.com",'password'=>Hash::make('12345678'),'statusId'=>1]);
          $user=User::create(['pseudo'=>"enseignant",'email'=>"nana@gmail.com",'password'=>Hash::make('12345678'),'statusId'=>1]);
          $user=User::create(['pseudo'=>"enseignant",'email'=>"leo@gmail.com",'password'=>Hash::make('12345678'),'statusId'=>1]);
+         $user=User::create(['pseudo'=>"etudiant",'email'=>"etudiant@gmail.com",'password'=>Hash::make('12345678'),'statusId'=>1]);
+
 
          $field=Field::create(["systemName"=>"Maintenace des systèmes","name"=>" MS1","abbreviation"=>"MS1","description"=>" filiere","offer"=>"filiere"]);
          $field=Field::create(["systemName"=>"Génie mecanique et productique ","name"=>" GMP1","abbreviation"=>"GMP1","description"=>" filiere","offer"=>"filiere"]);
@@ -40,6 +48,7 @@ class DatabaseSeeder extends Seeder
          $field=Field::create(["systemName"=>"Genie electrique et informatique","name"=>" GEI1","abbreviation"=>"GEI1","description"=>" filiere","offer"=>"filiere"]);
 
          $academic_years=AcademicYear::create(['name'=>"Academique","calendar"=>"Calendrier de l'année en cours","startDate"=>"2019-02-18","endDate"=>"2019-08-18","observation"=>"un observateur"]);
+        
 
         // semestre_annee, semestre_cycle, annee_etude, type_enseignant/apprenant/personnel/UE/composition/stage/, nature_UE
          $generals=General::create(["name"=>"semestre 1","systemName"=>"1","content_type"=>"UE","content_tag"=>"nature_UE"]);
@@ -47,7 +56,8 @@ class DatabaseSeeder extends Seeder
          $generals=General::create(["name"=>"semestre 3","systemName"=>"1","content_type"=>"UE","content_tag"=>"nature_UE"]);
          $generals=General::create(["name"=>"semestre 4","systemName"=>"2","content_type"=>"UE","content_tag"=>"nature_UE"]);
 
-
+        
+        
          $pedagogic_groups=PedagogicGroup::create(["name"=>"MS1","fieldId"=>"1","academicYearId"=>"1","studyYearId"=>"1","description"=>"MS1"]);
          $pedagogic_groups=PedagogicGroup::create(["name"=>"GMP1","fieldId"=>"2","academicYearId"=>"1","studyYearId"=>"1","description"=>"GMP1"]);
          $pedagogic_groups=PedagogicGroup::create(["name"=>"GE1","fieldId"=>"3","academicYearId"=>"1","studyYearId"=>"1","description"=>"GE1"]);
@@ -92,6 +102,22 @@ class DatabaseSeeder extends Seeder
         $ues=Ue::create(["name"=>"Anaglais général","abbreviation"=>"ANG","code"=>"2023","CT"=>"25","TD"=>"5","TP"=>"5","generalId"=>"1"]);
         $ues=Ue::create(["name"=>"Analyse numerique etapplication","abbreviation"=>"AVN","code"=>"2023","CT"=>"30","TD"=>"5","TP"=>"5","generalId"=>"1"]);
         $ues=Ue::create(["name"=>"POO","abbreviation"=>"java","code"=>"2023","CT"=>"25","TD"=>"5","TP"=>"3","generalId"=>"1"]);
+
+        $user_pedagogic_group=user_pedagogic_group_map::create(["user_Id"=>"4","pedagogic_group_Id"=>"4"]);
+
+        $academic_semesters=AcademicSemester::create(["designation"=>"Semestre1","calendar"=>"Calendrier de l'année en cours","startDate"=>"2019-02-18","endDate"=>"2019-08-18","observation"=>"un observateur"]);
+        $academic_semesters=AcademicSemester::create(["designation"=>"Semestre2","calendar"=>"Calendrier de l'année en cours","startDate"=>"2019-02-18","endDate"=>"2019-08-18","observation"=>"un observateur"]);
+
+
+        $shortcuts_request=ShortcutsRequest::create(["academic_year_Id"=>"1","academic_semester_Id"=>"1","field_Id"=>"4","pedagogic_group_Id"=>"4","ue_Id"=>"1"]);
+        $shortcuts_request=ShortcutsRequest::create(["academic_year_Id"=>"1","academic_semester_Id"=>"1","field_Id"=>"4","pedagogic_group_Id"=>"4","ue_Id"=>"2"]);
+        $shortcuts_request=ShortcutsRequest::create(["academic_year_Id"=>"1","academic_semester_Id"=>"1","field_Id"=>"4","pedagogic_group_Id"=>"4","ue_Id"=>"3"]);
+        $shortcuts_request=ShortcutsRequest::create(["academic_year_Id"=>"1","academic_semester_Id"=>"1","field_Id"=>"4","pedagogic_group_Id"=>"4","ue_Id"=>"4"]);
+
+       $evaluation_types=Evaluation_type::create(["designation"=>"Devoir du professeur","description"=>""]);
+       $evaluation_types=Evaluation_type::create(["designation"=>"Devoir de l'administration","description"=>""]);
+       $evaluation_types=Evaluation_type::create(["designation"=>"Reprise","description"=>""]);
+       $evaluation_types=Evaluation_type::create(["designation"=>"Rattrappage","description"=>""]);
 
 
     }

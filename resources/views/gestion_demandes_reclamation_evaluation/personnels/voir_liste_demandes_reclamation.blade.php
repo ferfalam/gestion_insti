@@ -1,4 +1,4 @@
-@extends('gestion_demandes.personnels.dashboard')
+@extends('gestion_demandes_reclamation_evaluation.personnels.dashboard')
 @section('main')
     <div class="container-fluid">
         <div class="d-sm-flex justify-content-between align-items-center mb-4">
