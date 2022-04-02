@@ -13,8 +13,7 @@
                         <option value="{{$lv}}">{{$lv}}</option>
                     @endisset
                     <option value="*">*</option>
-                    {{-- @foreach ($profile as $profil)<option value="{{$profil->nom}} {{$profil->prenom}}">{{$profil->nom}} {{$profil->prenom}}</option>@endforeach --}}
-                                             
+                    @foreach ($profile as $profil)<option value="{{$profil->com_givenName}} {{$profil->com_fullname}}">{{$profil->com_givenName}} {{$profil->com_fullname}}</option>@endforeach               
                 </select>
                 <div style="padding-top: 10px"><input class="btn btn-primary" id="ChangeTable" type="submit" name="ChangeTable" value="Changer"></div>
             </form>                                
@@ -48,18 +47,17 @@
             @foreach ($profileTrait as $profile)
             @php
                 $rowspan=0;
-                $sqlTable= "select * from tableau_missions where Nom_enseignant ='"."".$profile->nom." ".$profile->prenom."'";
+                $sqlTable= "select * from missions where nom_enseignant ='"."".$profile->com_givenName." ".$profile->com_fullname."'";
                 $table=DB::select($sqlTable);
                 $table2=DB::select($sqlTable);
                 foreach ($table2 as $table) {
                     $rowspan++;
                 }
             @endphp
-            
             @if ($table!=null)
-                <td class="text-center" rowspan="{{$rowspan+1}}">{{$profile->prenom}} {{$profile->nom}}</td>
+                <td class="text-center" rowspan="{{$rowspan+1}}">{{$profile->com_fullname}} {{$profile->com_givenName}}</td>
                 @php
-                    $sqlTable= "select * from tableau_missions where Nom_enseignant ='"."".$profile->nom." ".$profile->prenom."'";
+                    $sqlTable= "select * from missions where nom_enseignant ='"."".$profile->com_givenName." ".$profile->com_fullname."'";
                     $table=DB::select($sqlTable);
                     foreach ($table as $table) {
                         echo '
@@ -68,15 +66,15 @@
                                 <td>'.$table->adressse.'</td>
                                 <td>'.$table->date_naissance.'</td>
                                 <td>'.$table->nationalite.'</td>
-                                <td>'.$table->Maticule.'</td>
+                                <td>'.$table->maticule.'</td>
                                 <td>'.$table->grade.'</td>
-                                <td>'.$table->Ue.'</td>
-                                <td>'.$table->Groupe_Pedagogique.'</td>
-                                <td>'.$table->Annee_academique.'</td>
+                                <td>'.$table->ue.'</td>
+                                <td>'.$table->pedagogicGroup.'</td>
+                                <td>'.$table->academicYear.'</td>
                                 <td>'.$table->missionHeure.'</td>
                                 <td>'.$table->missionDuree.'</td>
-                                <td>'.$table->dateJourArrive.'</td>
-                                <td>'.$table->dateJourRetour.'</td>
+                                <td>'.$table->startDate.'</td>
+                                <td>'.$table->endDate.'</td>
                             </tr>
                         ';
                     }
@@ -86,7 +84,7 @@
         @else
         <tr>
             @php
-                $sqlTable= "select * from tableau_missions where Nom_enseignant ='"."".request('selectNomA')."'";
+                $sqlTable= "select * from missions where nom_enseignant ='"."".request('selectNomA')."'";
                 $rowspan=0;
                 $table=DB::select($sqlTable);
                 $table2=DB::select($sqlTable);
@@ -97,7 +95,7 @@
             @if ($table!=null)
                 <td class="text-center" rowspan="{{$rowspan+1}}">{{request('selectNomA')}}</td>
                 @php
-                    $sqlTable= "select * from tableau_missions where nom_enseignant ='".request('selectNomA')."'";
+                    $sqlTable= "select * from missions where nom_enseignant ='".request('selectNomA')."'";
                     $table=DB::select($sqlTable);
                     foreach ($table as $table) {
                        
@@ -107,15 +105,15 @@
                                 <td>'.$table->adressse.'</td>
                                 <td>'.$table->date_naissance.'</td>
                                 <td>'.$table->nationalite.'</td>
-                                <td>'.$table->Maticule.'</td>
+                                <td>'.$table->maticule.'</td>
                                 <td>'.$table->grade.'</td>
-                                <td>'.$table->Ue.'</td>
-                                <td>'.$table->Groupe_Pedagogique.'</td>
-                                <td>'.$table->Annee_academique.'</td>
+                                <td>'.$table->ue.'</td>
+                                <td>'.$table->pedagogicGroup.'</td>
+                                <td>'.$table->academicYear.'</td>
                                 <td>'.$table->missionHeure.'</td>
                                 <td>'.$table->missionDuree.'</td>
-                                <td>'.$table->dateJourArrive.'</td>
-                                <td>'.$table->dateJourRetour.'</td>
+                                <td>'.$table->startDate.'</td>
+                                <td>'.$table->endDate.'</td>
                             </tr>
                         ';
 

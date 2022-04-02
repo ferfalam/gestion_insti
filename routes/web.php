@@ -91,6 +91,8 @@ Route::group(["prefix"=>"gestion_enseignant", "as"=>"gestion_enseignant.","middl
 
     Route::post('/image-upload',[App\Http\Controllers\GestionDesEnseignants\ImageUploadController::class,"imageUploadPost"])->name('image_upload_post');
 
+    Route::get('/deconnexion', [App\Http\Controllers\GestionDesEnseignants\ConnexionController::class,"deconnexion"])->name('deconnexion');
+
     // Route::get('/profile','App\Http\Controllers\ProfileController@affichage');
     // Route::post('/profilPass','App\Http\Controllers\ProfileController@traitement1');
     // Route::post('/profilInfo','App\Http\Controllers\ProfileController@traitement2');
