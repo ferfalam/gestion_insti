@@ -9,10 +9,13 @@ class PedagogicGroup extends Model
 {
     use HasFactory;
 
+    public $timestamps = false;
+
     protected $fillable = [
         'name',
         'fieldId',
         'academicYearId',
         'studyYearId',
+        'description',
     ];
 }

@@ -15,4 +15,5 @@ class Services extends Model
         'name',
         'description',
     ];
+    public $timestamps = false;
 }
