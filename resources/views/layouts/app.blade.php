@@ -10,10 +10,6 @@
 
     <title>{{ config('app.name', 'Délibérations') }}</title>
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-    <script src="{{ asset('bootstrap/js/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('js/script.min.js') }}"></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -35,18 +31,23 @@
         <div id="wrapper">
             <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0">
                 <div class="container-fluid d-flex flex-column p-0"><a
-                        class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="/">
+                        class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="{{ route('home') }}">
                         <div class="sidebar-brand-icon"><i class="fas fa-school"></i></div>
                         <div class="sidebar-brand-text mx-3"><span>INSTI</span></div>
                     </a>
                     <hr class="sidebar-divider my-0">
                     @guest
-                        
-                    <ul class="navbar-nav text-light" id="accordionSidebar">
-                        <li class="nav-item"><a class="nav-link"
-                                href="{{ route('login') }}"><i
-                                    class="far fa-user-circle"></i><span>Connexion</span></a></li>
-                    </ul>
+                        <ul class="navbar-nav text-light" id="accordionSidebar">
+                            <li class="nav-item"><a class="nav-link"
+                                    href="{{ route('login') }}"><i
+                                        class="far fa-user-circle"></i><span>Connexion</span></a></li>
+                        </ul>
+                    @else
+                        <ul class="navbar-nav text-light" id="accordionSidebar">
+                            <li class="nav-item"><a class="nav-link {{ request()->routeIs('generality.index') ? 'active' : '' }}"
+                                    href="{{ route('generality.index', []) }}"><i
+                                        class="fa-solid fa-gear"></i><span>Généralité</span></a></li>
+                        </ul>
                     @endguest
                     <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0"
                             id="sidebarToggle" type="button"></button></div>
@@ -60,10 +61,11 @@
                         <!-- <form class="d-none d-sm-inline-block me-auto ms-md-3 my-2 my-md-0 mw-100 navbar-search">
                         <div class="input-group"><input class="bg-light form-control border-0 small" type="text" placeholder="Search for ..."><button class="btn btn-primary py-0" type="button"><i class="fas fa-search"></i></button></div>
                     </form> -->
-                        {{-- <ul class="navbar-nav flex-nowrap ms-auto">
-                            <div class="d-none d-sm-block topbar-divider"></div>
+                        <ul class="navbar-nav flex-nowrap ms-auto">
+                            {{-- <div class="d-none d-sm-block topbar-divider"></div> --}}
                             <li class="nav-item dropdown no-arrow">
-                                <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link"
+                                {{-- <div class="nav-item dropdown no-arrow">
+                                    <a class="dropdown-toggle nav-link"
                                         aria-expanded="false" data-bs-toggle="dropdown" href="#"><span
                                             class="d-none d-lg-inline me-2 text-gray-600 small">Valerie Luna</span><img
                                             class="border rounded-circle img-profile"
@@ -79,9 +81,9 @@
                                         <div class="dropdown-divider"></div><a class="dropdown-item" href="#"><i
                                                 class="fas fa-sign-out-alt fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Logout</a>
                                     </div>
-                                </div>
+                                </div> --}}
                             </li>
-                        </ul> --}}
+                        </ul> 
                     </div>
                 </nav>
 
@@ -92,6 +94,11 @@
     </div>
     <!-- ALL JS FILES -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Scripts -->
+    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('bootstrap/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('js/script.min.js') }}"></script>
     {{-- <script src="{{ asset('js/all.js') }}"></script> --}}
     @yield("script")
 </body>

@@ -1,5 +1,20 @@
 @extends('layouts.app')
 
+@section('style')
+    <style>
+        .card{
+            height : 100%
+        }
+
+        .card-body a{
+            float: right;
+            position: absolute;
+            right: 10px;
+            bottom: 10px;
+        }
+    </style>
+@endsection
+
 @section('content')
 
 

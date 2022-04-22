@@ -2,18 +2,73 @@
 
 @section('style')
 	<link rel="stylesheet" type="text/css" href="{{asset('css/main.css')}}">
+    <style>
+        a {
+            text-decoration: none
+        }
+    </style>
 @endsection
 @section('main')
     <div id="overviews" class="section lb">
-        <div class="container">
-            <div class="section-title row text-center">
-                <div class="col-md-8 offset-md-2">
-                    <h3>Emploi du temps des filières</h3>
-                </div>
-            </div><!-- end title -->
-        </div><!-- end container -->
+        <div class="section-title row mx-4">
+            <div class="col-md-8">
+                <h3>Emploi du temps des filières</h3>
+            </div>
+            <div class="col-md-4 text-right">
+                <a href="#" class="btn btn-primary">Ajouter un emploi du temps</a>
+            </div>
+        </div><!-- end title -->
     </div><!-- end section -->
 
+    <div class="row mx-4">
+        <div class="col-md-12 my-4 elevate-2">
+            <div class="card">
+                <div class="card-body">
+                    <form action="#" method="post">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="field">Filière</label>
+                                    <select class="form-control" name="field" id="field">
+                                        <option value="none">---</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="semestre">Semestre</label>
+                                    <select class="form-control" name="semestre" id="semestre">
+                                        <option value="none">---</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="year">Année d'étude</label>
+                                    <select class="form-control" name="year" id="year">
+                                        <option value="none">---</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="gp">Groupe Pédagogique</label>
+                                    <select class="form-control" name="gp" id="gp">
+                                        <option value="none">---</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4 text-left">
+                                <input type="submit" value="Appliquer" class="btn btn-success">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="cd-schedule cd-schedule--loading margin-top-lg margin-bottom-lg js-cd-schedule">
         <div class="cd-schedule__timeline">
             <ul>
@@ -138,5 +193,5 @@
 @endsection
 
 @section('script')
-    <script src="{{asset('js/main.js')}}"></script>
+    {{-- <script src="{{asset('js/main.js')}}"></script> --}}
 @endsection
