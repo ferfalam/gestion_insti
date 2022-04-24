@@ -45,7 +45,7 @@
                     <div class="form-group">
 
                         @if ( count($groupPedagogique) == 0 )
-                            <label for="fields"> <strong class="wordgrp"> Liste des Groupes pedagogiques existantes </strong> </label> <br>
+                            <label for="fields"> <strong class="wordgrp"> Aucune Liste de Groupe pedagogique existante </strong> </label> <br>
                         @else
                             <label for="fields"> <strong class="wordgrp"> Liste des Groupes pedagogiques existantes </strong> </label> <br>
                     
@@ -148,31 +148,5 @@
             toastr.success("{{$message}}", 'Succès')
         </script>
     @endif
-         {{-- <div class="form-group">
-                        <label for="fields"> Option <strong> Filiere(s) </strong> </label> <br>
-                            <script type="text/javascript">
-                                function ajout_input(form) 
-                                    {
-                                        i = form.Rubrique.selectedIndex;
-                                        for (j=0;j<=i;j++)
-                                        {
-                                            var input= document.createElement('input');
-                                            document.body.appendChild(input);
-                                        }
-                                    }
-                            </script>
-                             
-                           
-                                <select class="form-control" id="fields" name="filiere" required="" onChange='ajout_input(this.form)'>
-                                    <optgroup label="Filière">
-
-                                        @foreach($filieres as $one_filiere)
-                                            <option>
-                                                {!!$one_filiere->appelation!!}
-                                            </option>
-                                        @endforeach
-                                    </optgroup>
-                                </select>
-                    </div> --}}
 
 @endsection
