@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class userGroup extends Model
+class UserGroup extends Model
 {
     use HasFactory;
 
@@ -15,4 +15,6 @@ class userGroup extends Model
         'name',
         'description',
     ];
+
+    public $timestamps = false;
 }

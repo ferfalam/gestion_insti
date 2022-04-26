@@ -40,11 +40,14 @@
                         <div class="sidebar-brand-text mx-3"><span>INSTI</span></div>
                     </a>
                     <hr class="sidebar-divider my-0">
+                    @guest
+                        
                     <ul class="navbar-nav text-light" id="accordionSidebar">
                         <li class="nav-item"><a class="nav-link"
                                 href="{{ route('login') }}"><i
                                     class="far fa-user-circle"></i><span>Connexion</span></a></li>
                     </ul>
+                    @endguest
                     <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0"
                             id="sidebarToggle" type="button"></button></div>
                 </div>

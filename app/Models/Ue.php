@@ -13,5 +13,9 @@ class Ue extends Model
         'name',
         'abbreviation', //integer
         'code',
+        'CT',
+        'TD',
+        'TP',
+        'generalId',
     ];
 }
