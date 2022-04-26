@@ -85,7 +85,7 @@ class FieldController extends Controller
             'description' => $request->description,
             'offer' => 'Filiere'
         ]);
-        // $flight->update($request->all());
+
         return view('gestion_deroulement_cours.filiereModule.formItemFiliere')->with('Success');
     }
 

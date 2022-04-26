@@ -52,8 +52,8 @@
                         <ul class="nav navbar-nav text-light" id="accordionSidebar">
                             <li class="nav-item" role="presentation"><a class="nav-link" href="{{ route('home') }}"><i class="la la-ioxhost"></i><span>Accueil</span></a></li>                    
                             <li class="nav-item" role="presentation"><a class="nav-link" href="{{ route('gestion_deroulement_cours.accueil') }}"><i class="la la-ioxhost"></i><span>Déroulement des cours</span></a></li>                    
-                            <li class="nav-item" role="presentation"><a class="nav-link" href="{{ route('gestion_deroulement_cours.newField') }}"><i class="la la-ioxhost"></i><span> Nouveau Groupe Pédagogique </span></a></li>                    
-                            <li class="nav-item" role="presentation"><a class="nav-link" href="{{ route('gestion_deroulement_cours.newFields') }}"><i class="la la-ioxhost"></i><span> Nouvelle Filiere </span></a></li>                    
+                            <li class="nav-item" role="presentation"><a class="nav-link" href="{{ route('gestion_deroulement_cours.newGroup') }}"><i class="la la-ioxhost"></i><span> Nouveau Groupe Pédagogique </span></a></li>                    
+                            <li class="nav-item" role="presentation"><a class="nav-link" href="{{ route('gestion_deroulement_cours.newField') }}"><i class="la la-ioxhost"></i><span> Nouvelle Filiere </span></a></li>                    
                         </ul>
                         <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button></div>
                     </div>

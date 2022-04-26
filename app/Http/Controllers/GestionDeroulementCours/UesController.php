@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers\GestionDeroulementCours;
 
+use App\Models\Ue;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Auth\Events\Registered;
 
 
 class UesController extends Controller
@@ -12,54 +15,88 @@ class UesController extends Controller
      * For to read all Ues created.
      * @return \Illuminate\Http\Response
      */
-    public function readUes( Request $request)
+    public function createUe()
     {
-        $groupPedagogique = PedagogicGroup::all() ;
-
-        // 'name',
-        // 'abbreviation', //integer
-        // 'code',
-        // 'CT',
-        // 'TD',
-        // 'TP',
-        // 'generalId',
-
-        return view ('gestion_deroulement_cours.fiche.formItemGroupPedagogique', compact('groupPedagogique'));
+        return view ('gestion_deroulement_cours.ueModule.formItemUe');
     }
-    
+
     /**
-     * Create Validate and Save the field
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\View\View
+     * For to read all Groups created.
+     * @return \Illuminate\Http\Response
      */
+    public function showUe( Request $request)
+    {
+        $ues = Ue::all() ;
+
+        return view ('gestion_deroulement_cours.ueModule.showUe', compact('ues'));
+    }
+
+    /**
+      * @return \Illuminate\Http\Response
+      */
     public function storeUe(Request $request)
     {
-
+        // Verifiy if this integer or string
         $this->validate( $request , [
-            'appelation' => 'required|max:255',
-            
+            'name' => 'required|max:255',
+            'abbreviation' => 'required',
+            'code' => 'required',
+            'ct' => 'required',
+            'td' => 'required',
+            'tp' => 'required',
+            'generalId' => 'required',
         ]);
 
-        $field = Field::create(
+        $ue = Ue::create(
             [
-                'name' => $request->appelation,
-               
+                'name' => $request->name,
+                'abbreviation' => $request->abbreviation,
+                'code' => $request->code,
+                'CT' => $request->ct,
+                'TD' => $request->td,
+                'TP' => $request->tp,
+                'generalId' => $request->generalId,
             ]
         );
-        event(new Registered($field));
-        $this->message = "Nouvelle Filiere ajoutee avec succès";
+
+        event(new Registered($ue));
+        $this->message = "Nouvelle UE ajoutée avec succès";
         $this->success = true;
-     
+  
         return view('gestion_deroulement_cours.accueil');
     }
 
-    public function updateUe() 
+    public function findById($id)
     {
-        
+        $flight = Ue::findorFail($id);
+        return view('gestion_deroulement_cours.ueModule.updateUe', compact('flight'))->with('Success'); 
     }
 
-    public function deleteUe() 
+    public function updateUe($id, Request $request)
     {
-        
+        $flight = Ue::findorFail($id);
+        $flight-> update([
+            'name' => $request->name,
+            'abbreviation' => $request->abbreviation,
+            'code' => $request->code,
+            'CT' => $request->ct,
+            'TD' => $request->td,
+            'TP' => $request->tp,
+            'generalId' => $request->generalId,
+        ]);
+
+        return view('gestion_deroulement_cours.ueModule.formItemUe')->with('Success');
+    
     }
+
+    public function deleteUe ($id,Request $request) 
+    {
+        $flight = Ue::findorFail($id);
+        $flight->delete();
+
+        return view('gestion_deroulement_cours.ueModule.formItemUe');
+    }
+    
+
+
 }

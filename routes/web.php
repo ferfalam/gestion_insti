@@ -224,19 +224,38 @@ Route::group(["prefix"=>"gestion_deroulement_cours", "as"=>"gestion_deroulement_
 
     // Download Fiche
     Route::get('/ficheDeCoursSortant/pdf', 'GestionDeroulementCours\DownloadFicheController@pdfSave')->name('downloadFiche');
+    Route::get('/ficheDeCoursEnseignant/pdf', 'GestionDeroulementCours\DownloadFicheController@pdfSaveEnseignant')->name('downloadFicheEnseignant');
 
     // PedagogicGroup
-    Route::get('/nouveauGroupePedagogique', 'GestionDeroulementCours\PedagogicGroupController@readGroupePedagogique')->name('newField');
+    Route::get('/formGroupePedagogique', 'GestionDeroulementCours\PedagogicGroupController@createGroupPedagogique')->name('newGroup');
+    Route::get('/GroupePedagogiqueEnregistres', 'GestionDeroulementCours\PedagogicGroupController@showGroupPedagogique')->name('showGroup');
     Route::post('/nouveauGroupePedagogique', 'GestionDeroulementCours\PedagogicGroupController@storeGroupePedagogique')->name('saveNewGroup');
-    Route::delete('/nouveauGroupePedagogique', 'GestionDeroulementCours\PedagogicGroupController@deleteGroupPedagogique')->name('deleteGroup');
+    Route::get('/GroupePedagogiqueSupprime/{id}', 'GestionDeroulementCours\PedagogicGroupController@deleteGroupPedagogique')->name('deleteGroup');
+    Route::get('/GroupePedagogique/{id}', 'GestionDeroulementCours\PedagogicGroupController@findById')->name('groupById');
+    Route::post('/MettreAJourGroupePedagogique/{id}', 'GestionDeroulementCours\PedagogicGroupController@updateGroupPedagogique')->name('updateGroup');
     //Field
-    Route::get('/nouvelleFiliere', 'GestionDeroulementCours\FieldController@createFiliere')->name('newFields');
+    Route::get('/formFiliere', 'GestionDeroulementCours\FieldController@createFiliere')->name('newField');
     Route::get('/FilieresEnregistrees', 'GestionDeroulementCours\FieldController@showFiliere')->name('showField');
     Route::post('/nouvelleFiliere', 'GestionDeroulementCours\FieldController@storeFiliere')->name('saveNewField');
     Route::get('/FiliereSupprimee/{id}', 'GestionDeroulementCours\FieldController@deleteField')->name('deleteField');
     Route::get('/Filiere/{id}', 'GestionDeroulementCours\FieldController@findById')->name('fieldById');
     Route::post('/MettreAJourFiliere/{id}', 'GestionDeroulementCours\FieldController@updateField')->name('updateField');
+    //General
+    Route::get('/formModuleGeneral', 'GestionDeroulementCours\GeneralController@createGeneral')->name('newGenerals');
+    Route::get('/ModuleGeneralEnregistres', 'GestionDeroulementCours\GeneralController@showGeneral')->name('showGenerals');
+    Route::post('/nouveauModuleGeneral', 'GestionDeroulementCours\GeneralController@storeGeneral')->name('saveNewGenerals');
+    Route::get('/moduleGeneralSupprimee/{id}', 'GestionDeroulementCours\GeneralController@deleteGeneral')->name('deleteGeneral');
+    Route::get('/ModuleGeneral/{id}', 'GestionDeroulementCours\GeneralController@findById')->name('generalById');
+    Route::post('/MettreAJourModuleGeneral/{id}', 'GestionDeroulementCours\GeneralController@updateGeneral')->name('updateGeneral');
+   //UE
+    Route::get('/formUe', 'GestionDeroulementCours\UesController@createUe')->name('newUe');
+    Route::get('/UesEnregistrees', 'GestionDeroulementCours\UesController@showUe')->name('showUes');
+    Route::post('/nouvelleUe', 'GestionDeroulementCours\UesController@storeUe')->name('saveNewUe');
+    Route::get('/UeSupprimee/{id}', 'GestionDeroulementCours\UesController@deleteUe')->name('deleteUe');
+    Route::get('/Ue/{id}', 'GestionDeroulementCours\UesController@findById')->name('ueById');
+    Route::post('/MettreAJourUe/{id}', 'GestionDeroulementCours\UesController@updateUe')->name('updateUe');
     
+
     // Route::get('/accueil', function()
     // {
     //     return view('gestionDeroulementCours/accueil');

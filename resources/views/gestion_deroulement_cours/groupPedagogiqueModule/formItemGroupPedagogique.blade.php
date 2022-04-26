@@ -40,27 +40,7 @@
                 {{ csrf_field() }} 
 
                 <h2 class="text-center" data-aos="fade-down" data-aos-duration="600" data-aos-delay="400" style="font-size: 29px;"><strong> <br> Nouveau Groupe Pedagogique </strong></h2>
-                    
-                
-                    <div class="form-group">
-
-                        @if ( count($groupPedagogique) == 0 )
-                            <label for="fields"> <strong class="wordgrp"> Aucune Liste de Groupe pedagogique existante </strong> </label> <br>
-                        @else
-                            <label for="fields"> <strong class="wordgrp"> Liste des Groupes pedagogiques existantes </strong> </label> <br>
-                    
-                            <select class="form-control" id="fields" name="groupPedag" required="" onChange='ajout_input(this.form)'>
-                                <optgroup label="Groupe Pedagogique">
-                                    @foreach($groupPedagogique as $grpPedag)
-                                        <option>
-                                            {!!$grpPedag->name!!}
-                                        </option>
-                                    @endforeach
-                                </optgroup>
-                            </select>
-                        @endif
-                    </div>
-                    
+                        
                     <div class="form-group" >
                         <label for="dsgn"> Designation </label> <br>
                         <div class="form-row">
@@ -116,8 +96,6 @@
                         </div>
                     </div>
     
-
-
                     {{-- End insert id domain generate --}}
 
                     <div class="form-group">
@@ -142,6 +120,8 @@
         <br>
         <li class="retourAccueil" >  <a href="{{ route('gestion_deroulement_cours.accueil') }}"> Annuler </a></li>
         
+        <li class="retourAccueil" > <a href="{{ route('gestion_deroulement_cours.showGroup') }}" > Afficher tous les Groupes Pedagogiques </a>  </li>
+
         
     @if(isset($message))
         <script>

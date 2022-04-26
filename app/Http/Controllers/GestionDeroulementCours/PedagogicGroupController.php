@@ -11,15 +11,20 @@ use Illuminate\Auth\Events\Registered;
 class PedagogicGroupController extends Controller {
 
     
+    public function createGroupPedagogique(Request $request)
+    {
+        return view ('gestion_deroulement_cours.groupPedagogiqueModule.formItemGroupPedagogique');
+    }
+
     /**
      * For to read all Groups created.
      * @return \Illuminate\Http\Response
      */
-    public function readGroupePedagogique( Request $request)
+    public function showGroupPedagogique( Request $request)
     {
         $groupPedagogique = PedagogicGroup::all() ;
 
-        return view ('gestion_deroulement_cours.fiche.formItemGroupPedagogique', compact('groupPedagogique'));
+        return view ('gestion_deroulement_cours.groupPedagogiqueModule.showGroupPedagogique', compact('groupPedagogique'));
     }
 
     /**
@@ -38,8 +43,6 @@ class PedagogicGroupController extends Controller {
             'anneeStudy' => 'required',
         ]);
 
-       
-
         $groupPedag = PedagogicGroup::create(
             [
                 'name' => $request->nameGP,
@@ -57,26 +60,33 @@ class PedagogicGroupController extends Controller {
         return view('gestion_deroulement_cours.accueil');
     }
 
-    public function deleteGroupPedagogique (Request $request) 
+    public function findById($id)
     {
-        $flight = Field::find($request->groupPedagodique);
-        
-        $flight = Field::find($request->id);
+        $flight = PedagogicGroup::findorFail($id);
+        return view('gestion_deroulement_cours.groupPedagogiqueModule.updateGroupPedagogique', compact('flight'))->with('Success'); 
+    }
 
+    public function updateGroupPedagogique($id, Request $request)
+    {
+        $flight = PedagogicGroup::findorFail($id);
+        $flight-> update([
+                'name' => $request->nameGP,
+                'description' => $request->description,
+                'fieldId' => $request->filiere,
+                'academicYearId' => $request->academicYear,
+                'studyYearId' => $request->anneeStudy,
+        ]);
+
+        return view('gestion_deroulement_cours.groupPedagogiqueModule.formItemGroupPedagogique')->with('Success');
+    
+    }
+
+    public function deleteGroupPedagogique ($id,Request $request) 
+    {
+        $flight = PedagogicGroup::findorFail($id);
         $flight->delete();
-        return view('gestion_deroulement_cours.accueil');
-    }
 
-    public function updateGroupPedagogique()
-    {
-        // use App\Models\Flight;
-        
-        // $flight = Flight::find(1);
-        
-        // $flight->name = 'Paris to London';
-        
-        // $flight->save();
+        return view('gestion_deroulement_cours.groupPedagogiqueModule.formItemGroupPedagogique');
     }
-
 
 }
