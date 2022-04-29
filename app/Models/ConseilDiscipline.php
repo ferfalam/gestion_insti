@@ -1,6 +1,13 @@
 <?php
 
 namespace App\Models;
+use App\Models\ConseilDiscipline;
+use App\Models\ConseilUsers;
+use App\Models\ConseilPlainte;
+use App\Models\ConseilPresent;
+use App\Models\Rapport;
+use App\Models\Plainte;
+use App\Models\User;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -12,18 +19,37 @@ class ConseilDiscipline extends Model
      * @var array
      */
     protected $fillable = [
-        'id_plainte', 'date', 'heure', 'statut'
+        'id_plainte', 'date', 'heure', 'lieu', 'mailOK', 'tenue', 'maitre'
     ];
 
-    public function Conseilusers(){
-        return $this->hasMany(ConseilUsers::class);
+    public function participants(){
+        return $this->hasMany(ConseilUsers::class, 'id_conseil');
+    }
+
+    public function presents(){
+        return $this->hasMany(ConseilPresent::class, 'id_conseil');
     }
 
     public function Conseilplaintes(){
-        return $this->hasMany(Conseilplaintes::class);
+        return $this->hasMany(ConseilPlainte::class);
+    }
+
+    public function conseilpresents(){
+        return $this->hasMany(ConseilPresent::class, 'id_conseil');
     }
 
     public function rapport(){
-        return $this->hasOne(Rapport::class);
+        return $this->hasOne(Rapport::class, 'id_conseil');
+    }
+
+    public function maitres(){
+        return $this->belongsTo(User::class, 'maitre');
+    }
+
+    public function convocations(){
+        return $this->hasMany(Convocations::class);
+    }
+    public function plainte(){
+        return $this->belongsTo(Plainte::class, 'id_plainte');
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -11,6 +11,6 @@ class Rapport extends Model
     ];
 
     public function conseil(){
-        return $this-> belongsTo(ConseilDiscipline::class);
+        return $this-> belongsTo(ConseilDiscipline::class, 'id_conseil');
     }
 }

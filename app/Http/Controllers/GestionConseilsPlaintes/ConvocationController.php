@@ -5,6 +5,11 @@ namespace App\Http\Controllers\GestionConseilsPlaintes;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Models\Convocation;
+use App\Models\Plainte;
+use Auth;
+///use App\Http\Requests\ContactRequest;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\ConvocationLetter;
 
 class ConvocationController extends Controller
 {
@@ -13,25 +18,41 @@ class ConvocationController extends Controller
         return view('form');
     }
 
+    public function send(Request $request)
+    {
+        Mail::to('makandjou3000@gmail.com')
+            ->send(new ConvocationLetter($request->except('_token')));
+        return view('gestion_conseils_plaintes.vue_convocation');
+    }
+
     public function view($id){
         $tile = Convocation::find($id);
-        return view('vue_convocation', compact('tile'));
+        return view('gestion_conseils_plaintes.vue_convocation', compact('tile'));
     }
 
     public function show(){
 
-        $admin = auth()->user()->admin;
+        $admin = auth()->user()->statusId;
 
         if($admin == 1){
             $query = Convocation::all();
         } else {
-            $query = Convocation::where('id_plaignant', auth()->user()->id)->where('nom_fautif', auth()->user()->name)->get();
+            $query = Convocation::where('id_user', Auth::user()->id);
         }
-        return view('convocations_user', compact('query'));
+        return view('gestion_conseils_plaintes.convocations_user', compact('query'));
     }
 
     public function form(){
-        return view('convocation_form');
+        return view('gestion_conseils_plaintes.convocation_form');
+    }
+
+    public function store(Request $request)
+    {
+        $order = Convocation::findOrFail($request->id);
+
+        // Ship the order...
+
+        Mail::to('makandjou3000@gmail.com')->send(new Convocation($order));
     }
 
     public function create(Request $request){
@@ -42,6 +63,6 @@ class ConvocationController extends Controller
             'date' => Carbon::parse(request('date'))->format('m/d/Y'),
         ]);
         //$query = Convocation::all();
-        return redirect()->route('liste_convocations');
+        return redirect()->route('gestion_conseils_plaintes.liste_convocations');
     }
 }

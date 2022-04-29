@@ -2,14 +2,18 @@
 
 namespace App\Models;
 
-use App\User;
-use App\Plainte;
+use App\Models\User;
+use App\Models\Plainte;
 use Illuminate\Database\Eloquent\Model;
 
 class PlainteUser extends Model
 {
-    public function users(){
-        return $this->belongsTo(User::class);
+    protected $fillable = [
+        'id_plainte', 'id_user'
+    ];
+
+    public function user(){
+        return $this->belongsTo(User::class, );
     }
 
     public function plaintes(){
