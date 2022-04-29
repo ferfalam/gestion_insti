@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
 
 class CreatePedagogicGroupsTable extends Migration
 {
@@ -19,7 +19,8 @@ class CreatePedagogicGroupsTable extends Migration
             $table->foreignId('fieldId')->constrained('fields');
             $table->foreignId('academicYearId')->constrained('academic_years');
             $table->foreignId('studyYearId')->constrained('generals');
-            //$table->timestamps();
+            $table->text('description');
+            $table->timestamps();
         });
     }
 

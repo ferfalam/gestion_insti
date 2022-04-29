@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\GestionAuthAttClassement;
 
 use App\Http\Controllers\Controller;
-use App\Models\GestionAuthAttClassement\Moyenne;
+use App\Models\Moyenne;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;

@@ -35,7 +35,7 @@
         <div id="wrapper">
             <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0">
                 <div class="container-fluid d-flex flex-column p-0"><a
-                        class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="#">
+                        class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="{{ route('home') }}">
                         <div class="sidebar-brand-icon"><i class="fas fa-school"></i></div>
                         <div class="sidebar-brand-text mx-3"><span>INSTI</span></div>
                     </a>
@@ -47,15 +47,17 @@
                                         class="far fa-user-circle"></i><span>Connexion</span></a></li>
                         @else
                             <li class="nav-item"><a
-                                    class="nav-link {{ request()->is('home') ? 'active' : '' }}"
-                                    href="{{ route('home') }}"><i
+                                    class="nav-link {{ request()->routeIs('gestion_salle.index') ? 'active' : '' }}"
+                                    href="{{ route('gestion_salle.index') }}"><i
                                         class="fas fa-tachometer-alt"></i><span>Accueil</span></a></li>
-                            <li class="nav-item"><a class="nav-link" href="{{ route('gestion_salle.index') }}"><i
-                                        class="fas fa-user"></i><span>Occupation des salle</span></a></li>
-                            <li class="nav-item"><a class="nav-link" href="#"><i
+                            <li class="nav-item"><a class="nav-link {{ request()->routeIs('gestion_salle.class_shedule.index') ? 'active' : '' }}"
+                                href="{{ route('gestion_salle.class_shedule.index') }}"><i
+                                        class="fas fa-user"></i><span>Occupation des salles</span></a></li>
+                            <li class="nav-item"><a class="nav-link {{ request()->routeIs('gestion_salle.shedule.index') ? 'active' : '' }}"
+                                href="{{ route('gestion_salle.shedule.index') }}"><i
                                         class="fas fa-table"></i><span>Emploi du temps</span></a></li>
-                            <li class="nav-item"><a class="nav-link" href="#"><i
-                                        class="fas fa-user-circle"></i><span>Administration</span></a></li>
+                            {{-- <li class="nav-item"><a class="nav-link" href="#"><i
+                                        class="fas fa-user-circle"></i><span>Administration</span></a></li> --}}
                         @endif
                     </ul>
                     <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0"

@@ -88,7 +88,7 @@
                             </div>
                         </div>
                         <div class="p-3">
-                            <button class="btn btn-outline-primary rounded-circle w-50" id="advanced">
+                            <button class="btn btn-outline-primary rounded-2 w-50" id="advanced">
                                 Recherche Avancée
                             </button>
                         </div>
