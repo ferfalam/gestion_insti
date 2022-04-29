@@ -53,18 +53,6 @@ class DatabaseSeeder extends Seeder
 
          $user=User::create(['pseudo'=>"admin",'email'=>"admin@insti.com",'password'=>Hash::make('12345678'),'statusId'=>1]);
          $user=User::create(['pseudo'=>"enseignant",'email'=>"nana@gmail.com",'password'=>Hash::make('12345678'),'statusId'=>1]);
-         $user=User::create(['pseudo'=>"enseignant",'email'=>"leo@gmail.com",'password'=>Hash::make('12345678'),'statusId'=>1]);
-         $user=User::create(['pseudo'=>"etudiant",'email'=>"etudiant@gmail.com",'password'=>Hash::make('12345678'),'statusId'=>1]);
-
-         $field=Field::create(["systemName"=>"Bâtiments et Travaux Publics","name"=>"BTP","abbreviation"=>"BTP-GC","description"=>" filiere","offer"=>"filiere"]);
-         $field=Field::create(["systemName"=>"Electrotechnique et Electronique","name"=>"EE","abbreviation"=>"EE-GEI","description"=>" filiere","offer"=>"filiere"]);
-         $field=Field::create(["systemName"=>"Informatique et Télécoms","name"=>" IT","abbreviation"=>"IT-GEI","description"=>" filiere","offer"=>"filiere"]);
-         $field=Field::create(["systemName"=>"Maintenance Industrielle","name"=>" MI","abbreviation"=>"MI-MS","description"=>" filiere","offer"=>"filiere"]);
-         $field=Field::create(["systemName"=>"Maintenance Automobile","name"=>" MA","abbreviation"=>"MA-MS","description"=>" filiere","offer"=>"filiere"]);
-         $field=Field::create(["systemName"=>"Energies Renouvelables","name"=>" ER","abbreviation"=>"ER-GE","description"=>" filiere","offer"=>"filiere"]);
-         $field=Field::create(["systemName"=>"Froid et Climatisation et Maintenance des Systèmes Energétiques","name"=>" FCMSE","abbreviation"=>"FCMSE-GE","description"=>" filiere","offer"=>"filiere"]);
-         $field=Field::create(["systemName"=>"Mécanique et Productique","name"=>" GMP","abbreviation"=>"GMP","description"=>" filiere","offer"=>"filiere"]);
-         $field=Field::create(["systemName"=>"Neutre","name"=>"Neutre","abbreviation"=>"N","description"=>"Toute filiere confondue","offer"=>"filiere"]);
          $user=User::create(['pseudo'=>"enseignante",'email'=>"leo@gmail.com",'password'=>Hash::make('12345678'),'statusId'=>2]);
          $user=User::create(['pseudo'=>"etudiant1",'email'=>"etu1@gmail.com",'password'=>Hash::make('12345678'),'statusId'=>2]);
          $user=User::create(['pseudo'=>"etudiant2",'email'=>"etu2@gmail.com",'password'=>Hash::make('12345678'),'statusId'=>2]);
