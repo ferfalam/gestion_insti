@@ -1,22 +1,17 @@
 <?php
 
-namespace App\Http\Controllers\GestionDemande\Etudiant;
+namespace App\Http\Controllers\GestionDemande;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Evaluation_request;
 use Auth;
 use DB;
-use App\Http\Requests\StoreFileRequest;
-use App\Models\Evaluation_request;
 
-class MakeEvaluationRequestController extends Controller
+class EvaluationRequestController extends Controller
 {
-    // public function index(){
-    //     return view('gestion_demandes.etudiants.faire_demande_reclamation');
-    // }
+    public function create(){
 
-    public function show()
-    {
         $idUser = Auth::user()->id;
         $idPedagogicGroupe = DB::table('user_pedagogic_group_maps')->where('user_Id', $idUser)->value('pedagogic_group_Id');
        
@@ -34,7 +29,6 @@ class MakeEvaluationRequestController extends Controller
         return view('gestion_demandes_reclamation_evaluation.etudiants.faire_demande_evaluation'
          ,compact('academic_semesters','ues','evaluation_types')
         );
-
     }
 
         /**
@@ -43,9 +37,8 @@ class MakeEvaluationRequestController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-       
+    public function store(Request $request){
+
         $request->validate([
             'semester' => 'required|string',
             'ue' => 'required|string',
@@ -62,6 +55,9 @@ class MakeEvaluationRequestController extends Controller
         // return $documentPath;
 
         $idUser = Auth::user()->id;
+        $userFirstName = DB::table('profiles')->where('user_id', $idUser)->value('com_fullname');
+        $userLastName = DB::table('profiles')->where('user_id', $idUser)->value('com_givenName');
+
 
         $idPedagogicGroupe = DB::table('user_pedagogic_group_maps')->where('user_Id', $idUser)->value('pedagogic_group_Id');
         $pedagogicGroupe = DB::table('pedagogic_groups')->where('id',$idPedagogicGroupe)->value('name');
@@ -78,37 +74,59 @@ class MakeEvaluationRequestController extends Controller
 
 
 
-        // $requete = Complaint_request::create([
-        //     'userId' => $idUser,
-        //     'motif' => request("reclamationMotif"),
-        //     'description_motif' => request("descriptionMotif"),
-        //     'evaluation_type' => request("evaluationType"),
-        //     'ue' => request("ue"),
-        //     'document_path' => $documentPath,
-        //     'field' => $field,
-        //     'pegagogic_group' => $pedagogicGroupe,
-        //     'academic_year_start' => $academic_year_start,
-        //     'academic_year_end' => $academic_year_end,
-        //     'academic_semester' => $academic_semester,
+        $requete = Evaluation_request::create([
+            'firt_name' => $userFirstName,
+            'last_name' => $userLastName,
+            'userId' => $idUser,
+            'motif' => request("reclamationMotif"),
+            'description_motif' => request("description"),
+            'evaluation_type' => request("evaluationType"),
+            'ue' => request("ue"),
+            'document_path' => $documentPath,
+            'field' => $field,
+            'pegagogic_group' => $pedagogicGroupe,
+            'academic_year_start' => $academic_year_start,
+            'academic_year_end' => $academic_year_end,
+            'academic_semester' => $academic_semester,
+            'created_date' => date('d-m-y h:i:s'),
 
-        // ]);
+        ]);
 
-        DB::table('evaluation_requests')->insert(
-            array('userId' => $idUser,
-                'motif' => request("reclamationMotif"),
-                'description_motif' => request("description"),
-                'evaluation_type' => request("evaluationType"),
-                'ue' => request("ue"),
-                'document_path' => $documentPath,
-                'field' => $field,
-                'pegagogic_group' => $pedagogicGroupe,
-                'academic_year_start' => $academic_year_start,
-                'academic_year_end' => $academic_year_end,
-                'academic_semester' => $academic_semester,)
-        );
+        // DB::table('complaint_requests')->insert(
+        //     array('userId' => $idUser,
+        //         'motif' => request("reclamationMotif"),
+        //         'description_motif' => request("description"),
+        //         'evaluation_type' => request("evaluationType"),
+        //         'ue' => request("ue"),
+        //         'document_path' => $documentPath,
+        //         'field' => $field,
+        //         'pegagogic_group' => $pedagogicGroupe,
+        //         'academic_year_start' => $academic_year_start,
+        //         'academic_year_end' => $academic_year_end,
+        //         'academic_semester' => $academic_semester,)
+        // );
 
         
 
-        return redirect(route('gestion_demandes_reclamation_evaluation.dashboard_etudiant'))->with('success', 'Demande d\'evaluation effectuer avec sucess');
+        return redirect(route('gestion_demandes_reclamation_evaluation.dashboard_etudiant'))->with('success', 'Evaluation effectuer avec sucess');
+    }
+
+    public function show_all(){
+        $all_evaluation_requests = Evaluation_request::all();
+
+        return view('gestion_demandes_reclamation_evaluation.personnels.voir_liste_demandes_evaluation'
+         ,compact('all_evaluation_requests')
+        );
+
+
+    }
+
+    public function show($id){
+        
+
+        $evaluation_request = Evaluation_request::findOrFail($id);
+        return view('gestion_demandes_reclamation_evaluation.personnels.voir_details_demandes_evaluation'
+         ,compact('evaluation_requests')
+        );
     }
 }

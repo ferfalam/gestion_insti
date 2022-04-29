@@ -41,6 +41,7 @@ class EnregistrerDeliberationsController extends Controller
     {
         $deliberations = Deliberation::all();
 
+
         $request->validate([
             'annee' => 'required|integer',
             'groupePedagogique' => 'required|integer',            

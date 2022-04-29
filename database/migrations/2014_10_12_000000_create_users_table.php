@@ -20,6 +20,8 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->foreignId('statusId')->constrained('statuses');
+            // $table->foreignId('user_groupId')->constrained('users_groups');
+            $table->foreignId('user_groupId')->constrained('user_groups');
             $table->rememberToken();
             $table->timestamps();
         });

@@ -16,6 +16,8 @@ class CreateEvaluationRequestsTable extends Migration
         Schema::create('evaluation_requests', function (Blueprint $table) {
             $table->id();
             $table->foreignId('userId')->constrained('users');
+            $table->string('firt_name');
+            $table->string('last_name');
             $table->string('motif');
             $table->string('description_motif');
             $table->string('document_path');
@@ -26,7 +28,8 @@ class CreateEvaluationRequestsTable extends Migration
             $table->string('academic_year_end');
             $table->string('academic_semester');
             $table->string('evaluation_type');
-            $table->timestamps();
+            $table->date('created_date');
+            $table->timestamps();   
         });
     }
 

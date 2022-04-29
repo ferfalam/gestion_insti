@@ -37,10 +37,21 @@ class DatabaseSeeder extends Seeder
 
          $status=Status::create(['name'=>'Bloquer','notation'=>1,'description'=>"Description diu status créer"]);
 
-         $user=User::create(['pseudo'=>"admin",'email'=>"admin@insti.com",'password'=>Hash::make('12345678'),'statusId'=>1]);
-         $user=User::create(['pseudo'=>"enseignant",'email'=>"nana@gmail.com",'password'=>Hash::make('12345678'),'statusId'=>1]);
-         $user=User::create(['pseudo'=>"enseignant",'email'=>"leo@gmail.com",'password'=>Hash::make('12345678'),'statusId'=>1]);
-         $user=User::create(['pseudo'=>"etudiant",'email'=>"etudiant@gmail.com",'password'=>Hash::make('12345678'),'statusId'=>1]);
+         //admin,superadmin,apprenant,enseignant,personnel,redacteur,partenaire
+         $user_groups=UserGroup::create(["name"=>"admin","description"=>"Admin"]);
+         $user_groups=UserGroup::create(["name"=>"superadmin","description"=>"Le super Admin"]);
+         $user_groups=UserGroup::create(["name"=>"apprenant","description"=>"Un apprenant"]);
+         $user_groups=UserGroup::create(["name"=>"enseignant","description"=>"Un enseignant"]);
+         $user_groups=UserGroup::create(["name"=>"personnel","description"=>"Un personnel"]);
+         $user_groups=UserGroup::create(["name"=>"redacteur","description"=>"Un redacteur"]);
+         $user_groups=UserGroup::create(["name"=>"partenaire","description"=>"Un partenaire"]);
+
+         $user=User::create(['pseudo'=>"admin",'email'=>"admin@insti.com",'password'=>Hash::make('12345678'),'statusId'=>1, 'user_groupId'=>1]);
+         $user=User::create(['pseudo'=>"enseignant",'email'=>"nana@gmail.com",'password'=>Hash::make('12345678'),'statusId'=>1, 'user_groupId'=>4]);
+         $user=User::create(['pseudo'=>"enseignant",'email'=>"leo@gmail.com",'password'=>Hash::make('12345678'),'statusId'=>1, 'user_groupId'=>4]);
+         $user=User::create(['pseudo'=>"etudiant",'email'=>"etudiant@gmail.com",'password'=>Hash::make('12345678'),'statusId'=>1, 'user_groupId'=>3]);
+         $user=User::create(['pseudo'=>"personnel",'email'=>"personnel@gmail.com",'password'=>Hash::make('12345678'),'statusId'=>1, 'user_groupId'=>5]);
+
 
          $field=Field::create(["systemName"=>"Maintenace des systèmes","name"=>" MS1","abbreviation"=>"MS1","description"=>" filiere","offer"=>"filiere"]);
          $field=Field::create(["systemName"=>"Génie mecanique et productique ","name"=>" GMP1","abbreviation"=>"GMP1","description"=>" filiere","offer"=>"filiere"]);
@@ -90,6 +101,8 @@ class DatabaseSeeder extends Seeder
         $user_group_positions=User_userGroup_Position_Service_Map::create(["userId"=>"1","userGroupId"=>"1","serviceId"=>"1","positionId"=>"4"]);
         $user_group_positions=User_userGroup_Position_Service_Map::create(["userId"=>"2","userGroupId"=>"4","serviceId"=>"3","positionId"=>"2"]);
         $user_group_positions=User_userGroup_Position_Service_Map::create(["userId"=>"3","userGroupId"=>"4","serviceId"=>"3","positionId"=>"2"]);
+        $user_group_positions=User_userGroup_Position_Service_Map::create(["userId"=>"4","userGroupId"=>"5","serviceId"=>"3","positionId"=>"1"]);
+        $user_group_positions=User_userGroup_Position_Service_Map::create(["userId"=>"5","userGroupId"=>"5","serviceId"=>"3","positionId"=>"1"]);
 
         $qualite=Qualite::create(["name"=>"Assistant"]);
         $qualite=Qualite::create(["name"=>"Ingenieur"]);
@@ -131,6 +144,46 @@ class DatabaseSeeder extends Seeder
             "com_phoneNumber" => "90998656",
             "com_address" => "Lokossa Insti",
             "com_parentFullname" => "Parent Enseignant",
+            "com_parentGivenName" => "Parent ",
+            "com_parentPhoneNumber" => "68587412",
+            "app_fieldId" => "4",
+            "app_typeId" => "1",
+            "ens_typeId" => "2",
+            "pers_typeId" => "3",
+        ]);
+
+        $profil = Profile::create([
+            'user_id' => "4",
+            "com_fullname" => "Etudiant",
+            "com_givenName" => "Insti",
+            "com_gender" => "M",
+            "com_birthdate" => "2019-02-18",
+            "com_birthPlace" => "Lokossa",
+            "com_diploma" => "C",
+            "com_registrationNumber" => "00002",
+            "com_phoneNumber" => "90998656",
+            "com_address" => "Lokossa Insti",
+            "com_parentFullname" => "Parent Etudiant",
+            "com_parentGivenName" => "Parent ",
+            "com_parentPhoneNumber" => "68587412",
+            "app_fieldId" => "4",
+            "app_typeId" => "1",
+            "ens_typeId" => "2",
+            "pers_typeId" => "3",
+        ]);
+
+        $profil = Profile::create([
+            'user_id' => "4",
+            "com_fullname" => "Personnel",
+            "com_givenName" => "Insti",
+            "com_gender" => "M",
+            "com_birthdate" => "2019-02-18",
+            "com_birthPlace" => "Lokossa",
+            "com_diploma" => "Licence",
+            "com_registrationNumber" => "00002",
+            "com_phoneNumber" => "90998656",
+            "com_address" => "Lokossa Insti",
+            "com_parentFullname" => "Parent Personnel",
             "com_parentGivenName" => "Parent ",
             "com_parentPhoneNumber" => "68587412",
             "app_fieldId" => "4",
