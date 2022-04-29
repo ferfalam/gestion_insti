@@ -214,6 +214,10 @@ Route::group(["prefix"=>"gestion_deliberation", "as"=>"gestion_deliberation.", "
         Route::post('/delibinfos', "GestionDeliberation\DeliberationInfosController@index")->name('delibinfos');
         Route::post('/ouvrir', "GestionDeliberation\DeliberationInfosController@show")->name('ouvrir');
         Route::post('/voir', "GestionDeliberation\IndexController@show")->name('voir');
+        Route::post('/download', "GestionDeliberation\IndexController@down")->name('download');
+        Route::post('/change', "GestionDeliberation\DeliberationInfosController@change")->name('change');
+        Route::post('/update', "GestionDeliberation\DeliberationInfosController@update")->name('update');
+        Route::post('/delete', "GestionDeliberation\DeliberationInfosController@delete")->name('delete');
     });
 });
 
