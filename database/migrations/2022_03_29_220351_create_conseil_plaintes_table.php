@@ -15,8 +15,8 @@ class CreateConseilPlaintesTable extends Migration
     {
         Schema::create('conseil_plaintes', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('id_plainte')->constrained('plaintes')->ondelete('cascade');
-            $table->foreignId('id_conseil')->constrained('conseildisciplines')->ondelete('cascade');
+            $table->foreignId('id_plainte')->constrained('plaintes')->onDelete('cascade');
+            $table->foreignId('id_conseil')->constrained('conseil_disciplines')->onDelete('cascade');
             $table->timestamps();
         });
     }
