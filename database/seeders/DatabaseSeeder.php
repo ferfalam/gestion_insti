@@ -133,10 +133,24 @@ class DatabaseSeeder extends Seeder
             "com_parentFullname" => "Parent Enseignant",
             "com_parentGivenName" => "Parent ",
             "com_parentPhoneNumber" => "68587412",
-            "app_fieldId" => "4",
-            "app_typeId" => "1",
             "ens_typeId" => "2",
-            "pers_typeId" => "3",
+        ]);
+
+        $profil = Profile::create([
+            'user_id' => "4",
+            "com_fullname" => "Etudiant",
+            "com_givenName" => "Insti",
+            "com_gender" => "M",
+            "com_birthdate" => "2019-02-18",
+            "com_birthPlace" => "Lokossa",
+            "com_diploma" => "Ing",
+            "com_registrationNumber" => "00002",
+            "com_phoneNumber" => "90998656",
+            "com_address" => "Lokossa Insti",
+            "com_parentFullname" => "Parent Enseignant",
+            "com_parentGivenName" => "Parent ",
+            "com_parentPhoneNumber" => "68587412",
+            "app_typeId" => "1",
         ]);
 
     }
