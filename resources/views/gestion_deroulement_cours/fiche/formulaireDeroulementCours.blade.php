@@ -28,13 +28,13 @@
 
 @section('main')
 
-    
+
         <div class="d-flex flex-column" id="content-wrapper">
-            
+
 
             <form data-bs-hover-animate="pulse" method="post" action="{{ route('gestion_deroulement_cours.saveFicheEtudiant') }}" novalidate>
                 {{ csrf_field() }}
-                
+
                 <h2 class="text-center" data-aos="fade-down" data-aos-duration="600" data-aos-delay="400" style="font-size: 29px;"><strong> Fiche de Déroulement des Cours </strong></h2>
 
                 <div class="form-group">
@@ -65,13 +65,13 @@
 
                                     </optgroup>
                             </select>
-                            {!! $errors->first('yearstudy', '<span class="error"> :message </span>') !!}   
+                            {!! $errors->first('yearstudy', '<span class="error"> :message </span>') !!}
                         </div>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <div class="form-row">   
+                    <div class="form-row">
 
                         <div class="col" data-aos="fade-right" data-aos-duration="700" data-aos-delay="600">
                             <label style="font-weight: normal;"> Filière </label>
@@ -124,8 +124,8 @@
                         De
                             <input class="form-control" type="time" data-aos="fade-right" data-aos-duration="700" data-aos-delay="600" name="starttime" placeholder="De" required=""> <br>
                             {!! $errors->first('starttime', '<span class="error"> :message </span>') !!}
-                        A 
-                            <input class="form-control" type="time" data-aos="fade-right" data-aos-duration="700" data-aos-delay="600" name="endtime" placeholder="A" required=""> 
+                        A
+                            <input class="form-control" type="time" data-aos="fade-right" data-aos-duration="700" data-aos-delay="600" name="endtime" placeholder="A" required="">
                             {!! $errors->first('endtime', '<span class="error"> :message </span>') !!}
                         </div>
                     </div>
@@ -162,7 +162,7 @@
 
                 <div class="form-group">
                     <a style="float : right">
-                        <input name="bouton" class="btn btn-primary btn-block" data-aos="fade-up" data-aos-duration="750" data-aos-delay="600" type="submit" style="font-weight: bold;" value="Envoyer">   
+                        <input name="bouton" class="btn btn-primary btn-block" data-aos="fade-up" data-aos-duration="750" data-aos-delay="600" type="submit" style="font-weight: bold;" value="Envoyer">
                     </a>
                 </div>
 
@@ -170,7 +170,7 @@
 
             <br>
             <li class="retourAccueil" >  <a href="{{ route('gestion_deroulement_cours.accueil') }}"> Annuler </a></li>
-       
+
         </div>
 
 @endsection

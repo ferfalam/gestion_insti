@@ -34,6 +34,7 @@ class DatabaseSeeder extends Seeder
         // \App\Models\User::factory(10)->create();
 
          $status=Status::create(['name'=>'Bloquer','notation'=>1,'description'=>"Description diu status créer"]);
+         $status=Status::create(['name'=>'Bloquer','notation'=>2,'description'=>"Description diu status créer"]);
 
          $user=User::create(['pseudo'=>"admin",'email'=>"admin@insti.com",'password'=>Hash::make('12345678'),'statusId'=>1]);
          $user=User::create(['pseudo'=>"enseignant",'email'=>"nana@gmail.com",'password'=>Hash::make('12345678'),'statusId'=>1]);
@@ -49,6 +50,15 @@ class DatabaseSeeder extends Seeder
          $field=Field::create(["systemName"=>"Froid et Climatisation et Maintenance des Systèmes Energétiques","name"=>" FCMSE","abbreviation"=>"FCMSE-GE","description"=>" filiere","offer"=>"filiere"]);
          $field=Field::create(["systemName"=>"Mécanique et Productique","name"=>" GMP","abbreviation"=>"GMP","description"=>" filiere","offer"=>"filiere"]);
          $field=Field::create(["systemName"=>"Neutre","name"=>"Neutre","abbreviation"=>"N","description"=>"Toute filiere confondue","offer"=>"filiere"]);
+         $user=User::create(['pseudo'=>"enseignante",'email'=>"leo@gmail.com",'password'=>Hash::make('12345678'),'statusId'=>2]);
+         $user=User::create(['pseudo'=>"etudiant1",'email'=>"etu1@gmail.com",'password'=>Hash::make('12345678'),'statusId'=>2]);
+         $user=User::create(['pseudo'=>"etudiant2",'email'=>"etu2@gmail.com",'password'=>Hash::make('12345678'),'statusId'=>2]);
+         $user=User::create(['pseudo'=>"etudiant3",'email'=>"etu3@gmail.com",'password'=>Hash::make('12345678'),'statusId'=>2]);
+
+         $field=Field::create(["systemName"=>"Maintenace des systèmes","name"=>" MS1","abbreviation"=>"MS1","description"=>" filiere","offer"=>"filiere"]);
+         $field=Field::create(["systemName"=>"Génie mecanique et productique ","name"=>" GMP1","abbreviation"=>"GMP1","description"=>" filiere","offer"=>"filiere"]);
+         $field=Field::create(["systemName"=>"Génie energetique","name"=>" GE1","abbreviation"=>"GE1","description"=>" filiere","offer"=>"filiere"]);
+         $field=Field::create(["systemName"=>"Genie electrique et informatique","name"=>" GEI1","abbreviation"=>"GEI1","description"=>" filiere","offer"=>"filiere"]);
 
          $academic_years=AcademicYear::create(['name'=>"Academique","calendar"=>"Calendrier de l'année en cours","startDate"=>"2019-02-18","endDate"=>"2019-08-18","observation"=>"un observateur"]);
 
