@@ -51,12 +51,9 @@ class DatabaseSeeder extends Seeder
          $user=User::create(['pseudo'=>"etudiant",'email'=>"etudiant@gmail.com",'password'=>Hash::make('12345678'),'statusId'=>1, 'user_groupId'=>3]);
          $user=User::create(['pseudo'=>"personnel",'email'=>"personnel@gmail.com",'password'=>Hash::make('12345678'),'statusId'=>1, 'user_groupId'=>5]);
 
-         $user=User::create(['pseudo'=>"admin",'email'=>"admin@insti.com",'password'=>Hash::make('12345678'),'statusId'=>1]);
-         $user=User::create(['pseudo'=>"enseignant",'email'=>"nana@gmail.com",'password'=>Hash::make('12345678'),'statusId'=>1]);
-         $user=User::create(['pseudo'=>"enseignante",'email'=>"leo@gmail.com",'password'=>Hash::make('12345678'),'statusId'=>2]);
-         $user=User::create(['pseudo'=>"etudiant1",'email'=>"etu1@gmail.com",'password'=>Hash::make('12345678'),'statusId'=>2]);
-         $user=User::create(['pseudo'=>"etudiant2",'email'=>"etu2@gmail.com",'password'=>Hash::make('12345678'),'statusId'=>2]);
-         $user=User::create(['pseudo'=>"etudiant3",'email'=>"etu3@gmail.com",'password'=>Hash::make('12345678'),'statusId'=>2]);
+         $user=User::create(['pseudo'=>"etudiant1",'email'=>"etu1@gmail.com",'password'=>Hash::make('12345678'),'statusId'=>1 , 'user_groupId'=>3]);
+         $user=User::create(['pseudo'=>"etudiant2",'email'=>"etu2@gmail.com",'password'=>Hash::make('12345678'),'statusId'=>1 , 'user_groupId'=>3]);
+         $user=User::create(['pseudo'=>"etudiant3",'email'=>"etu3@gmail.com",'password'=>Hash::make('12345678'),'statusId'=>1, 'user_groupId'=>3]);
 
          $field=Field::create(["systemName"=>"Maintenace des systèmes","name"=>" MS1","abbreviation"=>"MS1","description"=>" filiere","offer"=>"filiere"]);
          $field=Field::create(["systemName"=>"Génie mecanique et productique ","name"=>" GMP1","abbreviation"=>"GMP1","description"=>" filiere","offer"=>"filiere"]);
@@ -76,14 +73,7 @@ class DatabaseSeeder extends Seeder
          $pedagogic_groups=PedagogicGroup::create(["name"=>"Génie Civil","fieldId"=>"1","academicYearId"=>"1","studyYearId"=>"1","description"=>"GC"]);
          $pedagogic_groups=PedagogicGroup::create(["name"=>"Génie Electrique et Informatique","fieldId"=>"2","academicYearId"=>"1","studyYearId"=>"1","description"=>"GEI"]);
          $pedagogic_groups=PedagogicGroup::create(["name"=>"Génie Electrique et Informatique","fieldId"=>"3","academicYearId"=>"1","studyYearId"=>"1","description"=>"GEI"]);
-         $pedagogic_groups=PedagogicGroup::create(["name"=>"Génie Electrique et Informatique","fieldId"=>"9","academicYearId"=>"1","studyYearId"=>"1","description"=>"GEI"]);
          $pedagogic_groups=PedagogicGroup::create(["name"=>"Maintenance des Systèmes","fieldId"=>"4","academicYearId"=>"1","studyYearId"=>"1","description"=>"MS"]);
-         $pedagogic_groups=PedagogicGroup::create(["name"=>"Maintenance des Systèmes","fieldId"=>"5","academicYearId"=>"1","studyYearId"=>"1","description"=>"MS"]);
-         $pedagogic_groups=PedagogicGroup::create(["name"=>"Maintenance des Systèmes","fieldId"=>"9","academicYearId"=>"1","studyYearId"=>"1","description"=>"MS"]);
-         $pedagogic_groups=PedagogicGroup::create(["name"=>"Génie Energétique","fieldId"=>"6","academicYearId"=>"1","studyYearId"=>"1","description"=>"GE"]);
-         $pedagogic_groups=PedagogicGroup::create(["name"=>"Génie Energétique","fieldId"=>"7","academicYearId"=>"1","studyYearId"=>"1","description"=>"GE"]);
-         $pedagogic_groups=PedagogicGroup::create(["name"=>"Génie Energétique","fieldId"=>"9","academicYearId"=>"1","studyYearId"=>"1","description"=>"GE"]);
-         $pedagogic_groups=PedagogicGroup::create(["name"=>"Génie Mécanique et Productique","fieldId"=>"8","academicYearId"=>"1","studyYearId"=>"1","description"=>"GMP"]);
 
          //admin,superadmin,apprenant,enseignant,personnel,redacteur,partenaire
          $user_groups=UserGroup::create(["name"=>"admin","description"=>"Admin"]);
