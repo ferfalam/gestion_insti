@@ -2,35 +2,33 @@
 
 namespace App\Http\Controllers\GestionDesEnseignants;
 
-use App\Http\Controllers\Controller;
+use App\Models\Profile;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class MissionController extends Controller
 {
     public function affichage()
     {
-        // if(auth()->guest()){
-        //     return view('index', [
-        //         'vTitle'=> 'Connexion'
-        //     ]);
-        // }
-        // if(Auth::user()->email=='admin@insti.com'){
-            //$profile=profile::all();
+        if(Auth::user()->email=='admin@insti.com'){
+            $profile=Profile::all();
             return view('gestion_enseignants.missionAdmin', [
-                'vTitle'=>'Mission'
-                // 'profile'=>$profile,
+                'vTitle'=>'Mission',
+                 'profile'=>$profile,
             ]);
-        // }else{
+        }else{
 
-        //     $profil=DB::table('profiles')->where('user_id',Auth::user()->id)->first();
-        //     $sqlTable= "select * from tableau_missions where Nom_enseignant ='"."".$profil->nom." ".$profil->prenom."'";
-        //     $table=DB::select($sqlTable);
+            $profil=DB::table('profiles')->where('user_id',Auth::user()->id)->first();
+            $sqlTable= "select * from missions where nom_enseignant ='"."".$profil->com_givenName." ".$profil->com_fullname."'";
+            $table=DB::select($sqlTable);
 
 
-        //     return view('gestion_enseignants.mission',[
-        //         'table'=> $table,
-        //     ]);
-        // }
+            return view('gestion_enseignants.mission',[
+                'table'=> $table,
+            ]);
+        }
 
     }
 
@@ -51,8 +49,8 @@ class MissionController extends Controller
             ]);
             // return $this->lastvalue;
         }else{
-            $profil=DB::table('profiles')->where('nom',Auth::user()->id)->first();
-            $sqlTable= "select * from tableau_missions where Nom_enseignant ='"."".$profil->nom." ".$profil->prenom."'";
+            $profil=DB::table('profiles')->where('com_givenName',Auth::user()->id)->first();
+            $sqlTable= "select * from missions where nom_enseignant ='"."".$profil->com_givenName." ".$profil->com_fullname."'";
             $table=DB::select($sqlTable);
 
             return view('mission',[
@@ -64,7 +62,7 @@ class MissionController extends Controller
         if(Auth::user()->email=='admin@insti.com'){
             $profil=DB::table('profiles')->where('user_id',Auth::user()->id)->first();
             $profile=profile::all();
-            $sqlTable= "select * from tableau_missions where Nom_enseignant ='"."".$profil->nom." ".$profil->prenom."'";
+            $sqlTable= "select * from missions where nom_enseignant ='"."".$profil->com_givenName." ".$profil->com_fullname."'";
             $table=DB::select($sqlTable);
             
             if(request('selectNom')=="*"){
@@ -81,7 +79,7 @@ class MissionController extends Controller
         else{
             $profil=DB::table('profiles')->where('user_id',Auth::user()->id)->first();
    
-            $sqlTable= "select * from tableau_missions where Nom_enseignant ='"."".$profil->nom." ".$profil->prenom."'";
+            $sqlTable= "select * from missions where nom_enseignant ='"."".$profil->com_givenName." ".$profil->com_fullname."'";
             $table=DB::select($sqlTable);
     
             return PDF::loadView('missionPdf',[
