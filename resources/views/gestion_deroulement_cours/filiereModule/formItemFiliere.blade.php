@@ -42,26 +42,6 @@
                 
                 <h2 class="text-center" data-aos="fade-down" data-aos-duration="600" data-aos-delay="400" style="font-size: 29px;"><strong> <br> Nouvelle Filiere </strong></h2>    
                 
-                <div class="form-group">
-
-                    @if ( count($filieres) == 0)
-                        <label for="fields"> <strong> Aucune filiere enrégistrée </strong> </label> <br>
-                    @else
-                        <label for="fields"> <strong> Liste des Filieres existantes </strong> </label> <br>
-                
-                        <select class="form-control" id="fields" name="filiere" required="" onChange='ajout_input(this.form)'>
-                            <optgroup label="Filière">
-                                @foreach($filieres as $one_filiere)
-                                    <option>
-                                        {!!$one_filiere->name!!}
-                                    </option>
-                                @endforeach
-                            </optgroup>
-                        </select>
-                    @endif
-                </div>
-                
-                
                     <div class="form-group" >
                         <label for="dsgn"> Appelation </label> <br>
                         <div class="form-row">
@@ -117,9 +97,12 @@
             </form>
 
         </div>
+
         <br>
         <li class="retourAccueil" >  <a href="{{ route('gestion_deroulement_cours.accueil') }}"> Annuler </a></li>
         
+        <li class="retourAccueil" > <a href="{{ route('gestion_deroulement_cours.showField') }}" > Afficher toutes les Filieres </a>  </li>
+
        
     @if(isset($message))
         <script>

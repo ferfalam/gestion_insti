@@ -40,27 +40,7 @@
                 {{ csrf_field() }} 
 
                 <h2 class="text-center" data-aos="fade-down" data-aos-duration="600" data-aos-delay="400" style="font-size: 29px;"><strong> <br> Nouveau Groupe Pedagogique </strong></h2>
-                    
-                
-                    <div class="form-group">
-
-                        @if ( count($groupPedagogique) == 0 )
-                            <label for="fields"> <strong class="wordgrp"> Liste des Groupes pedagogiques existantes </strong> </label> <br>
-                        @else
-                            <label for="fields"> <strong class="wordgrp"> Liste des Groupes pedagogiques existantes </strong> </label> <br>
-                    
-                            <select class="form-control" id="fields" name="groupPedag" required="" onChange='ajout_input(this.form)'>
-                                <optgroup label="Groupe Pedagogique">
-                                    @foreach($groupPedagogique as $grpPedag)
-                                        <option>
-                                            {!!$grpPedag->name!!}
-                                        </option>
-                                    @endforeach
-                                </optgroup>
-                            </select>
-                        @endif
-                    </div>
-                    
+                        
                     <div class="form-group" >
                         <label for="dsgn"> Designation </label> <br>
                         <div class="form-row">
@@ -116,8 +96,6 @@
                         </div>
                     </div>
     
-
-
                     {{-- End insert id domain generate --}}
 
                     <div class="form-group">
@@ -142,37 +120,13 @@
         <br>
         <li class="retourAccueil" >  <a href="{{ route('gestion_deroulement_cours.accueil') }}"> Annuler </a></li>
         
+        <li class="retourAccueil" > <a href="{{ route('gestion_deroulement_cours.showGroup') }}" > Afficher tous les Groupes Pedagogiques </a>  </li>
+
         
     @if(isset($message))
         <script>
             toastr.success("{{$message}}", 'Succès')
         </script>
     @endif
-         {{-- <div class="form-group">
-                        <label for="fields"> Option <strong> Filiere(s) </strong> </label> <br>
-                            <script type="text/javascript">
-                                function ajout_input(form) 
-                                    {
-                                        i = form.Rubrique.selectedIndex;
-                                        for (j=0;j<=i;j++)
-                                        {
-                                            var input= document.createElement('input');
-                                            document.body.appendChild(input);
-                                        }
-                                    }
-                            </script>
-                             
-                           
-                                <select class="form-control" id="fields" name="filiere" required="" onChange='ajout_input(this.form)'>
-                                    <optgroup label="Filière">
-
-                                        @foreach($filieres as $one_filiere)
-                                            <option>
-                                                {!!$one_filiere->appelation!!}
-                                            </option>
-                                        @endforeach
-                                    </optgroup>
-                                </select>
-                    </div> --}}
 
 @endsection

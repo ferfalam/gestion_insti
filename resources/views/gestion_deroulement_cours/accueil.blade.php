@@ -49,9 +49,13 @@
 
                                 <li> <a href="{{ route('gestion_deroulement_cours.RetraitFicheEnseignantGlobal') }}"> Retirer fiche Enseignant Global </a> </li>
                 
-                                <li> <a href="{{ route('gestion_deroulement_cours.newField') }}"> Integrer un nouveau groupe Pedagogique  </a> </li>
+                                <li> <a href="{{ route('gestion_deroulement_cours.newGroup') }}"> Integrer un nouveau Groupe Pedagogique  </a> </li>
 
-                                <li> <a href="{{ route('gestion_deroulement_cours.newFields') }}"> Integrer une nouvelle filiere </a> </li>
+                                <li> <a href="{{ route('gestion_deroulement_cours.newField') }}"> Integrer une nouvelle Filiere </a> </li>
+
+                                <li> <a href="{{ route('gestion_deroulement_cours.newGenerals') }}"> Integrer un Module de type General </a> </li>
+
+                                <li> <a href="{{ route('gestion_deroulement_cours.newUe') }}"> Integrer une UE </a> </li>
 
                             </ul>
 

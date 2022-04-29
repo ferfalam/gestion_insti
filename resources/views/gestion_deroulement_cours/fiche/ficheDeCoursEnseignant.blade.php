@@ -89,8 +89,8 @@
                    
                     </br></br>
 
-                    <a href="{{ route('gestion_deroulement_cours.accueil') }}" style="float : right" >
-                        <button type="button" class="btn btn-primary"> Envoyer </button>
+                    <a href="{{ route('gestion_deroulement_cours.downloadFicheEnseignant') }}" style="float : right" >
+                        <button type="button" class="btn btn-primary"> Importer sous PDF </button>
                     </a>
                     </br>
                 </div>
