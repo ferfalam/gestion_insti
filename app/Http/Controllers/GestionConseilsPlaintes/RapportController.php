@@ -9,31 +9,43 @@ use App\Models\Rapport;
 class RapportController extends Controller
 {
     //
-
     public function new(){
         return view('form');
     }
 
     public function view($id){
         $tile = Rapport::find($id);
-        return view('rapports', compact('tile'));
+        return view('gestion_conseils_plaintes.rapports', compact('tile'));
     }
 
     public function show(){
         $query = Rapport::all();
-        return view('rapports_user', compact('query'));
+        return view('gestion_conseils_plaintes.rapports_user', compact('query'));
     }
 
-    public function form(){
-        return view('rapport_form');
+    public function form($id){
+        return view('gestion_conseils_plaintes.rapport_form', compact('id'));
     }
 
-    public function create(Request $request){
-        $store = Convocation::create([
-            'id_conseil' => request('id_conseil'),
+    public function create(Request $request, $id){
 
+        $request->validate([
+            'file' => 'required',
+            'file.*' => 'mimes:docx,pdf',
         ]);
-        //$query = Convocation::all();
-        return redirect()->route('liste_rapports');
+
+        $store = Rapport::create([
+            'id_conseil' => $id,
+            'path' => request('file')
+        ]);
+
+        return redirect()->route('gestion_conseils_plaintes.liste_rapports');
     }
+
+    public function destroy(Request $request, $id){
+        $Del = Rapport::find($id);
+        $Del->delete();
+        $request->session()->flash('alert-success', ' The rapport is deleted successfully.');
+        return redirect()->route('gestion_conseils_plaintes.rapports');
+     }
 }

@@ -15,8 +15,8 @@ class CreateConseilUsersTable extends Migration
     {
         Schema::create('conseil_users', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('id_conseil')->constrained('conseildisciplines')->ondelete('cascade');
-            $table->foreignId('id_user')->constrained('users')->ondelete('cascade');
+            $table->foreignId('id_conseil')->constrained('conseil_disciplines')->onDelete('cascade');
+            $table->foreignId('id_user')->constrained('users')->onDelete('cascade');
             $table->timestamps();
         });
     }
