@@ -22,8 +22,6 @@ class MissionController extends Controller
             $profil=DB::table('profiles')->where('user_id',Auth::user()->id)->first();
             $sqlTable= "select * from missions where nom_enseignant ='"."".$profil->com_givenName." ".$profil->com_fullname."'";
             $table=DB::select($sqlTable);
-
-
             return view('gestion_enseignants.mission',[
                 'vTitle'=>'Mission',
                 'table'=> $table,
@@ -67,7 +65,6 @@ class MissionController extends Controller
             $profile=profile::all();
             $sqlTable= "select * from missions where nom_enseignant ='"."".$profil->com_givenName." ".$profil->com_fullname."'";
             $table=DB::select($sqlTable);
-            
             if(request('selectNom')=="*"){
                 $profileTrait=$profile;
             }
