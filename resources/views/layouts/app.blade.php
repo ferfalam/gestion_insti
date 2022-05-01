@@ -35,7 +35,7 @@
         <div id="wrapper">
             <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0">
                 <div class="container-fluid d-flex flex-column p-0"><a
-                        class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="#">
+                        class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="/">
                         <div class="sidebar-brand-icon"><i class="fas fa-school"></i></div>
                         <div class="sidebar-brand-text mx-3"><span>INSTI</span></div>
                     </a>
@@ -60,7 +60,7 @@
                         <!-- <form class="d-none d-sm-inline-block me-auto ms-md-3 my-2 my-md-0 mw-100 navbar-search">
                         <div class="input-group"><input class="bg-light form-control border-0 small" type="text" placeholder="Search for ..."><button class="btn btn-primary py-0" type="button"><i class="fas fa-search"></i></button></div>
                     </form> -->
-                        <ul class="navbar-nav flex-nowrap ms-auto">
+                        {{-- <ul class="navbar-nav flex-nowrap ms-auto">
                             <div class="d-none d-sm-block topbar-divider"></div>
                             <li class="nav-item dropdown no-arrow">
                                 <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link"
@@ -81,7 +81,7 @@
                                     </div>
                                 </div>
                             </li>
-                        </ul>
+                        </ul> --}}
                     </div>
                 </nav>
 

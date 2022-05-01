@@ -63,7 +63,7 @@
         </tbody>
     </table>
 </div></div>
-                        <div id="btn-Exporter"><a class="btn btn-primary btn-sm" role="button" id="exporterPdf" name="exporterPdf" href="/pdfM">Exporter PDF</a></div>
+                        <div id="btn-Exporter"><a class="btn btn-primary btn-sm" role="button" id="exporterPdf" name="exporterPdf" href="{{ route('gestion_enseignant.mission_pdf') }}">Exporter PDF</a></div>
                     </div>
                 </div>
             </div>
