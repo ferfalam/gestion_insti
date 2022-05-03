@@ -59,7 +59,7 @@
                                                 <td><a href="{{ route('gestion_conseils_plaintes.vue_plainte', $item-> id) }}">Voir</a></td>
                                             </tr>
                                             @empty
-                                            <tr>Aucune Plainte</tr>
+                                            <tr> <div class="text-center"> Aucune Plainte </div></tr>
                                             @endforelse
                                         </tbody>
                                         <tfoot>
