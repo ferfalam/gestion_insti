@@ -54,9 +54,6 @@
                         </tr>
                         @endforeach
                         @endisset
-
-
-
                     </tbody>
                 </table>
             </div>
@@ -85,7 +82,7 @@
                 </table>
             </div>
         </div>
-        <div id="btn-Exporter"><a class="btn btn-primary btn-sm" role="button" id="exporterPdf" name="exporterPdf" href="/pdfT">Exporter PDF</a></div>
+        <div id="btn-Exporter"><a class="btn btn-primary btn-sm" role="button" id="exporterPdf" name="exporterPdf" href="{{ route('gestion_enseignant.programme_pdf') }}">Exporter PDF</a></div>
     </div>
 </div>
 </div>
