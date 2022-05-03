@@ -41,9 +41,12 @@ class ConseilController extends Controller
 
     public function tenu(Request $request,$id)
     {
+        $tile =ConseilDiscipline::find($id);
         ConseilDiscipline::find($id)->update([
             "tenue" => 1
         ]);
+        return view('gestion_conseils_plaintes.vue_conseil', compact('tile'));
+
     }
 
 
@@ -113,6 +116,7 @@ class ConseilController extends Controller
             'date' => 'required|after:today',
             'heure' => 'required',
             'lieu' => 'required',
+            'participants' => 'required',
         ]);
 
         ConseilDiscipline::findOrFail($conseil)->update([

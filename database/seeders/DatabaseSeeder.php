@@ -47,10 +47,8 @@ class DatabaseSeeder extends Seeder
 
          $user=User::create(['pseudo'=>"admin",'email'=>"admin@insti.com",'password'=>Hash::make('12345678'),'statusId'=>1, 'user_groupId'=>1]);
          $user=User::create(['pseudo'=>"enseignant",'email'=>"nana@gmail.com",'password'=>Hash::make('12345678'),'statusId'=>1, 'user_groupId'=>4]);
-         $user=User::create(['pseudo'=>"enseignant",'email'=>"leo@gmail.com",'password'=>Hash::make('12345678'),'statusId'=>1, 'user_groupId'=>4]);
-         $user=User::create(['pseudo'=>"etudiant",'email'=>"etudiant@gmail.com",'password'=>Hash::make('12345678'),'statusId'=>1, 'user_groupId'=>3]);
          $user=User::create(['pseudo'=>"personnel",'email'=>"personnel@gmail.com",'password'=>Hash::make('12345678'),'statusId'=>1, 'user_groupId'=>5]);
-
+         $user=User::create(['pseudo'=>"etudiant",'email'=>"etudiant@gmail.com",'password'=>Hash::make('12345678'),'statusId'=>1, 'user_groupId'=>3]);
          $user=User::create(['pseudo'=>"etudiant1",'email'=>"etu1@gmail.com",'password'=>Hash::make('12345678'),'statusId'=>1 , 'user_groupId'=>3]);
          $user=User::create(['pseudo'=>"etudiant2",'email'=>"etu2@gmail.com",'password'=>Hash::make('12345678'),'statusId'=>1 , 'user_groupId'=>3]);
          $user=User::create(['pseudo'=>"etudiant3",'email'=>"etu3@gmail.com",'password'=>Hash::make('12345678'),'statusId'=>1, 'user_groupId'=>3]);
@@ -134,11 +132,45 @@ class DatabaseSeeder extends Seeder
        $evaluation_types=Evaluation_type::create(["designation"=>"Rattrappage","description"=>""]);
 
         $profil = Profile::create([
+            'user_id' => "1",
+            "com_fullname" => "INSTI Admin",
+            "com_givenName" => "John Doe Admin",
+            "com_gender" => "M",
+            "com_birthdate" => "1999-02-18",
+            "com_birthPlace" => "Lokossa",
+            "com_diploma" => "Ing",
+            "com_registrationNumber" => "00002",
+            "com_phoneNumber" => "90998656",
+            "com_address" => "Lokossa Insti",
+            "com_parentFullname" => "Parent Enseignant",
+            "com_parentGivenName" => "Parent ",
+            "com_parentPhoneNumber" => "68587412",
+            "ens_typeId" => "2",
+        ]);
+
+        $profil = Profile::create([
             'user_id' => "2",
-            "com_fullname" => "Enseignant",
-            "com_givenName" => "Insti",
+            "com_fullname" => "John Doe SuperAdmin",
+            "com_givenName" => "SuperAdmin",
             "com_gender" => "M",
-            "com_birthdate" => "2019-02-18",
+            "com_birthdate" => "1998-02-18",
+            "com_birthPlace" => "Lokossa",
+            "com_diploma" => "Ing",
+            "com_registrationNumber" => "00002",
+            "com_phoneNumber" => "90998656",
+            "com_address" => "Lokossa Insti",
+            "com_parentFullname" => "Parent Enseignant",
+            "com_parentGivenName" => "Parent ",
+            "com_parentPhoneNumber" => "68587412",
+            "ens_typeId" => "2",
+        ]);
+
+        $profil = Profile::create([
+            'user_id' => "3",
+            "com_fullname" => "John Doe Personnel",
+            "com_givenName" => "Personnel",
+            "com_gender" => "M",
+            "com_birthdate" => "1995-02-18",
             "com_birthPlace" => "Lokossa",
             "com_diploma" => "Ing",
             "com_registrationNumber" => "00002",
@@ -152,10 +184,10 @@ class DatabaseSeeder extends Seeder
 
         $profil = Profile::create([
             'user_id' => "4",
-            "com_fullname" => "Etudiant",
-            "com_givenName" => "Insti",
+            "com_fullname" => "John Duet",
+            "com_givenName" => "Etudiant",
             "com_gender" => "M",
-            "com_birthdate" => "2019-02-18",
+            "com_birthdate" => "2000-02-18",
             "com_birthPlace" => "Lokossa",
             "com_diploma" => "Ing",
             "com_registrationNumber" => "00002",
@@ -164,47 +196,58 @@ class DatabaseSeeder extends Seeder
             "com_parentFullname" => "Parent Enseignant",
             "com_parentGivenName" => "Parent ",
             "com_parentPhoneNumber" => "68587412",
-            "app_typeId" => "1",
+            "ens_typeId" => "2",
         ]);
 
         $profil = Profile::create([
-            'user_id' => "4",
-            "com_fullname" => "Etudiant",
-            "com_givenName" => "Insti",
+            'user_id' => "5",
+            "com_fullname" => "John Duet1",
+            "com_givenName" => "Etudiant1",
             "com_gender" => "M",
-            "com_birthdate" => "2019-02-18",
+            "com_birthdate" => "2000-02-18",
             "com_birthPlace" => "Lokossa",
-            "com_diploma" => "C",
+            "com_diploma" => "Ing",
             "com_registrationNumber" => "00002",
             "com_phoneNumber" => "90998656",
             "com_address" => "Lokossa Insti",
-            "com_parentFullname" => "Parent Etudiant",
+            "com_parentFullname" => "Parent Enseignant",
             "com_parentGivenName" => "Parent ",
             "com_parentPhoneNumber" => "68587412",
-            "app_fieldId" => "4",
-            "app_typeId" => "1",
             "ens_typeId" => "2",
-            "pers_typeId" => "3",
         ]);
 
         $profil = Profile::create([
-            'user_id' => "4",
-            "com_fullname" => "Personnel",
-            "com_givenName" => "Insti",
+            'user_id' => "6",
+            "com_fullname" => "John Duet2",
+            "com_givenName" => "Etudiant2",
             "com_gender" => "M",
-            "com_birthdate" => "2019-02-18",
+            "com_birthdate" => "2000-02-18",
             "com_birthPlace" => "Lokossa",
-            "com_diploma" => "Licence",
+            "com_diploma" => "Ing",
             "com_registrationNumber" => "00002",
             "com_phoneNumber" => "90998656",
             "com_address" => "Lokossa Insti",
-            "com_parentFullname" => "Parent Personnel",
+            "com_parentFullname" => "Parent Enseignant",
             "com_parentGivenName" => "Parent ",
             "com_parentPhoneNumber" => "68587412",
-            "app_fieldId" => "4",
-            "app_typeId" => "1",
             "ens_typeId" => "2",
-            "pers_typeId" => "3",
+        ]);
+
+        $profil = Profile::create([
+            'user_id' => "7",
+            "com_fullname" => "John Duet3",
+            "com_givenName" => "Etudiant3",
+            "com_gender" => "M",
+            "com_birthdate" => "2000-02-18",
+            "com_birthPlace" => "Lokossa",
+            "com_diploma" => "Ing",
+            "com_registrationNumber" => "00002",
+            "com_phoneNumber" => "90998656",
+            "com_address" => "Lokossa Insti",
+            "com_parentFullname" => "Parent Enseignant",
+            "com_parentGivenName" => "Parent ",
+            "com_parentPhoneNumber" => "68587412",
+            "ens_typeId" => "2",
         ]);
 
     }

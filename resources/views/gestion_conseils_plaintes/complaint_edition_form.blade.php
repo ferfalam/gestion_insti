@@ -45,14 +45,14 @@
                 <select class="select2 form-control select2-multiple"
                     name = "fautifs[]" multiple="multiple" data-placeholder="Fautifs...">
                     @foreach ($users as $user)
-                    <option value="{{ $user -> id}}" >{{ $user -> pseudo}}</option>
+                    <option value="{{ $user -> id}}" >{{ $user -> profile -> com_fullname}}</option>
                     @endforeach
                 </select>
             </div>
 
             <div class="form-group"><input class="form-control" type="text" name="motif" placeholder="Motif de la plainte"></div>
             <div class="form-group"><textarea class="form-control" name="description" placeholder="Description" rows="5"></textarea></div>
-            <div class="form-group"><button class="btn btn-primary" type="submit">Mettre à jour</button></div>
+            <div class="form-group"><button class="btn btn-primary" type="submit" onclick="return confirm('Voulez-vous vraiment mettre à jour cette plainte avec ces nouvelles informations?')">Mettre à jour</button></div>
         </form>
     </div>
 

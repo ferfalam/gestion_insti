@@ -22,9 +22,19 @@
     }
 
 
-
       .sender-column {
-        text-align: right;
+        text-align: left;
+      }
+      .receiver-column {
+        text-align: left;
+        width: 100%;
+        right:10%
+      }
+
+      .date {
+        width: 100%;
+        right: 10%;
+        text-align:left;
       }
 
       h1 {
@@ -35,112 +45,132 @@
         font-size: 1.3em;
       }
 
-      p,ul,ol,dl,address {
-        font-size: 1.1em;
+      p,ul,h2,ol,dl, address {
+        font-size: 1em;
       }
 
-      p, li, dd, dt, address {
-        line-height: 1.5;
+      p, li, dd, dt, address, strong {
+        line-height: 1.2em;
       }
     </style>
-<div width= "800px"
+<div id="letter" width= "800px" height= 1110px;
         style ="margin: 5em auto;
         padding: 2em;
         background-color: #fdfdff;
         border-radius: 0.5em;
         box-shadow: 2px 3px 7px 2px rgba(0,0,0,0.02)"
          class="col-lg-7 col-xl-8">
-    <h1>Example Domain</h1>
+    <h1 style="text-align: center; margin_bottom: 2em">Lettre de plainte</h1>
+    <br>
+
+    <div>
+
+    </div>
+    <div style="width:100%">
+    <div style="text-align: left; margin-left:auto; margin-right:0; width:5cm"><p>Lokossa, le <strong>{{\Carbon\Carbon::now()->format('j F Y') }}</strong></div>
+    </div>
+    <br>
+
      <address class="sender-column">
-    <strong>Lokossa le </strong><time datetime="2016-01-20">20 January 2016</time><br>
-      <strong>CA. Eleanor Gaye</strong><br>
-   Numéro matricule=10599,<br>
-      <strong>Tel</strong>: 123-456-7890<br>
-      <strong>Email</strong>: no_reply@example.com
+      <p>{{$tile -> plaignant -> profile -> com_fullname}}<br>
+      <strong>Numéro matricule: </strong>61234567<br>
+      <strong>Tel</strong>: {{$tile -> plaignant -> profile -> com_phoneNumber}}<br>
+      <strong>Email</strong>: {{$tile -> plaignant -> email}}
     </address>
 
-    <p class="sender-column"><time datetime="2016-01-20">20 January 2016</time></p>
-
-    <address>
-      <strong>Chef scolarité</strong><br>
-      AHOGNISSE Ariel<br>
-   Numéro matricule=4321 <br>
-
-    </address>
-
-    <h1>Object=Conseil de discipline </h1>
-
-    <p>Cher CA,</p>
-
-    <p>Il sera organisé un conseil de discipline pour gerer le cas de l'etudiant GOHOUE rodias.IL a été absent pendant 1 mois au cours de math . Votre présence est requise </p>
-
-    <h2>Lieu et date du conseil</h2>
-
-    <p>les informations concernant ce conseil sont les suivantes:</p>
-
-    <ul>
-      <li>Lieu: Salle des professeurs /INSTI LOKOSSA</li>
-      <li>Date<time datetime="2022-1-4">4/01/2022</time></li>
-      <li>Heure: 16h00</li>
-    </ul>
-
-    <h2>Participants</h2>
-
-    <p>En plus de vous ,les personnes présentes a ce conseil seront:</p>
-
-    <ol>
-      <li>Monsieur AMOUSSA Farid DE</li>
-      <li>Madame BIAOU Laurette SR</li>
-      <li>Les parents de l'étudiant/e</li>
-      <li>Monsieur BABIO Amir (Témoin)</li>
-    </ol>
 
 
+    <div style=" width:100%">
+        <div style="text-align: left; margin-left:auto; margin-right:0; width:5cm">
+            <address class="receiver-column">
+                <div >
+                    <p>A <br>
+                        Monsieur le Chef Service des Plaintes
+                        de l'Institut National Supérieur de
+                        Technologie Industrielle ex-IUT de Lokossa</p>
+                </div>
+
+              </address>
+        </div>
+
+    </div>
 
 
+    <h2><strong>Objet: </strong>Dépôt de plainte </h1>
+        <br>
+        <br>
 
+    <p>Monsieur le Chef Service, </p>
+    <p>J'ai l'honneur d'attirer votre attention sur les faits de {{ $tile -> motif}}, occasionnés par le(s) interess(é)s:
+        @foreach ($tile -> fautifs as $fautife)
+        <strong>{{$fautife -> fautif -> profile -> com_fullname}}</strong>,
+        @endforeach connus dans l'enceinte de cet établissement.
+    </p>
+    <p>En effet, ce(s) dernier(s) ont {{ $tile -> description}}...</p>
+    @if ($tile -> temoins -> count() != 0)
+    <p>Une/Plusieurs personnes ont été témoins des faits mentionnés ci-dessus. Il s'agit de:
+        @foreach ($tile -> temoins as $temoin)
+        <strong>{{$temoin -> temoin -> profile -> com_fullname }}</strong>,
+        @endforeach joignables aux numéros respectifs:
+        @foreach ($tile -> temoins as $temoin)
+        <strong> {{$temoin -> temoin -> profile -> com_phoneNumber}}</strong>,
+        @endforeach .</p>
+    @endif
+    <p>Dans ces conditions, je vous prie de bien vouloir accepter mon dépôt de plainte afin de doner une suite légale à cette affaire et de faire valoir mes droits.</p>
+    <p>Je vous prie d'agréer, Monsieur le Chef Service, l'expression de mes sentiments les meilleurs.</p>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
 
+    <div style="text-align: right"><p><strong>{{$tile -> plaignant -> profile -> com_fullname}}</strong></p></div>
+    <br>
 
-
-
-    <p>Nous esperons votre presence a ce conseil . </p>
-
-    <p>Yours sincerely,</p>
-
-    <p>Dr Eleanor Gaye</p>
-
-
-    <p>University of Awesome motto: <q>Be awesome to each other.</q> -- <cite>The memoirs of Bill S Preston, <abbr title="Esquire">Esq</abbr></cite></p>
 
 
 </div>
 @if ($tile -> statut == 0 && auth()->user()->id == $tile -> id_plaignant)
-<div class="col-lg-7 col-xl-8"><div style ="margin: 10px auto;" class="form-group"><a class="btn btn-primary" role="button" href="{{route('gestion_conseils_plaintes.formulaire_edition_plainte', $tile-> id)}}">Modifier la plainte</a>
-<form action="{{route('gestion_conseils_plaintes.suppression_plainte', $tile-> id)}}"
-    method="post">
-    @csrf
-    <button
-        class="btn btn-xs btn-info pull-right " onclick="return confirm('Voulez vous vraiment supprimer cette plainte?')">
-        Supprimer la plainte
-    </button>
-</form></div>
+
+<div class="d-flex justify-content-center">
+    <div class="btn-toolbar mx-auto" style="margin-bottom: 0.5cm">
+        <a style="color: white" class=" btn btn-primary  mx-2" role="button" href="{{route('gestion_conseils_plaintes.formulaire_edition_plainte', $tile-> id)}}">Modifier la plainte</a>
+        <form action="{{route('gestion_conseils_plaintes.suppression_plainte', $tile-> id)}}"
+            method="post">
+            @csrf
+            <button
+                class="btn btn-xs btn-info pull-right btn-danger mx-2" onclick="return confirm('Voulez vous vraiment supprimer cette plainte?')">
+                Supprimer la plainte
+            </button>
+        </form>
+    </div><br>
+</div>
 @endif
 
-@if ($tile -> statut == 0)
-@if (auth()->user()->statusId == 1)
-<div class="form-group"><a href="{{ route('gestion_conseils_plaintes.formulaire_conseil', $tile-> id) }}" class="btn btn-xs  btn-info pull-right">Organiser un conseil</a></div>
-
-<form action="{{ route('gestion_conseils_plaintes.rejet_plainte', $tile-> id) }}"
-    method="post">
-    @csrf
-    <button
-        class="btn btn-xs btn-info pull-right btn-danger" onclick="return confirm('Voulez vous vraiment rejeter cette plainte?')">
-        Rejeter la plainte
-    </button>
-</form>
+@if ($tile -> statut == 0 && auth()->user()->user_groupId == 1)
+<div class="d-flex justify-content-center">
+    <div class="btn-toolbar mx-auto" style="margin-bottom: 1cm">
+        <a href="{{ route('gestion_conseils_plaintes.formulaire_conseil', $tile-> id) }}" style="color: white" class=" btn btn-primary  mx-2">Organiser un conseil</a>
+        <form action="{{ route('gestion_conseils_plaintes.rejet_plainte', $tile-> id) }}"
+            method="post">
+            @csrf
+            <button
+                class="btn btn-xs btn-info pull-right mx-2 btn-danger" onclick="return confirm('Voulez vous vraiment rejeter cette plainte?')">
+                Rejeter la plainte
+            </button>
+        </form>
+        </div>
+</div>
 @endif
-@endif
+<div class="text-center">
+    <div class="btn-group" style="margin-bottom: 1cm">
+        <form action="{{ route('gestion_conseils_plaintes.telechargerPlainte', $tile ->id) }}" method="post">
+            @csrf
+            <button href="" class="btn btn-primary">Télécharger le document</button>
+        </form>
+        </div>
+</div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.0/sweetalert.min.js"></script>
 </div>
 @endsection

@@ -6,10 +6,14 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Models\Convocation;
 use App\Models\Plainte;
+use App\Models\PlainteUser;
+use App\Models\ConseilUsers;
+use App\Models\ConseilDiscipline;
 use Auth;
 ///use App\Http\Requests\ContactRequest;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\ConvocationLetter;
+use App\Mail\InvitationLetter;
 
 class ConvocationController extends Controller
 {
@@ -18,21 +22,58 @@ class ConvocationController extends Controller
         return view('form');
     }
 
-    public function send(Request $request)
+
+    public function sendConvocations(Request $request, $id)
     {
-        Mail::to('makandjou3000@gmail.com')
-            ->send(new ConvocationLetter($request->except('_token')));
-        return view('gestion_conseils_plaintes.vue_convocation');
+        $convoc = ConseilDiscipline::find($id);
+        $convoques = PlainteUser::where('id_plainte', $convoc-> id)->get();
+        foreach($convoques as $co ){
+            Convocation::create([
+                'id_conseil' => $id,
+                'id_user' => $co -> id_user,
+                'type' => 'Convocation'
+            ]);
+            Mail::to($co-> fautif -> email)
+            ->send(new ConvocationLetter(Convocation::find($id)));
+        }
+        Convocation::find($id)->conseil->update([
+            'convocationsOK' => 1
+        ]);
+        return redirect()->route('gestion_conseils_plaintes.liste_convocations');
+    }
+
+
+    public function sendInvitations(Request $request, $id)
+    {
+        $invites = ConseilUsers::where('id_conseil', $id)->get();
+        foreach($invites as $co ){
+            Convocation::create([
+                'id_conseil' => $id,
+                'id_user' => $co -> id_user,
+                'type' => 'Invitation'
+            ]);
+            Mail::to($co -> participant -> email)
+            ->send(new InvitationLetter(Convocation::find($id)));
+        }
+
+        Convocation::find($id)-> conseil->update([
+            'invitationsOK' => 1
+        ]);
+        return redirect()->route('gestion_conseils_plaintes.liste_convocations');
     }
 
     public function view($id){
         $tile = Convocation::find($id);
-        return view('gestion_conseils_plaintes.vue_convocation', compact('tile'));
+        if($tile -> type == 'Invitation'){
+            return view('gestion_conseils_plaintes.vue_invitation', compact('tile'));
+        } else {
+            return view('gestion_conseils_plaintes.vue_convocation', compact('tile'));
+        }
     }
 
     public function show(){
 
-        $admin = auth()->user()->statusId;
+        $admin = auth()->user()->user_groupId;
 
         if($admin == 1){
             $query = Convocation::all();
@@ -46,14 +87,7 @@ class ConvocationController extends Controller
         return view('gestion_conseils_plaintes.convocation_form');
     }
 
-    public function store(Request $request)
-    {
-        $order = Convocation::findOrFail($request->id);
 
-        // Ship the order...
-
-        Mail::to('makandjou3000@gmail.com')->send(new Convocation($order));
-    }
 
     public function create(Request $request){
         $store = Convocation::create([

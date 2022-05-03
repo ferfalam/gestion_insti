@@ -26,7 +26,7 @@
 @section('content')
 
 <div id="wrapper" class="contact-clean">
-        <form method="post" action="{{ route('gestion_conseils_plaintes.nouveau_rapport', $id) }}">
+        <form method="post" enctype="multipart/form-data" action="{{ route('gestion_conseils_plaintes.nouveau_rapport', $id) }}">
             @csrf
             <h2 class="text-center"><br><strong>Soumettre un rapport</strong><br><br></h2>
             @if ($errors->any())
@@ -38,12 +38,15 @@
                             </ul>
                 </div>
             @endif
-            <div class="form-group"><input class="form-control" name="file" type="file" placeholder="Votre fichier..." ></div>
+            @if ($message = Session::get('success'))
+            <div class="alert alert-success">
+                <strong>{{ $message }}</strong>
+            </div>
+          @endif
+          <span>Fichier du rapport</span><div id="file" class="form-group"><input class="form-control" name="file" type="file" placeholder="Votre fichier..." ></div>
             <div class="form-group"><button class="btn btn-primary" type="submit">Envoyer</button></div>
         </form>
     </div>
-
-
 @endsection
 
 @section('script')

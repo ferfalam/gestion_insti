@@ -273,6 +273,17 @@ Route::group(["prefix"=>"gestion_deroulement_cours", "as"=>"gestion_deroulement_
 
 });
 
+Route::group(["prefix"=>"gestion_tfe", "as"=>"gestion_tfe." , "middleware" => "auth"], function ()
+{
+    Route::get('/search', ['as'=>'search','uses'=>'GestionTfe\SearchController@search']);
+    Route::get('/',["as"=>'welcome', 'uses'=>'GestionTfe\TfeController@index']);
+    Route::resource('/tfe',"GestionTfe\TfeController");
+        Route::get("/profil/{id}",'GestionTfe\ProfilController@index')->name('profil');
+        Route::get("/edit/{id}",'GestionTfe\TfeController@edit')->name('editTfe');
+        Route::get("/update/{id}",'GestionTfe\TfeController@update')->name('updateTfe');
+        Route::get("/delete/{id}",'GestionTfe\TfeController@destroy')->name('tfeDelete');
+});
+
 Route::group(["prefix"=>"gestion_conseils_plaintes", "as"=>"gestion_conseils_plaintes.", "middleware" => "auth" ], function ()
 //"middleware" => "auth"
 {
@@ -305,9 +316,19 @@ Route::group(["prefix"=>"gestion_conseils_plaintes", "as"=>"gestion_conseils_pla
     Route::get('/conseils', 'GestionConseilsPlaintes\ConseilController@show')->name('liste_conseils');
     Route::get('/rapports', 'GestionConseilsPlaintes\RapportController@show')->name('liste_rapports');
 
+    Route::post('/telecharger/rapport{id}', 'GestionConseilsPlaintes\RapportController@downloadRapport')->name('telecharger_rapport');
+
     Route::post('/rejet/{id}', 'GestionConseilsPlaintes\PlainteController@reject')->name('rejet_plainte');
-    Route::post('/mailing/{id}', 'GestionConseilsPlaintes\ConseilController@mailSend')->name('mailing');
-    Route::post('/send', 'GestionConseilsPlaintes\ConvocationController@send')->name('send');
+    Route::post('/valider_conseil/{id}', 'GestionConseilsPlaintes\ConseilController@tenu')->name('tenu');
+
+    Route::post('/send_convocations/{id}', 'GestionConseilsPlaintes\ConvocationController@sendConvocations')->name('envoi_convocation');
+    Route::post('/send_invitations/{id}', 'GestionConseilsPlaintes\ConvocationController@sendInvitations')->name('envoi_invitation');
+
+    Route::post('/telechargement/plainte/{id}', 'GestionConseilsPlaintes\PDFController@telechargerPlainte')->name('telechargerPlainte');
+    Route::post('/telechargement/convocation/{id}', 'GestionConseilsPlaintes\PDFController@telechargerConvocation')->name('telechargerConvocation');
+    Route::post('/telechargement/invitation/{id}', 'GestionConseilsPlaintes\PDFController@telechargerInvitation')->name('telechargerInvitation');
+
+
 });
 
 
@@ -320,7 +341,6 @@ Route::group(["prefix" => "gestion_conseil_pedagogique", "as" => "gestion_consei
     Route::get('/index', [CouncilControler::class, "index"])->middleware(['auth'])->name('index');
 
     // the site route
-
 
     Route::get('/councils', [CouncilControler::class, "councils"])->name("councils");
 
@@ -356,6 +376,8 @@ Route::group(["prefix" => "gestion_conseil_pedagogique", "as" => "gestion_consei
 
     Route::post('/del_guest', [CouncilControler::class, "del_guest"])->name("del_guest");
 });
+
+
 
 
 

@@ -2,12 +2,11 @@
 
 @section('content')
 
-
     <style type="text/css">
     body {
-        background-color: #f0f0f2;
-        margin: 0;
-        padding: 0;
+        background-color: #ffffff;
+        margin: auto;
+        padding: auto;
         font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
     }
 
@@ -29,66 +28,138 @@
       }
 
       h1 {
-        font-size: 1.5em;
+        font-size: 2.2em;
       }
 
       h2 {
+        font-size: 1.6em;
+      }
+      p{
         font-size: 1.3em;
       }
 
-      p,ul,ol,dl,address {
+      ul,ol,dl,address {
         font-size: 1.1em;
       }
 
-      p, li, dd, dt, address {
+      li, dd, dt, address {
         line-height: 1.5;
       }
     </style>
 <div width= "800px"
         style ="
+        margin: 5em auto;
+
+        width: 800px;
+        padding: 2em;
+        background-color: #ffffff;
+        border-radius: 0.5em;
+        box-shadow: 2px 3px 7px 2px rgba(0,0,0,0.02);
         padding: 2em;
 
         box-shadow: 2px 3px 7px 2px rgba(0,0,0,0.02)"
         >
-    <h1 class="text-center">Conseil de discipline n° {{ $tile -> id}}</h1>
+    <h1 class="text-center">Conseil de discipline n° {{ $tile -> id}}</h1><br>
 
 
-    <h1>Object: Plainte n° {{ $tile -> plainte -> id}}</h1>
+    <h2>Objet: Plainte n° {{ $tile -> plainte -> id}}</h1>
 
 
-    <h2>Details</h2>
+    <h3 class="text-center" >Détails</h3>
 
     <ul>
-      <li>Date: {{ $tile -> date}}</li>
+      <li>Date: {{ \Carbon\Carbon::parse($tile -> date)->format('j F Y')}}</li>
       <li>Lieu: {{ $tile -> lieu}}</li>
-      <li>Heure: {{ $tile -> heure}}</li>
+      <li>Heure: {{ \Carbon\Carbon::parse($tile -> heure)->format(' H: i')}}</li>
     </ul>
 
-    <h2>Participants</h2>
+    <h3 class="text-center">Participants</h2>
+
+        <p>Convoqués:</p>
+        <ul>
+            @forelse ($tile -> plainte -> fautifs as $participant)
+            <li>{{ $participant -> fautif -> profile -> com_fullname }}</li>
+            @empty
+            <div class="text-center">Aucun convoqué</div>
+            @endforelse
+        </ul>
+
     <p>Invités:</p>
-    <ol>
+    <ul>
         @forelse ($tile -> participants as $participant)
-        <li>{{ $participant -> participant -> pseudo }}</li>
+        <li>{{ $participant -> participant -> profile -> com_fullname }}</li>
         @empty
-        <div class="text-center">Aucun participant</div>
+        <div class="text-center">Aucun invité</div>
         @endforelse
-    </ol>
+    </ul>
+
     <p>Présents:</p>
-    <ol>
+    <ul>
         @forelse ($tile -> presents as $presents)
         <li>{{ $presents -> present -> pseudo }}</li>
         @empty
-        <div class="text-center">Aucun participant présent</div>
+        <div class="">Aucun participant présent</div>
         @endforelse
-    </ol>
-    <p>Maitre de séance: @if ($tile -> maitre != null)
+    </ul>
+    <p>Maitre de séance: </p>
+    <ul>
+        <li>
+            @if ($tile -> maitre != null)
         {{ $tile -> maitres -> pseudo}}
     @else
-    <div class="text-center">Néant</div>
-    @endif </h1>
+    <div >Aucun maitre de séance</div>
+    @endif
+
+        </li>
+    </ul>
+
+    @if ($tile -> tenue == 0)
+    <div class="d-flex justify-content-center">
+    <div style="margin-bottom: 0.1cm" class="btn-toolbar mx-auto">
+        <form method="post" action="{{route('gestion_conseils_plaintes.envoi_convocation', $tile-> id)}}">
+        @csrf
+        <button class="btn btn-primary mx-2" role="submit" href="">@if ($tile->convocationsOK == 0)
+            Envoyer les convocations
+        @else
+        Renvoyer les convocations par mail
+        @endif</button>
+        </form>
+
+        @if ($tile -> tenue == 0 && $tile -> convocationsOK == 1 && $tile -> invitationsOK == 1)
+        <form method="post" action="{{route('gestion_conseils_plaintes.tenu', $tile-> id)}}">
+            @csrf
+            <button style="color: #ffffff" class="btn btn-primary mx-2" role="submit" href="">
+                Valider la tenue du conseil</button>
+            </form>
+        @endif
+
+        <form method="post" action="{{route('gestion_conseils_plaintes.envoi_invitation', $tile-> id)}}">
+            @csrf
+            <button style="color: #ffffff" class="btn btn-primary mx-2" role="submit" href="">@if ($tile->invitationsOK == 0)
+                Envoyer les invitations
+            @else
+            Renvoyer les invitations par mail
+            @endif </button>
+            </form>
+    </div>
 </div>
-<div class="col-lg-7 col-xl-8"><div style ="margin: 10px auto;" class="form-group"><a class="btn btn-primary" role="button" href="{{route('gestion_conseils_plaintes.formulaire_edition_conseil', $tile-> id)}}">Modifier le conseil</a>
-<div class="form-group"><a class="btn btn-primary btn-sm d-none d-sm-inline-block text-white-50" role="button" href="{{route('gestion_conseils_plaintes.formulaire_rapport', $tile-> id)}}">Soumettre un rapport</a></div>
+    @endif
+
+    <div class="d-flex justify-content-center">
+        <div style="margin-bottom: 1cm" class="btn-toolbar mx-auto">
+            <a style="color: #ffffff" class="btn btn-primary mx-2" role="button" href="{{route('gestion_conseils_plaintes.formulaire_edition_conseil', $tile-> id)}}">Modifier le conseil</a>
+
+            @if ($tile ->tenue == 1 && $tile->rapport == 0)
+            <a style="color: #ffffff" class="btn btn-primary mx-2" role="button" href="{{route('gestion_conseils_plaintes.formulaire_rapport', $tile-> id)}}">Soumettre un rapport</a>
+            @elseif ($tile ->tenue == 1  && $tile->rapport == 1)
+            <a style="color: #ffffff" class="btn btn-primary mx-2" role="button" href="{{route('gestion_conseils_plaintes.formulaire_rapport', $tile-> id)}}">Télécharger le rapport</a>
+            @endif
+
+</div>
+
+
+</div>
+</div>
 
 
 @endsection
