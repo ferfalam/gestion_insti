@@ -130,7 +130,7 @@
             </div>
         </div>
     </div>
-    <form action="/pdfM" method="get">
+    <form action="{{ route('gestion_enseignant.mission_pdf') }}" method="get">
         <input type="hidden" name="selectNom" id="selectNom" value="{{request('selectNomA')}}"/>
         <div id="btn-Exporter"><input class="btn btn-primary btn-sm" type="submit" id="exporterPdfAdmin" name="exporterPdf" value="Exporter PDF" /></div>
     </form>

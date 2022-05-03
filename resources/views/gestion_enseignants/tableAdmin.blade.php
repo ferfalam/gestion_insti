@@ -14,7 +14,7 @@
                                     <div class="card-body text-center shadow">
                                         <div class="col"><select class="custom-select chosen" id="selectNom" name ="selectNom" required="" style="color: #232323;" value="{{old('selectNom')}}">
                                             @isset($lv)
-                                            <option value="{{$lv}}">{{$lv   }}</option>
+                                            <option value="{{$lv}}">{{$lv}}</option>
                                             @endisset
                                             <option value="*">*</option>
                                             @foreach ($profile as $profil)<option value="{{$profil->com_givenName}} {{$profil->com_fullname }}">{{$profil->com_givenName}} {{$profil->com_fullname }}</option>@endforeach
@@ -133,7 +133,7 @@
                     </div>
                 </div>
             </div>
-            <form action="/pdfT" method="get">
+            <form action="{{ route('gestion_enseignant.programme_pdf') }}" method="get">
                 <input type="hidden" name="selectNom" id="selectNom" value="{{request('selectNom')}}"/>
                 <div id="btn-Exporter">
                     <input class="btn btn-primary btn-sm" type="submit" id="exporterPdfAdmin" name="exporterPdf" value="Exporter PDF" />

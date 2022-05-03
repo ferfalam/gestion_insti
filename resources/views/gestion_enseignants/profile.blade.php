@@ -62,7 +62,7 @@
                                     </div>
                                 </div>
                                 <div class="card-body text-center shadow" id="profilePass">
-                                    <form method="POST" action="/profilPass">
+                                    <form method="POST" action="{{ route('gestion_enseignant.show_profil_pass') }}">
                                         @csrf
                                         <h5>Changer mot de passe</h5>
                                         {{-- <input type="password" id="oldPass" class="form-control" placeholder="Ancien mot de passe" name="oldPass" required />
@@ -121,7 +121,7 @@
                                             <p class="text-primary m-0 font-weight-bold">Paramètre utilisateur</p>
                                         </div>
                                         <div class="card-body">
-                                            <form method="POST"  action="/profilInfo">
+                                            <form method="POST"  action="{{ route('gestion_enseignant.show_profil_info') }}">
                                                 @csrf
                                                 {{-- @php
                                                     $profil=DB::table('profiles')->where('user_id',Auth::user()->id)->first();

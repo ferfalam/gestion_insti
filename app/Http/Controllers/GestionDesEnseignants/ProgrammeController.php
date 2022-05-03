@@ -40,6 +40,7 @@ class ProgrammeController extends Controller
             
 
             return view('gestion_enseignants.table',[
+                'vTitle'=>'Mission',
                 'table'=> $table,
                 'mp'=> $totalP,
                 'dif'=> $dif,
@@ -57,7 +58,8 @@ class ProgrammeController extends Controller
                 $profileTrait=DB::table('profiles')->where('user_id',Auth::user()->id)->first();
             }
             
-            return view('/tableAdmin',[
+            return view('gestion_enseignants.tableAdmin',[
+                'vTitle'=>'Programme',
                 'profile'=>$profile,
                 'lv'=>$lastvalue,
                 'profileTrait'=>$profileTrait
@@ -80,7 +82,8 @@ class ProgrammeController extends Controller
             $dif=$totalP-$totalE;
             
 
-            return view('table',[
+            return view('gestion_enseignants.table',[
+                'vTitle'=>'Programme',
                 'table'=> $table,
                 'mp'=> $totalP,
                 'dif'=> $dif,
@@ -94,7 +97,7 @@ class ProgrammeController extends Controller
             
             $profileTrait=$profile;
             
-            return PDF::loadView('tablePdf',[
+            return PDF::loadView('gestion_enseignants.tablePdf',[
                 'profile'=>$profile,
                 'lv'=>request('selectNom'),
                 'profileTrait'=>$profileTrait
@@ -116,13 +119,11 @@ class ProgrammeController extends Controller
             }
 
             $dif=$totalP-$totalE;
-            return PDF::loadView('tablePdf',[
+            return PDF::loadView('gestion_enseignants.tablePdf',[
                 'table'=> $table,
                 'mp'=> $totalP,
                 'dif'=> $dif,
             ])->setPaper('a4', 'landscape')->setWarnings(false)->download('psdtest.pdf');
         }
-        
-
     }
 }
