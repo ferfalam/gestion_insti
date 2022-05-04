@@ -19,13 +19,14 @@
                             </tr>
                         </thead>
                         <tbody>
-                        @foreach($all_evaluation_requests as $all_evaluation_request) 
+                        @foreach($all_evaluation_requests as $evaluation_request) 
                             <tr>
                                
-                                <td>{{$all_evaluation_request->fist_name}} {{$all_evaluation_request->last_name}}</td> 
-                                <td>{{$all_evaluation_request->field}}</td>    
-                                <td>{{$all_evaluation_request->created_date}}</td>
-                            
+                                <td><span>{{$evaluation_request->first_name}}</span><span>{{$evaluation_request->last_name}}</span></td> 
+                                <td>{{$evaluation_request->field}}</td>    
+                                <td>{{$evaluation_request->created_date}}</td>
+                                <td><a href="{{route('gestion_demandes_reclamation_evaluation.voir_details_demande_evaluation, $evaluation_request->id')}}" class="btn btn-primary">Voir plus</a></td>
+
                             </tr>
                         @endforeach 
                         </tbody>
