@@ -75,7 +75,7 @@ class EvaluationRequestController extends Controller
 
 
         $requete = Evaluation_request::create([
-            'firt_name' => $userFirstName,
+            'first_name' => $userFirstName,
             'last_name' => $userLastName,
             'userId' => $idUser,
             'motif' => request("reclamationMotif"),
@@ -121,11 +121,17 @@ class EvaluationRequestController extends Controller
 
     }
 
+    /**
+     * Show single evaluation request
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
     public function show($id){
         
 
-        $evaluation_request = Evaluation_request::findOrFail($id);
-        return view('gestion_demandes_reclamation_evaluation.personnels.voir_details_demandes_evaluation'
+        $evaluation_requests = Evaluation_request::find($id);
+        return view('gestion_demandes_reclamation_evaluation.personnels.voir_details_demande_evaluation'
          ,compact('evaluation_requests')
         );
     }
