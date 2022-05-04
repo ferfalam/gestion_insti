@@ -185,6 +185,10 @@ Route::group(["prefix"=>"gestion_entreprises_stage", "as"=>"gestion_entreprises_
         ->middleware(['auth'])
         ->name('profile.update.image');
 
+    Route::post('/enterprises/domaine',[\App\Http\Controllers\GestionDesEntreprisesDeStage\AddEnterpriseController::class, 'addDomain'])
+        ->middleware(['auth'])
+        ->name('enterprises.add.domaine');
+
     Route::get('/enterprise/inscription',[App\Http\Controllers\GestionDesEntreprisesDeStage\AddEnterpriseController::class, 'index'])
         ->middleware(['auth'])
         ->name('enterprise.index');

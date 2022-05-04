@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\typestages;
 use App\Models\Ue;
 use App\Models\User;
 use App\Models\Field;
@@ -249,6 +250,18 @@ class DatabaseSeeder extends Seeder
             "com_parentPhoneNumber" => "68587412",
             "ens_typeId" => "2",
         ]);
+
+        $typeStage = Typestages::create(
+            [
+                'libelle' => "Académique",
+            ]
+        );
+
+        $typeStage = Typestages::create(
+            [
+                'libelle' => "Professionnel",
+            ]
+        );
 
     }
 }
