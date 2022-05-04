@@ -1,15 +1,19 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
-use App\User;
+use App\Models\User;
 use App\Models\ConseilDiscipline;
 use Illuminate\Database\Eloquent\Model;
 
 class ConseilUsers extends Model
 {
-    public function participants(){
-        return $this->belongsTo(User::class);
+    protected $fillable = [
+        'id_conseil', 'id_user'
+    ];
+
+    public function participant(){
+        return $this->belongsTo(User::class, 'id_user');
     }
 
     public function conseils(){

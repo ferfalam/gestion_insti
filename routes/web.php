@@ -40,15 +40,23 @@ Route::group(["prefix"=>"gestion_salle", "as"=>"gestion_salle.", "middleware" =>
 
 Route::group(["prefix"=>"gestion_demandes_reclamation_evaluation", "as"=>"gestion_demandes_reclamation_evaluation.", "middleware" => "auth"], function ()
 {
-    Route::get('/etudiant',[App\Http\Controllers\GestionDemande\Etudiant\DashboardController::class, 'index'])->name("dashboard_etudiant");
-    Route::get('/personnel',[App\Http\Controllers\GestionDemande\Personnel\DashboardController::class, 'index'])->name("dashboard_personnel");
-    Route::get('/Faire_une_reclamation',[App\Http\Controllers\GestionDemande\Etudiant\MakeClaimController::class, 'show'])->name("reclamation");
-    Route::get('/Faire_demande_evaluation',[App\Http\Controllers\GestionDemande\Etudiant\MakeEvaluationRequestController::class, 'show'])->name("evaluation");
-    Route::post('/soumettre_demande_reclamation',[App\Http\Controllers\GestionDemande\Etudiant\MakeClaimController::class, 'validation'])->name("validation_reclamation");
-    Route::post('/soumettre_demande_evaluation',[App\Http\Controllers\GestionDemande\Etudiant\MakeEvaluationRequestController::class, 'validation'])->name("validation_demande_evaluation");
+    Route::get('/dashboard',[App\Http\Controllers\GestionDemande\Etudiant\DashboardController::class, 'index'])->name("dashboard_etudiant");
+    // Route::get('/personnel',[App\Http\Controllers\GestionDemande\Personnel\DashboardController::class, 'index'])->name("dashboard_personnel");
+    Route::get('/Faire_une_reclamation',[App\Http\Controllers\GestionDemande\ComplaintRequestController::class, 'create'])->name("reclamation");
+    Route::get('/Faire_demande_evaluation',[App\Http\Controllers\GestionDemande\EvaluationRequestController::class, 'create'])->name("evaluation");
+    Route::post('/soumettre_demande_reclamation',[App\Http\Controllers\GestionDemande\ComplaintRequestController::class, 'store'])->name("validation_reclamation");
+    Route::post('/soumettre_demande_evaluation',[App\Http\Controllers\GestionDemande\EvaluationRequestController::class, 'store'])->name("validation_demande_evaluation");
+    Route::get('/voir_demande_reclamation',[App\Http\Controllers\GestionDemande\ComplaintRequestController::class, 'show_all'])->name("voir_demande_reclamation");
+    Route::get('/voir_demande_evaluation',[App\Http\Controllers\GestionDemande\EvaluationRequestController::class, 'show_all'])->name("voir_demande_evaluation");
+    Route::get('/voir_demande_reclamation/{id}',[App\Http\Controllers\GestionDemande\ComplaintRequestController::class, 'show'])->name("voir_details_demande_reclamation");
+    Route::get('/voir_demande_evaluation/{id}',[App\Http\Controllers\GestionDemande\EvaluationRequestController::class, 'show'])->name("voir_details_demande_evaluation");
+
+
     // Route::get('/logout',[App\Http\Controllers\Auth\LoginController::class, 'logout'])->name("logout");
 
 });
+
+
 
 
 
@@ -90,6 +98,8 @@ Route::group(["prefix"=>"gestion_enseignant", "as"=>"gestion_enseignant.","middl
     Route::get('/pdfT',[App\Http\Controllers\GestionDesEnseignants\ProgrammeController::class,"generate"])->name('programme_pdf');
 
     Route::post('/image-upload',[App\Http\Controllers\GestionDesEnseignants\ImageUploadController::class,"imageUploadPost"])->name('image_upload_post');
+
+    Route::get('/deconnexion', [App\Http\Controllers\GestionDesEnseignants\ConnexionController::class,"deconnexion"])->name('deconnexion');
 
     // Route::get('/profile','App\Http\Controllers\ProfileController@affichage');
     // Route::post('/profilPass','App\Http\Controllers\ProfileController@traitement1');
@@ -204,6 +214,10 @@ Route::group(["prefix"=>"gestion_deliberation", "as"=>"gestion_deliberation.", "
         Route::post('/delibinfos', "GestionDeliberation\DeliberationInfosController@index")->name('delibinfos');
         Route::post('/ouvrir', "GestionDeliberation\DeliberationInfosController@show")->name('ouvrir');
         Route::post('/voir', "GestionDeliberation\IndexController@show")->name('voir');
+        Route::post('/download', "GestionDeliberation\IndexController@down")->name('download');
+        Route::post('/change', "GestionDeliberation\DeliberationInfosController@change")->name('change');
+        Route::post('/update', "GestionDeliberation\DeliberationInfosController@update")->name('update');
+        Route::post('/delete', "GestionDeliberation\DeliberationInfosController@delete")->name('delete');
     });
 });
 
@@ -215,62 +229,105 @@ Route::group(["prefix"=>"gestion_deroulement_cours", "as"=>"gestion_deroulement_
 
     Route::get('/', "GestionDeroulementCours\HomeController@index")->name('accueil');
 
-    Route::get('/formCours', 'GestionDeroulementCours\FormulaireDeroulementCoursController@createFiche')->name('formulaire_Deroulement_Cours');
-
+    Route::get('/formCours', 'GestionDeroulementCours\FormulaireDeroulementCoursController@readItemsModule')->name('formulaire_Deroulement_Cours');
     Route::post('/formCours', 'GestionDeroulementCours\FormulaireDeroulementCoursController@store')->name('saveFicheEtudiant');
-
     Route::put('/formCours', 'GestionDeroulementCours\FormulaireDeroulementCoursController@update')->name('updateFicheEtudiant');
 
     Route::get('/ficheDeCoursSortant', 'GestionDeroulementCours\FormulaireDeroulementCoursController@readFicheCourseExecute')->name('retraitFicheEtudiant');
-
     Route::get('/ficheDeCoursEnseignant', 'GestionDeroulementCours\FormulaireDeroulementCoursController@readFicheAllCourseTeacher')->name('RetraitFicheEnseignantGlobal');
 
+    // Download Fiche
     // Download
-
     Route::get('/ficheDeCoursSortant/pdf', 'GestionDeroulementCours\DownloadFicheController@pdfSave')->name('downloadFiche');
+    Route::get('/ficheDeCoursEnseignant/pdf', 'GestionDeroulementCours\DownloadFicheController@pdfSaveEnseignant')->name('downloadFicheEnseignant');
 
+    // PedagogicGroup
+    Route::get('/formGroupePedagogique', 'GestionDeroulementCours\PedagogicGroupController@createGroupPedagogique')->name('newGroup');
+    Route::get('/GroupePedagogiqueEnregistres', 'GestionDeroulementCours\PedagogicGroupController@showGroupPedagogique')->name('showGroup');
+    Route::post('/nouveauGroupePedagogique', 'GestionDeroulementCours\PedagogicGroupController@storeGroupePedagogique')->name('saveNewGroup');
+    Route::get('/GroupePedagogiqueSupprime/{id}', 'GestionDeroulementCours\PedagogicGroupController@deleteGroupPedagogique')->name('deleteGroup');
+    Route::get('/GroupePedagogique/{id}', 'GestionDeroulementCours\PedagogicGroupController@findById')->name('groupById');
+    Route::post('/MettreAJourGroupePedagogique/{id}', 'GestionDeroulementCours\PedagogicGroupController@updateGroupPedagogique')->name('updateGroup');
+    //Field
+    Route::get('/formFiliere', 'GestionDeroulementCours\FieldController@createFiliere')->name('newField');
+    Route::get('/FilieresEnregistrees', 'GestionDeroulementCours\FieldController@showFiliere')->name('showField');
+    Route::post('/nouvelleFiliere', 'GestionDeroulementCours\FieldController@storeFiliere')->name('saveNewField');
+    Route::get('/FiliereSupprimee/{id}', 'GestionDeroulementCours\FieldController@deleteField')->name('deleteField');
+    Route::get('/Filiere/{id}', 'GestionDeroulementCours\FieldController@findById')->name('fieldById');
+    Route::post('/MettreAJourFiliere/{id}', 'GestionDeroulementCours\FieldController@updateField')->name('updateField');
+    //General
+    Route::get('/formModuleGeneral', 'GestionDeroulementCours\GeneralController@createGeneral')->name('newGenerals');
+    Route::get('/ModuleGeneralEnregistres', 'GestionDeroulementCours\GeneralController@showGeneral')->name('showGenerals');
+    Route::post('/nouveauModuleGeneral', 'GestionDeroulementCours\GeneralController@storeGeneral')->name('saveNewGenerals');
+    Route::get('/moduleGeneralSupprimee/{id}', 'GestionDeroulementCours\GeneralController@deleteGeneral')->name('deleteGeneral');
+    Route::get('/ModuleGeneral/{id}', 'GestionDeroulementCours\GeneralController@findById')->name('generalById');
+    Route::post('/MettreAJourModuleGeneral/{id}', 'GestionDeroulementCours\GeneralController@updateGeneral')->name('updateGeneral');
+   //UE
+    Route::get('/formUe', 'GestionDeroulementCours\UesController@createUe')->name('newUe');
+    Route::get('/UesEnregistrees', 'GestionDeroulementCours\UesController@showUe')->name('showUes');
+    Route::post('/nouvelleUe', 'GestionDeroulementCours\UesController@storeUe')->name('saveNewUe');
+    Route::get('/UeSupprimee/{id}', 'GestionDeroulementCours\UesController@deleteUe')->name('deleteUe');
+    Route::get('/Ue/{id}', 'GestionDeroulementCours\UesController@findById')->name('ueById');
+    Route::post('/MettreAJourUe/{id}', 'GestionDeroulementCours\UesController@updateUe')->name('updateUe');
 
-    // a revoir
-    Route::get('/nouveauGroupePedagogique', 'GestionDeroulementCours\SaveModuleController@createGroupePedagogique')->name('newField');
-
-    Route::post('/nouveauGroupePedagogique', 'GestionDeroulementCours\SaveModuleController@storeGroupePedagogique')->name('saveNewGroup');
-
-    Route::get('/nouvelleFiliere', 'GestionDeroulementCours\SaveModuleController@createFiliere')->name('newFields');
-
-    Route::post('/nouvelleFiliere', 'GestionDeroulementCours\SaveModuleController@storeFiliere')->name('saveNewField');
-
-    // Route::get('/accueil', function()
-    // {
-    //     return view('gestionDeroulementCours/accueil');
-    // })->name('accueil');
 
 });
 
-Route::group(["prefix"=>"gestion_conseils_plaintes", "as"=>"gestion_conseils_plaintes.", "middleware" => "auth"], function ()
+Route::group(["prefix"=>"gestion_tfe", "as"=>"gestion_tfe." , "middleware" => "auth"], function ()
+{
+    Route::get('/search', ['as'=>'search','uses'=>'GestionTfe\SearchController@search']);
+    Route::get('/',["as"=>'welcome', 'uses'=>'GestionTfe\TfeController@index']);
+    Route::resource('/tfe',"GestionTfe\TfeController");
+        Route::get("/profil/{id}",'GestionTfe\ProfilController@index')->name('profil');
+        Route::get("/edit/{id}",'GestionTfe\TfeController@edit')->name('editTfe');
+        Route::get("/update/{id}",'GestionTfe\TfeController@update')->name('updateTfe');
+        Route::get("/delete/{id}",'GestionTfe\TfeController@destroy')->name('tfeDelete');
+});
+
+Route::group(["prefix"=>"gestion_conseils_plaintes", "as"=>"gestion_conseils_plaintes.", "middleware" => "auth" ], function ()
+//"middleware" => "auth"
 {
     Route::get('/', 'GestionConseilsPlaintes\PlainteController@show')->name('index');
 
     Route::post('/nouvelle_plainte', 'GestionConseilsPlaintes\PlainteController@create')->name('nouvelle_plainte');
     Route::post('/nouvelle_convocation', 'GestionConseilsPlaintes\ConvocationController@create')->name('nouvelle_convocation');
     Route::post('/nouveau_conseil/{id}', 'GestionConseilsPlaintes\ConseilController@create')->name('nouveau_conseil');
+    Route::post('/nouveau_rapport/{id}', 'GestionConseilsPlaintes\RapportController@create')->name('nouveau_rapport');
 
-    Route::post('/edition', 'GestionConseilsPlaintes\PlainteController@update')->name('validation');
-    Route::post('/suppression', 'GestionConseilsPlaintes\PlainteController@destroy')->name('suppression');
+    Route::post('/edition_plainte/{id}', 'GestionConseilsPlaintes\PlainteController@update')->name('edition_plainte');
+    Route::post('/edition_conseil/{id}', 'GestionConseilsPlaintes\ConseilController@update')->name('edition_conseil');
+    Route::get('/plainte/{id}/formulaire_edition_plainte', 'GestionConseilsPlaintes\PlainteController@edform')->name('formulaire_edition_plainte');
+    Route::get('/conseil/{id}/formulaire_edition_conseil', 'GestionConseilsPlaintes\ConseilController@edform')->name('formulaire_edition_conseil');
+
+    Route::post('plainte/{id}/suppression_plainte', 'GestionConseilsPlaintes\PlainteController@destroy')->name('suppression_plainte');
+    Route::post('rapport/{id}/suppression_rapport', 'GestionConseilsPlaintes\RapportController@destroy')->name('suppression_rapport');
 
     Route::get('/formulaire_plainte', 'GestionConseilsPlaintes\PlainteController@form')->name('formulaire_plainte');
     Route::get('/formulaire_convocation', 'GestionConseilsPlaintes\ConvocationController@form')->name('formulaire_convocation');
     Route::get('/plainte/{id}/formulaire_conseil', 'GestionConseilsPlaintes\ConseilController@form')->name('formulaire_conseil');
-    Route::get('/formulaire_rapport', 'GestionConseilsPlaintes\RapportController@form')->name('formulaire_rapport');
+    Route::get('/conseil/{id}/formulaire_rapport', 'GestionConseilsPlaintes\RapportController@form')->name('formulaire_rapport');
 
     Route::get('/plainte/{id}', 'GestionConseilsPlaintes\PlainteController@view')->name('vue_plainte');
     Route::get('/convocation/{id}', 'GestionConseilsPlaintes\ConvocationController@view')->name('vue_convocation');
+    Route::get('/conseil/{id}', 'GestionConseilsPlaintes\ConseilController@view')->name('vue_conseil');
 
     Route::get('/convocations', 'GestionConseilsPlaintes\ConvocationController@show')->name('liste_convocations');
     Route::get('/plaintes', 'GestionConseilsPlaintes\PlainteController@show')->name('liste_plaintes');
     Route::get('/conseils', 'GestionConseilsPlaintes\ConseilController@show')->name('liste_conseils');
-    Route::get('/rapport', 'GestionConseilsPlaintes\RapportController@show')->name('liste_rapports');
+    Route::get('/rapports', 'GestionConseilsPlaintes\RapportController@show')->name('liste_rapports');
 
-    Route::get('autocomplete', 'GestionConseilsPlaintes\SearchController@autocomplete')->name('autocomplete');
+    Route::post('/telecharger/rapport{id}', 'GestionConseilsPlaintes\RapportController@downloadRapport')->name('telecharger_rapport');
+
+    Route::post('/rejet/{id}', 'GestionConseilsPlaintes\PlainteController@reject')->name('rejet_plainte');
+    Route::post('/valider_conseil/{id}', 'GestionConseilsPlaintes\ConseilController@tenu')->name('tenu');
+
+    Route::post('/send_convocations/{id}', 'GestionConseilsPlaintes\ConvocationController@sendConvocations')->name('envoi_convocation');
+    Route::post('/send_invitations/{id}', 'GestionConseilsPlaintes\ConvocationController@sendInvitations')->name('envoi_invitation');
+
+    Route::post('/telechargement/plainte/{id}', 'GestionConseilsPlaintes\PDFController@telechargerPlainte')->name('telechargerPlainte');
+    Route::post('/telechargement/convocation/{id}', 'GestionConseilsPlaintes\PDFController@telechargerConvocation')->name('telechargerConvocation');
+    Route::post('/telechargement/invitation/{id}', 'GestionConseilsPlaintes\PDFController@telechargerInvitation')->name('telechargerInvitation');
+
 
 });
 
@@ -284,7 +341,6 @@ Route::group(["prefix" => "gestion_conseil_pedagogique", "as" => "gestion_consei
     Route::get('/index', [CouncilControler::class, "index"])->middleware(['auth'])->name('index');
 
     // the site route
-
 
     Route::get('/councils', [CouncilControler::class, "councils"])->name("councils");
 
@@ -320,6 +376,8 @@ Route::group(["prefix" => "gestion_conseil_pedagogique", "as" => "gestion_consei
 
     Route::post('/del_guest', [CouncilControler::class, "del_guest"])->name("del_guest");
 });
+
+
 
 
 

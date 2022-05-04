@@ -48,22 +48,22 @@
                     <td class="text-center">{{ $table->adressse }}</td>
                     <td class="text-center">{{ $table->date_naissance }}</td>
                     <td class="text-center">{{ $table->nationalite }}</td>
-                    <td class="text-center">{{ $table->Maticule }}</td>
+                    <td class="text-center">{{ $table->maticule }}</td>
                     <td class="text-center">{{ $table->grade }}</td>
-                    <td class="text-center">{{ $table->Ue }}</td>
-                    <td class="text-center">{{ $table->Groupe_Pedagogique }}</td>
-                    <td class="text-center">{{ $table->Annee_academique }}</td>
+                    <td class="text-center">{{ $table->ue }}</td>
+                    <td class="text-center">{{ $table->pedagogicGroup }}</td>
+                    <td class="text-center">{{ $table->academicYear }}</td>
                     <td class="text-center">{{ $table->missionHeure }}</td>
                     <td class="text-center">{{ $table->missionDuree." semaines" }}</td>
-                    <td class="text-center">{{ $table->dateJourArrive }}</td>
-                    <td class="text-center">{{ $table->dateJourRetour }}</td>
+                    <td class="text-center">{{ $table->startDate }}</td>
+                    <td class="text-center">{{ $table->endDate }}</td>
                 </tr>
             @endforeach
             @endisset
         </tbody>
     </table>
 </div></div>
-                        <div id="btn-Exporter"><a class="btn btn-primary btn-sm" role="button" id="exporterPdf" name="exporterPdf" href="/pdfM">Exporter PDF</a></div>
+                        <div id="btn-Exporter"><a class="btn btn-primary btn-sm" role="button" id="exporterPdf" name="exporterPdf" href="{{ route('gestion_enseignant.mission_pdf') }}">Exporter PDF</a></div>
                     </div>
                 </div>
             </div>

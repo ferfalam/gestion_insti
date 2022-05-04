@@ -22,7 +22,6 @@
 @endsection
 
 @section('main')
-
         <div class="d-flex flex-column" id="content-wrapper">
             <div id="content"><div class="register-photo">
         <div class="form-container shadow">

@@ -6,10 +6,15 @@
         <nav class="navbar navbar-light navbar-expand bg-white shadow mb-4 topbar static-top"></nav>
         <div class="container-fluid">
             <!-- ** -->
-            <div class="m_body">
+            @if(session()->has('error'))
+            <div class="alert alert-danger" role="alert">
+                {{ session()->get('error') }}
+            </div>
+            @endif
+            <div class="m_body"> 
                 <div class="main">
                     <div class="card-header py-3">
-                        <p class="text-primary m-0 fw-bold">Ajoutez une nouvelle délibération!</p>
+                        <h3 class="text-primary m-0 fw-bold text-center">Ajoutez une nouvelle délibération!</h3>
                     </div>
                     <div class="main_form">
                         
@@ -48,7 +53,7 @@
                             @enderror
 
                             <div class="element_">
-                                <label for="begin_date">Date de début</label>
+                                <label for="begin_date">Début</label>
                                 <div class="sous_section">
                                     <input type="date" name="begin_date" id="begin_date" required value="{{ old('begin_date') }}" class="form-control @error('begin_date') is-invalid @enderror">
                                 </div> 
@@ -82,6 +87,23 @@
                                 </div>
                             </div>
                             @error('groupePedagogique')
+                            <span class="alert alert-danger">
+                                {{ $message }}
+                            </span>
+                            @enderror
+
+                            <div class="element_ row d-flex ">
+                                <label class="col-md-3" for="">UEs</label>
+                                <div class="col-md-9 row d-flex justify-content-center">
+                                    @foreach($ues as $ue)
+                                    <div class="custom-control custom-checkbox col-md-2 col-sm-2">
+                                        <input type="checkbox" name ="ues[]" value="{{$ue->id}}">
+                                        <label>{{$ue->abbreviation}}</label>
+                                    </div>
+                                    @endforeach   
+                                </div>
+                            </div>
+                            @error('ues')
                             <span class="alert alert-danger">
                                 {{ $message }}
                             </span>

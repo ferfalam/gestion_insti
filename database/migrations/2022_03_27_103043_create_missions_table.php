@@ -16,7 +16,7 @@ class CreateMissionsTable extends Migration
         Schema::create('missions', function (Blueprint $table) {
             $table->id();
             $table->string('nom_enseignant');
-            $table->foreignId('qualiteId')->constrained('qualites');
+            $table->string('qualite');
             $table->string('adressse');
             $table->date('date_naissance');
             $table->string('lieu');
@@ -24,7 +24,7 @@ class CreateMissionsTable extends Migration
             $table->string('maticule');
             $table->string('grade');
             $table->string('ue');
-            $table->foreignId('pedagogicGroupsId')->constrained('pedagogic_groups');
+            $table->string('pedagogicGroup');
             $table->string('academicYear');
             $table->string('missionHeure');
             $table->string('missionDuree');

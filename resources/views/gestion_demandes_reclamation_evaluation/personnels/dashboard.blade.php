@@ -41,7 +41,7 @@
                     </a>
                     <hr class="sidebar-divider my-0">
                     <ul class="navbar-nav text-light" id="accordionSidebar">
-                        @if (!auth()->guest())
+                        @if (auth()->guest())
                             <li class="nav-item">
                                 <a class="nav-link {{ request()->is('home') ? 'active' : '' }}" href="{{ route('home') }}">
                                     <i class="far fa-user-circle"></i>
@@ -56,13 +56,13 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('gestion_salle.index') }}">
+                                <a class="nav-link" href="{{ route('gestion_demandes_reclamation_evaluation.voir_demande_reclamation') }}">
                                     <i class="fas fa-user"></i>
                                     <span>Voir demande de reclamations</span>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">
+                                <a class="nav-link" href="{{ route('gestion_demandes_reclamation_evaluation.voir_demande_evaluation') }}">
                                     <i class="fas fa-table"></i>
                                     <span>Voir demande d'evaluation</span>
                                 </a>

@@ -21,6 +21,8 @@ class Deliberation extends Model
         'report',
         'revealTicket',
         'hideTicket', 
+        'uesIds', 
+        'infos',
     ];
 
 }

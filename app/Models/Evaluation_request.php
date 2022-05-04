@@ -7,5 +7,20 @@ use Illuminate\Database\Eloquent\Model;
 
 class Evaluation_request extends Model
 {
-    use HasFactory;
+    protected $fillable =[
+        'firt_name',
+        'last_name',
+        'userId',
+        'motif',
+        'description_motif',
+        'evaluation_type',
+        'ue',
+        'document_path',
+        'field',
+        'pegagogic_group',
+        'academic_year_start',
+        'academic_year_end',
+        'academic_semester',
+        'created_date',
+    ];
 }

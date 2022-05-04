@@ -11,7 +11,7 @@ table {
   overflow: hidden;
   position: relative;
   border-radius: 2px;
-  /* background-image: url("../.."); */
+  background-image: url("../../images/deliberation/pdf.jpg");
   -o-object-fit: cover;
      object-fit: cover;
 }

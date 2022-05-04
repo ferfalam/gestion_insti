@@ -16,6 +16,8 @@ class CreateComplaintRequestsTable extends Migration
         Schema::create('complaint_requests', function (Blueprint $table) {
             $table->id();
             $table->foreignId('userId')->constrained('users');
+            $table->string('firt_name');
+            $table->string('last_name');
             $table->string('motif');
             $table->string('description_motif');
             $table->string('document_path');
@@ -26,6 +28,7 @@ class CreateComplaintRequestsTable extends Migration
             $table->string('academic_year_end');
             $table->string('academic_semester');
             $table->string('evaluation_type');
+            $table->date('created_date');
 
             // $table->foreignId('academic_year_Id')->constrained('academic_years');
             // $table->foreignId('pedagogic_group_Id')->constrained('pedagogic_groups');

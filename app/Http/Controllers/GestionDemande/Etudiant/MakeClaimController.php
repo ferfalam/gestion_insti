@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Auth;
 use DB;
+use App\Http\Requests\StoreFileRequest;
+use App\Models\Complaint_request;
 
 class MakeClaimController extends Controller
 {
@@ -35,20 +37,30 @@ class MakeClaimController extends Controller
 
     }
 
-     
-
-    public function validation(){
-        // return request();
-        request()->validate([
-            "semester" => "required",
-            "ue" => "required",
-            "evaluationType" => "required",
-            "document" => "required|file|max:2048|mines:pdf,docx,jpg,jpeg",
-            "reclamationMotif" => "required",
-            "descriptionMotif" => "required",
+        /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+       
+        $request->validate([
+            'semester' => 'required|string',
+            'ue' => 'required|string',
+            'evaluationType' => 'required|string',
+            'document' => 'required|file|mimes:jpg,jpeg,bmp,png,doc,docx,csv,rtf,xlsx,xls,txt,pdf,zip',
+            'reclamationMotif' => 'required|string',
+            'description' => 'required|string',
         ]);
 
-        $documentPath = request()->file('document')->store('public/reclamations');
+        
+
+        $documentPath = $request->file('document')->store('public/document');
+
+        // return $documentPath;
+
         $idUser = Auth::user()->id;
 
         $idPedagogicGroupe = DB::table('user_pedagogic_group_maps')->where('user_Id', $idUser)->value('pedagogic_group_Id');
@@ -64,9 +76,9 @@ class MakeClaimController extends Controller
         $idAcademic_semester = DB::table('shortcuts_requests')->where('pedagogic_group_Id', $idPedagogicGroupe)->value('academic_semester_Id');
         $academic_semester = DB::table('academic_semesters')->where('id',$idAcademic_semester)->value('designation');
 
-        
 
-        // Complaint_request::create([
+
+        // $requete = Complaint_request::create([
         //     'userId' => $idUser,
         //     'motif' => request("reclamationMotif"),
         //     'description_motif' => request("descriptionMotif"),
@@ -78,13 +90,13 @@ class MakeClaimController extends Controller
         //     'academic_year_start' => $academic_year_start,
         //     'academic_year_end' => $academic_year_end,
         //     'academic_semester' => $academic_semester,
-            
+
         // ]);
 
         DB::table('complaint_requests')->insert(
             array('userId' => $idUser,
                 'motif' => request("reclamationMotif"),
-                'description_motif' => request("descriptionMotif"),
+                'description_motif' => request("description"),
                 'evaluation_type' => request("evaluationType"),
                 'ue' => request("ue"),
                 'document_path' => $documentPath,
@@ -96,5 +108,7 @@ class MakeClaimController extends Controller
         );
 
         
+
+        return redirect(route('gestion_demandes_reclamation_evaluation.dashboard_etudiant'))->with('success', 'Reclamation effectuer avec sucess');
     }
 }
