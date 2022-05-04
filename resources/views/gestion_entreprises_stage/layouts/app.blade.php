@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="{{asset($resolved_assets."css/styles.css")}}">
     <link rel="stylesheet" href="{{asset($resolved_assets."css/hero.css")}}">
     <link rel="stylesheet" href="{{asset($resolved_assets."toastr/toastr.css")}}">
+    <link rel="stylesheet" href="{{asset($resolved_assets."bootstrap/css/bootstrap-multiselect.css")}}">
     <link href="{{asset($resolved_assets."bootstrap-icons/bootstrap-icons.css")}}" rel="stylesheet">
     <link href="{{asset($resolved_assets."css/tabs.css")}}" rel="stylesheet">
 </head>
@@ -67,6 +68,7 @@
 <script src="{{asset($resolved_assets."jquery-steps/jquery.steps.min.js")}}"></script>
 <script src="{{asset($resolved_assets."js/theme.js")}}"></script>
 <script src="{{asset($resolved_assets."toastr/toastr.js")}}"></script>
+<script src="{{asset($resolved_assets."bootstrap/js/bootstrap-multiselect.min.js")}}"></script>
 <script>
     toastr.options = {
         "closeButton": false,

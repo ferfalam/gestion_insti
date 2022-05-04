@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="{{asset($resolved_assets."fonts/fontawesome-all.min.css")}}">
     <link rel="stylesheet" href="{{asset($resolved_assets."fonts/fontawesome5-overrides.min.css")}}">
     <link rel="stylesheet" href="{{asset($resolved_assets."toastr/toastr.css")}}">
+    <link rel="stylesheet" href="{{asset($resolved_assets."bootstrap/css/bootstrap-multiselect.css")}}">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700">
 </head>
@@ -47,13 +48,21 @@
                 </div>
             </div>
             <div class="form-group">
-                <div class="form-row">
+                <div class="form-row " style="align-items: center;">
                     <div class="col" data-aos="fade-right" data-aos-duration="700" data-aos-delay="600">
-                        <label style="font-weight: normal;">Domaines d'intervention</label>
-                        <select class="form-control" name="domaines[]" multiple="multiple" style="height: 80px;">
-                            <optgroup label="Domaines">@foreach(DB::table("domaines")->get() as $domaine)<option value='{{$domaine->id}}' selected=''>{{$domaine->libelle}}</option>@endforeach</optgroup>
+                        <label style="font-weight: normal;">Domaines d'intervention</label><br>
+                        <select class="form-control" name="domaines[]" multiple="multiple" style="height: 80px; border-color: #0b2e13">
+                            <optgroup label="Domaines">
+                                @foreach(DB::table("domaines")->get() as $domaine)<option value='{{$domaine->id}}' selected=''>{{$domaine->libelle}}</option>@endforeach
+                            </optgroup>
                         </select>
                         @error("domaines")<p style="color: rgb(193,15,15); font-size: 10px; " data-aos="fade-right" data-aos-duration="700" data-aos-delay="600" >{{$message}}</p>@enderror
+                    </div>
+                    <div class="col d-none" data-aos="fade-right" data-aos-duration="700" data-aos-delay="600" style="align-items: center;" id="new-domain-ctn"><br>
+                        <input type="text" class="form-control" id="new-domain" aria-describedby="domaine" placeholder="Saissiez le nom du domaine">
+                    </div>
+                    <div class="col" data-aos="fade-right" data-aos-duration="700" data-aos-delay="600" style="align-items: center;"><br>
+                        <button type="button" class="btn btn-info" id="add-domain">Ajouter un domaine</button>
                     </div>
                 </div>
             </div>
@@ -137,12 +146,56 @@
 <script src="{{asset($resolved_assets."js/bs-init.js")}}"></script>
 <script src="{{asset($resolved_assets."js/aos.js")}}"></script>
 <script src="{{asset($resolved_assets."toastr/toastr.js")}}"></script>
+<script src="{{asset($resolved_assets."bootstrap/js/bootstrap-multiselect.min.js")}}"></script>
+
 
 @if(isset($message))
     <script>
         toastr.success("{{$message}}", 'Succès')
     </script>
 @endif
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        // $('#domaines').multiselect({
+        //     includeSelectAllOption: true,
+        //     nonSelectedText: 'Sélectionnez les domaines'
+        // });
+    });
+
+    $("#add-domain").on("click", function (e){
+        if($("#new-domain-ctn").hasClass("d-none")) {
+
+            $("#new-domain-ctn").removeClass("d-none")
+            $("#add-domain").text("Ajouter")
+        }else {
+            let name = $("#new-domain-ctn input").val()
+            if(jQuery.trim(name).length!==0){
+                $.ajax({
+                    type:'POST',
+                    url:'{{route("gestion_entreprises_stage.enterprises.add.domaine")}}',
+                    data: {
+                        '_token':'{{ csrf_token() }}',
+                        'domaine':name
+                    },
+                    success:function(result) {
+                        let o = new Option(result["libelle"], result["id"]);
+                        $(o).html(result["libelle"]);
+                        $("#domaines").append(o);
+                        toastr.success("Le domaine à été ajouter", 'Succès')
+                        $("#new-domain-ctn input").val("")
+                    },
+                    error:function (data) {
+                        toastr.error("Une s'est produite");
+                    }
+                });
+            }else {
+                toastr.warning("Veuillez saisir le nom du domaine", '')
+            }
+        }
+
+    })
+</script>
 
 </body>
 
