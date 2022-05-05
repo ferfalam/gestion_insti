@@ -17,12 +17,13 @@
                             </tr>
                         </thead>
                         <tbody>
-                        @foreach($all_complaint_requests as $all_complaint_request) 
+                        @foreach($all_complaint_requests as $complaint_request) 
                             <tr>
                                
-                                <td>{{$all_complaint_request->fist_name}} {{$all_complaint_request->last_name}}</td> 
-                                <td>{{$all_complaint_request->field}}</td>    
-                                <td>{{$all_complaint_request->created_date}}</td>
+                                <td>{{$complaint_request->first_name}} {{$complaint_request->last_name}}</td> 
+                                <td>{{$complaint_request->field}}</td>    
+                                <td>{{$complaint_request->created_date}}</td>
+                                <td><a href="{{route('gestion_demandes_reclamation_evaluation.voir_details_demande_reclamation, $complaint_request->id')}}" class="btn btn-primary">Voir plus</a></td>
                             
                             </tr>
                         @endforeach 
