@@ -20,7 +20,7 @@ class Entreprises extends Model
         'email',
         'adresse',
         'capacite',
-        'domaines'=>"array",
+        'domaines',
         'partenariat',
         'partenariat_date',
         'd_contact',
@@ -39,10 +39,6 @@ class Entreprises extends Model
      */
     protected $hidden = [
         'password'
-    ];
-
-    protected $casts = [
-        'domaines'=> array(),
     ];
 
 }

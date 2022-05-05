@@ -15,7 +15,6 @@
                     <ul>
                         <li><i class="bi bi-chevron-right"></i> <a href="https://enseignementsuperieur.gouv.bj/" target="_blank">Ministère de l'Enseignement Supérieur et de la Recherche Scientifique</a></li>
                         <li><i class="bi bi-chevron-right"></i> <a href="https://unstim.bj/" target="_blank">Université Nationale des Sciences, Technologies, Ingénierie et Mathématiques</a></li>
-                        <li><i class="bi bi-chevron-right"></i> <a href="http://insti.edu.bj/" target="_blank">Unité d'application de l'INSTI</a></li>
                     </ul>
                 </div>
 
@@ -24,10 +23,6 @@
                     <ul>
                         <li><i class="bi bi-chevron-right"></i> <a href="#">Licence professionnelle en Génie civil (GC)</a></li>
                         <li><i class="bi bi-chevron-right"></i> <a href="#">Licence professionnelle en Génie Electrique et Informatique</a></li>
-                        <li><i class="bi bi-chevron-right"></i> <a href="#">Licence professionnelle en Maintenance des Systèmes</a></li>
-                        <li><i class="bi bi-chevron-right"></i> <a href="#">Licence professionnelle en Génie Energétique</a></li>
-                        <li><i class="bi bi-chevron-right"></i> <a href="#">Licence professionnelle en Génie Mécanique et Productique</a></li>
-                        <li><i class="bi bi-chevron-right"></i> <a href="#">Laboratoires pédagogiques et Unités d'application</a></li>
                     </ul>
                 </div>
 

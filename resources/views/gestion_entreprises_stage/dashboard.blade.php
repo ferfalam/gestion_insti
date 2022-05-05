@@ -35,7 +35,7 @@
                 <h3 class="text-center text-dark mb-0" data-aos="zoom-in"><strong>Tableau De Bord</strong><br></h3>
             </div>
             @include('gestion_entreprises_stage.enterprises.interns_lists')
-            @include('gestion_entreprises_stage.enterprises.offers_form')
+{{--            @include('gestion_entreprises_stage.enterprises.offers_form')--}}
         @endif
     </div>
 

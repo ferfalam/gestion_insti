@@ -74,7 +74,7 @@ class ComplaintRequestController extends Controller
 
 
         $requete = Complaint_request::create([
-            'firt_name' => $userFirstName,
+            'first_name' => $userFirstName,
             'last_name' => $userLastName,
             'userId' => $idUser,
             'motif' => request("reclamationMotif"),
@@ -127,9 +127,9 @@ class ComplaintRequestController extends Controller
      */
 
     public function show($id){
-        $complaint_request = Complaint_request::findOrFail($id);
-        return view('gestion_demandes_reclamation_evaluation.etudiants.voir_detail_demande_reclamation'
-         ,compact('complaint_request')
+        $complaint_requests = Complaint_request::find($id);
+        return view('gestion_demandes_reclamation_evaluation.personnels.voir_details_demande_reclamation'
+         ,compact('complaint_requests')
         );
     }
 }
