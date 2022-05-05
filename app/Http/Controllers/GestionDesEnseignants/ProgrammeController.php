@@ -15,7 +15,7 @@ class ProgrammeController extends Controller
 
     public function affichage()
     {
-        if(Auth::user()->user_groupId==1){
+        if(Auth::user()->user_group->name=="admin"){
             $profile=Profile::all();
             return view('gestion_enseignants.tableAdmin',[
                 'vTitle'=>'Programme',
@@ -48,7 +48,7 @@ class ProgrammeController extends Controller
         }
     }
     public function traitement(){
-        if(Auth::user()->user_groupId==1){
+        if(Auth::user()->user_group->name=="admin"){
             $profile=Profile::all();
             // $profileTrait=$profile;
             $lastvalue=request('selectNom');
@@ -92,7 +92,7 @@ class ProgrammeController extends Controller
     }
 
     public function generate(){
-        if(Auth::user()->user_groupId==1){
+        if(Auth::user()->user_group->name=="admin"){
             $profile=Profile::all();
             
             $profileTrait=$profile;
