@@ -59,7 +59,7 @@ class Profile extends Controller
     public function index(){
         $id = Auth::id();
 
-        $this->userGroup = userGroup::find(User_userGroup_Position_Service_Map::where("userId", $id)->first()->userGroupId)->name;
+        $this->userGroup = UserGroup::find(Auth::user()->user_groupId)->name;
         if ($this->userGroup == "partenaire"){
 
             $user_data = DB::table("entreprises")
@@ -74,8 +74,8 @@ class Profile extends Controller
             {
                 $user_data = DB::table("profiles")
                     ->select("profiles.*", "users.email", "fields.name as fields", "pedagogic_groups.name as pedagogic_group")
-                    ->where("userId", $id)
-                    ->join('users', 'profiles.userId', '=', 'users.id')
+                    ->where("user_id", $id)
+                    ->join('users', 'profiles.user_id', '=', 'users.id')
                     ->leftJoin('fields', 'profiles.app_fieldId', '=', 'fields.id')
                     ->leftJoin('pedagogic_groups', 'pedagogic_groups.fieldId', '=', 'profiles.app_fieldId')
                     ->first();
@@ -84,8 +84,8 @@ class Profile extends Controller
             {
                 $user_data = DB::table("profiles")
                     ->select("profiles.*", "users.email")
-                    ->where("userId", $id)
-                    ->join('users', 'profiles.userId', '=', 'users.id')
+                    ->where("user_id", $id)
+                    ->join('users', 'profiles.user_id', '=', 'users.id')
                     ->first();
             }
             $username = $user_data->com_fullname;

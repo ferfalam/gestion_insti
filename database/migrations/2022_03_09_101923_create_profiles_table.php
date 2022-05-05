@@ -25,9 +25,9 @@ class CreateProfilesTable extends Migration
             $table->string('com_registrationNumber'); //matricule
             $table->integer('com_phoneNumber'); //à voir
             $table->string('com_address');
-            $table->string('com_parentFullname');
-            $table->string('com_parentGivenName');
-            $table->integer('com_parentPhoneNumber'); //à voir
+            $table->string('com_parentGivenName')->nullable();
+            $table->string('com_parentFullname')->nullable();
+            $table->integer('com_parentPhoneNumber')->nullable(); //à voir
             $table->foreignId('app_fieldId')->nullable()->constrained('fields');
             //$table->string('app_pedagogicGroupId'); #problématique
             $table->foreignId('app_typeId')->nullable()->constrained('generals');

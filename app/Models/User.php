@@ -22,7 +22,8 @@ class User extends Authenticatable
         'pseudo',
         'email',
         'password',
-        'statusId'
+        'statusId',
+        'user_groupId'
     ];
 
     /**
