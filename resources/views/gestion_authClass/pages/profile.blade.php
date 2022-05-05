@@ -96,12 +96,13 @@
                                                 ><strong>Prenom</strong></label
                                                 >
 
-                                                <!-- <input
+                                                <input
                                                     class="form-control"
                                                     type="text"
-                                                    placeholder="{{explode(' ',Auth::user()->name)[1]}}"
+                                                    placeholder=""
                                                     name="first_name"
-                                                /> -->
+                                                />
+                                                
                                             </div>
                                         </div>
                                     </div>
@@ -140,7 +141,7 @@
                                                 ><input
                                                     class="form-control"
                                                     type="text"
-                                                    placeholder="Telephone"
+                                                    placeholder="{{Auth::user()->contact}}"
                                                     name="phone"
                                                 />
                                             </div>

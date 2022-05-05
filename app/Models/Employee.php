@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 
 class Employee extends Model
@@ -22,7 +23,7 @@ class Employee extends Model
 
     public static function getEmployee()
     {
-        $records=DB::table('moyennes')->select('id','name','genre','filiere','n_matricule','moy_annee1','moy_annee2','moy_annee3')->get()->toArray();
+        $records=DB::table('moyennes')->select('id','name','genre','filiere','n_matricule','moy_annee1','moy_annee2','moy_annee3')->where('filiere','GC')->get()->toArray();
         return $records;
     }
 }

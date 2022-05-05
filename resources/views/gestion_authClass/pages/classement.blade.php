@@ -1,9 +1,14 @@
 @extends('gestion_authClass.layout')
 
 @section('main')
-    <div class="container-fluid">
-        <h3 class="text-black mb-4">Classement des étudiants</h3>
-        <div class="card shadow">
+
+<div class="container-fluid">
+
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h2 class="text-primary font-weight-bold m-0" style="text-align:center;">Classement des étudiants</h2>
+        </div>
+        <div class="card-body">
             <div class="card-header py-3" style="columns: 2">
                 <div>
                     <div style="display: inline">
@@ -11,19 +16,19 @@
                     </div>
                     <div style="display: inline">
 
-                            <select class="form-control" name="fili">
-                                <optgroup>
-                                    <option value="GEI" name="GEI">GEI</option>
-                                    <option value="GMP" name="GMP">GMP</option>
-                                    <option value="MS" name="MS">MS</option>
-                                    <option value="GE" name="GE">GE</option>
-                                    <option value="GC" name="GC">GC</option>
-                                </optgroup>
-                            </select>
+                        <select class="form-control" name="fili">
+                            <optgroup>
+                                <option value="GEI" name="GEI">GEI</option>
+                                <option value="GMP" name="GMP">GMP</option>
+                                <option value="MS" name="MS">MS</option>
+                                <option value="GE" name="GE">GE</option>
+                                <option value="GC" name="GC">GC</option>
+                            </optgroup>
+                        </select>
 
                     </div>
                 </div>
-                <div style="width: 500px">
+                <div>
                     <div style="display: inline">
                         <label for="">Promotion</label>
                     </div>
@@ -44,23 +49,18 @@
                 <div class="row">
 
                 </div>
-                <div
-                    class="table-responsive table mt-2"
-                    id="dataTable"
-                    role="grid"
-                    aria-describedby="dataTable_info"
-                >
+                <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
                     <table class="table dataTable my-0" id="dataTable">
                         <thead>
-                        <tr>
+                            <tr>
 
-                            <th>Nom et Prénoms</th>
-                            <th>Genre</th>
-                            <th>Matricule</th>
-                            <th>Filière</th>
-                            <th>Moyenne</th>
-                            <th>Rang</th>
-                        </tr>
+                                <th>Nom et Prénoms</th>
+                                <th>Genre</th>
+                                <th>Matricule</th>
+                                <th>Filière</th>
+                                <th>Moyenne</th>
+                                <th>Rang</th>
+                            </tr>
                         </thead>
                         <tbody>
                             <?php $i=0;?>
@@ -78,10 +78,12 @@
                             </tr>
 
                             @empty
-                            <li><h1>Aucun classement disponible</h1></li>
+                            <li>
+                                <h1>Aucun classement disponible</h1>
+                            </li>
 
-                    @endforelse
-                        {{-- <tr>
+                            @endforelse
+                            {{-- <tr>
                             <td>1</td>
                             <td>61425358</td>
                             <td>DODE Joe</td>
@@ -98,7 +100,7 @@
                             <td>15</td>
                         </tr>
                         </tbody> --}}
-                        <!-- <tfoot>
+                            <!-- <tfoot>
                                         <tr>
                                             <td><strong>Name</strong></td>
                                             <td><strong>Position</strong></td>
@@ -113,5 +115,5 @@
             </div>
         </div>
     </div>
-
+</div>
 @endsection

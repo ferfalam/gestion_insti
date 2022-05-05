@@ -65,3 +65,26 @@
     </div>
 
 @endsection
+@section('script')
+    <script>
+        (() => {
+            var advanced = false
+            $('#searchAdvanced').hide()
+
+            $('#advanced').click((e) => {
+                e.preventDefault()
+                advanced = !advanced
+                if (advanced) {
+                    $('#search').fadeOut(300)
+                    $('#searchAdvanced').show(600)
+                    $('#advanced').text("Recherche Simple")
+                }else{
+                    $('#searchAdvanced').fadeOut(300)
+                    $('#search').show(600)
+                    $('#advanced').text("Recherche Avancée")
+                }
+            })
+        })()
+    </script>
+@endsection
+
