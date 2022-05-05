@@ -19,10 +19,15 @@
         "symfony/http-client": "^5.4",
         "symfony/mailgun-mailer": "^5.4",
         "symfony/postmark-mailer": "^5.4",
+<<<<<<< HEAD
 =======
         "spatie/simple-excel": "^1.13",
 >>>>>>> f59079e1e80389dd8b0a468298ce5308baf933f2
         "yajra/laravel-datatables-oracle": "~9.0"
+=======
+        "yajra/laravel-datatables-oracle": "~9.0",
+      "ext-json": "*"
+>>>>>>> 9d9d39ff2aba85d980f857007807b48968d48cf0
     },
     "require-dev": {
         "facade/ignition": "^2.5",

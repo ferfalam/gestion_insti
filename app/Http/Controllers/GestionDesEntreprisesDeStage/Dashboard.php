@@ -65,14 +65,15 @@ class Dashboard extends Controller
         $id = Auth::id();
         $interns = null;
 
-        $this->userGroup = UserGroup::find(User_userGroup_Position_Service_Map::where("userId", $id)->first()->userGroupId)->name;
+        $this->userGroup = UserGroup::find(Auth::user()->user_groupId)->name;
+//        dd($this->userGroup);
         if ($this->userGroup == "partenaire") {
             $username = DB::table("entreprises")->where("user_id", $id)->value('designation');
             $interns = $this->getInterns();
         } else {
             $shortProfile = DB::table("profiles")
                 ->select("com_fullname")
-                ->where("userId", $id)
+                ->where("user_id", $id)
                 ->first();
             $username = $shortProfile->com_fullname;
             if ($this->userGroup == "admin") {
@@ -114,8 +115,9 @@ class Dashboard extends Controller
     public function getInterns(): Collection
     {
         return DB::table("profiles")
-            ->select("com_fullname")
-            ->whereIn("userId",
+            ->select("profiles.com_fullname", "stages.startdate", "stages.enddate")
+            ->join("stages", "stages.user_id", "=", "profiles.user_id")
+            ->whereIn("profiles.user_id",
                 function ($query) {
                     $query->from("stages")
                         ->select("user_id")
@@ -132,7 +134,7 @@ class Dashboard extends Controller
     {
         $enterprise = Entreprises::find($request->id);
         $domaines_ids = array();
-        foreach (explode("-", $enterprise->domaines) as $id) {
+        foreach (json_decode($enterprise->domaines) as $id) {
             if ($id != "") {
                 array_push($domaines_ids, (int)$id);
             }
