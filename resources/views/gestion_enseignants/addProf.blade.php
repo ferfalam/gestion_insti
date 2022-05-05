@@ -6,16 +6,16 @@
     <div class="container-fluid" data-aos="fade-up-left" data-aos-duration="600" >
         {{-- @include('flash::message') --}}
         <h3 class="text-dark mb-4">Ajouter/ Modifier le programme</h3>
-        
+
         <form method="POST" action="{{ route('gestion_enseignant.store_prof') }}" id="containerAddProf" name="containerAddProf">
                 @csrf
             <div class="card-body">
 
             </div>
-        
+
     </div>
     <div id="btnDiv">
-        <div style="display: flex; float: right;">
+        <div style="display: flex; float: right; pyb-3">
             <button type="button" class="btn btn-primary btn-sm" id="addLigneProf" name="addLigneProf" style="margin-right: 20px;">Ajouter</button>
             <input type="submit" class="btn btn-primary btn-sm " id="save" name="save" value="Enregistrer" >
             <input type="hidden" class="btn btn-primary btn-sm " id="compteur" name="compteur" value="" >
@@ -29,10 +29,16 @@
 
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script  type="text/javascript">
+
+    function delete_div(i){
+        var elem = document.getElementById('div'+i+'');
+        elem.remove();
+    };
     $(document).ready(function () {
+
         var counter = 0;
                 $("#addLigneProf").on("click", function () {
-                    var newCard='<div">'+
+                    var newCard='<div id="div'+counter+'">'+
                     '<div class="card shadow" style="margin-top: 30px;">'+
                     '<div class="card-body" style="margin-top: 30px;">'+
                     '<div class="form-row">'+
@@ -93,20 +99,20 @@
                     '<option value="13">Vacataire</option>'+
                     '<option value="14">Missionnaire</option>'+
                     '</select></div>'+
+                    '<div><button id="ibtnDel'+counter+'"  id=" name'+counter+'" onclick="{delete_div('+counter+');}" class="btn btn-sm btn-danger float-right mt-2">Supprimer</button></div>'+
                     '</div>'+
                     '</div>'+
                     '</div>'+
                     '</div>'+
-                    '<div><button id="ibtnDel" class="ibtnDel btn btn-sm btn-danger float-right mt-2" value="Supprimer">Supprimer</button></div>'+
                     '</div>';
                     $("#containerAddProf").append(newCard);
                     document.getElementById('compteur').value=counter;
                     counter++;
                 });
 
-            $("#containerAddProf").on("click", ".ibtnDel", function (event) {
-                $("#containerAddProf").closest("div").remove();
-            });    
+            // $("#containerAddProf").on("click", ".ibtnDel", function (event) {
+            //     $("#containerAddProf").closest("div").remove();
+            // });
        });
 
    </script>

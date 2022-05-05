@@ -28,7 +28,7 @@ class AddProfController extends Controller
             //verifions si les eléments saisie n'etais pas enregistrer
             $compteExistant=false;
             $allUser= User::all();
-            
+
 
             foreach($allUser as $user ){
                 if(($user->email)==request('email'.$i)){
@@ -41,34 +41,37 @@ class AddProfController extends Controller
                 return back();
             }
             if(!$compteExistant){
-                $Users=DB::table('users')->insert([
-                    'pseudo'=>request('last_name'.$i),
-                    'email'=>request('email'.$i),
-                    'password'=>Hash::make(request('pass'.$i)),
-                    'statusId'=>1,
-                    'user_groupId'=>4,
-                ]);
-                $id=DB::getPdo()->lastInsertId();
-                $profile=DB::table('profiles')->insert([
-                    'user_id'=>$id,
-                    'com_fullname'=>request('first_name'.$i),
-                    'com_givenName'=>request('last_name'.$i),
-                    'com_gender'=>request('genre'.$i),
-                    'com_birthdate'=>request('date'.$i),
-                    'com_birthPlace'=>request('lieu_naissance'.$i),
-                    'com_diploma'=>request('diplome'.$i),
-                    'com_registrationNumber'=>request('matricule'.$i),
-                    'com_phoneNumber'=>request('num'.$i),
-                    'com_address'=>request('adresse'.$i),
-                    'pers_grade'=>request('type'.$i),
-                    "com_parentFullname" => "Parent Enseignant",
-                    "com_parentGivenName" => "Parent ",
-                    "com_parentPhoneNumber" => "68587412",
-                    "app_fieldId" => "4",
-                    "app_typeId" => "1",
-                    "ens_typeId" => "2",
-                    "pers_typeId" => "3",
-                ]);
+                if(request('last_name'.$i)!=""){
+                    $Users=DB::table('users')->insert([
+                        'pseudo'=>request('last_name'.$i),
+                        'email'=>request('email'.$i),
+                        'password'=>Hash::make(request('pass'.$i)),
+                        'statusId'=>1,
+                        'user_groupId'=>4,
+                    ]);
+                    $id=DB::getPdo()->lastInsertId();
+                    $profile=DB::table('profiles')->insert([
+                        'user_id'=>$id,
+                        'com_fullname'=>request('first_name'.$i),
+                        'com_givenName'=>request('last_name'.$i),
+                        'com_gender'=>request('genre'.$i),
+                        'com_birthdate'=>request('date'.$i),
+                        'com_birthPlace'=>request('lieu_naissance'.$i),
+                        'com_diploma'=>request('diplome'.$i),
+                        'com_registrationNumber'=>request('matricule'.$i),
+                        'com_phoneNumber'=>request('num'.$i),
+                        'com_address'=>request('adresse'.$i),
+                        'pers_grade'=>request('type'.$i),
+                        "com_parentFullname" => "Parent Enseignant",
+                        "com_parentGivenName" => "Parent ",
+                        "com_parentPhoneNumber" => "68587412",
+                        "app_fieldId" => "4",
+                        "app_typeId" => "1",
+                        "ens_typeId" => "2",
+                        "pers_typeId" => "3",
+                    ]);
+                }
+
             }
 
         }
@@ -80,7 +83,7 @@ class AddProfController extends Controller
     	return view('gestion_enseignants.addProf',[
     		'vTitle'=>'Ajouter',
     	]);
-        
+
 
     }
 }
