@@ -16,7 +16,7 @@ class CreateComplaintRequestsTable extends Migration
         Schema::create('complaint_requests', function (Blueprint $table) {
             $table->id();
             $table->foreignId('userId')->constrained('users');
-            $table->string('firt_name');
+            $table->string('first_name');
             $table->string('last_name');
             $table->string('motif');
             $table->string('description_motif');

@@ -73,14 +73,6 @@ class DatabaseSeeder extends Seeder
          $pedagogic_groups=PedagogicGroup::create(["name"=>"Génie Electrique et Informatique","fieldId"=>"3","academicYearId"=>"1","studyYearId"=>"1","description"=>"GEI"]);
          $pedagogic_groups=PedagogicGroup::create(["name"=>"Maintenance des Systèmes","fieldId"=>"4","academicYearId"=>"1","studyYearId"=>"1","description"=>"MS"]);
 
-         //admin,superadmin,apprenant,enseignant,personnel,redacteur,partenaire
-         $user_groups=UserGroup::create(["name"=>"admin","description"=>"Admin"]);
-         $user_groups=UserGroup::create(["name"=>"superadmin","description"=>"Le super Admin"]);
-         $user_groups=UserGroup::create(["name"=>"apprenant","description"=>"Un apprenant"]);
-         $user_groups=UserGroup::create(["name"=>"enseignant","description"=>"Un enseignant"]);
-         $user_groups=UserGroup::create(["name"=>"personnel","description"=>"Un personnel"]);
-         $user_groups=UserGroup::create(["name"=>"redacteur","description"=>"Un redacteur"]);
-         $user_groups=UserGroup::create(["name"=>"partenaire","description"=>"Un partenaire"]);
 
          //chefService/Adjoint, collaborateur, chefCollaborateur, chefDivision, responsableClasse/Adjoint
          $position=Position::create(["name"=>"chefService/Adjoint","description"=>" le chefService/Adjoint "]);
