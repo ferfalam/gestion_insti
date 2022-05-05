@@ -30,6 +30,8 @@ use App\Http\Controllers\GestionDeliberation\DeliberationInfosController;
 
 Auth::routes();
 
+Route::get('generality', 'GenralityController@index')->name('generality.index');
+
 Route::group(["prefix"=>"gestion_salle", "as"=>"gestion_salle.", "middleware" => "auth"], function ()
 {
     Route::get('/', "GestionSalleDeClasse\SalleController@index")->name("index");
