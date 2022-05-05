@@ -32,7 +32,8 @@
     $(document).ready(function () {
         var counter = 0;
                 $("#addLigneProf").on("click", function () {
-                    var newCard='<div class="card shadow" style="margin-top: 30px;">'+
+                    var newCard='<div">'+
+                    '<div class="card shadow" style="margin-top: 30px;">'+
                     '<div class="card-body" style="margin-top: 30px;">'+
                     '<div class="form-row">'+
                     '<div class="col">'+
@@ -44,7 +45,7 @@
                     '</div>'+
                     '<div class="form-row">'+
                     '<div class="col">'+
-                    '<div class="form-group"><label for="email"><strong>Email </strong></label><input type="email" class="form-control" placeholder="flavienProf@gmail.com" name="email'+counter+'" required /></div>'+
+                    '<div class="form-group"><label for="email"><strong>Email</strong></label><input type="email" class="form-control" placeholder="flavienProf@gmail.com" name="email'+counter+'" required /></div>'+
                     '</div>'+
                     '<div class="col">'+
                     '<div class="form-group"><label for="first_name"><strong>Mots de passe par defaut</strong><br /></label><input type="password" class="form-control" id="pass" placeholder="admin" name="pass'+counter+'" required /></div>'+
@@ -95,12 +96,17 @@
                     '</div>'+
                     '</div>'+
                     '</div>'+
+                    '</div>'+
+                    '<div><button id="ibtnDel" class="ibtnDel btn btn-sm btn-danger float-right mt-2" value="Supprimer">Supprimer</button></div>'+
                     '</div>';
                     $("#containerAddProf").append(newCard);
                     document.getElementById('compteur').value=counter;
                     counter++;
-
                 });
+
+            $("#containerAddProf").on("click", ".ibtnDel", function (event) {
+                $("#containerAddProf").closest("div").remove();
+            });    
        });
 
    </script>

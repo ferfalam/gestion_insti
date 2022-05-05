@@ -46,6 +46,7 @@ class AddProfController extends Controller
                     'email'=>request('email'.$i),
                     'password'=>Hash::make(request('pass'.$i)),
                     'statusId'=>1,
+                    'user_groupId'=>4,
                 ]);
                 $id=DB::getPdo()->lastInsertId();
                 $profile=DB::table('profiles')->insert([

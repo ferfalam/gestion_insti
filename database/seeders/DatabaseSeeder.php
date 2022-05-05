@@ -2,26 +2,26 @@
 
 namespace Database\Seeders;
 
-use App\Models\typestages;
 use App\Models\Ue;
 use App\Models\User;
 use App\Models\Field;
 use App\Models\Status;
 use App\Models\General;
+use App\Models\Profile;
 use App\Models\Qualite;
 use App\Models\Position;
 use App\Models\Services;
 use App\Models\UserGroup;
+use App\Models\Typestages;
 use App\Models\AcademicYear;
 use App\Models\PedagogicGroup;
-use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\Hash;
-use App\Models\User_userGroup_Position_Service_Map;
-use App\Models\user_pedagogic_group_map;
-use App\Models\ShortcutsRequest;
-use App\Models\AcademicSemester;
 use App\Models\Evaluation_type;
-use App\Models\Profile;
+use Illuminate\Database\Seeder;
+use App\Models\AcademicSemester;
+use App\Models\ShortcutsRequest;
+use Illuminate\Support\Facades\Hash;
+use App\Models\user_pedagogic_group_map;
+use App\Models\User_userGroup_Position_Service_Map;
 
 class DatabaseSeeder extends Seeder
 {
