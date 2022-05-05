@@ -20,7 +20,7 @@
 </style>
 <body>
     <h1></h1>
-    @if (Auth::user()->email=='admin@insti.com')
+    @if (Auth::user()->user_groupId==1)
         
         <div class="card-body text-center shadow" id="cardId">
                 <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
