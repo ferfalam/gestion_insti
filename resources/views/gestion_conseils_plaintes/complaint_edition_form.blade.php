@@ -36,7 +36,7 @@
                                 @foreach ($errors->all() as $error)
                                 <li>{{ $error }}</li>
                                 @endforeach
-                            </ul>
+                          </ul>
                 </div>
             @endif
             <h2 class="text-center"><br><strong>Mettre à jour votre plainte</strong><br><br></h2>

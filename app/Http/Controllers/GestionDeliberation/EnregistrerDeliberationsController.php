@@ -24,12 +24,12 @@ class EnregistrerDeliberationsController extends Controller
      */
     public function create()
     {
-        // 1 - admin, 2 - superadmin, 3 - aprennant, 4 - enseignant, 5 - personnel, 6 - redacteur, 7 - partenaire 
+        // 1 - admin, 2 - superadmin, 3 - aprennant, 4 - enseignant, 5 - personnel, 6 - redacteur, 7 - partenaire
 
         $usergroupid = User_userGroup_Position_Service_Map::where('userId', Auth::user()->id)->get()[0]->userGroupId;
         $positionid = User_userGroup_Position_Service_Map::where('userId', Auth::user()->id)->get()[0]->positionId;
         $serviceid = User_userGroup_Position_Service_Map::where('userId', Auth::user()->id)->get()[0]->serviceId;
-        
+
         if ($positionid == 1 and ($serviceid == 1 or $serviceid == 2)){
 
             $annees = AcademicYear::all();
@@ -37,13 +37,11 @@ class EnregistrerDeliberationsController extends Controller
             $filieres = Field::all();
             $semestres = General::where('content_type', 'semestre_annee')->get();
             $groupes = PedagogicGroup::all();
-            return view('gestion_deliberations.enregistrerDeliberation', compact('annees', 'semestres', 'filieres', 'groupes', 'ues'));    
+            return view('gestion_deliberations.enregistrerDeliberation', compact('annees', 'semestres', 'filieres', 'groupes', 'ues'));
         }
         else {
             return redirect()->action([IndexController::class, 'index'])->with('error', ' Vous ne pouvez pas enrégistrer de délibérations!');
         }
-
-
     }
 
     /**
@@ -59,7 +57,7 @@ class EnregistrerDeliberationsController extends Controller
 
         $request->validate([
             'annee' => 'required|integer',
-            'groupePedagogique' => 'required|integer',            
+            'groupePedagogique' => 'required|integer',
             'delib_af' => 'required|file|mimes:xls,xlsx,pdf',
             'delib_msq' => 'required|file|mimes:xls,xlsx,pdf',
             'semestre' => 'required|string',
@@ -72,7 +70,7 @@ class EnregistrerDeliberationsController extends Controller
 
         $groupe = PedagogicGroup::where('id', $request->input('groupePedagogique'))->get()[0]->name;
 
-        $annee = AcademicYear::where('id', $request->input('annee'))->get()[0]->name; 
+        $annee = AcademicYear::where('id', $request->input('annee'))->get()[0]->name;
         $now = str_replace(':', '-', NOW());
 
         $inter = $annee.$request->input('semestre').$groupe.$now;
@@ -116,7 +114,7 @@ class EnregistrerDeliberationsController extends Controller
                 'semesters' => $request->input('semestre'),
                 'fieldId' => PedagogicGroup::where('id', $request->input('groupePedagogique'))->get()[0]->fieldId,
                 'groupId' => $request->input('groupePedagogique'),
-                'authorId' => Auth::user()->id, 
+                'authorId' => Auth::user()->id,
                 'participants' => $participantspath,
                 'start' => $request->input('begin_date'),
                 'end' => $request->input('end_date'),
@@ -126,13 +124,13 @@ class EnregistrerDeliberationsController extends Controller
                 'uesIds' => $uesids,
                 'infos' => $infos,
            ]);
-   
-           
-   
+
+
+
            return redirect(route('gestion_deliberation.index'))->with('success', 'Délibération bien ajoutée');
         }
 
-        
-        
+
+
     }
 }
