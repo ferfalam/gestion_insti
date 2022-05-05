@@ -43,11 +43,11 @@
 
                                 <li> <a href="{{ route('gestion_deroulement_cours.formulaire_Deroulement_Cours') }}"> Créer une Fiche du déroulement des Cours</a> </li>
 
-                                <li> <a href="{{ route('gestion_deroulement_cours.updateFicheEtudiant') }}"> Mettre à jour une fiche du déroulement du cours </a> </li>
+                                <li> <a href="{{ route('gestion_deroulement_cours.showFiche') }}"> Fiche du déroulement de cours Disponible </a> </li>
                                 
-                                <li> <a href="{{ route('gestion_deroulement_cours.retraitFicheEtudiant') }}"> Retirer Fiche Etudiant  </a> </li>
+                                <li> <a href="{{ route('gestion_deroulement_cours.retraitFicheEtudiant') }}"> Retirer Fiche Etudiant pour une UE  </a> </li>
 
-                                <li> <a href="{{ route('gestion_deroulement_cours.RetraitFicheEnseignantGlobal') }}"> Retirer fiche Enseignant Global </a> </li>
+                                <li> <a href="{{ route('gestion_deroulement_cours.RetraitFicheEnseignantGlobal') }}"> Retirer Fiche Enseignant Global </a> </li>
                 
                                 <li> <a href="{{ route('gestion_deroulement_cours.newGroup') }}"> Integrer un nouveau Groupe Pedagogique  </a> </li>
 

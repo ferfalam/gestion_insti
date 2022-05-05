@@ -214,11 +214,15 @@ Route::group(["prefix"=>"gestion_deroulement_cours", "as"=>"gestion_deroulement_
 {
 
     Route::get('/', "GestionDeroulementCours\HomeController@index")->name('accueil');
-
-    Route::get('/formCours', 'GestionDeroulementCours\FormulaireDeroulementCoursController@readItemsModule')->name('formulaire_Deroulement_Cours');
-    Route::post('/formCours', 'GestionDeroulementCours\FormulaireDeroulementCoursController@store')->name('saveFicheEtudiant');
-    Route::put('/formCours', 'GestionDeroulementCours\FormulaireDeroulementCoursController@update')->name('updateFicheEtudiant');
     
+    // form Deroulement Cours
+    Route::get('/formDeroulementCours', 'GestionDeroulementCours\FormulaireDeroulementCoursController@createFormDeroulementCours')->name('formulaire_Deroulement_Cours');
+    Route::get('/formDeroulementCoursEnregistres', 'GestionDeroulementCours\FormulaireDeroulementCoursController@showFormDeroulementCours')->name('showFiche');
+    Route::post('/newformDeroulementCours', 'GestionDeroulementCours\FormulaireDeroulementCoursController@storeFormDeroulementCours')->name('saveFiche');
+    Route::get('/formDeroulementCoursSupprime/{id}', 'GestionDeroulementCours\FormulaireDeroulementCoursController@deleteFormDeroulementCours')->name('deleteFiche');
+    Route::get('/formDeroulementCours/{id}', 'GestionDeroulementCours\FormulaireDeroulementCoursController@findById')->name('ficheById');
+    Route::post('/MettreAJourformDeroulementCours/{id}', 'GestionDeroulementCours\FormulaireDeroulementCoursController@updateFormDeroulementCours')->name('updateFiche');
+
     Route::get('/ficheDeCoursSortant', 'GestionDeroulementCours\FormulaireDeroulementCoursController@readFicheCourseExecute')->name('retraitFicheEtudiant');
     Route::get('/ficheDeCoursEnseignant', 'GestionDeroulementCours\FormulaireDeroulementCoursController@readFicheAllCourseTeacher')->name('RetraitFicheEnseignantGlobal');
 
