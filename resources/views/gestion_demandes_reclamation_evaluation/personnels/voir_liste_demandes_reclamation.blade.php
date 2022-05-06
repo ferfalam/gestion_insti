@@ -8,31 +8,25 @@
             <div class="col">
                 <div class="table-responsive">
                     <table class="table">
-                        <thead>
+                    <thead>
                             <tr>
                                 <th>Nom et Prénoms</th>
-                                @foreach($complaint_requests as $a_complaint_request)
-                                    
-                                    <tr>{!!$a_complaint_request->profil_id!!}</tr>
-                                @endforeach 
-
-                                <th>Type de Demande</th>
-
-                                @foreach($complaint_requests as $a_complaint_request)
-                                                
-                                    <tr> {!!$a_complaint_request->evaluation_type_id!!}</tr>
-                                @endforeach
-
+                                <th>Filiere</th>
                                 <th>Date de Réception</th>
-
-                                @foreach($complaint_requests as $a_complaint_request)
-                                                
-                                    <tr> {!!$a_complaint_request->created_at!!}</tr>
-                                
-                                @endforeach
 
                             </tr>
                         </thead>
+                        <tbody>
+                        @foreach($all_complaint_requests as $all_complaint_request) 
+                            <tr>
+                               
+                                <td>{{$all_complaint_request->fist_name}} {{$all_complaint_request->last_name}}</td> 
+                                <td>{{$all_complaint_request->field}}</td>    
+                                <td>{{$all_complaint_request->created_date}}</td>
+                            
+                            </tr>
+                        @endforeach 
+                        </tbody>
                     </table>
                 </div>
             </div>

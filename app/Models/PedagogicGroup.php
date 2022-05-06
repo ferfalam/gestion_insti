@@ -18,4 +18,8 @@ class PedagogicGroup extends Model
         'studyYearId',
         'description',
     ];
+    //public $timestamps = false
 }
+
+
+

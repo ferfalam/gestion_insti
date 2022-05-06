@@ -19,7 +19,7 @@ class CreatePlaintesTable extends Migration
             $table->foreignId('id_plaignant')->constrained('users')->cascadeOnDelete();
             $table->string('motif');
             $table->string('description');
-            $table->boolean('statut')->default(false);
+            $table->integer('statut')->default(0);
             $table->timestamps();
         });
     }

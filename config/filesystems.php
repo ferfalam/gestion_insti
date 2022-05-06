@@ -28,6 +28,47 @@ return [
     |
     */
 
+    'public_uploads' => [
+        'driver' => 'local',
+        'root'   => public_path() . '/uploads',
+    ],
+
+    'ftp' => [
+        'driver' => 'ftp',
+        'host' => env('FTP_HOST'),
+        'username' => env('FTP_USERNAME'),
+        'password' => env('FTP_PASSWORD'),
+
+        // Optional FTP Settings...
+        // 'port' => env('FTP_PORT', 21),
+        // 'root' => env('FTP_ROOT'),
+        // 'passive' => true,
+        // 'ssl' => true,
+        // 'timeout' => 30,
+    ],
+
+    'sftp' => [
+        'driver' => 'sftp',
+        'host' => env('SFTP_HOST'),
+
+        // Settings for basic authentication...
+        'username' => env('SFTP_USERNAME'),
+        'password' => env('SFTP_PASSWORD'),
+
+        // Settings for SSH key based authentication with encryption password...
+        'privateKey' => env('SFTP_PRIVATE_KEY'),
+        'password' => env('SFTP_PASSWORD'),
+
+        // Optional SFTP Settings...
+        // 'hostFingerprint' => env('SFTP_HOST_FINGERPRINT'),
+        // 'maxTries' => 4,
+        // 'passphrase' => env('SFTP_PASSPHRASE'),
+        // 'port' => env('SFTP_PORT', 22),
+        // 'root' => env('SFTP_ROOT', ''),
+        // 'timeout' => 30,
+        // 'useAgent' => true,
+    ],
+
     'disks' => [
 
         'local' => [
@@ -49,7 +90,7 @@ return [
             'region' => env('AWS_DEFAULT_REGION'),
             'bucket' => env('AWS_BUCKET'),
             'url' => env('AWS_URL'),
-            'endpoint' => env('AWS_ENDPOINT'),
+            'endpoint' => env('AWS_ENDPOINT','https://minio:9000'),
             'use_path_style_endpoint' => env('AWS_USE_PATH_STYLE_ENDPOINT', false),
         ],
 
@@ -68,6 +109,7 @@ return [
 
     'links' => [
         public_path('storage') => storage_path('app/public'),
+        public_path('rapports') => storage_path('app/ressources/storage/app/rapports'),
     ],
 
 ];

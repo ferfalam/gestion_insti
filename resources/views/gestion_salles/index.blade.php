@@ -15,7 +15,7 @@
                                         {{ session('errMsg') }}
                                     </div>
                                 @endif
-                                <form class="checkdomain form-inline" method="POST" action="#">
+                                <form class="" method="POST" action="#">
                                     @csrf
                                     <div class="checkdomain-wrapper">
                                         <div class="form-group">
@@ -34,7 +34,8 @@
                             <div class="container">
                                 <h1>Recherche de salle avancée</h1>
                                 <form action="" method="post">
-                                    <div class="checkdomain form-inline" style="padding: 0 !important">
+                                    @csrf
+                                    <div class="" style="padding: 0 !important">
                                         <div class="checkdomain-wrapper">
                                             <div class="form-group">
                                                 <label class="sr-only" for="domainnamehere">Salle de classe</label>

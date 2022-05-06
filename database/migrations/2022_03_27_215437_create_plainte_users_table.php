@@ -15,8 +15,8 @@ class CreatePlainteUsersTable extends Migration
     {
         Schema::create('plainte_users', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('id_plainte')->constrained('plaintes')->ondelete('cascade');
-            $table->foreignId('id_user')->constrained('users')->ondelete('cascade');
+            $table->foreignId('id_plainte')->constrained('plaintes')->onDelete('cascade');
+            $table->foreignId('id_user')->constrained('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

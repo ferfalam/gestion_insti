@@ -26,11 +26,15 @@
     <!-- <link rel="stylesheet" href="{{ asset('css/main.css') }}"> -->
     <link rel="stylesheet" href="{{ asset('css/delib/main.css') }}">
     <link rel="stylesheet" href="{{ asset('css/delib/main_.css') }}">
+    
     <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
 
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </head>
 <body id="page-top">
     <div id="wrapper">
@@ -44,7 +48,7 @@
                     @if (auth() -> guest())
                         <li class="nav-item"><a class="nav-link {{ request() -> is('login')? 'active': '' }}"  href="{{ route('login')}}"><i class="far fa-user-circle"></i><span>Connexion</span></a></li>
                     @else
-                        <li class="nav-item"><a class="nav-link {{ request() -> is('gestion_deliberation.index')? 'active': '' }}" href="{{ route('gestion_deliberation.index')}}"><i class="fas fa-tachometer-alt"></i><span>Accueil</span></a></li>
+                        <li class="nav-item"><a class="nav-link {{ request() -> is('gestion_deliberation')? 'active': '' }}" href="{{ route('gestion_deliberation.index')}}"><i class="fas fa-tachometer-alt"></i><span>Accueil</span></a></li>
                         <li class="nav-item"><a class="nav-link {{ request() -> is('gestion_deliberation/enregistrerDeliberation')? 'active': '' }}" href="{{ route('gestion_deliberation.nouvelledeliberation')}}"><i class="fas fa-user-circle"></i><span>Enrégistrer une délibération</span></a></li> 
                     @endif
                 </ul>

@@ -11,28 +11,25 @@
                 <div class="table-responsive">
                     <table class="table">
                         <thead>
-                            <th>Nom et Prénoms</th>
-                            <th>Type de Demande</th>
-                            <th>Date de Réception</th>
+                            <tr>
+                                <th>Nom et Prénoms</th>
+                                <th>Filiere</th>
+                                <th>Date de Réception</th>
+
+                            </tr>
                         </thead>
-
-
                         <tbody>
-                            @foreach($evaluation_requests as $an_eva_request)
-
-                                <tr>
-                                        
-                                <td>{!!$an_eva_request->profil_id!!}</td>
-                                                                                
-                                <td> {!!$an_eva_request->evaluation_type_id!!}</td>
-                                                                                                                    
-                                <td> {!!$an_eva_request->created_at!!}</td>
-
-                                </tr>        
-                            @endforeach
-                        
+                        @foreach($all_evaluation_requests as $all_evaluation_request) 
+                            <tr>
+                               
+                                <td>{{$all_evaluation_request->fist_name}} {{$all_evaluation_request->last_name}}</td> 
+                                <td>{{$all_evaluation_request->field}}</td>    
+                                <td>{{$all_evaluation_request->created_date}}</td>
+                            
+                            </tr>
+                        @endforeach 
                         </tbody>
-                        
+
                     </table>
                 </div>
             </div>
