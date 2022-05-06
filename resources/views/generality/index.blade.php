@@ -2,16 +2,12 @@
 
 @section('style')
     <style>
-        .card{
-            height : 100%
+
+        .row a{
+            color:white;
+            text-decoration: none;
         }
 
-        .card-body a{
-            float: right;
-            position: absolute;
-            right: 10px;
-            bottom: 10px;
-        }
     </style>
 @endsection
 
@@ -22,9 +18,6 @@
         </li>
         <li class="nav-item" role="presentation">
             <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false"> <a href="{{ route('newGroup') }}"> Groupe Pédagogique </a></button>
-        </li>
-        <li class="nav-item" role="presentation">
-            <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Année Académique</button>
         </li>
         <li class="nav-item" role="presentation">
             <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false"><a href="{{ route('newGenerals') }}">General </a> </button>
@@ -127,8 +120,8 @@
                         <div class="row">
                             <ul>
                                 <li>  {!! $one_filiere->systemName !!} - {!! $one_filiere->name!!} </li> 
-                                <a href="{{ route('deleteField', ['id'=>$one_filiere->id]) }}"> Supprimer </a>
-                                <a href="{{ route('fieldById', ['id'=>$one_filiere->id]) }}"> Mettre à jour </a>
+                                <button class="btn btn-primary"> <a href="{{ route('fieldById', ['id'=>$one_filiere->id]) }}"> Mettre à jour </a> </button>
+                                <button class="btn btn-danger"> <a href="{{ route('deleteField', ['id'=>$one_filiere->id]) }}"> Supprimer </a> </button>
                             </ul>
                         </div>
                     @endforeach   

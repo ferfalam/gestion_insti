@@ -2,15 +2,9 @@
 
 @section('style')
     <style>
-        .card{
-            height : 100%
-        }
-
-        .card-body a{
-            float: right;
-            position: absolute;
-            right: 10px;
-            bottom: 10px;
+        .row a{
+            color:white;
+            text-decoration: none;
         }
     </style>
 @endsection
@@ -22,9 +16,6 @@
         </li>
         <li class="nav-item" role="presentation">
             <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false"> <a href="{{ route('newGroup') }}"> Groupe Pédagogique </a></button>
-        </li>
-        <li class="nav-item" role="presentation">
-            <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Année Académique</button>
         </li>
         <li class="nav-item" role="presentation">
             <button class="nav-link active" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="true"> <a href="{{ route('newGenerals') }}"> General </a> </button>
@@ -112,8 +103,8 @@
                             <div class="row">
                                 <ul>
                                     <li>  {!! $one_module_general->systemName !!} - {!! $one_module_general->name!!} </li> 
-                                    <a href="{{ route('deleteGeneral', ['id'=>$one_module_general->id]) }}"> Supprimer </a>
-                                    <a href="{{ route('generalById', ['id'=>$one_module_general->id]) }}"> Mettre à jour </a>
+                                    <button class="btn btn-primary"> <a href="{{ route('generalById', ['id'=>$one_module_general->id]) }}"> Mettre à jour </a> </button>
+                                    <button class="btn btn-danger"> <a href="{{ route('deleteGeneral', ['id'=>$one_module_general->id]) }}"> Supprimer </a> </button>
                                 </ul>
                             </div>
                         @endforeach
