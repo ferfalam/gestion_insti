@@ -32,9 +32,9 @@ class GeneralController extends Controller
 
         $this->validate( $request , [
             'name' => 'required|max:255',
-            'systemName' => 'required|max:255',
-            'content_type' => 'required|max:255',
-            'content_tag' => 'required|max:255',
+            'nameSys' => 'required|max:255',
+            'contentType' => 'required|max:255',
+            'contentTag' => 'required|max:255',
         ]);
 
         $general = General::create(
