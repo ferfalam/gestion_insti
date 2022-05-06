@@ -44,8 +44,8 @@
                         </ul>
                     @else
                         <ul class="navbar-nav text-light" id="accordionSidebar">
-                            <li class="nav-item"><a class="nav-link {{ request()->routeIs('generality.index') ? 'active' : '' }}"
-                                    href="{{ route('generality.index', []) }}"><i
+                            <li class="nav-item"><a class="nav-link {{ request()->routeIs('newField') ? 'active' : '' }}"
+                                    href="{{ route('newField', []) }}"><i
                                         class="fa-solid fa-gear"></i><span>Généralité</span></a></li>
                         </ul>
                     @endguest

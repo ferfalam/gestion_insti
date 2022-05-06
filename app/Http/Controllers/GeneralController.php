@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\GestionDeroulementCours;
+namespace App\Http\Controllers;
 
 use App\Models\General;
 use Illuminate\Http\Request;
@@ -15,23 +15,17 @@ class GeneralController extends Controller
      *  For to read all Generals created.
      * @return \Illuminate\Http\Response
      */
-    public function createGeneral( Request $request)
-    {
-        return view ('gestion_deroulement_cours.generalModule.formGeneral');
-    }
-
-    public function showGeneral()
+    public function index( Request $request)
     {
         $generals = General::all() ;
 
-        return view('gestion_deroulement_cours.generalModule.showGeneral', compact('generals'));
+        return view ('generality.general', compact('generals'));
     }
-
     
     /**
      * Create Validate and Save the general
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\View\View
+     * 
+     * @return \Illuminate\Http\Response
      */
     public function storeGeneral(Request $request)
     {
@@ -52,17 +46,20 @@ class GeneralController extends Controller
                 'status' => 1,
             ]
         );
+        
         event(new Registered($general));
         $this->message = "Nouveau Module General ajoutee avec succès";
         $this->success = true;
+
+        $generals = General::all() ;
      
-        return view('gestion_deroulement_cours.accueil');
+        return view('generality.general', compact('generals'));
     }
 
     public function findById($id)
     {
         $flight = General::findorFail($id);
-        return view('gestion_deroulement_cours.generalModule.updateGeneral', compact('flight'))->with('Success');
+        return view('generality.updateGeneral', compact('flight'))->with('Success');
     }
 
     /**
@@ -78,8 +75,9 @@ class GeneralController extends Controller
             'content_tag' => $request->contentTag,
             'status' => 1
         ]);
+        $generals = General::all() ;
 
-        return view('gestion_deroulement_cours.generalModule.formGeneral')->with('Success');
+        return view('generality.general', compact('generals'))->with('Success');
     }
 
     /**
@@ -90,7 +88,9 @@ class GeneralController extends Controller
         $flight = General::findorFail($id);
         $flight->delete();
 
-        return view('gestion_deroulement_cours.generalModule.formGeneral');
+        $generals = General::all() ;
+
+        return view('generality.general', compact('generals'));
     }
 
 }
