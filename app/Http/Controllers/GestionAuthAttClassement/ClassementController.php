@@ -31,8 +31,9 @@ class ClassementController extends Controller
     public function create()
     {
  
-         $moyenne=DB::select('SELECT * FROM Moyennes Order by moy_generale DESC');
-         return view('gestion_authClass.pages.classement', ['moyenne' => $moyenne]);
+        //  $moyenne=DB::select('SELECT * FROM Moyennes Order by moy_generale DESC')->where('filiere','GC');
+         $moyenne=Moyenne::all()->where('filiere','GC');
+         return view('gestion_authClass.pages.classement', compact('moyenne'));
  
     }
  

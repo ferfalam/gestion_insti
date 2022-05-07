@@ -67,23 +67,24 @@ class DemandeAuthController extends Controller
  
        
          $request->validate([
-             'last_name',
-             'first_name',
+             'name_d',
+             'recipient',
              'email',
              'contact',
              'entite' ,
              'status',
              'piece',
              'objet',
-             'redaction',
+             'message',
          ]);
         
         //  dd($request->last_name);
         // $path= request('piece')->store('avatars');
+        // $documentPath = $request->file('piece')->store('public/document');
  
          $details=[
-             'name_d'=>$request->last_name,
-             'genre_d'=>$request->first_name,
+             'name_d'=>$request->name_d,
+             'recipient'=>$request->recipient,
              'email'=>$request->email,
              'contact'=>$request->contact,
              'entite'=>$request->entite,
@@ -96,8 +97,8 @@ class DemandeAuthController extends Controller
  
  
          $demande = Demande::create([
-             'name_d' => $request->last_name,
-             'genre_d'=>$request->first_name,
+             'name_d' => $request->name_d,
+             'genre_d'=>$request->recipient,
              'email' => $request->email,
              'contact' => $request->contact,
              'entite' => $request->entite,
@@ -142,7 +143,6 @@ class DemandeAuthController extends Controller
       */
      public function edit($id)
      {
-         //
          $demande=Demande::find($id);
          return view('gestion_authClass.pages.updatede',compact('demande'));
  

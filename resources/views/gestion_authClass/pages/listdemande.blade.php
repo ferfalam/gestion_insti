@@ -36,7 +36,7 @@
                             <td>{{explode(' ',$demandes->created_at)[0]}}</td>
                             <td> {{explode(' ',$demandes->created_at)[1]}}</td>
                             <td>
-                                <a class="btn btn-primary btn-sm" href="{{route('gestion_authClass.edit',$demandes->id)}}">
+                                <a class="btn btn-primary btn-sm" href="{{route('gestion_authClass.edit2',$demandes->id)}}">
 <!-- {{--                                <a class="btn btn-primary btn-sm" href="{{route('demandeaff')}}">--}} -->
                                     Voir
                                 </a>
