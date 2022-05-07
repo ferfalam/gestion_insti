@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers\GestionDeroulementCours;
 
+use App\Models\Field;
+use App\Models\AcademicYear;
 use Illuminate\Http\Request;
+use App\Models\PedagogicGroup;
+use App\Models\AcademicSemester;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Models\FichesDeroulementCours;
@@ -10,6 +14,18 @@ use Illuminate\Auth\Events\Registered;
 
 class FormulaireDeroulementCoursController extends Controller
 {
+
+    // public function show(){
+
+    //     $admin = auth()->user()->user_groupId;
+    //     if($admin == 1){
+    //         $query = Plainte::all();
+    //     } else {
+    //         $query = Plainte::where('id_plaignant', auth()->user()->id)->get();
+    //     }
+
+    //     return view('gestion_conseils_plaintes.complaints_user', compact('query'));
+    // }
 
     /**
       * Create fiche de remplissage des cours
@@ -78,7 +94,13 @@ class FormulaireDeroulementCoursController extends Controller
     public function findById($id)
     {
         $flight = FichesDeroulementCours::findorFail($id);
-        return view('gestion_deroulement_cours.fiche.updateFicheDeroulementCours', compact('flight'))->with('Success'); 
+
+        $studyYears = AcademicYear::all(); 
+        $semesters = AcademicSemester::all();
+        $filieres = Field::all();
+        $ues = PedagogicGroup::all();
+
+        return view('gestion_deroulement_cours.fiche.updateFicheDeroulementCours', compact('flight','studyYears','semesters','filieres','ues'))->with('Success'); 
     }
 
     public function updateFormDeroulementCours($id, Request $request)
@@ -111,25 +133,25 @@ class FormulaireDeroulementCoursController extends Controller
     }
 
 
-    /**
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function readFicheCourseExecute ( Request $request)
-    {
-        // Get the information from the database
-        return view ('gestion_deroulement_cours.fiche.ficheDeCoursSortant');
-    }
+    // /**
+    //  *
+    //  * @return \Illuminate\Http\Response
+    //  */
+    // public function readFicheCourseExecute ( Request $request)
+    // {
+    //     // Get the information from the database
+    //     return view ('gestion_deroulement_cours.fiche.vueFicheDeCoursSortant');
+    // }
 
-    /**
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function readFicheAllCourseTeacher( Request $request)
-    {
-        // Get the information from the database
-        return view ('gestion_deroulement_cours.fiche.ficheDeCoursEnseignant');
-    }
+    // /**
+    //  *
+    //  * @return \Illuminate\Http\Response
+    //  */
+    // public function readFicheAllCourseTeacher( Request $request)
+    // {
+    //     // Get the information from the database
+    //     return view ('gestion_deroulement_cours.fiche.vueFicheDeCoursEnseignant');
+    // }
 }
 
 ?>

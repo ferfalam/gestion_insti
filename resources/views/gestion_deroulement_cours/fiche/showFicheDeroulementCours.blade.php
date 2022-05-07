@@ -9,6 +9,11 @@
             margin : 2%;
             padding : 1%;
         }
+
+        .row a {
+            color: white;
+            text-decoration: none;
+        }
        
         </style>
 @endsection
@@ -34,8 +39,8 @@
                     <div class="row">
                         <ul>
                             <li>  {!! $one_fiche->surname !!} - {!! $one_fiche->name!!} </li> 
-                            <a href="{{ route('gestion_deroulement_cours.deleteFiche', ['id'=>$one_fiche->id]) }}"> Supprimer </a>
-                            <a href="{{ route('gestion_deroulement_cours.ficheById', ['id'=>$one_fiche->id]) }}"> Mettre à jour </a>
+                            <button class="btn btn-primary"> <a href="{{ route('gestion_deroulement_cours.ficheById', ['id'=>$one_fiche->id]) }}"> Mettre à jour </a> </button>
+                            <button class="btn btn-danger"> <a href="{{ route('gestion_deroulement_cours.deleteFiche', ['id'=>$one_fiche->id]) }}"> Supprimer </a> </button>
                         </ul>
                     </div>
                 @endforeach

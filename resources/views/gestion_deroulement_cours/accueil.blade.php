@@ -44,21 +44,12 @@
                                 <li> <a href="{{ route('gestion_deroulement_cours.formulaire_Deroulement_Cours') }}"> Créer une Fiche du déroulement des Cours</a> </li>
 
                                 <li> <a href="{{ route('gestion_deroulement_cours.showFiche') }}"> Fiche du déroulement de cours Disponible </a> </li>
+
+                                <li> <a href="{{ route('gestion_deroulement_cours.showFicheUes') }}"> Retirer Fiche Etudiant pour une UE </a> </li>
                                 
-                                <li> <a href="{{ route('gestion_deroulement_cours.retraitFicheEtudiant') }}"> Retirer Fiche Etudiant pour une UE  </a> </li>
+                                <li> <a href="{{ route('gestion_deroulement_cours.showFicheEnseignants') }}"> Retirer Fiche Enseignant Global  </a> </li>
 
-<<<<<<< HEAD
-                                <li> <a href="{{ route('gestion_deroulement_cours.RetraitFicheEnseignantGlobal') }}"> Retirer Fiche Enseignant Global </a> </li>
-                
-                                <li> <a href="{{ route('gestion_deroulement_cours.newGroup') }}"> Integrer un nouveau Groupe Pedagogique  </a> </li>
-
-                                <li> <a href="{{ route('gestion_deroulement_cours.newField') }}"> Integrer une nouvelle Filiere </a> </li>
-
-                                <li> <a href="{{ route('gestion_deroulement_cours.newGenerals') }}"> Integrer un Module de type General </a> </li>
-=======
-                                <li> <a href="{{ route('gestion_deroulement_cours.RetraitFicheEnseignantGlobal') }}"> Retirer fiche Enseignant Global </a> </li>
->>>>>>> generalityClone
-
+                                {{-- <li> <a href="{{ route('gestion_deroulement_cours.RetraitFicheEnseignantGlobal') }}"> Retirer fiche Enseignant Global </a> </li> --}}
 
                             </ul>
 

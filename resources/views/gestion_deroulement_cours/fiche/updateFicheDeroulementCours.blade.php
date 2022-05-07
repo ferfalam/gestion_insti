@@ -56,8 +56,8 @@
                             <label style="font-weight: normal;"> Année d'Etude </label>
                             <select required="" class="form-control" name="yearstudy">
                                 <optgroup label="Année_Etude">
-                                    @foreach(DB::table("academic_years")->get() as $annee_etude)
-                                        <option value='{{ $annee_etude->id }}' selected=''> {{ $annee_etude->name }} </option>
+                                    @foreach($studyYears as $annee)
+                                        <option value="{{$annee->id}}" >{{$annee->name}} </option>
                                     @endforeach
                                 </optgroup>
                             </select>

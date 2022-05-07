@@ -33,7 +33,7 @@
                 <div class = "description">
                     
                     <div class = "form-enseignant"> 
-                        <p> <strong> Enseignant : </strong> </p>
+                        <p> <strong> Enseignant : {{ $flight->nomEnseignant }} </strong> </p>
                     </div>
                     
                     <div class = "form-annee"> 
@@ -87,12 +87,6 @@
 
                     <strong> Signature <sub> Chef Departement </sub> : </strong>
                    
-                    </br></br>
-
-                    <a href="{{ route('gestion_deroulement_cours.downloadFicheEnseignant') }}" style="float : right" >
-                        <button type="button" class="btn btn-primary"> Importer sous PDF </button>
-                    </a>
-                    </br>
                 </div>
             </form>
 
