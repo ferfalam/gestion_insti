@@ -2,6 +2,11 @@
 
 @section('style')
 	<link rel="stylesheet" type="text/css" href="{{asset('css/main.css')}}">
+    <style>
+        a {
+            text-decoration: none
+        }
+    </style>
 @endsection
 @section('main')
     <div id="overviews" class="section lb">
@@ -145,5 +150,5 @@
 @endsection
 
 @section('script')
-    <script src="{{asset('js/main.js')}}"></script>
+    {{-- <script src="{{asset('js/main.js')}}"></script> --}}
 @endsection

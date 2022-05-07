@@ -1,6 +1,7 @@
 <?php
 
-namespace App\Http\Controllers\GestionDeroulementCours;
+namespace App\Http\Controllers;
+
 
 use Svg\Tag\Group;
 use Illuminate\Http\Request;
@@ -11,20 +12,11 @@ use Illuminate\Auth\Events\Registered;
 class PedagogicGroupController extends Controller {
 
     
-    public function createGroupPedagogique(Request $request)
-    {
-        return view ('gestion_deroulement_cours.groupPedagogiqueModule.formItemGroupPedagogique');
-    }
-
-    /**
-     * For to read all Groups created.
-     * @return \Illuminate\Http\Response
-     */
-    public function showGroupPedagogique( Request $request)
+    public function index(Request $request)
     {
         $groupPedagogique = PedagogicGroup::all() ;
 
-        return view ('gestion_deroulement_cours.groupPedagogiqueModule.showGroupPedagogique', compact('groupPedagogique'));
+        return view ('generality.groupePedagogique', compact('groupPedagogique'));
     }
 
     /**
@@ -56,14 +48,16 @@ class PedagogicGroupController extends Controller {
         event(new Registered($groupPedag));
         $this->message = "Nouveau Groupe pedagogique ajouté avec succès";
         $this->success = true;
+
+        $groupPedagogique = PedagogicGroup::all() ;
   
-        return view('gestion_deroulement_cours.accueil');
+        return view('generality.groupePedagogique', compact('groupPedagogique'));
     }
 
     public function findById($id)
     {
         $flight = PedagogicGroup::findorFail($id);
-        return view('gestion_deroulement_cours.groupPedagogiqueModule.updateGroupPedagogique', compact('flight'))->with('Success'); 
+        return view('generality.updateGroupePedagogique', compact('flight'))->with('Success'); 
     }
 
     public function updateGroupPedagogique($id, Request $request)
@@ -77,7 +71,9 @@ class PedagogicGroupController extends Controller {
                 'studyYearId' => $request->anneeStudy,
         ]);
 
-        return view('gestion_deroulement_cours.groupPedagogiqueModule.formItemGroupPedagogique')->with('Success');
+        $groupPedagogique = PedagogicGroup::all() ;
+
+        return view('generality.groupePedagogique', compact('groupPedagogique'))->with('Success');
     
     }
 
@@ -86,7 +82,10 @@ class PedagogicGroupController extends Controller {
         $flight = PedagogicGroup::findorFail($id);
         $flight->delete();
 
-        return view('gestion_deroulement_cours.groupPedagogiqueModule.formItemGroupPedagogique');
+        $groupPedagogique = PedagogicGroup::all() ;
+
+
+        return view('generality.groupePedagogique', compact('groupPedagogique'));
     }
 
 }

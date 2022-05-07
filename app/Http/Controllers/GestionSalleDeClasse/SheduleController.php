@@ -24,7 +24,7 @@ class SheduleController extends Controller
      */
     public function create()
     {
-        //
+        return view('gestion_salles.shedule.create');
     }
 
     /**
