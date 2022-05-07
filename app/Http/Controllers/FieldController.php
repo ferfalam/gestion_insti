@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\GestionDeroulementCours;
+namespace App\Http\Controllers;
 
 use Svg\Tag\Group;
 use App\Models\Field;
@@ -8,33 +8,15 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Auth\Events\Registered;
 
-
-// use App\Models\General;
-// use App\Models\AcademicYear;
-// use App\Models\PedagogicGroup;
-// use Illuminate\Validation\Rule;
-// use Illuminate\Support\Facades\DB;
-
 class FieldController extends Controller
 {
-  
-    /**
-     *  For to read all Fields created.
-     * @return \Illuminate\Http\Response
-     */
-    public function createFiliere( Request $request)
-    {
-        return view ('gestion_deroulement_cours.filiereModule.formItemFiliere');
-    }
-
-    public function showFiliere()
+    public function index()
     {
         $filieres = Field::all() ;
 
-        return view('gestion_deroulement_cours.filiereModule.showItemFiliere', compact('filieres'));
+        return view('generality.index', compact('filieres'));
     }
 
-    
     /**
      * Create Validate and Save the field
      * @param  \Illuminate\Http\Request  $request
@@ -62,14 +44,16 @@ class FieldController extends Controller
         event(new Registered($field));
         $this->message = "Nouvelle Filiere ajoutee avec succès";
         $this->success = true;
+
+        $filieres = Field::all() ;
      
-        return view('gestion_deroulement_cours.accueil');
+        return view('generality.index', compact('filieres'));
     }
 
     public function findById($id)
     {
         $flight = Field::findorFail($id);
-        return view('gestion_deroulement_cours.filiereModule.updateFiliere', compact('flight'))->with('Success');
+        return view('generality.updateField', compact('flight'))->with('Success');
     }
 
     /**
@@ -77,8 +61,8 @@ class FieldController extends Controller
      */
     public function updateField ($id, Request $request)
     {       
-        $flight = Field::findorFail($id);
-        $flight-> update([
+        $filieres = Field::findorFail($id);
+        $filieres-> update([
             'name' => $request->appelation,
             'systemName' => $request->nameSys,
             'abbreviation' => $request->abreviation,
@@ -86,7 +70,9 @@ class FieldController extends Controller
             'offer' => 'Filiere'
         ]);
 
-        return view('gestion_deroulement_cours.filiereModule.formItemFiliere')->with('Success');
+        $filieres = Field::all() ;
+
+        return view('generality.index', compact('$filieres'))->with('Success');
     }
 
     /**
@@ -94,10 +80,12 @@ class FieldController extends Controller
      */
     public function deleteField ($id)
     {
-        $flight = Field::findorFail($id);
-        $flight->delete();
+        $filiere = Field::findorFail($id);
+        $filiere->delete();
 
-        return view('gestion_deroulement_cours.filiereModule.formItemFiliere');
+        $filieres = Field::all() ;
+
+        return view('generality.index', compact('filieres'));
     }
 
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\GestionDeroulementCours;
+namespace App\Http\Controllers;
 
 use App\Models\Ue;
 use Illuminate\Http\Request;
@@ -15,20 +15,11 @@ class UesController extends Controller
      * For to read all Ues created.
      * @return \Illuminate\Http\Response
      */
-    public function createUe()
-    {
-        return view ('gestion_deroulement_cours.ueModule.formItemUe');
-    }
-
-    /**
-     * For to read all Groups created.
-     * @return \Illuminate\Http\Response
-     */
-    public function showUe( Request $request)
+    public function index()
     {
         $ues = Ue::all() ;
 
-        return view ('gestion_deroulement_cours.ueModule.showUe', compact('ues'));
+        return view ('generality.uEModule', compact('ues'));
     }
 
     /**
@@ -62,14 +53,16 @@ class UesController extends Controller
         event(new Registered($ue));
         $this->message = "Nouvelle UE ajoutée avec succès";
         $this->success = true;
+
+        $ues = Ue::all() ;
   
-        return view('gestion_deroulement_cours.accueil');
+        return view('generality.uEModule', compact('ues'));
     }
 
     public function findById($id)
     {
         $flight = Ue::findorFail($id);
-        return view('gestion_deroulement_cours.ueModule.updateUe', compact('flight'))->with('Success'); 
+        return view('generality.updateUeModule', compact('flight'))->with('Success'); 
     }
 
     public function updateUe($id, Request $request)
@@ -85,7 +78,9 @@ class UesController extends Controller
             'generalId' => $request->generalId,
         ]);
 
-        return view('gestion_deroulement_cours.ueModule.formItemUe')->with('Success');
+        $ues = Ue::all() ;
+
+        return view('generality.uEModule', compact('ues'))->with('Success');
     
     }
 
@@ -94,7 +89,9 @@ class UesController extends Controller
         $flight = Ue::findorFail($id);
         $flight->delete();
 
-        return view('gestion_deroulement_cours.ueModule.formItemUe');
+        $ues = Ue::all() ;
+
+        return view('generality.uEModule', compact('ues'));
     }
     
 

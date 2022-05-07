@@ -1391,7 +1391,11 @@
                 "reference": "dffcec0cb686eafaa3b8f33db11da2cd9d69af1c",
 =======
             "version": "v8.83.10",
+<<<<<<< HEAD
 >>>>>>> gesAuthClas
+=======
+>>>>>>> 490de532d07c5d9ad9fd05f9d27020c4cf514169
+>>>>>>> feat/generality
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
@@ -1410,7 +1414,11 @@
                 "url": "https://api.github.com/repos/laravel/framework/zipball/cf430301ad17656b3d918995bcdd0454c3c119b9",
                 "reference": "cf430301ad17656b3d918995bcdd0454c3c119b9",
 >>>>>>> 99e07aa (start with generality setting)
+<<<<<<< HEAD
 >>>>>>> gesAuthClas
+=======
+>>>>>>> 490de532d07c5d9ad9fd05f9d27020c4cf514169
+>>>>>>> feat/generality
                 "shasum": ""
             },
             "require": {
@@ -1595,7 +1603,11 @@
                 "reference": "5be160413b6f37dcf8758663edeab12d0e806f56",
 =======
             "time": "2022-04-27T14:07:37+00:00"
+<<<<<<< HEAD
 >>>>>>> gesAuthClas
+=======
+>>>>>>> 490de532d07c5d9ad9fd05f9d27020c4cf514169
+>>>>>>> feat/generality
         },
         {
             "name": "laravel/sanctum",
@@ -1616,7 +1628,11 @@
                 "url": "https://api.github.com/repos/laravel/sanctum/zipball/31fbe6f85aee080c4dc2f9b03dc6dd5d0ee72473",
                 "reference": "31fbe6f85aee080c4dc2f9b03dc6dd5d0ee72473",
 >>>>>>> 99e07aa (start with generality setting)
+<<<<<<< HEAD
 >>>>>>> gesAuthClas
+=======
+>>>>>>> 490de532d07c5d9ad9fd05f9d27020c4cf514169
+>>>>>>> feat/generality
                 "shasum": ""
             },
             "require": {
@@ -1680,7 +1696,11 @@
 =======
             "time": "2022-04-08T13:39:49+00:00"
 >>>>>>> 99e07aa (start with generality setting)
+<<<<<<< HEAD
 >>>>>>> gesAuthClas
+=======
+>>>>>>> 490de532d07c5d9ad9fd05f9d27020c4cf514169
+>>>>>>> feat/generality
         },
         {
             "name": "laravel/serializable-closure",
@@ -2588,7 +2608,11 @@
 <<<<<<< HEAD
             "time": "2022-03-14T12:44:37+00:00"
 =======
+<<<<<<< HEAD
 >>>>>>> gesAuthClas
+=======
+>>>>>>> 490de532d07c5d9ad9fd05f9d27020c4cf514169
+>>>>>>> feat/generality
             "time": "2022-04-08T15:43:54+00:00"
         },
         {
@@ -2657,7 +2681,11 @@
 =======
             "time": "2022-04-08T15:43:54+00:00"
 >>>>>>> 99e07aa (start with generality setting)
+<<<<<<< HEAD
 >>>>>>> gesAuthClas
+=======
+>>>>>>> 490de532d07c5d9ad9fd05f9d27020c4cf514169
+>>>>>>> feat/generality
         },
         {
             "name": "myclabs/php-enum",
@@ -6606,7 +6634,11 @@
 =======
 <<<<<<< HEAD
             "version": "v5.4.8",
+<<<<<<< HEAD
 >>>>>>> gesAuthClas
+=======
+>>>>>>> 490de532d07c5d9ad9fd05f9d27020c4cf514169
+>>>>>>> feat/generality
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/translation.git",
@@ -6632,7 +6664,11 @@
                 "url": "https://api.github.com/repos/symfony/translation/zipball/e1eb790575202ee3ac2659f55b93b05853726f8e",
                 "reference": "e1eb790575202ee3ac2659f55b93b05853726f8e",
 >>>>>>> 99e07aa (start with generality setting)
+<<<<<<< HEAD
 >>>>>>> gesAuthClas
+=======
+>>>>>>> 490de532d07c5d9ad9fd05f9d27020c4cf514169
+>>>>>>> feat/generality
                 "shasum": ""
             },
             "require": {
@@ -6706,7 +6742,11 @@
 =======
                 "source": "https://github.com/symfony/translation/tree/v5.4.7"
 >>>>>>> 99e07aa (start with generality setting)
+<<<<<<< HEAD
 >>>>>>> gesAuthClas
+=======
+>>>>>>> 490de532d07c5d9ad9fd05f9d27020c4cf514169
+>>>>>>> feat/generality
             },
             "funding": [
                 {
@@ -6730,7 +6770,11 @@
 =======
             "time": "2022-03-24T17:09:09+00:00"
 >>>>>>> 99e07aa (start with generality setting)
+<<<<<<< HEAD
 >>>>>>> gesAuthClas
+=======
+>>>>>>> 490de532d07c5d9ad9fd05f9d27020c4cf514169
+>>>>>>> feat/generality
         },
         {
             "name": "symfony/translation-contracts",
@@ -7729,7 +7773,11 @@
                 "reference": "b00f1b64afff9c16355d23bb1e0f83a7ea9bbb7e",
 =======
             "version": "v1.14.0",
+<<<<<<< HEAD
 >>>>>>> gesAuthClas
+=======
+>>>>>>> 490de532d07c5d9ad9fd05f9d27020c4cf514169
+>>>>>>> feat/generality
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/sail.git",
@@ -7748,7 +7796,11 @@
                 "url": "https://api.github.com/repos/laravel/sail/zipball/7bb294fe99fc42c3b1bee83fb667cd7698b3c385",
                 "reference": "7bb294fe99fc42c3b1bee83fb667cd7698b3c385",
 >>>>>>> 99e07aa (start with generality setting)
+<<<<<<< HEAD
 >>>>>>> gesAuthClas
+=======
+>>>>>>> 490de532d07c5d9ad9fd05f9d27020c4cf514169
+>>>>>>> feat/generality
                 "shasum": ""
             },
             "require": {
@@ -7807,7 +7859,11 @@
 =======
             "time": "2022-04-04T15:21:51+00:00"
 >>>>>>> 99e07aa (start with generality setting)
+<<<<<<< HEAD
 >>>>>>> gesAuthClas
+=======
+>>>>>>> 490de532d07c5d9ad9fd05f9d27020c4cf514169
+>>>>>>> feat/generality
         },
         {
             "name": "mockery/mockery",
@@ -9811,6 +9867,14 @@
     },
     "platform-dev": [],
 <<<<<<< HEAD
+=======
+<<<<<<< HEAD
+
+    "plugin-api-version": "2.3.0"
+
+=======
+>>>>>>> feat/generality
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -9831,10 +9895,14 @@
 =======
     "plugin-api-version": "2.3.0"
 >>>>>>> 99e07aa (start with generality setting)
+<<<<<<< HEAD
 >>>>>>> gesAuthClas
 =======
 
     "plugin-api-version": "2.3.0"
 
 >>>>>>> gestion_conseil_pedagogique_branch
+=======
+>>>>>>> 490de532d07c5d9ad9fd05f9d27020c4cf514169
+>>>>>>> feat/generality
 }
