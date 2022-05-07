@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\User;
+use App\Models\UserGroup;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
@@ -27,9 +28,9 @@ class AuthServiceProvider extends ServiceProvider
         $this->registerPolicies();
 
         Gate::define("yesadmin",function(User $user){
-            
-      
-            return $user->usergroup_id!=5;
+            $group = UserGroup::find($user->user_groupId);
+            $allow_tab=["admin","personnel","superadmin"];
+            return in_array($group->name,$allow_tab) ;
         });
     }
 }

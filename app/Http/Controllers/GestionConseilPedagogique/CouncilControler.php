@@ -203,13 +203,14 @@ class councilControler extends Controller
                 profiles.com_registrationNumber as regist_num,
                 services.name as services_name,
                 user_groups.name as user_groups_name
-                FROM invitations ,user_groups ,profiles ,
+                FROM invitations ,user_groups ,profiles ,users,
                     user_user_group__position__service__maps  maps,
                     positions,services
                 WHERE invitations.conseil_id=:id 
-                AND invitations.participant_id=profiles.userId
+                AND invitations.participant_id=users.id
+                AND invitations.participant_id=profiles.user_id
                 AND invitations.participant_id=maps.userId
-                AND maps.userGroupId=user_groups.id
+                AND users.user_groupId=user_groups.id
                 AND maps.serviceId=services.id
                 AND maps.positionId=positions.id',
             array("id" => $conseil->id,)
@@ -243,10 +244,11 @@ class councilControler extends Controller
 
         $fichier = "invite" . time() . ".pdf";
         $profile = Profil::where("com_registrationNumber", $request->num_mat)->first();
+        
         if($profile==null) return redirect()->route("gestion_conseil_pedagogique.guests");
         $conseil = Conseil::where("user_id", Auth::id())->where("statut", null)->first();
         $guest = new Invitation();
-        $guest->participant_id = $profile->userId;
+        $guest->participant_id = $profile->user_id;
         $guest->conseil_id = $conseil->id;
         $guest->fichier = $request->fichier->storeAs("document", $fichier, "public");
         $guest->save();
@@ -273,24 +275,17 @@ class councilControler extends Controller
 
     function councilObject(){
         $guests = DB::select(
-            "SELECT DISTINCT profiles.id,
+            "SELECT DISTINCT 
                 
-                profiles.com_fullname as fullname,
-                profiles.com_givenName as firstname,
-                profiles.com_registrationNumber as regist_num,
-                services.name as services_name,
-                user_groups.name as user_groups_name,
                 fields.abbreviation as field_name
                 
-                FROM user_groups ,profiles ,
+                FROM profiles ,
                     user_user_group__position__service__maps  maps,
-                    positions,services,fields
+                    services,fields
                 WHERE maps.userId=:id 
-                AND maps.userId=profiles.userId
+                AND maps.userId=profiles.user_id
                 AND profiles.app_fieldId= fields.id
-                AND maps.userGroupId=user_groups.id
                 AND maps.serviceId=services.id
-                AND maps.positionId=positions.id
                 AND services.name ='departement'",
             array("id" =>Auth::id(),));
          
