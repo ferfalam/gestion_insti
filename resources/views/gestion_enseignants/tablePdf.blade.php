@@ -20,7 +20,7 @@
 </style>
 <body>
     <h1></h1>
-    @if (Auth::user()->email=='admin@insti.com')
+    @if (Auth::user()->user_group->name=="admin")
         <div class="card-body text-center shadow">
             <div class="table-responsive table mt-2" id="dataTableAdmin" role="grid" aria-describedby="dataTable_info">
                 <table class="table dataTable my-0" id="dataTable">
@@ -45,7 +45,7 @@
                                 @foreach ($profileTrait as $profile)
                                 @php
                                     $rowspan=0;
-                                    $sqlTable= "select * from tableau_enseignants where nom_enseignant ='"."".$profile->nom." ".$profile->prenom."'";
+                                    $sqlTable= "select * from enseignants where nomEnseignant ='"."".$profile->com_givenName." ".$profile->com_fullname."'";
                                     $table=DB::select($sqlTable);
                                     $table2=DB::select($sqlTable);
                                     foreach ($table2 as $table) {
@@ -53,14 +53,14 @@
                                     }
                                 @endphp
                                 @if ($table!=null)
-                                    <td class="text-center" rowspan="{{$rowspan}}">{{$profile->prenom}} {{$profile->nom}}</td>
+                                    <td class="text-center" rowspan="{{$rowspan}}">{{$profile->com_fullname}} {{$profile->com_givenName}}</td>
                                     @php
-                                        $sqlTable= "select * from tableau_enseignants where nom_enseignant ='"."".$profile->nom." ".$profile->prenom."'";
+                                        $sqlTable= "select * from enseignants where nomEnseignant ='"."".$profile->com_givenName." ".$profile->com_fullname."'";
                                         $table=DB::select($sqlTable);
                                         foreach ($table as $table) {
                                             echo '
                                             <tr>
-                                            <td class="text-center" >'.$table->nom_ue.'</td>
+                                            <td class="text-center" >'.$table->nomUe.'</td>
                                             <td class="text-center" id="credit">'.$table->credit.'</td>
                                             <td id="ct">'.$table->ct.'</td>
                                             <td id="td">'.$table->td.'</td>
@@ -77,7 +77,7 @@
                             @else
                                 @php
                                     $rowspan=0;
-                                    $sqlTable= "select * from tableau_enseignants where nom_enseignant ='"."".request('selectNom')."'";
+                                    $sqlTable= "select * from enseignants where nomEnseignant ='"."".request('selectNom')."'";
                                     $table=DB::select($sqlTable);
                                     $table2=DB::select($sqlTable);
                                     foreach ($table2 as $table) {
@@ -87,12 +87,12 @@
                                 @if ($table!=null)
                                     <td class="text-center" rowspan="{{$rowspan}}">{{request('selectNom')}}</td>
                                     @php
-                                        $sqlTable= "select * from tableau_enseignants where nom_enseignant ='".request('selectNom')."'";
+                                        $sqlTable= "select * from enseignants where nomEnseignant ='".request('selectNom')."'";
                                         $table=DB::select($sqlTable);
                                         foreach ($table as $table) {
                                             echo '
                                             <tr>
-                                            <td class="text-center" >'.$table->nom_ue.'</td>
+                                            <td class="text-center" >'.$table->nomUe.'</td>
                                             <td class="text-center" id="credit">'.$table->credit.'</td>
                                             <td id="ct">'.$table->ct.'</td>
                                             <td id="td">'.$table->td.'</td>
@@ -135,7 +135,7 @@
                             @isset($table)
                             @foreach ($table as $table)
                             <tr>
-                                <td style=" border :1px solid ; padding: 6px ;" class="text-center" align="center" >{{$table->nom_ue}}</td>
+                                <td style=" border :1px solid ; padding: 6px ;" class="text-center" align="center" >{{$table->nomUe}}</td>
                                 <td style=" border :1px solid ; padding: 6px ;" class="text-center" align="center" >{{$table->credit}}</td>
                                 <td style=" border :1px solid ; padding: 6px ;" class="text-center" align="center" >{{$table->ct}}</td>
                                 <td style=" border :1px solid ; padding: 6px ;" class="text-center" align="center" >{{$table->td}}</td>
@@ -167,7 +167,6 @@
                                     <td style=" border :1px solid ; padding: 6px ;" class="text-center" align="center" >{{ $mp."h" }}
                                     </td>
                                     <td style=" border :1px solid ; padding: 6px ;" class="text-center" align="center" >{{ $dif."h" }}</td>
-
                                     @endisset
                                 </tr>
                             </tfoot>
