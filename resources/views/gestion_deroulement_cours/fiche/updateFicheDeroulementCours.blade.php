@@ -1,6 +1,6 @@
 @extends('gestion_deroulement_cours.layout')
 
-@section('title') Déroulement_du_cours @endsection
+@section('title') Fiche À Mettre À Jour @endsection
 
 @section('style_for_file_point')
     <style>
@@ -28,23 +28,23 @@
 
 @section('main')
 
-
+    
         <div class="d-flex flex-column" id="content-wrapper">
+            
 
-
-            <form data-bs-hover-animate="pulse" method="post" action="{{ route('gestion_deroulement_cours.saveFiche') }}" novalidate>
+            <form data-bs-hover-animate="pulse" method="post" action="{{ route('gestion_deroulement_cours.updateFiche', ['id'=> $flight->id]) }}" novalidate>
                 {{ csrf_field() }}
-
-                <h2 class="text-center" data-aos="fade-down" data-aos-duration="600" data-aos-delay="400" style="font-size: 29px;"><strong> Fiche de Déroulement des Cours </strong></h2>
+                
+                <h2 class="text-center" data-aos="fade-down" data-aos-duration="600" data-aos-delay="400" style="font-size: 29px;"><strong>  Mettre À Jour Fiche de Déroulement des Cours </strong></h2>
 
                 <div class="form-group">
                     <div class="form-row">
                         <div class="col">
-                            <input class="form-control" type="text" data-aos="fade-right" data-aos-duration="700" data-aos-delay="600" name="surname" placeholder="Nom" required="">
+                            <input class="form-control" type="text" data-aos="fade-right" data-aos-duration="700" data-aos-delay="600" name="surname" placeholder="{{ $flight->surname}}" required="">
                             {!! $errors->first('surname', '<span class="error"> :message </span>') !!}
                         </div>
                         <div class="col">
-                            <input class="form-control" type="text" data-aos="fade-left" data-aos-duration="700" data-aos-delay="600" name="name" placeholder="Prenoms" required="">
+                            <input class="form-control" type="text" data-aos="fade-left" data-aos-duration="700" data-aos-delay="600" name="name" placeholder="{{ $flight->name }}" required="">
                             {!! $errors->first('name', '<span class="error"> :message </span>') !!}
                         </div>
                     </div>
@@ -56,18 +56,18 @@
                             <label style="font-weight: normal;"> Année d'Etude </label>
                             <select required="" class="form-control" name="yearstudy">
                                 <optgroup label="Année_Etude">
-                                    @foreach(DB::table("academic_years")->get() as $annee_etude)
-                                        <option value='{{$annee_etude->id}}' selected=''> {{ $annee_etude->name }} </option>
+                                    @foreach($studyYears as $annee)
+                                        <option value="{{$annee->id}}" >{{$annee->name}} </option>
                                     @endforeach
                                 </optgroup>
                             </select>
-                            {!! $errors->first('yearstudy', '<span class="error"> :message </span>') !!}
+                            {!! $errors->first('yearstudy', '<span class="error"> :message </span>') !!}   
                         </div>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <div class="form-row">
+                    <div class="form-row">   
 
                         <div class="col" data-aos="fade-right" data-aos-duration="700" data-aos-delay="600">
                             <label style="font-weight: normal;"> Filière </label>
@@ -113,7 +113,7 @@
                     <div class="form-row">
                         <div class="col">
                             <label style="font-weight: normal;"> Date de déroulement </label>
-                            <input class="form-control" type="date" data-aos="fade-right" data-aos-duration="700" data-aos-delay="600" name="date" required="">
+                            <input class="form-control" type="date" data-aos="fade-right" data-aos-duration="700" data-aos-delay="600" name="date" placeholder="{{ $flight->dateDeroulement }}" required="">
                             {!! $errors->first('date', '<span class="error"> :message </span>') !!}
                         </div>
                     </div>
@@ -124,10 +124,10 @@
                         <div class="col"><label style="font-weight: normal;"> Temps de déroulement </label> </div>
                         <div class="col">
                         De
-                            <input class="form-control" type="time" data-aos="fade-right" data-aos-duration="700" data-aos-delay="600" name="starttime" placeholder="De" required=""> <br>
+                            <input class="form-control" type="time" data-aos="fade-right" data-aos-duration="700" data-aos-delay="600" name="starttime" placeholder="{{ $flight->startTimeCours }}" required=""> <br>
                             {!! $errors->first('starttime', '<span class="error"> :message </span>') !!}
-                        A
-                            <input class="form-control" type="time" data-aos="fade-right" data-aos-duration="700" data-aos-delay="600" name="endtime" placeholder="A" required="">
+                        A 
+                            <input class="form-control" type="time" data-aos="fade-right" data-aos-duration="700" data-aos-delay="600" name="endtime" placeholder="{{ $flight->endTimeCours }}" required=""> 
                             {!! $errors->first('endtime', '<span class="error"> :message </span>') !!}
                         </div>
                     </div>
@@ -152,7 +152,7 @@
                 <div class="form-group">
                     <div class="form-row">
                         <div class="col"><label style="font-weight: normal;"> Observation </label>
-                            <input class="form-control" type="text-area" data-aos="fade-right" data-aos-duration="700" data-aos-delay="600" name="observation" required="">
+                            <input class="form-control" type="text-area" data-aos="fade-right" data-aos-duration="700" data-aos-delay="600" name="observation" placeholder="{{ $flight->observation }}" required="">
                             {!! $errors->first('observation', '<span class="error"> :message </span>') !!}
                         </div>
                         </div>
@@ -160,7 +160,7 @@
 
                 <div class="form-group">
                     <a style="float : right">
-                        <input name="bouton" class="btn btn-primary btn-block" data-aos="fade-up" data-aos-duration="750" data-aos-delay="600" type="submit" style="font-weight: bold;" value="Envoyer">
+                        <input name="bouton" class="btn btn-primary btn-block" data-aos="fade-up" data-aos-duration="750" data-aos-delay="600" type="submit" style="font-weight: bold;" value="Valider">   
                     </a>
                 </div>
 
@@ -168,7 +168,7 @@
 
             <br>
             <li class="retourAccueil" >  <a href="{{ route('gestion_deroulement_cours.accueil') }}"> Annuler </a></li>
-
+       
         </div>
 
 @endsection

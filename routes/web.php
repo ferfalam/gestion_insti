@@ -266,17 +266,25 @@ Route::group(["prefix"=>"gestion_deroulement_cours", "as"=>"gestion_deroulement_
 {
 
     Route::get('/', "GestionDeroulementCours\HomeController@index")->name('accueil');
+    
+    // Form Deroulement Cours
+    Route::get('/formDeroulementCours', 'GestionDeroulementCours\FormulaireDeroulementCoursController@createFormDeroulementCours')->name('formulaire_Deroulement_Cours');
+    Route::get('/formDeroulementCoursEnregistres', 'GestionDeroulementCours\FormulaireDeroulementCoursController@showFormDeroulementCours')->name('showFiche');
+    Route::post('/newformDeroulementCours', 'GestionDeroulementCours\FormulaireDeroulementCoursController@storeFormDeroulementCours')->name('saveFiche');
+    Route::get('/formDeroulementCoursSupprime/{id}', 'GestionDeroulementCours\FormulaireDeroulementCoursController@deleteFormDeroulementCours')->name('deleteFiche');
+    Route::get('/formDeroulementCours/{id}', 'GestionDeroulementCours\FormulaireDeroulementCoursController@findById')->name('ficheById');
+    Route::post('/MettreAJourformDeroulementCours/{id}', 'GestionDeroulementCours\FormulaireDeroulementCoursController@updateFormDeroulementCours')->name('updateFiche');
 
-    Route::get('/formCours', 'GestionDeroulementCours\FormulaireDeroulementCoursController@readItemsModule')->name('formulaire_Deroulement_Cours');
-    Route::post('/formCours', 'GestionDeroulementCours\FormulaireDeroulementCoursController@store')->name('saveFicheEtudiant');
-    Route::put('/formCours', 'GestionDeroulementCours\FormulaireDeroulementCoursController@update')->name('updateFicheEtudiant');
+    Route::get('/formDeroulementCoursEnregistresParUes', 'GestionDeroulementCours\FicheDeroulementCoursUeController@showFormDeroulementCoursByUes')->name('showFicheUes');
+    Route::get('/formDeroulementCoursEnregistresParUe/{id}', 'GestionDeroulementCours\FicheDeroulementCoursUeController@showFormDeroulementCoursByUe')->name('showFicheUe');
 
-    Route::get('/ficheDeCoursSortant', 'GestionDeroulementCours\FormulaireDeroulementCoursController@readFicheCourseExecute')->name('retraitFicheEtudiant');
-    Route::get('/ficheDeCoursEnseignant', 'GestionDeroulementCours\FormulaireDeroulementCoursController@readFicheAllCourseTeacher')->name('RetraitFicheEnseignantGlobal');
+    
+    Route::get('/formDeroulementCoursEnseignants', 'GestionDeroulementCours\FicheDeroulementCoursUeController@showFormDeroulementCoursByEnseignants')->name('showFicheEnseignants');
+    Route::get('/formDeroulementCoursEnseignant/{id}', 'GestionDeroulementCours\FicheDeroulementCoursUeController@showFormDeroulementCoursByEnseignant')->name('showFicheEnseignant');
 
     // Download
-    Route::get('/ficheDeCoursSortant/pdf', 'GestionDeroulementCours\DownloadFicheController@pdfSave')->name('downloadFiche');
-    Route::get('/ficheDeCoursEnseignant/pdf', 'GestionDeroulementCours\DownloadFicheController@pdfSaveEnseignant')->name('downloadFicheEnseignant');
+    Route::get('/ficheDeCoursSortant/pdf/{id}', 'GestionDeroulementCours\DownloadFicheController@telechargerFicheStudentCours')->name('downloadFiche');
+    Route::get('/ficheDeCoursEnseignant/pdf/{id}', 'GestionDeroulementCours\DownloadFicheController@telechargerFicheEnseignant')->name('downloadFicheEnseignant');
 
 });
 
@@ -323,14 +331,13 @@ Route::group(["prefix"=>"gestion_conseils_plaintes", "as"=>"gestion_conseils_pla
     Route::get('/conseils', 'GestionConseilsPlaintes\ConseilController@show')->name('liste_conseils');
     Route::get('/rapports', 'GestionConseilsPlaintes\RapportController@show')->name('liste_rapports');
 
-    Route::post('/telecharger/rapport{id}', 'GestionConseilsPlaintes\RapportController@downloadRapport')->name('telecharger_rapport');
-
     Route::post('/rejet/{id}', 'GestionConseilsPlaintes\PlainteController@reject')->name('rejet_plainte');
     Route::post('/valider_conseil/{id}', 'GestionConseilsPlaintes\ConseilController@tenu')->name('tenu');
 
     Route::post('/send_convocations/{id}', 'GestionConseilsPlaintes\ConvocationController@sendConvocations')->name('envoi_convocation');
     Route::post('/send_invitations/{id}', 'GestionConseilsPlaintes\ConvocationController@sendInvitations')->name('envoi_invitation');
 
+    Route::post('/telecharger/rapport{id}', 'GestionConseilsPlaintes\RapportController@downloadRapport')->name('telecharger_rapport');
     Route::post('/telechargement/plainte/{id}', 'GestionConseilsPlaintes\PDFController@telechargerPlainte')->name('telechargerPlainte');
     Route::post('/telechargement/convocation/{id}', 'GestionConseilsPlaintes\PDFController@telechargerConvocation')->name('telechargerConvocation');
     Route::post('/telechargement/invitation/{id}', 'GestionConseilsPlaintes\PDFController@telechargerInvitation')->name('telechargerInvitation');

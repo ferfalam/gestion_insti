@@ -22,29 +22,31 @@
 @endsection
 
 @section('main')
+
         <div class="d-flex flex-column" id="content-wrapper">
             <div id="content"><div class="register-photo">
         <div class="form-container shadow">
 
             <form data-bs-hover-animate="pulse" method="get" action="">
+                {{ csrf_field() }}
                 <h2 class="text-center" data-aos="fade-down" data-aos-duration="600" data-aos-delay="400" style="font-size: 29px;"><strong></br> Fiche de déroulement des cours </strong></h2>
 
                 <div class = "description">
-                    
+                   
                     <div class = "form-enseignant"> 
                         <p> <strong> Enseignant : </strong> </p>
                     </div>
                     <div class = "form-nom" > 
-                        <p> <strong>Nom de l'Etudiant : </strong> <p> 
-                        <p> <strong>Prénom de l'Etudiant : </strong> <p> 
+                        <p> <strong>Nom de l'Etudiant : </strong> </p> 
+                        <p> <strong>Prénom de l'Etudiant :  </strong> </p> 
                     </div> 
                     <div class = "form-filiere" >
-                        <p> <strong>Filière : </strong> </p> 
-                        <p> <strong>Annee d'Etude : </strong> </p>     
+                        <p> <strong>Filière :</strong> </p> 
+                        <p> <strong>Annee d'Etude :  </strong> </p>     
                         <p> <strong>Unite d'Enseignement : </strong> </p>   
                     </div>
                     <div class = "form-annee"> 
-                        <p> <strong> Annee Academique </strong> </p>
+                        <p> <strong> Annee Academique :  </strong> </p>
                     </div> 
 
                     <div>
@@ -59,29 +61,18 @@
                             </thead>
 
                             <tbody>
-                                <tr>
-                                    <td> 12/09/2021 </td>
-                                    <td> 03:23:PM </td>
-                                    <td> 07:23:PM </td>
-                                    <td> 
-                                        04 heures 
-                                    </td>
-                                </tr>
+                                @foreach ($flight as $item) 
+
+                                    <tr>
+                                        <td> {{ $item->dateDeroulement }} </td>
+                                        <td> {{ $item->startTimeCours }}  </td>
+                                        <td> {{ $item->endTimeCours }}  </td>
+                                        <td> {{ $item->endTimeCours }}  </td>
+                                    </tr>
+                                {{-- {{ ($item->endTimeCours) - ($item->startTimeCours).int }} --}}
+                                @endforeach
                             </tbody> 
 
-                            {{--  A remplir to resee--}}
-
-                            {{-- @foreach ($collection as $dataLineTaken )
-                                <tbody>
-                                    <tr>
-                                        <td> {{ $dataLineTaken['surname'] }} </td>
-                                        <td> {{ $dataLineTaken['name'] }} </td>
-                                        <td> {{ $dataLineTaken['ue'] }} </td>
-                                    </tr>
-                                </tbody>  
-                            @endforeach --}}
-
-                           
                         </table>
                     </div>
 
@@ -95,19 +86,19 @@
 
                     <strong> Signature  <sub> Etudiant </sub> : </strong>
 
-                    </br> </br>
+                    </br> <br>
 
                     <strong> Signature <sub> Enseignant </sub> : </strong>
                    
-                    </br></br>
-                    
                 
-                    <a href="{{ route('gestion_deroulement_cours.downloadFiche') }}" style="float : right" >
-                        <button type="button" class="btn btn-primary"> Importer sous PDF </button>
-                    </a>
-                    </br>
                 </div>
             </form>
+
+        
+        <a href="{{ route('gestion_deroulement_cours.showFicheUes') }}" style="float : right" >
+            <button type="button" class="btn btn-primary"> << Retour </button>
+        </a>
+        <br> <br> 
 
         </div>
 
