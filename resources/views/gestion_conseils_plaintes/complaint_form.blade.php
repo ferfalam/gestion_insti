@@ -28,6 +28,10 @@
 @section('content')
 
 <div id ="wrapper" class="contact-clean">
+
+    <div style="margin-right:0">
+        <a href="{{ route('gestion_conseils_plaintes.model') }}">Voir un model</a>
+        </div>
         <form method="post" action="{{ route('gestion_conseils_plaintes.nouvelle_plainte') }}">
             @csrf
             @if ($message = Session::get('success'))

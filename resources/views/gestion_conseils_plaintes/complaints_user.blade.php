@@ -46,7 +46,6 @@
                                                 @else
                                                 <td>{{ $item-> plaignant -> profile -> com_fullname}}</td>
                                                 @endif
-
                                                 <td>{{ $item-> motif }}</td>
                                                 <td>{{ $item-> created_at -> format("d F Y à H:i")}}</td>
                                                 @if ($item->statut == 0)

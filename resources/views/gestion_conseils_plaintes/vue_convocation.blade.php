@@ -108,41 +108,41 @@ border-color: #F0F0F0;
 
     <div class="container" >
 
-      <div class="row">
-        <div class="col " style="text-align: center;">
+      <div >
+        <div style="text-align: center;">
           <h2 style="font-size: medium;"> <i> REPUBLIQUE DU BENIN</i> <br>*-*-*-*-*-*-*-*-*-*<br> <i>MINISTERE DE L'ENSEIGNEMENT SUPERIEUR ET DE
             LA RECHERCHE SCIENTIFIQUE</i>
             <br><i>*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*</i></h2>
         </div>
       </div>
-      <div class="row">
-        <div class="col" style="text-align: left;">
-          <div class="row no-gutters">
-            <div class="col-auto">
-              <img src="{{ asset('gestion_cd/unstim.jpeg') }}" class="img-fluid" alt="logo unstim" style="width:90px ; height: 90px;">
+      <div style="width: 100%; display:flex; align-content:space-between">
+
+        <div  style="display:flex; ">
+          <div >
+            <div style="display: inline-block;">
+              <img src="{{ asset('gestion_cd/unstim.jpeg') }}" class="img-fluid" alt="logo unstim" style=" display: width:90px ; height: 90px;">
             </div>
-            <div class="col">
-              <div class="card-block px-1"><br>
+            <div style="display: inline-block; position:relative; text-align: left; margin-left:0; margin-right:auto">
+              <div >
                 <p style="font-size: x-small;">UNIVERSITE NATIONALE DES SCIENCES, TECHNOLOGIES, INGENIERIE ET
                   MATHEMATIQUES D'ABOMEY
                 </p>
               </div>
             </div>
           </div>
-
         </div>
-        <div class="col" style="text-align: left;">
-          <div class="row no-gutters">
-            <div class="col">
-              <div class="card-block px-1"><br>
-                <p style=" font-size: x-small;">INSTITUT NATIONAL SUPERIEUR DE TECHNOLOGIE INDUSTRIELLE (INSTI) EX-IUT LOKOSSA
+
+        <div style="  margin-left:0; margin-right:auto;">
+            <div >
+              <div style="text-align: left;">
+                <p style="font-size: x-small;">INSTITUT NATIONAL SUPERIEUR DE TECHNOLOGIE INDUSTRIELLE (INSTI) EX-IUT LOKOSSA
                 </p>
               </div>
             </div>
-            <div class="col-auto">
+            <div class=>
               <img src="{{ asset('gestion_cd/insti.png')}}" class="img-fluid" alt="logo insti" style="width: 90px; height: 90px;">
             </div>
-          </div>
+
         </div>
       </div>
     </div>
@@ -212,6 +212,12 @@ border-color: #F0F0F0;
     <hr id="horizontal-line">
     <div id="footer" class="center-text">
         <div><strong>INSTI ex Institut Universitaire de Technologie BP: 133 - Mail: <a href="mailto:instilokossa@gmail.com">instilokossa@gmail.com</a> - site web : http://insti.edu.bj/ </strong></div>
+        </div>
+        <br>
+        <div style="display:flex;  width: 50%; height: 1mm; margin:auto; text-align: center;">
+            <div style="width: 33.33%; height: 1mm; background-color:green"></div>
+            <div style="width: 33.33%; height: 1mm; background-color:yellow"></div>
+            <div style="width: 33.33%; height: 1mm; background-color:red"></div>
         </div>
     </div>
 
