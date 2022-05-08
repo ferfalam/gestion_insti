@@ -14,17 +14,17 @@ class ComplaintRequestController extends Controller
 
         $idUser = Auth::user()->id;
         $idPedagogicGroupe = DB::table('user__pedagogic_group__maps')->where('user_Id', $idUser)->value('pedagogic_group_Id');
-       
+
         $ues = DB::table('shortcuts_requests')
                     ->leftJoin('ues', 'shortcuts_requests.ue_Id', '=', 'ues.id')
                     ->where('shortcuts_requests.pedagogic_group_Id','=', $idPedagogicGroupe)
                     ->select('ues.name as name')
                     ->get();
-        
+
         $academic_semesters = DB::table('academic_semesters')->pluck('designation');
         $evaluation_types = DB::table('evaluation_types')->pluck('designation');
 
-       
+
 
         return view('gestion_demandes_reclamation_evaluation.etudiants.faire_demande_reclamation'
          ,compact('academic_semesters','ues','evaluation_types')
@@ -48,7 +48,7 @@ class ComplaintRequestController extends Controller
             'description' => 'required|string',
         ]);
 
-        
+
 
         $documentPath = $request->file('document')->store('public/document');
 
@@ -60,10 +60,10 @@ class ComplaintRequestController extends Controller
 
         $idPedagogicGroupe = DB::table('user__pedagogic_group__maps')->where('user_Id', $idUser)->value('pedagogic_group_Id');
         $pedagogicGroupe = DB::table('pedagogic_groups')->where('id',$idPedagogicGroupe)->value('name');
-        
+
         $idField = DB::table('shortcuts_requests')->where('pedagogic_group_Id', $idPedagogicGroupe)->value('field_Id');
         $field = DB::table('fields')->where('id',$idField)->value('name');
-        
+
         $idAcademic_year = DB::table('shortcuts_requests')->where('pedagogic_group_Id', $idPedagogicGroupe)->value('academic_year_Id');
         $academic_year_start = DB::table('academic_years')->where('id',$idAcademic_year)->value('startDate');
         $academic_year_end = DB::table('academic_years')->where('id',$idAcademic_year)->value('endDate');
@@ -105,7 +105,7 @@ class ComplaintRequestController extends Controller
         //         'academic_semester' => $academic_semester,)
         // );
 
-        
+
 
         return redirect(route('gestion_demandes_reclamation_evaluation.dashboard_etudiant'))->with('success', 'Reclamation effectuer avec sucess');
     }
@@ -127,15 +127,9 @@ class ComplaintRequestController extends Controller
      */
 
     public function show($id){
-<<<<<<< HEAD
-        $complaint_requests = Complaint_request::find($id);
-        return view('gestion_demandes_reclamation_evaluation.personnels.voir_details_demande_reclamation'
-         ,compact('complaint_requests')
-=======
         $complaint_request = Complaint_request::find($id);
         return view('gestion_demandes_reclamation_evaluation.personnels.voir_details_demande_reclamation'
          ,compact('complaint_request')
->>>>>>> gestion_demande_reclamation_evaluation
         );
     }
 }

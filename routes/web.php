@@ -184,11 +184,8 @@ Route::group(["prefix"=>"gestion_authClass", "as"=>"gestion_authClass.", "middle
     Route::post('/classement','GestionAuthAttClassement\ClassementController@show')->name('showClassement');
 
     Route::get('/ficheDeliberation','GestionAuthAttClassement\FileController@ImportForm')->name('deliber');
-<<<<<<< HEAD
-=======
 
     Route::get('/getClassementPdf','GestionAuthAttClassement\ClassementController@getClassementPdf')->name('getClassementPdf');
->>>>>>> gesAuthClas
 
     Route::post('/import','GestionAuthAttClassement\FileController@Import')->name('employee.import');
 
