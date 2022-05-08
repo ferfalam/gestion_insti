@@ -26,6 +26,8 @@ class CreateDeliberationsTable extends Migration
             $table->text('report');
             $table->text('revealTicket');
             $table->text('hideTicket');
+            $table->text('uesIds');
+            $table->text('infos');
             $table->timestamps();
         });
             

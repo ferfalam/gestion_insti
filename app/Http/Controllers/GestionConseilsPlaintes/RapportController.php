@@ -5,35 +5,83 @@ namespace App\Http\Controllers\GestionConseilsPlaintes;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Models\Rapport;
+use App\Models\ConseilDiscipline;
+use Illuminate\Auth\Access\Response;
+use Illuminate\Support\Facades\Storage;
 
 class RapportController extends Controller
 {
     //
-
     public function new(){
         return view('form');
     }
 
     public function view($id){
         $tile = Rapport::find($id);
-        return view('rapports', compact('tile'));
+        return view('gestion_conseils_plaintes.rapports', compact('tile'));
     }
 
     public function show(){
         $query = Rapport::all();
-        return view('rapports_user', compact('query'));
+        return view('gestion_conseils_plaintes.rapports_user', compact('query'));
     }
 
-    public function form(){
-        return view('rapport_form');
+    public function form($id){
+        return view('gestion_conseils_plaintes.rapport_form', compact('id'));
     }
 
-    public function create(Request $request){
-        $store = Convocation::create([
-            'id_conseil' => request('id_conseil'),
+    public function downloadRapport(Request $request, $id)
+    {
+    $file =  public_path('rapports').'/'.Rapport::find($id)->path;
 
+    //dd(public_path('rapports').'/'. Rapport::find($id)->path);
+    $headers = ['Content-Type: application/pdf'];
+
+    Storage::download($file, Rapport::find($id)->path, $headers);
+
+
+        //return Storage::download(Rapport::findOrFail($id)-> path);
+    }
+
+    public function create(Request $req, $id){
+
+        $req->validate([
+            'file.*' => 'required|mimes:docx,pdf|max:2048',
+            'file' => 'required',
         ]);
-        //$query = Convocation::all();
-        return redirect()->route('liste_rapports');
+
+         $name = $req->file('file')->getClientOriginalName();
+
+
+         //$path = Storage::putFileAs('rapports', $req->file('file'), $name);
+         $path = $req->file('file')->move('rapports', $name);
+
+         $store = Rapport::create([
+                'id_conseil' => $id,
+                'path' => $name
+            ]);
+            ConseilDiscipline::find($id)->update([
+                'rapport' => 1
+            ]);
+
+
+        return redirect()->route('gestion_conseils_plaintes.liste_rapports');
     }
+
+    public function destroy(Request $request, $id){
+        $Del = Rapport::find($id);
+        if (file_exists($Del->path)) {
+            return unlink($Del->path);
+        } else {
+            ConseilDiscipline::find($Del->id_conseil)->update([
+                'rapport' => 0
+            ]);
+            $Del->delete();
+
+            echo('File not found.');
+        }
+
+        $request->session()->flash('alert-success', ' The rapport is deleted successfully.');
+        return redirect()->route('gestion_conseils_plaintes.liste_rapports');
+     }
 }

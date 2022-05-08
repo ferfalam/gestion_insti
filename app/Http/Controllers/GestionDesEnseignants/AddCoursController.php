@@ -2,33 +2,28 @@
 
 namespace App\Http\Controllers\GestionDesEnseignants;
 
-use App\Http\Controllers\Controller;
+use App\Models\Ue;
+use App\Models\Profile;
 use Illuminate\Http\Request;
+use App\Models\PedagogicGroup;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
 
 class AddCoursController extends Controller
 {
     public function show(){
 
-        return view('gestion_enseignants.addCours', ['vTitle'=> 'AddCours']);
-    
-        }
-	    public function affichage()
-    {
-        if(auth()->guest()){
-            return view('index', [
-                'vTitle'=> 'Connexion'
-            ]);
-        }
-        $user= profile::all();
-        $ue= UE::all();
-        $gpe= GroupePedagogique::all();
-    	return view('addCours',[
-    		'vtitle'=>'Ajouter Cours',
+        $user=Profile::all();
+        $ue= Ue::all();
+        $gpe= PedagogicGroup::all();
+        return view('gestion_enseignants.addCours', [
+            'vTitle'=> 'AddCours',
             "user"=> $user,
             "ue"=> $ue,
             "gpe"=>$gpe,
-    	]);
-    }
+        ]);
+    
+        }
     public function traitement()
     {
 
@@ -37,16 +32,15 @@ class AddCoursController extends Controller
 
         for($i=0; $i<=$compteur; $i++){
             if(request('credit'.$i)!=null){
-                DB::table('tableau_enseignants')->insert([
-                    'nom_enseignant'=> request('selectNom'.$i), 
-                    'nom_ue'=> request('selectUE'.$i), 
+                DB::table('enseignants')->insert([
+                    'nomEnseignant'=> request('selectNom'.$i), 
+                    'nomUe'=> request('selectUE'.$i), 
                     'credit'=> request('credit'.$i), 
                     'ct'=> request('ct'.$i), 
                     'td'=> request('td'.$i), 
                     'tp'=> request('tp'.$i), 
                     'tpe'=> request('tpe'.$i), 
-                    'gpe'=> request('selectGPE'.$i), 
-                    'gpe'=> request('selectGPE'.$i), 
+                    'gpe'=> request('selectGPE'.$i),
                     'mp'=> request('mp'.$i), 
                     'me'=> request('me'.$i), 
                 ]);
@@ -54,16 +48,9 @@ class AddCoursController extends Controller
             }
             
         }
-        flash($nombreSucces.' enrégistrement(s) réussit')->success();
-        $user= profile::all();
-        $ue= UE::all();
-        $gpe= GroupePedagogique::all();
-    	return view('addCours',[
-    		'vtitle'=>'Ajouter Cours',
-            "user"=> $user,
-            "ue"=> $ue,
-            "gpe"=>$gpe,
-    	]);
+        // flash($nombreSucces.' enrégistrement(s) réussit')->success();
+
+    	return redirect()->route('gestion_enseignant.show');
 
     }
     

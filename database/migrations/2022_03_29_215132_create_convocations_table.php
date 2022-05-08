@@ -15,7 +15,9 @@ class CreateConvocationsTable extends Migration
     {
         Schema::create('convocations', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('id_conseil')->constrained('conseildisciplines');
+            $table->foreignId('id_conseil')->constrained('conseil_disciplines')->onDelete('cascade');
+            $table->foreignId('id_user')->constrained('users')->onDelete('cascade');
+            $table->string('type');
             $table->timestamps();
         });
     }

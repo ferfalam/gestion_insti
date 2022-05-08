@@ -18,9 +18,8 @@ class FormulaireDeroulementCoursController extends Controller
       * Create fiche de remplissage des cours
       * @return \Illuminate\Http\Response
       */
-    public function createFiche()
+    public function readItemsModule()
     {
-
         $annee_detude = AcademicYear::all() ;
         $filieres = Field::all() ;
         $ues = Ue::all() ;
@@ -47,6 +46,9 @@ class FormulaireDeroulementCoursController extends Controller
             'semester' => 'required',
             'observation' => 'required|min:3'
         ]);
+
+        // save in a model Group pedagogique
+        // so create a model group pedagogique
 
         /* NameOfModel::create(
             [

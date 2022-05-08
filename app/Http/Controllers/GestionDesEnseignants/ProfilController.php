@@ -9,11 +9,6 @@ class ProfilController extends Controller
 {
     public function affichage()
     {
-        // if(auth()->guest()){
-        //     return view('index', [
-        //         'vTitle'=> 'Connexion'
-        //     ]);
-        // }
         return view('gestion_enseignants.profile',[
             'vTitle'=>'Profil',
         ]);

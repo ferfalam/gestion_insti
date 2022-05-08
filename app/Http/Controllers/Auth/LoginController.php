@@ -31,7 +31,7 @@ class LoginController extends Controller
     // protected $redirectTo = RouteServiceProvider::HOME;
 
     public function redirectTo(){
-        $idUser = Auth::user()->id;
+        // $idUser = Auth::user()->id;
         // $idUserRole = DB::table('user_user_group__position__service__maps')->where('user_Id', $idUser)->value('userGroup_Id');
 
         // $userRole = DB::table('user_groups')->where('id', $idUserRole)->value('name');

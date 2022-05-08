@@ -13,18 +13,18 @@
                                                         
                         <ul class="list-group">
                 
-                            <li class='list-group-item'><span style='font-weight: bold;font-size: 12px;'>Nom : {!!$prof->com_nom!!} </span></li>
-                            <li class='list-group-item'><span style='font-weight: bold;font-size: 12px;'>Prénoms :{!!$prof->com_prenom!!}</span></li>
-                            <li class='list-group-item'><span style='font-weight: bold;font-size: 12px;'>Fillère : <?php echo $filiere ?></span></li>
-                            <li class='list-group-item'><span style='font-weight: bold;'>Groupe Pédagogique : <?php echo $groupe_pedagogique ?></span></li>
+                            <li class='list-group-item'><span style='font-weight: bold;font-size: 12px;'>Nom : {{$evaluation_request->first_name}} </span></li>
+                            <li class='list-group-item'><span style='font-weight: bold;font-size: 12px;'>Prénoms :{{$evaluation_request->last_name}}</span></li>
+                            <li class='list-group-item'><span style='font-weight: bold;font-size: 12px;'>Fillère : {{$evaluation_request->field}}</span></li>
+                            <li class='list-group-item'><span style='font-weight: bold;'>Groupe Pédagogique : {{$evaluation_request->pegagogic_group}}</span></li>
                             <li class='list-group-item'><span style='font-weight: bold;'>Type de demande : Demande d'evaluation </span></li>
-                            <li class='list-group-item'><span style='font-weight: bold;'>Type d'évaluation : <?php echo $type_evaluation ?></span></li>
-                            <li class='list-group-item'><span style='font-weight: bold;'>Semestre concerné: <?php echo $semestre_academique ?></span></li>
-                            <li class='list-group-item'><span style='font-weight: bold;'>UE concerné: <?php echo $UE ?></span></li>
-                            <li class='list-group-item'><span style='font-weight: bold;'>Motif: <?php echo $motif ?></span></li>
-                            <li class='list-group-item'><span style='font-weight: bold;'>Description de motif : <?php echo $description_motif ?></span></li>
-                            <li class='list-group-item'><span style='font-weight: bold;'>Quittance: <a href = "<?php echo $fichier_preuve ?>"><?php echo $fichier_preuve ?></a></span></li>
-                                                
+                            <li class='list-group-item'><span style='font-weight: bold;'>Type d'évaluation : {{$evaluation_request->evaluation_type}}</span></li>
+                            <li class='list-group-item'><span style='font-weight: bold;'>Semestre concerné: {{$evaluation_request->academic_semester}}</span></li>
+                            <li class='list-group-item'><span style='font-weight: bold;'>UE concerné: {{$evaluation_request->ue}}</span></li>
+                            <li class='list-group-item'><span style='font-weight: bold;'>Motif: {{$evaluation_request->motif}}</span></li>
+                            <li class='list-group-item'><span style='font-weight: bold;'>Description de motif : {{$evaluation_request->description_motif}}</span></li>
+                            <li class='list-group-item'><span style='font-weight: bold;'>Date d'envoie: {{$evaluation_request->created_date}}</span></li>
+                            <li class='list-group-item'><span style='font-weight: bold;'>Quittance: <a href = "{{$evaluation_request->document_path}}"></a></span></li>                                                     
                         </ul>         
                     </div>
                 </div>

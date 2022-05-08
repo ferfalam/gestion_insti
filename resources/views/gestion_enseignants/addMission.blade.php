@@ -65,7 +65,7 @@ document.getElementById('addrow').onclick= function (){addNewLine()};
 function  addNewLine() {
     var newRow = $("<tr>");
     var cols = "";
-    cols += '<td><select class="custom-select chosen" style="width: 200px;" required style="color: #555555;" name="selectNom'+counter+'"></select></td>';
+    cols += '<td><select class="custom-select chosen" style="width: 200px;" required style="color: #555555;" name="selectNom'+counter+'">@foreach ($profile as $profil)<option value="{{$profil->com_givenName}} {{$profil->com_fullname}}">{{$profil->com_givenName}} {{$profil->com_fullname}}</option>@endforeach</select></td>';
     cols += '<td><select class="custom-select chosen" style="width: 150px;" required style="color: #232323;" name="selectQualite'+counter+'">@foreach ($qualite as $qualit)<option value="{{$qualit->name}}">{{$qualit->name}}</option>@endforeach</select></td>';
     cols += '<td ><input type="text" required style="width: 150px;" name="adresse_complet'+counter+'" class="form-control"></td>';
     cols += '<td ><input type="date" required style="width: 150px;" name="date_naissance'+counter+'" class="form-control"></td>';
@@ -73,8 +73,8 @@ function  addNewLine() {
     cols += '<td ><input type="text" required style="width: 150px;" name="Nationalite'+counter+'" class="form-control"></td>';
     cols += '<td ><input type="text" required style="width: 150px;" name="matricul'+counter+'" class="form-control"></td>';
     cols += '<td ><input type="text" required style="width: 150px;" name="grade'+counter+'" class="form-control"></td>';
-    cols += '<td><select class="custom-select chosen" style="width: 120px;" required style="color: #232323;" name="selectUE'+counter+'"></select></td>';
-    cols += '<td><select class="custom-select chosen" required style="width: 150px;" name="selectGPE'+counter+'"></select></td>';
+    cols += '<td><select class="custom-select chosen" style="width: 120px;" required style="color: #232323;" name="selectUE'+counter+'">@foreach ($ue as $Ue)<option value="{{$Ue->abbreviation}}">{{$Ue->abbreviation}}</option>@endforeach</select></td>';
+    cols += '<td><select class="custom-select chosen" required style="width: 150px;" name="selectGPE'+counter+'">@foreach ($group as $groupe)<option value="{{$groupe->name}}">{{$groupe->name}}</option>@endforeach</select></td>';
     cols += '<td ><input type="text" name="Annee_academique'+counter+'" style="width: 150px;" class="form-control" required></td>';
     cols += '<td ><input type="text" name="heure_UE'+counter+'" style="width: 150px;" class="form-control" required></td>';
     cols += '<td ><input type="text" name="dure_mission'+counter+'" style="width: 150px;" class="form-control" required></td>';

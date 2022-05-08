@@ -27,6 +27,8 @@ class DashboardController extends Controller
             return view('gestion_demandes_reclamation_evaluation.etudiants.dashboard');
         }else if($userRole == 'personnel'){
             return view('gestion_demandes_reclamation_evaluation.personnels.dashboard');
+        }else if($userRole == 'admin'){
+            return view('gestion_demandes_reclamation_evaluation.personnels.dashboard');
         }
     }
 

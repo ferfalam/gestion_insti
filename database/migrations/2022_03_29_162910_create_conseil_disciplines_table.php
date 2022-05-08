@@ -13,11 +13,17 @@ class CreateConseilDisciplinesTable extends Migration
      */
     public function up()
     {
-        Schema::create('conseildisciplines', function (Blueprint $table) {
+        Schema::create('conseil_disciplines', function (Blueprint $table) {
             $table->id();
-            //$table->foreignId('id_plainte')->constrained('plaintes');
+            $table->foreignId('id_plainte')->constrained('plaintes')->onDelete('cascade');
             $table->date('date');
             $table->time('heure');
+            $table->string('lieu');
+            $table->integer('convocationsOK')->default(0);
+            $table->integer('invitationsOK')->default(0);
+            $table->integer('tenue')->default(0);
+            $table->integer('rapport')->default(0);
+            $table->foreignId('maitre')->nullable()->constrained('users')->onDelete(null);
             $table->timestamps();
         });
     }

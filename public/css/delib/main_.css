@@ -19,15 +19,24 @@
     /* border: 2px solid black; */
     height: max-content;
     width: 82%;
-    position: absolute;
+    position: relative;
     background-color: rgb(255, 255, 255);
     box-shadow: 1px 1px 7px rgb(202, 202, 202);
     padding: 1em 1.5em;
     border-radius: 5px;
-    margin-top: 5em;
+    margin-top: 3em;
+    margin-bottom: 2em;
 }
 
 /** */
+
+.dataTables_length{
+    margin: 12px;
+}
+
+.form-label{
+    font-size: 17px;
+}
 
 .center {
     text-align: center;
@@ -39,7 +48,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 3.5em;
+    min-height: 3.5em;
     background-color: #f9fbff;
     padding: 5px 8px;
     margin: 10px 0px;

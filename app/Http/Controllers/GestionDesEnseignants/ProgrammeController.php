@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers\GestionDesEnseignants;
 
-use App\Http\Controllers\Controller;
+use App\Models\Profile;
+use Barryvdh\DomPDF\PDF;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class ProgrammeController extends Controller
 {
@@ -11,61 +15,15 @@ class ProgrammeController extends Controller
 
     public function affichage()
     {
-        // if(auth()->guest()){
-        //     return view('index', [
-        //         'vTitle'=> 'Connexion'
-        //     ]);
-        // }
-        // if(Auth::user()->email=='admin@insti.com'){
-            //$profile=profile::all();
-            return view('gestion_enseignants.tableAdmin',[
-                'vTitle'=>'Programme'
-                //'profile'=>$profile,
-            ]);
-        // }else{  
-        //     $profil=DB::table('profiles')->where('user_id',Auth::user()->id)->first();
-        //     $sqlTable= "select * from tableau_enseignants where nom_enseignant ='"."".$profil->nom." ".$profil->prenom."'";
-        //     $table=DB::select($sqlTable);
-        //     $table2=DB::select($sqlTable);
-
-        //     $totalP=0;
-        //     $totalE=0;
-        //     $dif=0;
-
-        //     foreach($table2 as $table2){
-        //         $totalP+=$table2->mp;
-        //         $totalE+=$table2->me;
-        //     }
-
-        //     $dif=$totalP-$totalE;
-            
-
-        //     return view('gestion_enseignants.table',[
-        //         'table'=> $table,
-        //         'mp'=> $totalP,
-        //         'dif'=> $dif,
-        //     ]);
-        // }
-    }
-    public function traitement(){
         if(Auth::user()->email=='admin@insti.com'){
-            $profile=profile::all();
-            // $profileTrait=$profile;
-            $lastvalue=request('selectNom');
-            if($lastvalue=="*"){
-                $profileTrait=$profile;
-            }else{
-                $profileTrait=DB::table('profiles')->where('user_id',Auth::user()->id)->first();
-            }
-            
-            return view('/tableAdmin',[
+            $profile=Profile::all();
+            return view('gestion_enseignants.tableAdmin',[
+                'vTitle'=>'Programme',
                 'profile'=>$profile,
-                'lv'=>$lastvalue,
-                'profileTrait'=>$profileTrait
             ]);
         }else{  
-            $profil=DB::table('profiles')->where('nom',Auth::user()->id)->first();
-            $sqlTable= "select * from tableau_enseignants where nom_enseignant ='"."".$profil->nom." ".$profil->prenom."'";
+            $profil=DB::table('profiles')->where('user_id',Auth::user()->id)->first();
+            $sqlTable= "select * from enseignants where nomEnseignant ='"."".$profil->com_givenName." ".$profil->com_fullname."'";
             $table=DB::select($sqlTable);
             $table2=DB::select($sqlTable);
 
@@ -81,7 +39,51 @@ class ProgrammeController extends Controller
             $dif=$totalP-$totalE;
             
 
-            return view('table',[
+            return view('gestion_enseignants.table',[
+                'vTitle'=>'Mission',
+                'table'=> $table,
+                'mp'=> $totalP,
+                'dif'=> $dif,
+            ]);
+        }
+    }
+    public function traitement(){
+        if(Auth::user()->email=='admin@insti.com'){
+            $profile=Profile::all();
+            // $profileTrait=$profile;
+            $lastvalue=request('selectNom');
+            if($lastvalue=="*"){
+                $profileTrait=$profile;
+            }else{
+                $profileTrait=DB::table('profiles')->where('user_id',Auth::user()->id)->first();
+            }
+            
+            return view('gestion_enseignants.tableAdmin',[
+                'vTitle'=>'Programme',
+                'profile'=>$profile,
+                'lv'=>$lastvalue,
+                'profileTrait'=>$profileTrait
+            ]);
+        }else{  
+            $profil=DB::table('profiles')->where('com_givenName',Auth::user()->id)->first();
+            $sqlTable= "select * from enseignants where nomEnseignant='"."".$profil->com_givenName." ".$profil->com_fullname."'";
+            $table=DB::select($sqlTable);
+            $table2=DB::select($sqlTable);
+
+            $totalP=0;
+            $totalE=0;
+            $dif=0;
+
+            foreach($table2 as $table2){
+                $totalP+=$table2->mp;
+                $totalE+=$table2->me;
+            }
+
+            $dif=$totalP-$totalE;
+            
+
+            return view('gestion_enseignants.table',[
+                'vTitle'=>'Programme',
                 'table'=> $table,
                 'mp'=> $totalP,
                 'dif'=> $dif,
@@ -91,11 +93,11 @@ class ProgrammeController extends Controller
 
     public function generate(){
         if(Auth::user()->email=='admin@insti.com'){
-            $profile=profile::all();
+            $profile=Profile::all();
             
             $profileTrait=$profile;
             
-            return PDF::loadView('tablePdf',[
+            return PDF::loadView('gestion_enseignants.tablePdf',[
                 'profile'=>$profile,
                 'lv'=>request('selectNom'),
                 'profileTrait'=>$profileTrait
@@ -103,7 +105,7 @@ class ProgrammeController extends Controller
         }else{
             $profil=DB::table('profiles')->where('user_id',Auth::user()->id)->first();
 
-            $sqlTable= "select * from tableau_enseignants where nom_enseignant ='"."".$profil->nom." ".$profil->prenom."'";
+            $sqlTable= "select * from enseignants where nomEnseignant ='"."".$profil->com_givenName." ".$profil->com_fullname."'";
             $table=DB::select($sqlTable);
             $table2=DB::select($sqlTable);
 
@@ -117,13 +119,11 @@ class ProgrammeController extends Controller
             }
 
             $dif=$totalP-$totalE;
-            return PDF::loadView('tablePdf',[
+            return PDF::loadView('gestion_enseignants.tablePdf',[
                 'table'=> $table,
                 'mp'=> $totalP,
                 'dif'=> $dif,
             ])->setPaper('a4', 'landscape')->setWarnings(false)->download('psdtest.pdf');
         }
-        
-
     }
 }

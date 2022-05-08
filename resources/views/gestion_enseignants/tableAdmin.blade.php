@@ -14,11 +14,10 @@
                                     <div class="card-body text-center shadow">
                                         <div class="col"><select class="custom-select chosen" id="selectNom" name ="selectNom" required="" style="color: #232323;" value="{{old('selectNom')}}">
                                             @isset($lv)
-                                            <option value="{{$lv}}">{{$lv   }}</option>
+                                            <option value="{{$lv}}">{{$lv}}</option>
                                             @endisset
-
                                             <option value="*">*</option>
-                                            {{-- @foreach ($profile as $profil)<option value="{{$profil->nom}} {{$profil->prenom}}">{{$profil->nom}} {{$profil->prenom}}</option>@endforeach --}}
+                                            @foreach ($profile as $profil)<option value="{{$profil->com_givenName}} {{$profil->com_fullname }}">{{$profil->com_givenName}} {{$profil->com_fullname }}</option>@endforeach
                                             </select>
                                             <div style="padding-top: 10px"><input class="btn btn-primary" id="ChangeTable" type="submit" name="ChangeTable" value="Changer"></div>
                                             <div id="checkDiv">
@@ -61,7 +60,7 @@
                                                         @foreach ($profileTrait as $profile)
                                                         @php
                                                             $rowspan=0;
-                                                            $sqlTable= "select * from tableau_enseignants where nom_enseignant ='"."".$profile->nom." ".$profile->prenom."'";
+                                                            $sqlTable= "select * from enseignants where nomEnseignant ='"."".$profile->com_givenName." ".$profile->com_fullname."'";
                                                             $table=DB::select($sqlTable);
                                                             $table2=DB::select($sqlTable);
                                                             foreach ($table2 as $table) {
@@ -69,14 +68,14 @@
                                                             }
                                                         @endphp
                                                         @if ($table!=null)
-                                                            <td class="text-center" rowspan="{{$rowspan+1}}">{{$profile->prenom}} {{$profile->nom}}</td>
+                                                            <td class="text-center" rowspan="{{$rowspan+1}}">{{$profile->com_fullname}} {{$profile->com_givenName}}</td>
                                                             @php
-                                                                $sqlTable= "select * from tableau_enseignants where nom_enseignant ='"."".$profile->nom." ".$profile->prenom."'";
+                                                                $sqlTable= "select * from enseignants where nomEnseignant ='"."".$profile->com_givenName." ".$profile->com_fullname."'";
                                                                 $table=DB::select($sqlTable);
                                                                 foreach ($table as $table) {
                                                                     echo '
                                                                     <tr>
-                                                                    <td class="text-center" >'.$table->nom_ue.'</td>
+                                                                    <td class="text-center" >'.$table->nomUe.'</td>
                                                                     <td class="text-center" id="credit">'.$table->credit.'</td>
                                                                     <td id="ct">'.$table->ct.'</td>
                                                                     <td id="td">'.$table->td.'</td>
@@ -93,7 +92,7 @@
                                                     @else
                                                         @php
                                                             $rowspan=0;
-                                                            $sqlTable= "select * from tableau_enseignants where nom_enseignant ='"."".request('selectNom')."'";
+                                                            $sqlTable= "select * from enseignants where nomEnseignant ='"."".request('selectNom')."'";
                                                             $table=DB::select($sqlTable);
                                                             $table2=DB::select($sqlTable);
                                                             foreach ($table2 as $table) {
@@ -108,7 +107,7 @@
                                                                 foreach ($table as $table) {
                                                                     echo '
                                                                     <tr>
-                                                                    <td class="text-center" >'.$table->nom_ue.'</td>
+                                                                    <td class="text-center" >'.$table->nomUe.'</td>
                                                                     <td class="text-center" id="credit">'.$table->credit.'</td>
                                                                     <td id="ct">'.$table->ct.'</td>
                                                                     <td id="td">'.$table->td.'</td>
@@ -134,7 +133,7 @@
                     </div>
                 </div>
             </div>
-            <form action="/pdfT" method="get">
+            <form action="{{ route('gestion_enseignant.programme_pdf') }}" method="get">
                 <input type="hidden" name="selectNom" id="selectNom" value="{{request('selectNom')}}"/>
                 <div id="btn-Exporter">
                     <input class="btn btn-primary btn-sm" type="submit" id="exporterPdfAdmin" name="exporterPdf" value="Exporter PDF" />

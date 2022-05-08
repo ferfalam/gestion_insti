@@ -2,57 +2,60 @@
 
 namespace App\Http\Controllers\GestionDesEnseignants;
 
+use App\Models\Ue;
+use App\Models\Profile;
 use App\Models\Qualite;
 use Illuminate\Http\Request;
+use App\Models\PedagogicGroup;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 
 class AddMissionController extends Controller
 {
     public function affichage(){
-        // $profile=profile::all();
+         $profile=Profile::all();
          $qualite=Qualite::all();
-        // $ue=UE::all();
-        // $group=GroupePedagogique::all();
-         return view('gestion_enseignants.addMission',['vTitle'=>'Mission',"qualite"=>$qualite]);
+         $ue=Ue::all();
+        $group= PedagogicGroup::all();
+         return view('gestion_enseignants.addMission',[
+             'vTitle'=>'Mission',
+             'profile'=>$profile,
+             "qualite"=>$qualite,
+             'ue'=>$ue,
+             'group'=>$group,
+            ]);
     }
     public function traitement()
     {
+
+
     $compteur= request('compteur');
     $nombreSucces=0;
 
     for($i=0; $i<=$compteur; $i++){
         if(request('adresse_complet'.$i)!=null){
-            DB::table('tableau_missions')->insert([
-                'Nom_enseignant'=> request('selectNom'.$i),
+            DB::table('missions')->insert([
+                'nom_enseignant'=> request('selectNom'.$i),
                  'qualite'=>request('selectQualite'.$i),
                  'adressse'=>request('adresse_complet'.$i),
                  'date_naissance'=>request('date_naissance'.$i),
                  'lieu'=>request('lieu'.$i),
                  'nationalite'=>request('Nationalite'.$i),
-                 'Maticule'=>request('matricul'.$i),
+                 'maticule'=>request('matricul'.$i),
                  'grade'=>request('grade'.$i),
-                 'Ue'=>request('selectUE'.$i),
-                 'Groupe_Pedagogique'=>request('selectGPE'.$i),
-                 'Annee_academique'=>request('Annee_academique'.$i),
+                 'ue'=>request('selectUE'.$i),
+                 'pedagogicGroup'=>request('selectGPE'.$i),
+                 'academicYear'=>request('Annee_academique'.$i),
                  'missionHeure'=>request('heure_UE'.$i),
                  'missionDuree'=>request('dure_mission'.$i),
-                 'dateJourArrive'=>request('dure_jourArrive'.$i),
-                 'dateJourRetour'=>request('dure_jourRetour'.$i),
+                 'startDate'=>request('dure_jourArrive'.$i),
+                 'endDate'=>request('dure_jourRetour'.$i),
                 ]);
                 $nombreSucces++;
             }
         }
-        flash($nombreSucces.' enrégistrement(s) réussit')->success();
-        $profile=profile::all();
-        $qualite=qualite::all();
-        $ue=UE::all();
-        $group=GroupePedagogique::all();
-        return view('addMission',[
-            'vtitle'=>'Mission',
-            'profile'=>$profile,
-            'qualite'=>$qualite,
-            'ue'=>$ue,
-            'group'=>$group,
-        ]);
+        //flash($nombreSucces.' enrégistrement(s) réussit')->success();
+
+        return redirect()->route('gestion_enseignant.show_programmerMission');
     }
 }

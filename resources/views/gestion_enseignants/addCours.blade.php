@@ -67,28 +67,26 @@
         function addNewLine(){
             var newRow = $("<tr>");
             var cols = "";
-            cols += '<td><select class="custom-select chosen" style="width: 200px;" required style="color: #555555;" name="selectNom'+counter+'">/td>';
-            cols += '<td><select class="custom-select chosen" style="width: 120px;" required style="color: #232323;" name="selectUE'+counter+'"></td>';
+            cols += '<td><select class="custom-select chosen" style="width: 200px;" required style="color: #555555;" name="selectNom'+counter+'">@foreach ($user as $user)<option value="{{$user->com_givenName}} {{$user->com_fullname}}">{{$user->com_givenName}} {{$user->com_fullname}}</option>@endforeach</select></td>';
+            cols += '<td><select class="custom-select chosen" style="width: 120px;" required style="color: #232323;" name="selectUE'+counter+'">@foreach ($ue as $ue)<option value="'+'{{$ue->abbreviation}}">{{$ue->abbreviation}}</option>@endforeach</select></td>';
             cols += '<td ><input type="number" style="width: 70px;" required name="credit'+counter+'" class="form-control"></td>';
             cols += '<td ><input type="number" style="width: 70px;" required name="ct'+counter+'" class="form-control"></td>';
             cols += '<td ><input type="number" style="width: 70px;" required name="td'+counter+'" class="form-control"></td>';
             cols += '<td ><input type="number" style="width: 70px;" required name="tp'+counter+'" class="form-control"></td>';
             cols += '<td ><input type="number" style="width: 70px;" required name="tpe'+counter+'" class="form-control"></td>';
-            cols += '<td><select class="custom-select chosen" required style="width: 100px;" name="selectGPE'+counter+'"></td>';
+            cols += '<td><select class="custom-select chosen" required style="width: 100px;" name="selectGPE'+counter+'">@foreach ($gpe as $gpe)<option value="'+'{{$gpe->name}}">{{$gpe->name}}</option>@endforeach</select></td>';
             cols += '<td ><input type="number" name="mp'+counter+'" required style="width: 70px;" class="form-control"></td>';
             cols += '<td ><input type="number" name="me'+counter+'" required style="width: 70px;" class="form-control"></td>';
             
             $(".chosen").select2();
 
-            cols += '<td><button id="ibtnDel" class="ibtnDel btn btn-md btn-danger "  value="Supprimer">Supprimer</button></td>';
+            cols += '<td><button id="ibtnDel" class="ibtnDel btn btn-md btn-danger " value="Supprimer">Supprimer</button></td>';
             newRow.append(cols);
             $("table.order-list").append(newRow);
             document.getElementById('compteur').value=counter;
             counter++;
         }
-
-        
-       
+     
 
 
         $("table.order-list").on("click", ".ibtnDel", function (event) {
