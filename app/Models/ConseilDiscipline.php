@@ -19,7 +19,7 @@ class ConseilDiscipline extends Model
      * @var array
      */
     protected $fillable = [
-        'id_plainte', 'date', 'heure', 'lieu', 'mailOK', 'tenue', 'maitre'
+        'id_plainte', 'date', 'heure', 'lieu', 'convocationsOK','invitationsOK', 'tenue', 'maitre'
     ];
 
     public function participants(){

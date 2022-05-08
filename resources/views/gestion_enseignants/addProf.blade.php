@@ -7,7 +7,7 @@
         {{-- @include('flash::message') --}}
         <h3 class="text-dark mb-4">Ajouter/ Modifier le programme</h3>
         
-        <form method="POST" action="/ajouterProf" id="containerAddProf" name="containerAddProf">
+        <form method="POST" action="{{ route('gestion_enseignant.store_prof') }}" id="containerAddProf" name="containerAddProf">
                 @csrf
             <div class="card-body">
 
@@ -47,7 +47,7 @@
                     '<div class="form-group"><label for="email"><strong>Email </strong></label><input type="email" class="form-control" placeholder="flavienProf@gmail.com" name="email'+counter+'" required /></div>'+
                     '</div>'+
                     '<div class="col">'+
-                    '<div class="form-group"><label for="first_name"><strong>Mots de passe par defaut</strong><br /></label><input type="text" class="form-control" id="pass" placeholder="admin" name="pass'+counter+'" required /></div>'+
+                    '<div class="form-group"><label for="first_name"><strong>Mots de passe par defaut</strong><br /></label><input type="password" class="form-control" id="pass" placeholder="admin" name="pass'+counter+'" required /></div>'+
                     '</div>'+
                     '</div>'+
                     '<div class="form-row">'+

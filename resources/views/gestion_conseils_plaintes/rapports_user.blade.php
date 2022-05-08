@@ -39,14 +39,16 @@
                                             <tr>
                                                 <td>{{ $item-> id }}</td>
                                                 <td>{{ $item-> conseil -> id }}</td>
-                                                <td>{{ $item-> conseil -> date }}</td>
-                                                <td><a href="{{ $item-> path }}">Télécharger</a></td>
+                                                <td>{{ $item-> conseil -> date  }}</td>
+                                                <td><form method="post" action="{{ route('gestion_conseils_plaintes.telecharger_rapport', $item-> id) }}">
+                                                    @csrf
+                                                    <button type="submit" class="btn btn-outline-success btn-block" onclick="return confirm('Télécharger ce rapport?')">Télécharger</button>
+                                                </form></td>
                                                 <td>{{ $item-> created_at }}</td>
                                                 <td>
                                                     <form method="post" action="{{ route('gestion_conseils_plaintes.suppression_rapport', $item-> id) }}">
                                                         @csrf
-                                                        <button type="submit" class="btn btn-outline-success btn-block">Enregistrer</button>
-
+                                                        <button type="submit" class="btn btn-outline-success btn-block" onclick="return confirm('Voulez vous vraiment supprimer ce rapport?')">Supprimer</button>
                                                     </form>
                                                     {{-- <a method="post" href="{{ route('gestion_conseils_plaintes.suppression_rapport', $item-> id) }}">Supprimer</a> --}}
                                                 </td>

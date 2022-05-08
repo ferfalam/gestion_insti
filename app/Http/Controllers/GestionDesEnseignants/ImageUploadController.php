@@ -12,9 +12,7 @@ class ImageUploadController extends Controller
     {
 
         $result=$request->validate([
-
             'imageUpload' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-
         ]);
 
         $result? flash('Photo de profil modifier avec succès')->success(): flash('Veillez importer une image de moins de 2Mo')->error();

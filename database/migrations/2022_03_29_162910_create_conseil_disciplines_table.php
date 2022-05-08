@@ -19,7 +19,8 @@ class CreateConseilDisciplinesTable extends Migration
             $table->date('date');
             $table->time('heure');
             $table->string('lieu');
-            $table->integer('mailOK')->default(0);
+            $table->integer('convocationsOK')->default(0);
+            $table->integer('invitationsOK')->default(0);
             $table->integer('tenue')->default(0);
             $table->integer('rapport')->default(0);
             $table->foreignId('maitre')->nullable()->constrained('users')->onDelete(null);

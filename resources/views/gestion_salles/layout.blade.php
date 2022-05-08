@@ -10,15 +10,11 @@
 
     <title>{{ config('app.name', 'Délibérations') }}</title>
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-    <script src="{{ asset('bootstrap/js/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('js/script.min.js') }}"></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <!-- <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet"> -->
-    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ asset('bootstrap/css/bootstrap.min.css') }}">
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet"
@@ -41,7 +37,7 @@
                     </a>
                     <hr class="sidebar-divider my-0">
                     <ul class="navbar-nav text-light" id="accordionSidebar">
-                        @if (!auth()->guest())
+                        @if (auth()->guest())
                             <li class="nav-item"><a class="nav-link {{ request()->is('home') ? 'active' : '' }}"
                                     href="{{ route('home') }}"><i
                                         class="far fa-user-circle"></i><span>Connexion</span></a></li>
@@ -87,7 +83,7 @@
                                     </form>
                                 </div>
                             </li>
-                            <li class="nav-item dropdown no-arrow mx-1">
+                            {{-- <li class="nav-item dropdown no-arrow mx-1">
                                 <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link"
                                         aria-expanded="false" data-bs-toggle="dropdown" href="#"><span
                                             class="badge bg-danger badge-counter">3+</span><i
@@ -179,9 +175,9 @@
                                 </div>
                                 <div class="shadow dropdown-list dropdown-menu dropdown-menu-end"
                                     aria-labelledby="alertsDropdown"></div>
-                            </li>
-                            <div class="d-none d-sm-block topbar-divider"></div>
-                            <li class="nav-item dropdown no-arrow">
+                            </li> --}}
+                            {{-- <div class="d-none d-sm-block topbar-divider"></div> --}}
+                            {{-- <li class="nav-item dropdown no-arrow">
                                 <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link"
                                         aria-expanded="false" data-bs-toggle="dropdown" href="#"><span
                                             class="d-none d-lg-inline me-2 text-gray-600 small">Valerie Luna</span><img
@@ -199,7 +195,7 @@
                                                 class="fas fa-sign-out-alt fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Logout</a>
                                     </div>
                                 </div>
-                            </li>
+                            </li> --}}
                         </ul>
                     </div>
                 </nav>
@@ -211,6 +207,10 @@
     </div>
     <!-- ALL JS FILES -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Scripts -->
+    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('bootstrap/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('js/script.min.js') }}"></script>
     {{-- <script src="{{ asset('js/all.js') }}"></script> --}}
     @yield("script")
 </body>

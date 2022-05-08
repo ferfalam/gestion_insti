@@ -39,15 +39,6 @@
         @endif
         <h2 class="text-center"><br><strong>Organiser un conseil de discipline</strong><br><br></h2>
 
-        <span>Participants</span><div class="form-group">
-            <select class="select2 form-control select2-multiple"
-                name = "participants[]" multiple="multiple" data-placeholder="Ajouter des participants...">
-                @foreach ($users as $user)
-                <option value="{{ $user -> id}}" >{{ $user -> pseudo}}</option>
-                @endforeach
-            </select>
-        </div>
-
         <span>Date du conseil</span><div class="form-group"><input class="form-control" type="date" name="date" placeholder="Date de tenue"></div>
         <span>Heure de conseil</span><div class="form-group"><input class="form-control" type="time" name="heure" placeholder="Heure"></div>
         <span>Lieu de conseil</span><div class="form-group">
@@ -56,7 +47,15 @@
                 <option value="Amphi GC">Amphi GC</option>
                 <option value="Salle P04">Salle P04</option>
             </select></div>
-        <div class="form-group"><button class="btn btn-primary" type="submit">Organiser</button></div>
+            <span>Participants</span><div class="form-group">
+                <select class="select2 form-control select2-multiple"
+                    name = "participants[]" multiple="multiple" data-placeholder="Ajouter des participants...">
+                    @foreach ($users as $user)
+                    <option value="{{ $user -> id}}" >{{ $user -> pseudo}}</option>
+                    @endforeach
+            </select>
+            </div>
+        <div class="form-group"><button class="btn btn-primary" type="submit" onclick="return confirm('Voulez-vous vraiment organiser ce conseil de discipline? (Vérifiez bien les informations saisies)')">Organiser</button></div>
     </form>
 </div>
 

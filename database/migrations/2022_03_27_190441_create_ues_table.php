@@ -21,7 +21,7 @@ class CreateUesTable extends Migration
             $table->integer('CT');
             $table->integer('TD');
             $table->integer('TP');
-            $table->foreignId('generalId')->constrained('generals');
+            $table->foreignId('generalId')->constrained('generals')->onDelete('restrict')->onUpdate('restrict');
             $table->timestamps();
         });
     }

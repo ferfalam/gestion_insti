@@ -31,8 +31,9 @@
                                         <thead>
                                             <tr>
                                                 <th>N°</th>
-                                                <th>Du conseil N°:</th>
-                                                <th>À:</th>
+                                                <th>Du conseil disciplinaire n°</th>
+                                                <th>Type</th>
+                                                <th>À</th>
                                                 <th>Date d'envoi</th>
                                                 <th>Statut</th>
                                                 <th>Actions</th>
@@ -43,8 +44,9 @@
                                             <tr>
                                                 <td>{{ $item-> id }}</td>
                                                 <td>{{ $item-> conseil -> id }}</td>
-                                                <td>{{ $item-> user -> pseudo }}</td>
-                                                <td>{{ $item-> created_at }}</td>
+                                                <td>{{ $item-> type }}</td>
+                                                <td>{{ $item-> user -> profile -> com_fullname }}</td>
+                                                <td>{{ $item-> created_at -> format("d F Y à H:i") }}</td>
                                                 @if ($item-> conseil -> statut == 0)
                                                 <td>Conseil en attente</td>
                                                 @else
@@ -67,7 +69,7 @@
                 </div>
             </div>
 
-                    
+
             </div>
         </div>
 

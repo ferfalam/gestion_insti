@@ -38,8 +38,8 @@
                                             <tr>
                                                 <td>{{ $item-> id }}</td>
                                                 <td>{{ $item-> id_plainte }}</td>
-                                                <td>{{ $item-> created_at -> format("d M Y") }}</td>
-                                                <td>{{ $item-> heure }}</td>
+                                                <td>{{ \Carbon\Carbon::parse($item->date)->format('j F Y') }}</td>
+                                                <td>{{ \Carbon\Carbon::parse($item->heure)->format('H:i') }}</td>
                                                 <td><a href="{{ route('gestion_conseils_plaintes.vue_conseil', $item-> id) }}">Voir</a></td>
                                             </tr>
                                             @empty

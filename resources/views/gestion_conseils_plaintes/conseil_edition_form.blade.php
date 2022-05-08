@@ -24,7 +24,6 @@
 @endsection
 @section('content')
 
-
 <div id ="wrapper" class="contact-clean">
     <form method="post" action="{{ route('gestion_conseils_plaintes.edition_conseil', $conseil -> id) }}">
         @csrf
@@ -43,7 +42,7 @@
             <select class="select2 form-control select2-multiple"
                 name = "participants[]" multiple="multiple" data-placeholder="Ajouter des participants...">
                 @foreach ($users as $user)
-                <option value="{{ $user -> id}}" >{{ $user -> pseudo}}</option>
+                <option value="{{ $user -> id}}" >{{ $user -> profile -> com_fullname}}</option>
                 @endforeach
             </select>
         </div>
@@ -57,11 +56,12 @@
                 <option value="Amphi GC">Amphi GC</option>
                 <option value="Salle P04">Salle P04</option>
             </select></div>
+            @if ($conseil-> tenue == 1)
             <span>Présents</span><div class="form-group">
                 <select class="select2 form-control select2-multiple"
                     name = "presents[]" multiple="multiple" data-placeholder="Personnes présentes...">
                     @foreach ($users as $user)
-                    <option value="{{ $user -> id}}" >{{ $user -> pseudo}}</option>
+                    <option value="{{ $user -> id}}" >{{ $user -> profile -> com_fullname}}</option>
                     @endforeach
                 </select>
             </div>
@@ -69,11 +69,12 @@
                 <select class="form-control" id="drop1"
                     name = "maitre"data-placeholder="Maitre de séance...">
                     @foreach ($users as $user)
-                    <option value="{{ $user -> id}}" >{{ $user -> pseudo}}</option>
+                    <option value="{{ $user -> id}}" >{{ $user -> profile -> com_fullname}}</option>
                     @endforeach
                 </select>
             </div>
-        <div class="form-group"><button class="btn btn-primary" type="submit">Mettre à jour</button></div>
+            @endif
+        <div class="form-group"><button class="btn btn-primary" type="submit" onclick="return confirm('Voulez-vous vraiment mettre à jour ce conseil de discipline avec les nouvelles informations?')">Mettre à jour</button></div>
     </form>
 </div>
 

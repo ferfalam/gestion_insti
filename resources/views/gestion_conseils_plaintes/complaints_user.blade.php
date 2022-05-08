@@ -44,11 +44,11 @@
                                                 @if ($item-> plaignant -> id == auth()->user()->id)
                                                 <td>Vous</td>
                                                 @else
-                                                <td>{{ $item-> plaignant -> pseudo }}</td>
+                                                <td>{{ $item-> plaignant -> profile -> com_fullname}}</td>
                                                 @endif
 
                                                 <td>{{ $item-> motif }}</td>
-                                                <td>{{ $item-> created_at -> format("d M Y à H:i")}}</td>
+                                                <td>{{ $item-> created_at -> format("d F Y à H:i")}}</td>
                                                 @if ($item->statut == 0)
                                                 <td>En Attente...</td>
                                                 @elseif ($item->statut == 1)

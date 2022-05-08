@@ -16,6 +16,7 @@
         "laravel/ui": "^3.4",
         "maatwebsite/excel": "^3.1",
 <<<<<<< HEAD
+<<<<<<< HEAD
         "symfony/http-client": "^5.4",
         "symfony/mailgun-mailer": "^5.4",
         "symfony/postmark-mailer": "^5.4",
@@ -23,6 +24,14 @@
         "spatie/simple-excel": "^1.13",
 >>>>>>> f59079e1e80389dd8b0a468298ce5308baf933f2
         "yajra/laravel-datatables-oracle": "~9.0"
+=======
+        "symfony/http-client": "^5.4",
+        "symfony/mailgun-mailer": "^5.4",
+        "symfony/postmark-mailer": "^5.4",
+        "spatie/simple-excel": "^1.13",
+        "yajra/laravel-datatables-oracle": "~9.0",
+      "ext-json": "*"
+>>>>>>> 981cdc9351c10f4fd0e18c0218707a33c114e69f
     },
     "require-dev": {
         "facade/ignition": "^2.5",

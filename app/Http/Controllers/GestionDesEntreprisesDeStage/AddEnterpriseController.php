@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\GestionDesEntreprisesDeStage;
 
+use App\Models\Domaines;
 use App\Models\Entreprises;
 use App\Models\User;
 use App\Models\User_userGroup_Position_Service_Map;
@@ -13,6 +14,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
+use function MongoDB\BSON\toJSON;
 
 class AddEnterpriseController extends Controller
 {
@@ -92,18 +94,20 @@ class AddEnterpriseController extends Controller
             'password' => (isset($request->password))?['confirmed', Rules\Password::defaults()]:[],
         ]);
 
+
         if (isset($request->password)) {
             $user = new User();
             $user->statusId = 1;
             $user->email = $request->email;
             $user->pseudo = "";
             $user->password = Hash::make($request->password);
+            $user->user_groupId = userGroup::where("name","partenaire")->first()->id;
             $user->save();
 
-            $userMapping = new User_userGroup_Position_Service_Map();
-            $userMapping->userId = $user->id;
-            $userMapping->userGroupId = userGroup::where("partenaire")->first()->id;
-            $userMapping->save();
+//            $userMapping = new User_userGroup_Position_Service_Map();
+//            $userMapping->user_id = $user->id;
+//            $userMapping->userGroupId = userGroup::where("partenaire")->first()->id;
+//            $userMapping->save();
         }
 
         $newName = null;
@@ -139,5 +143,16 @@ class AddEnterpriseController extends Controller
         $this->success = true;
 
         return view('gestion_entreprises_stage.enterprises.add_enterprise', $this->data);
+    }
+
+    public function  addDomain(Request $request){
+        $request->validate([
+            'domaine' => 'required|string',
+        ]);
+
+        $domaine = new Domaines();
+        $domaine->libelle = $request->domaine;
+        $domaine->save();
+        return json_encode($domaine);
     }
 }

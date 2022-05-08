@@ -48,10 +48,7 @@
                                 <li> <a href="{{ route('gestion_deroulement_cours.retraitFicheEtudiant') }}"> Retirer Fiche Etudiant  </a> </li>
 
                                 <li> <a href="{{ route('gestion_deroulement_cours.RetraitFicheEnseignantGlobal') }}"> Retirer fiche Enseignant Global </a> </li>
-                
-                                <li> <a href="{{ route('gestion_deroulement_cours.newField') }}"> Integrer un nouveau groupe Pedagogique  </a> </li>
 
-                                <li> <a href="{{ route('gestion_deroulement_cours.newFields') }}"> Integrer une nouvelle filiere </a> </li>
 
                             </ul>
 

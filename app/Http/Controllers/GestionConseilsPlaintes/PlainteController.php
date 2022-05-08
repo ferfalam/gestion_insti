@@ -5,8 +5,10 @@ namespace App\Http\Controllers\GestionConseilsPlaintes;
 use Illuminate\Http\Request;
 use App\Models\Plainte;
 use App\Models\PlainteUser;
+use App\Models\PlainteTemoin;
 use App\Models\User;
 use App\Http\Controllers\Controller;
+use PDF;
 use Auth;
 
 class PlainteController extends Controller
@@ -21,14 +23,14 @@ class PlainteController extends Controller
     }
 
     public function show(){
-        //$().DataTable();
-        $admin = auth()->user()->statusId;
+
+        $admin = auth()->user()->user_groupId;
         if($admin == 1){
             $query = Plainte::all();
         } else {
             $query = Plainte::where('id_plaignant', auth()->user()->id)->get();
         }
-        //dd($query);
+
         return view('gestion_conseils_plaintes.complaints_user', compact('query'));
     }
 
@@ -38,7 +40,7 @@ class PlainteController extends Controller
     }
 
     public function edform($id){
-        $users = User::all()->except(Auth::id());
+        $users = User::all();
         $plainte = Plainte::findOrFail($id);
         return view('gestion_conseils_plaintes.complaint_edition_form', compact('users','plainte'));
     }
@@ -61,18 +63,33 @@ class PlainteController extends Controller
             $request->session()->flash('alert-success', ' Complaint is deleted successfully.');
         }
 
+        $fautifs = PlaintePresent::where('id_plainte', $plainte)-> get();
+        foreach($fautifs as $c){
+            $c->delete();
+            $request->session()->flash('alert-success', ' Complaint is deleted successfully.');
+        }
+
         foreach($request -> fautifs as $key) {
             PlainteUser::create([
-                'id_plainte' => Plainte::orderBy('id', 'desc')->first()->id,
+                'id_plainte' => $plainte,
                 'id_user' => $key
             ]);
+        }
+
+        if($request -> temoins != null){
+            foreach($request -> temoins as $key) {
+                PlainteTemoin::create([
+                    'id_plainte' => Plainte::orderBy('id', 'desc')->first()->id,
+                    'id_temoin' => $key
+                ]);
+            }
         }
 
         return redirect()->route('gestion_conseils_plaintes.liste_plaintes');
 
     }
-    public function create(Request $request){
 
+    public function create(Request $request){
         $request->validate([
             'fautifs' => 'required',
             'motif' => 'required',
@@ -91,6 +108,15 @@ class PlainteController extends Controller
                 'id_user' => $key
             ]);
         }
+
+        if($request -> temoins != null){
+            foreach($request -> temoins as $key) {
+                PlainteTemoin::create([
+                    'id_plainte' => Plainte::orderBy('id', 'desc')->first()->id,
+                    'id_temoin' => $key
+                ]);
+            }
+        }
         return redirect()->route('gestion_conseils_plaintes.liste_plaintes');
     }
 
@@ -108,6 +134,7 @@ class PlainteController extends Controller
         ]);
         return redirect()->route('gestion_conseils_plaintes.liste_plaintes');
      }
+
 }
 
 

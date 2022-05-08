@@ -28,8 +28,13 @@
 @section('content')
 
 <div id ="wrapper" class="contact-clean">
-        <form method="post" action="{{ route('gestion_conseils_plaintes.send') }}">
+        <form method="post" action="{{ route('gestion_conseils_plaintes.nouvelle_plainte') }}">
             @csrf
+            @if ($message = Session::get('success'))
+            <div class="alert alert-success">
+                <strong>{{ 'Votre plainte a été soumise' }}</strong>
+            </div>
+          @endif
             @if ($errors->any())
                         <div class="alert alert-danger" role="alert">
                             <ul>
@@ -39,20 +44,30 @@
                             </ul>
                 </div>
             @endif
+
             <h2 class="text-center"><br><strong>Votre formulaire de plainte</strong><br><br></h2>
 
-            <div class="form-group">
+            <span>Motif</span><div class="form-group"><input class="form-control" type="text" name="motif" placeholder="Motif de la plainte"></div>
+            <span>Fautifs</span><div class="form-group">
                 <select class="select2 form-control select2-multiple"
                     name = "fautifs[]" multiple="multiple" data-placeholder="Fautifs...">
                     @foreach ($users as $user)
-                    <option value="{{ $user -> id}}" >{{ $user -> pseudo}}</option>
+                    <option value="{{ $user -> id}}" >{{ $user -> profile -> com_fullname}}</option>
                     @endforeach
                 </select>
             </div>
 
-            <div class="form-group"><input class="form-control" type="text" name="motif" placeholder="Motif de la plainte"></div>
-            <div class="form-group"><textarea class="form-control" name="description" placeholder="Description" rows="5"></textarea></div>
-            <div class="form-group"><button class="btn btn-primary" type="submit">Envoyer</button></div>
+            <span>Temoins</span><div class="form-group">
+                <select class="select2 form-control select2-multiple"
+                    name = "temoins[]" multiple="multiple" data-placeholder="(facultatif)">
+                    @foreach ($users as $user)
+                    <option value="{{ $user -> id}}" >{{ $user -> profile -> com_fullname}}</option>
+                    @endforeach
+                </select>
+            </div>
+            <span>Description</span><div class="form-group"><textarea class="form-control" name="description" placeholder="Description" rows="4"></textarea></div>
+
+            <div class="form-group"><button class="btn btn-primary" type="submit" onclick="return confirm('Voulez-vous soumettre cette plainte? (Vérifiez bien les informations saisies)'">Envoyer</button></div>
         </form>
     </div>
 

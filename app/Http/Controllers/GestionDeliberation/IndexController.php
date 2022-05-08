@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\GestionDeliberation;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use App\Http\Controllers\Controller;
 use App\Models\Deliberation;
 use App\Models\AcademicYear;
@@ -45,9 +46,18 @@ class IndexController extends Controller
 
     public function show(Request $request){
 
-        header('Content-type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-        readfile(Storage::path($request->path));
+        header('Content-type: application/pdf');
+        if(strrchr($request->path, '.') == '.pdf'){
+            readfile(Storage::path($request->path));
+        } else{
+            return redirect(route('gestion_deliberations.index'))->with('error', 'Ce fichier ne peut être lu dans le navigateur! ');
 
+        }
+    }
+
+    public function down(Request $request){
+        //return response()->();
+        return response()->download(Storage::path($request->path));
     }
  
     public function recherche(Request $request)

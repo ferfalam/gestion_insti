@@ -13,7 +13,7 @@
                 <a class="nav-link" href="{{ route('gestion_enseignant.show_mission') }}"><i class="fas fa-table"></i><span>Mission</span></a>
             </li>
 
-            <li class="nav-item"><a class="nav-link" href="/profile"><i class="fas fa-user"></i>Profil</a></li>
+            <li class="nav-item"><a class="nav-link" href="{{ route('gestion_enseignant.show_profil') }}"><i class="fas fa-user"></i>Profil</a></li>
         </ul>
         <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button></div>
     </div>
@@ -42,7 +42,7 @@
                         @isset($table)
                         @foreach ($table as $table)
                         <tr>
-                            <td class="text-center">{{$table->nom_ue}}</td>
+                            <td class="text-center">{{$table->nomUe}}</td>
                             <td class="text-center">{{$table->credit}}</td>
                             <td class="text-center">{{$table->ct}}</td>
                             <td class="text-center">{{$table->td}}</td>
@@ -54,9 +54,6 @@
                         </tr>
                         @endforeach
                         @endisset
-
-
-
                     </tbody>
                 </table>
             </div>
@@ -85,7 +82,7 @@
                 </table>
             </div>
         </div>
-        <div id="btn-Exporter"><a class="btn btn-primary btn-sm" role="button" id="exporterPdf" name="exporterPdf" href="/pdfT">Exporter PDF</a></div>
+        <div id="btn-Exporter"><a class="btn btn-primary btn-sm" role="button" id="exporterPdf" name="exporterPdf" href="{{ route('gestion_enseignant.programme_pdf') }}">Exporter PDF</a></div>
     </div>
 </div>
 </div>

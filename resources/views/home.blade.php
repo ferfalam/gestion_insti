@@ -1,6 +1,24 @@
 @extends('layouts.app')
 
+@section('style')
+    <style>
+        .card{
+            height : 100%
+        }
+
+        .card-body a{
+            float: right;
+            position: absolute;
+            right: 10px;
+            bottom: 10px;
+        }
+    </style>
+@endsection
+
 @section('content')
+
+
+
     <div class="container">
         <div class="row">
             <div class="col-md-4 mb-2">
@@ -14,27 +32,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-
-    <div class="container">
-        <div class="row">
-            <div class="col-md-4 mb-2">
-                <div class="card">
-                    <div class="card-header">Gestion des deliberation</div>
-
-                    <div class="card-body">
-                        <p class="card-text">Vous serez redirigé vers la section de gestion des deliberation de l'insti.</p>
-                        <a href="{{ route('gestion_deliberation.index') }}" class="btn btn-primary w-25" style="float: right"><i class="fa-solid fa-arrow-right-long"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-    <div class="container">
-        <div class="row">
             <div class="col-md-4 mb-2">
                 <div class="card">
                     <div class="card-header">Gestion des salles et emploi du temps</div>
@@ -97,6 +94,36 @@
                     <div class="card-body">
                         <p class="card-text">Vous serez redirigé vers la section de Gestion des conseils de discipline et plaintes de l'insti.</p>
                         <a href="{{ route('gestion_conseils_plaintes.index') }}" class="btn btn-primary w-25" style="float: right"><i class="fa-solid fa-arrow-right-long"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-2">
+                <div class="card">
+                    <div class="card-header">Gestion des conseils pédagogique et département</div>
+
+                    <div class="card-body">
+                        <p class="card-text">Vous serez redirigé vers la section de Gestion des conseils pédagogique et département de l'insti.</p>
+                        <a href="{{ route('gestion_conseil_pedagogique.index') }}" class="btn btn-primary w-25" style="float: right"><i class="fa-solid fa-arrow-right-long"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-2">
+                <div class="card">
+                    <div class="card-header">Gestion des fiches et rapports de Délibération</div>
+
+                    <div class="card-body">
+                        <p class="card-text">Vous serez redirigé vers la section de Gestion des fiches et rapports de Délibération de l'insti.</p>
+                        <a href="{{ route('gestion_deliberation.index') }}" class="btn btn-primary w-25" style="float: right"><i class="fa-solid fa-arrow-right-long"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-2">
+                <div class="card">
+                    <div class="card-header">Gestion des TFE</div>
+
+                    <div class="card-body">
+                        <p class="card-text">Vous serez redirigé vers la section de Gestion des travaux de fin d'étude de l'insti.</p>
+                        <a href="{{ route('gestion_tfe.welcome') }}" class="btn btn-primary w-25" style="float: right"><i class="fa-solid fa-arrow-right-long"></i></a>
                     </div>
                 </div>
             </div>
