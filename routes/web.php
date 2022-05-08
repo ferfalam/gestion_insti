@@ -162,27 +162,27 @@ Route::group(["prefix"=>"gestion_authClass", "as"=>"gestion_authClass.", "middle
     Route::get('/demandeaff', function () { return view('gestion_authClass.pages/demandeaff');  })->name('demandeaff');
 
     Route::get('/deconnexion', 'GestionAuthAttClassement\ConnexionController@deconnexion')->name('deconnexion');
-    
+
     Route::post('/listdemande','GestionAuthAttClassement\DemandeAuthController@store')->name('dem');
-    
+
     Route::get('/reponseDemande/{id}', 'GestionAuthAttClassement\DemandeAuthController@edit')->name('medit');
-    
+
     Route::get('/update/{id}', 'GestionAuthAttClassement\DemandeAuthController@show2')->name('edit2');
-    
+
     Route::post('/updatede/{id}', 'GestionAuthAttClassement\DemandeAuthController@update')->name('update');
-    
+
     Route::get('/listdemande','GestionAuthAttClassement\DemandeAuthController@create')->name('listdemande');
 
     Route::get('/demande_r','GestionAuthAttClassement\DemandeAuthController@index')->name('demande_r');
 
     Route::get('/classement','GestionAuthAttClassement\ClassementController@create')->name('classement');
-    
+
     Route::post('/classement','GestionAuthAttClassement\ClassementController@store')->name('dam');
 
     Route::get('/ficheDeliberation','GestionAuthAttClassement\FileController@ImportForm')->name('deliber');
-    
+
     Route::post('/import','GestionAuthAttClassement\FileController@Import')->name('employee.import');
-    
+
     Route::get('/export-excel','GestionAuthAttClassement\FileController@exportIntoExcel')->name('export-excel');
 
     Route::get('/send-mail', [\App\Http\Controllers\MailController::class, 'sendMail'])->middleware(['auth'])->name('send-mail');
@@ -272,7 +272,7 @@ Route::group(["prefix"=>"gestion_deroulement_cours", "as"=>"gestion_deroulement_
 {
 
     Route::get('/', "GestionDeroulementCours\HomeController@index")->name('accueil');
-    
+
     // Form Deroulement Cours
     Route::get('/formDeroulementCours', 'GestionDeroulementCours\FormulaireDeroulementCoursController@createFormDeroulementCours')->name('formulaire_Deroulement_Cours');
     Route::get('/formDeroulementCoursEnregistres', 'GestionDeroulementCours\FormulaireDeroulementCoursController@showFormDeroulementCours')->name('showFiche');
@@ -284,7 +284,7 @@ Route::group(["prefix"=>"gestion_deroulement_cours", "as"=>"gestion_deroulement_
     Route::get('/formDeroulementCoursEnregistresParUes', 'GestionDeroulementCours\FicheDeroulementCoursUeController@showFormDeroulementCoursByUes')->name('showFicheUes');
     Route::get('/formDeroulementCoursEnregistresParUe/{id}', 'GestionDeroulementCours\FicheDeroulementCoursUeController@showFormDeroulementCoursByUe')->name('showFicheUe');
 
-    
+
     Route::get('/formDeroulementCoursEnseignants', 'GestionDeroulementCours\FicheDeroulementCoursUeController@showFormDeroulementCoursByEnseignants')->name('showFicheEnseignants');
     Route::get('/formDeroulementCoursEnseignant/{id}', 'GestionDeroulementCours\FicheDeroulementCoursUeController@showFormDeroulementCoursByEnseignant')->name('showFicheEnseignant');
 
@@ -337,14 +337,11 @@ Route::group(["prefix"=>"gestion_conseils_plaintes", "as"=>"gestion_conseils_pla
     Route::get('/conseils', 'GestionConseilsPlaintes\ConseilController@show')->name('liste_conseils');
     Route::get('/rapports', 'GestionConseilsPlaintes\RapportController@show')->name('liste_rapports');
 
-<<<<<<< HEAD
-=======
 
     Route::post('/telecharger/rapport{id}', 'GestionConseilsPlaintes\RapportController@downloadRapport')->name('telecharger_rapport');
 
     Route::get('/plainte-model', 'GestionConseilsPlaintes\PlainteController@model')->name('model');
 
->>>>>>> conseild
     Route::post('/rejet/{id}', 'GestionConseilsPlaintes\PlainteController@reject')->name('rejet_plainte');
     Route::post('/valider_conseil/{id}', 'GestionConseilsPlaintes\ConseilController@tenu')->name('tenu');
 
