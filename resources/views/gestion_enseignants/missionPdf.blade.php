@@ -20,7 +20,7 @@
 </style>
 <body>
     <h1></h1>
-    @if (Auth::user()->email=='admin@insti.com')
+    @if (Auth::user()->user_group->name=="admin")
         
         <div class="card-body text-center shadow" id="cardId">
                 <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
@@ -52,19 +52,18 @@
         @foreach ($profileTrait as $profile)
         @php
             $rowspan=0;
-            $sqlTable= "select * from tableau_missions where Nom_enseignant ='"."".$profile->nom." ".$profile->prenom."'";
+            $sqlTable= "select * from missions where nom_enseignant ='"."".$profile->com_givenName." ".$profile->com_fullname."'";
             $table=DB::select($sqlTable);
             $table2=DB::select($sqlTable);
             foreach ($table2 as $table) {
                 $rowspan++;
             }
-            echo "je marche";
         @endphp
 
         @if ($table!=null)
-            <td class="text-center" rowspan="{{$rowspan}}">{{$profile->prenom}} {{$profile->nom}}</td>
+            <td class="text-center" rowspan="{{$rowspan}}">{{$profile->com_fullname}} {{$profile->com_givenName}}</td>
             @php
-                $sqlTable= "select * from tableau_missions where Nom_enseignant ='"."".$profile->nom." ".$profile->prenom."'";
+                $sqlTable= "select * from missions where nom_enseignant ='"."".$profile->com_givenName." ".$profile->com_fullname."'";
                 $table=DB::select($sqlTable);
                 foreach ($table as $table) {
                     echo '
@@ -73,15 +72,15 @@
                             <td>'.$table->adressse.'</td>
                             <td>'.$table->date_naissance.'</td>
                             <td>'.$table->nationalite.'</td>
-                            <td>'.$table->Maticule.'</td>
+                            <td>'.$table->maticule.'</td>
                             <td>'.$table->grade.'</td>
-                            <td>'.$table->Ue.'</td>
-                            <td>'.$table->Groupe_Pedagogique.'</td>
-                            <td>'.$table->Annee_academique.'</td>
+                            <td>'.$table->ue.'</td>
+                            <td>'.$table->pedagogicGroup.'</td>
+                            <td>'.$table->academicYear.'</td>
                             <td>'.$table->missionHeure.'</td>
                             <td>'.$table->missionDuree.'</td>
-                            <td>'.$table->dateJourArrive.'</td>
-                            <td>'.$table->dateJourRetour.'</td>
+                            <td>'.$table->startDate.'</td>
+                            <td>'.$table->endDate.'</td>
                         </tr>
                     ';
                 }
@@ -90,7 +89,7 @@
         @endforeach
         @else
         @php
-            $sqlTable= "select * from tableau_missions where Nom_enseignant ='"."".request('selectNom')."'";
+            $sqlTable= "select * from missions where nom_enseignant ='"."".request('selectNom')."'";
             $rowspan=0;
             $table=DB::select($sqlTable);
             $table2=DB::select($sqlTable);
@@ -101,7 +100,7 @@
         @if ($table!=null)
             <td class="text-center" rowspan="{{$rowspan}}">{{request('selectNom')}}</td>
             @php
-                $sqlTable= "select * from tableau_missions where nom_enseignant ='".request('selectNom')."'";
+                $sqlTable= "select * from missions where nom_enseignant ='".request('selectNom')."'";
                 $table=DB::select($sqlTable);
                 foreach ($table as $table) {
                 
@@ -111,15 +110,15 @@
                             <td>'.$table->adressse.'</td>
                             <td>'.$table->date_naissance.'</td>
                             <td>'.$table->nationalite.'</td>
-                            <td>'.$table->Maticule.'</td>
+                            <td>'.$table->maticule.'</td>
                             <td>'.$table->grade.'</td>
-                            <td>'.$table->Ue.'</td>
-                            <td>'.$table->Groupe_Pedagogique.'</td>
-                            <td>'.$table->Annee_academique.'</td>
+                            <td>'.$table->ue.'</td>
+                            <td>'.$table->pedagogicGroup.'</td>
+                            <td>'.$table->academicYear.'</td>
                             <td>'.$table->missionHeure.'</td>
                             <td>'.$table->missionDuree.'</td>
-                            <td>'.$table->dateJourArrive.'</td>
-                            <td>'.$table->dateJourRetour.'</td>
+                            <td>'.$table->startDate.'</td>
+                            <td>'.$table->endDate.'</td>
                         </tr>
                     ';
 
@@ -162,16 +161,17 @@
                             <td class="text-center">{{ $table->adressse }}</td>
                             <td class="text-center">{{ $table->date_naissance }}</td>
                             <td class="text-center">{{ $table->nationalite }}</td>
-                            <td class="text-center">{{ $table->Maticule }}</td>
+                            <td class="text-center">{{ $table->maticule }}</td>
                             <td class="text-center">{{ $table->grade }}</td>
-                            <td class="text-center">{{ $table->Ue }}</td>
-                            <td class="text-center">{{ $table->Groupe_Pedagogique }}</td>
-                            <td class="text-center">{{ $table->Annee_academique }}</td>
+                            <td class="text-center">{{ $table->ue }}</td>
+                            <td class="text-center">{{ $table->pedagogicGroup }}</td>
+                            <td class="text-center">{{ $table->academicYear }}</td>
                             <td class="text-center">{{ $table->missionHeure }}</td>
                             <td class="text-center">{{ $table->missionDuree." semaines" }}</td>
-                            <td class="text-center">{{ $table->dateJourArrive }}</td>
-                            <td class="text-center">{{ $table->dateJourRetour }}</td>
+                            <td class="text-center">{{ $table->startDate }}</td>
+                            <td class="text-center">{{ $table->endDate }}</td>
                         </tr>
+
                         @endforeach
                     </tbody>
                 </table>

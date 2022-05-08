@@ -67,6 +67,13 @@
                                     <span>Voir demande d'evaluation</span>
                                 </a>
                             </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('gestion_demandes_reclamation_evaluation.enregistrer_etudiant') }}">
+                                    <i class="fas fa-table"></i>
+                                    <span>Enregistrer les etudiants</span>
+                                </a>
+                            </li>
                             
                         @endif
                     </ul>

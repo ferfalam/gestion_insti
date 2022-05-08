@@ -81,9 +81,7 @@ border-color: #000000;
 
 }
 
-    #footer {
-
-
+#footer {
    position : relative;
    bottom : 0;
    height:20px;
@@ -211,12 +209,6 @@ border-color: #000000;
         <div><strong>INSTI ex Institut Universitaire de Technologie BP: 133 - Mail: <a href="mailto:instilokossa@gmail.com">instilokossa@gmail.com</a> - site web : http://insti.edu.bj/ </strong></div>
         </div>
     </div>
-
-
-
-
-
-
 </body>
 
 

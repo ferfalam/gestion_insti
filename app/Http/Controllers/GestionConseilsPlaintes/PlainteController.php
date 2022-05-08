@@ -10,6 +10,7 @@ use App\Models\User;
 use App\Http\Controllers\Controller;
 use PDF;
 use Auth;
+Use Alert;
 
 class PlainteController extends Controller
 {
@@ -39,10 +40,25 @@ class PlainteController extends Controller
         return view('gestion_conseils_plaintes.complaint_form', compact('users'));
     }
 
+    public function model(){
+        return view('gestion_conseils_plaintes.model');
+    }
+
     public function edform($id){
         $users = User::all();
-        $plainte = Plainte::findOrFail($id);
-        return view('gestion_conseils_plaintes.complaint_edition_form', compact('users','plainte'));
+        $plainte = Plainte::find($id);
+        $selected1 = array();
+        $selected2 = array();
+        $fautifs = PlainteUser::where('id_plainte', $id)-> get();
+        $temoins = PlainteTemoin::where('id_plainte', $id)-> get();
+        foreach($fautifs as $c){
+            array_push($selected1, $c->fautif-> id);
+        }
+
+        foreach($temoins as $c){
+            array_push($selected2, $c->temoin-> id);
+        }
+        return view('gestion_conseils_plaintes.complaint_edition_form', compact('users','plainte','selected1','selected2'));
     }
 
     public function update(Request $request, $plainte){
@@ -63,7 +79,7 @@ class PlainteController extends Controller
             $request->session()->flash('alert-success', ' Complaint is deleted successfully.');
         }
 
-        $fautifs = PlaintePresent::where('id_plainte', $plainte)-> get();
+        $fautifs = PlainteTemoin::where('id_plainte', $plainte)-> get();
         foreach($fautifs as $c){
             $c->delete();
             $request->session()->flash('alert-success', ' Complaint is deleted successfully.');
@@ -84,9 +100,7 @@ class PlainteController extends Controller
                 ]);
             }
         }
-
         return redirect()->route('gestion_conseils_plaintes.liste_plaintes');
-
     }
 
     public function create(Request $request){
@@ -117,6 +131,7 @@ class PlainteController extends Controller
                 ]);
             }
         }
+        toast('Votre plainte a été ajoutée!','success');
         return redirect()->route('gestion_conseils_plaintes.liste_plaintes');
     }
 

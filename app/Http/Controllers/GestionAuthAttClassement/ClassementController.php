@@ -153,8 +153,14 @@ class ClassementController extends Controller
             // 'annee',
         ]);
 
+        if ($request->filiere=='all') {
+            $moyenne=Moyenne::all();
+        } else {
+            $moyenne=Moyenne::all()->where('filiere',$request->filiere);
+        }
+
         // $moyenne = Moyenne::all()->where('filiere', $request-)->where('genre', 'M');
-        $moyenne = Moyenne::all()->where('filiere', $request->filiere);
+        
         $pdf = PDF::loadView('gestion_authClass.pages.classementPdf',compact('moyenne','request'));
         return $pdf->download('Classements.pdf');
        

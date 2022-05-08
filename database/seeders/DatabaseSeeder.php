@@ -7,22 +7,27 @@ use App\Models\User;
 use App\Models\Field;
 use App\Models\Status;
 use App\Models\General;
+use App\Models\Profile;
 use App\Models\Qualite;
 use App\Models\Position;
 use App\Models\Services;
 use App\Models\UserGroup;
+use App\Models\Typestages;
 use App\Models\AcademicYear;
 use App\Models\PedagogicGroup;
-use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\Hash;
-use App\Models\User_userGroup_Position_Service_Map;
-use App\Models\user_pedagogic_group_map;
-use App\Models\ShortcutsRequest;
-use App\Models\AcademicSemester;
 use App\Models\Evaluation_type;
+<<<<<<< HEAD
 use App\Models\Profile;
 use App\Models\Demande;
 use App\Models\Moyenne;
+=======
+use Illuminate\Database\Seeder;
+use App\Models\AcademicSemester;
+use App\Models\ShortcutsRequest;
+use Illuminate\Support\Facades\Hash;
+use App\Models\user_pedagogic_group_map;
+use App\Models\User_userGroup_Position_Service_Map;
+>>>>>>> a7a76d4a6557488b7c01616899a2d1da46f73e58
 
 class DatabaseSeeder extends Seeder
 {
@@ -34,7 +39,6 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // \App\Models\User::factory(10)->create();
-
          $status=Status::create(['name'=>'Bloquer','notation'=>1,'description'=>"Description diu status créer"]);
          $status=Status::create(['name'=>'Bloquer','notation'=>2,'description'=>"Description diu status créer"]);
 
@@ -75,14 +79,6 @@ class DatabaseSeeder extends Seeder
          $pedagogic_groups=PedagogicGroup::create(["name"=>"Génie Electrique et Informatique","fieldId"=>"3","academicYearId"=>"1","studyYearId"=>"1","description"=>"GEI"]);
          $pedagogic_groups=PedagogicGroup::create(["name"=>"Maintenance des Systèmes","fieldId"=>"4","academicYearId"=>"1","studyYearId"=>"1","description"=>"MS"]);
 
-         //admin,superadmin,apprenant,enseignant,personnel,redacteur,partenaire
-         $user_groups=UserGroup::create(["name"=>"admin","description"=>"Admin"]);
-         $user_groups=UserGroup::create(["name"=>"superadmin","description"=>"Le super Admin"]);
-         $user_groups=UserGroup::create(["name"=>"apprenant","description"=>"Un apprenant"]);
-         $user_groups=UserGroup::create(["name"=>"enseignant","description"=>"Un enseignant"]);
-         $user_groups=UserGroup::create(["name"=>"personnel","description"=>"Un personnel"]);
-         $user_groups=UserGroup::create(["name"=>"redacteur","description"=>"Un redacteur"]);
-         $user_groups=UserGroup::create(["name"=>"partenaire","description"=>"Un partenaire"]);
 
          //chefService/Adjoint, collaborateur, chefCollaborateur, chefDivision, responsableClasse/Adjoint
          $position=Position::create(["name"=>"chefService/Adjoint","description"=>" le chefService/Adjoint "]);
@@ -126,7 +122,7 @@ class DatabaseSeeder extends Seeder
         $shortcuts_request=ShortcutsRequest::create(["academic_year_Id"=>"1","academic_semester_Id"=>"1","field_Id"=>"4","pedagogic_group_Id"=>"4","ue_Id"=>"1"]);
         $shortcuts_request=ShortcutsRequest::create(["academic_year_Id"=>"1","academic_semester_Id"=>"1","field_Id"=>"4","pedagogic_group_Id"=>"4","ue_Id"=>"2"]);
         $shortcuts_request=ShortcutsRequest::create(["academic_year_Id"=>"1","academic_semester_Id"=>"1","field_Id"=>"4","pedagogic_group_Id"=>"4","ue_Id"=>"3"]);
-        $shortcuts_request=ShortcutsRequest::create(["academic_year_Id"=>"1","academic_semester_Id"=>"1","field_Id"=>"4","pedagogic_group_Id"=>"4","ue_Id"=>"4"]);
+    $shortcuts_request=ShortcutsRequest::create(["academic_year_Id"=>"1","academic_semester_Id"=>"1","field_Id"=>"4","pedagogic_group_Id"=>"4","ue_Id"=>"4"]);
 
        $evaluation_types=Evaluation_type::create(["designation"=>"Devoir du professeur","description"=>""]);
        $evaluation_types=Evaluation_type::create(["designation"=>"Devoir de l'administration","description"=>""]);
@@ -252,6 +248,7 @@ class DatabaseSeeder extends Seeder
             "ens_typeId" => "2",
         ]);
 
+<<<<<<< HEAD
 
         // Gestion d'authentification des Attestation
         // Demende
@@ -302,5 +299,19 @@ class DatabaseSeeder extends Seeder
             'moy_generale'=>15,
             ]);
         
+=======
+        $typeStage = Typestages::create(
+            [
+                'libelle' => "Académique",
+            ]
+        );
+
+        $typeStage = Typestages::create(
+            [
+                'libelle' => "Professionnel",
+            ]
+        );
+
+>>>>>>> a7a76d4a6557488b7c01616899a2d1da46f73e58
     }
 }

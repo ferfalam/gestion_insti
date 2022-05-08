@@ -74,11 +74,10 @@ class ConvocationController extends Controller
     public function show(){
 
         $admin = auth()->user()->user_groupId;
-
         if($admin == 1){
             $query = Convocation::all();
         } else {
-            $query = Convocation::where('id_user', Auth::user()->id);
+            $query = Convocation::where('id_user', Auth::user()->id)->get();
         }
         return view('gestion_conseils_plaintes.convocations_user', compact('query'));
     }

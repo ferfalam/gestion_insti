@@ -7,12 +7,14 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Barryvdh\DomPDF\Facade as PDF;
 
 class MissionController extends Controller
 {
     public function affichage()
     {
-        if(Auth::user()->email=='admin@insti.com'){
+        //dd(Auth::user()->user_group->id);
+        if(Auth::user()->user_group->name=="admin"){
             $profile=Profile::all();
             return view('gestion_enseignants.missionAdmin', [
                 'vTitle'=>'Mission',
@@ -31,7 +33,7 @@ class MissionController extends Controller
     }
 
     public function traitement(){
-        if(Auth::user()->email=='admin@insti.com'){
+        if(Auth::user()->user_group->name=="admin"){
             $profile=profile::all();
 
             $lastvalue=request('selectNomA');
@@ -60,7 +62,7 @@ class MissionController extends Controller
     }
 
     public function generate(){
-        if(Auth::user()->email=='admin@insti.com'){
+        if(Auth::user()->user_group->name=="admin"){
             $profil=DB::table('profiles')->where('user_id',Auth::user()->id)->first();
             $profile=profile::all();
             $sqlTable= "select * from missions where nom_enseignant ='"."".$profil->com_givenName." ".$profil->com_fullname."'";
