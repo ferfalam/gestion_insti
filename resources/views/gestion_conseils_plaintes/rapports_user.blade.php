@@ -40,10 +40,11 @@
                                                 <td>{{ $item-> id }}</td>
                                                 <td>{{ $item-> conseil -> id }}</td>
                                                 <td>{{ $item-> conseil -> date  }}</td>
-                                                <td><form method="post" action="{{ route('gestion_conseils_plaintes.telecharger_rapport', $item-> id) }}">
+                                                <td><a href="{{ route('gestion_conseils_plaintes.telecharger_rapport', $item-> path) }}">Download</a></td>
+                                                {{-- <td><form method="post" action="{{ route('gestion_conseils_plaintes.telecharger_rapport', $item-> id) }}">
                                                     @csrf
                                                     <button type="submit" class="btn btn-outline-success btn-block" onclick="return confirm('Télécharger ce rapport?')">Télécharger</button>
-                                                </form></td>
+                                                </form></td> --}}
                                                 <td>{{ $item-> created_at }}</td>
                                                 <td>
                                                     <form method="post" action="{{ route('gestion_conseils_plaintes.suppression_rapport', $item-> id) }}">

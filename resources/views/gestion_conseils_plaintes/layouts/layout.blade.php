@@ -25,6 +25,8 @@
 
     <!-- Bootstrap Font Icon CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" />
+    <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css'>
+
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     @yield("style")
@@ -71,6 +73,7 @@
                             id="sidebarToggle" type="button"></button></div>
                 </div>
             </nav>
+
             <main class="w-100">
                 <nav class="navbar navbar-light navbar-expand bg-white shadow mb-4 topbar static-top">
                     <div class="container-fluid"><button class="btn btn-link d-md-none rounded-circle me-3"
@@ -106,12 +109,15 @@
 
     <!-- ALL JS FILES -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     {{-- <script src="{{ asset('gestion_cd/js/all.js') }}"></script> --}}
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="{{ asset('bootstrap/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('js/script.min.js') }}"></script>
+    @include('sweetalert::alert')
     @yield("script")
+
 
 </body>
 

@@ -37,47 +37,41 @@ class RapportController extends Controller
     //dd(public_path('rapports').'/'. Rapport::find($id)->path);
     $headers = ['Content-Type: application/pdf'];
 
-    Storage::download($file, Rapport::find($id)->path, $headers);
-
-
-        //return Storage::download(Rapport::findOrFail($id)-> path);
+    //Storage::download($file, Rapport::find($id)->path, $headers);
+        return Storage::download($file);
     }
 
     public function create(Request $req, $id){
-
         $req->validate([
-            'file.*' => 'required|mimes:docx,pdf|max:2048',
             'file' => 'required',
+            'file.*' => 'required|mimes:docx,pdf|max:2048',
         ]);
 
          $name = $req->file('file')->getClientOriginalName();
 
+         $path = Storage::putFileAs('rapports', $req->file('file'), $name);
+        //$path = $req->file('file')->move('rapports', $name);
 
-         //$path = Storage::putFileAs('rapports', $req->file('file'), $name);
-         $path = $req->file('file')->move('rapports', $name);
-
-         $store = Rapport::create([
+        $store = Rapport::create([
                 'id_conseil' => $id,
                 'path' => $name
             ]);
-            ConseilDiscipline::find($id)->update([
+        ConseilDiscipline::find($id)->update([
                 'rapport' => 1
             ]);
-
 
         return redirect()->route('gestion_conseils_plaintes.liste_rapports');
     }
 
     public function destroy(Request $request, $id){
         $Del = Rapport::find($id);
-        if (file_exists($Del->path)) {
-            return unlink($Del->path);
-        } else {
+        if (file_exists(public_path('rapports').'/'.$Del->path)) {
             ConseilDiscipline::find($Del->id_conseil)->update([
                 'rapport' => 0
             ]);
             $Del->delete();
-
+            return unlink(public_path('rapports').'/'.$Del->path);
+        } else {
             echo('File not found.');
         }
 

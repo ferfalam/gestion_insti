@@ -174,7 +174,7 @@ border-color: #F0F0F0;
         </div>
 
     </div>
-    <h1 style=" font-size: 1em;"><strong>Objet: Convocation à conseil de discipline </strong></h1><br>
+    <h1 style=" font-size: 1em;"><strong>Objet: Invitation à conseil de discipline </strong></h1><br>
     <!--Début du contenu de la lettre-->
     <p>@if ($tile-> user -> profile -> gender == "F")
         Madame,
@@ -211,6 +211,12 @@ border-color: #F0F0F0;
     <hr id="horizontal-line">
     <div id="footer" class="center-text">
         <div><strong>INSTI ex Institut Universitaire de Technologie BP: 133 - Mail: <a href="mailto:instilokossa@gmail.com">instilokossa@gmail.com</a> - site web : http://insti.edu.bj/ </strong></div>
+        </div>
+        <br>
+        <div style="display:flex;  width: 50%; height: 1mm; margin:auto; text-align: center;">
+            <div style="width: 33.33%; height: 1mm; background-color:green"></div>
+            <div style="width: 33.33%; height: 1mm; background-color:yellow"></div>
+            <div style="width: 33.33%; height: 1mm; background-color:red"></div>
         </div>
     </div>
 

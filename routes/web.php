@@ -82,9 +82,9 @@ Route::group(["prefix"=>"gestion_demandes_reclamation_evaluation", "as"=>"gestio
     // Route::get('/voir_demande_reclamation/{complaint_requests}', [
 
     //     'as' => 'voir_details_demande_reclamation',
-    
+
     //     'uses' => 'GestionDemande\ComplaintRequestController@show',
-    
+
     // ]);
     // Route::get('/logout',[App\Http\Controllers\Auth\LoginController::class, 'logout'])->name("logout");
 
@@ -331,6 +331,14 @@ Route::group(["prefix"=>"gestion_conseils_plaintes", "as"=>"gestion_conseils_pla
     Route::get('/conseils', 'GestionConseilsPlaintes\ConseilController@show')->name('liste_conseils');
     Route::get('/rapports', 'GestionConseilsPlaintes\RapportController@show')->name('liste_rapports');
 
+<<<<<<< HEAD
+=======
+
+    Route::post('/telecharger/rapport{id}', 'GestionConseilsPlaintes\RapportController@downloadRapport')->name('telecharger_rapport');
+
+    Route::get('/plainte-model', 'GestionConseilsPlaintes\PlainteController@model')->name('model');
+
+>>>>>>> conseild
     Route::post('/rejet/{id}', 'GestionConseilsPlaintes\PlainteController@reject')->name('rejet_plainte');
     Route::post('/valider_conseil/{id}', 'GestionConseilsPlaintes\ConseilController@tenu')->name('tenu');
 

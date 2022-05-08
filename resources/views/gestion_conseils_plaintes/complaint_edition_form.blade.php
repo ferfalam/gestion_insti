@@ -36,22 +36,32 @@
                                 @foreach ($errors->all() as $error)
                                 <li>{{ $error }}</li>
                                 @endforeach
-                            </ul>
+                          </ul>
                 </div>
             @endif
             <h2 class="text-center"><br><strong>Mettre à jour votre plainte</strong><br><br></h2>
-
-            <div class="form-group">
+            <span>Motif</span><div class="form-group"><input class="form-control" type="text" name="motif" placeholder="Motif de la plainte" value="{{ $plainte -> motif }}"></div>
+            <span>Fautifs</span><div class="form-group">
                 <select class="select2 form-control select2-multiple"
-                    name = "fautifs[]" multiple="multiple" data-placeholder="Fautifs...">
+                    name = "fautifs[]" multiple="multiple" data-placeholder="Fautifs..." value="{{ $plainte -> motif }}">
                     @foreach ($users as $user)
-                    <option value="{{ $user -> id}}" >{{ $user -> profile -> com_fullname}}</option>
+                    <option value="{{ $user -> id}}" @if (in_array($user -> id, (array)$selected1))
+                        selected
+                    @endif >{{ $user -> profile -> com_fullname}}</option>
                     @endforeach
                 </select>
             </div>
-
-            <div class="form-group"><input class="form-control" type="text" name="motif" placeholder="Motif de la plainte"></div>
-            <div class="form-group"><textarea class="form-control" name="description" placeholder="Description" rows="5"></textarea></div>
+            <span>Temoins</span><div class="form-group">
+                <select class="select2 form-control select2-multiple"
+                    name = "temoins[]" multiple="multiple" data-placeholder="(facultatif)">
+                    @foreach ($users as $user)
+                    <option value="{{ $user -> id}}" @if (in_array($user -> id, (array)$selected2))
+                        selected
+                    @endif>{{ $user -> profile -> com_fullname}}</option>
+                    @endforeach
+                </select>
+            </div>
+            <span>Description</span><div class="form-group"><textarea class="form-control" name="description" placeholder="Description" rows="5">{{ $plainte -> description }}</textarea></div>
             <div class="form-group"><button class="btn btn-primary" type="submit" onclick="return confirm('Voulez-vous vraiment mettre à jour cette plainte avec ces nouvelles informations?')">Mettre à jour</button></div>
         </form>
     </div>

@@ -33,7 +33,6 @@ class ConseilController extends Controller
     }
 
     public function form($id){
-        //$item = ConseilDiscipline::find($id);
         $users = User::all();
         return view('gestion_conseils_plaintes.conseil_form', compact('id','users'));
     }
@@ -77,9 +76,21 @@ class ConseilController extends Controller
     }
 
     public function edform($id){
-        $users = User::all()->except(Auth::id());
+        $users = User::all();
         $conseil = ConseilDiscipline::findOrFail($id);
-        return view('gestion_conseils_plaintes.conseil_edition_form', compact('users','conseil'));
+
+        $selected1 = array();
+        $selected2 = array();
+        $participants = ConseilUsers::where('id_conseil', $id)-> get();
+        $presents = ConseilPresent::where('id_conseil', $id)-> get();
+        foreach($participants as $c){
+            array_push($selected1, $c->participant-> id);
+        }
+
+        foreach($presents as $c){
+            array_push($selected2, $c->present-> id);
+        }
+        return view('gestion_conseils_plaintes.conseil_edition_form', compact('users','conseil','selected1', 'selected2'));
     }
 
     public function create(Request $request, $id){
@@ -112,32 +123,34 @@ class ConseilController extends Controller
     }
 
     public function update(Request $request, $conseil){
-        $request->validate([
-            'date' => 'required|after:today',
-            'heure' => 'required',
-            'lieu' => 'required',
-            'participants' => 'required',
-        ]);
-
-        ConseilDiscipline::findOrFail($conseil)->update([
-            'date' => request('date'),
-            'heure' => request('heure'),
-            'lieu' => request('lieu'),
-            'maitre' => request('maitre') ?? null,
-        ]);
-
-        $parts = ConseilUsers::where('id_conseil', $conseil)-> get();
-        foreach($parts as $c){
-            $c->delete();
-            $request->session()->flash('alert-success', ' council is deleted successfully.');
-        }
-
-        foreach($request -> participants as $key) {
-            ConseilUsers::create([
-                'id_conseil' => $conseil,
-                'id_user' => $key
+        if(ConseilDiscipline::findOrFail($conseil)-> tenue == 0 ){
+            $request->validate([
+                'date' => 'required|after:today',
+                'heure' => 'required',
+                'lieu' => 'required',
+                'participants' => 'required',
             ]);
+            ConseilDiscipline::findOrFail($conseil)->update([
+                'date' => request('date'),
+                'heure' => request('heure'),
+                'lieu' => request('lieu'),
+                'maitre' => request('maitre') ?? null,
+            ]);
+
+            $parts = ConseilUsers::where('id_conseil', $conseil)-> get();
+            foreach($parts as $c){
+                $c->delete();
+                $request->session()->flash('alert-success', ' council is deleted successfully.');
+            }
+
+            foreach($request -> participants as $key) {
+                ConseilUsers::create([
+                    'id_conseil' => $conseil,
+                    'id_user' => $key
+                ]);
+            }
         }
+
 
         if($request -> presents != null){
             foreach($request -> presents as $key) {
