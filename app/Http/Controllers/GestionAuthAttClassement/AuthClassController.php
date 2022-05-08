@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers\GestionAuthAttClassement;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
 
 class AuthClassController extends Controller
 {
@@ -26,7 +27,10 @@ class AuthClassController extends Controller
     public function profile()
     {
         //
-        return view('gestion_authClass.pages.profile');
+        
+        $profile=DB::table('profiles')->where('user_id',2)->get();
+        // dd($profile);
+        return view('gestion_authClass.pages.profile',compact('profile'));
     }
 
     /**

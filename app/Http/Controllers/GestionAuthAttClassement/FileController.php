@@ -9,6 +9,7 @@ use App\Models\MoyenneImport;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Models\MoyenneExport;
 
+
 class FileController extends Controller
 {
      /**
@@ -27,20 +28,17 @@ class FileController extends Controller
     */
     public function exportIntoExcel()
     {
-        return Excel::download(new MoyenneExport, 'Employee.xlsx');
+        
+        return Excel::download(new MoyenneExport, 'Moyenne.xlsx');
     }
 
-    public function exportIntoCSV()
-    {
-        return Excel::download(new MoyenneExport, 'Employee.csv');
-    }
-
+    
     /**
     * @return \Illuminate\Support\Collection
     */
     public function importIntoCSV()
     {
-      return  Excel::import(new MoyenneImport,'employeelist.csv');
+      return  Excel::import(new MoyenneImport,'Moyennelist.csv');
 
         return back();
     }

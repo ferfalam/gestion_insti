@@ -15,8 +15,9 @@ class Demande extends Model
      * @var string[]
      */
     protected $fillable=[
+        "user_id",
         "name_d",
-        "genre_d",
+        "recipient",
         "email",
         "contact",
         "entite",
@@ -24,5 +25,10 @@ class Demande extends Model
         "objet",
         "message",
         "attestation",
+        "status_demande",
+        "name_admin",
+        "email_admin",
+        "contact_admin",
+        "reponse"
     ];
 }

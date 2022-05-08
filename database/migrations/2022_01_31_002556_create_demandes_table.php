@@ -15,18 +15,23 @@ class CreateDemandesTable extends Migration
     {
         Schema::create('demandes', function (Blueprint $table) {
             $table->id();
+            $table->integer('user_id');
             $table->string('name_d');
-            $table->string('genre_d');
+            $table->string('recipient');
             $table->string('entite');
             $table->string('status');
             $table->string('objet');
-            $table->string('message');
+            $table->text('message');
             $table->string('attestation');
-            $table->string('date_d');
-            $table->string('heure_d');
             $table->string('email');
             $table->string('contact');
+            $table->string('status_demande');
+            $table->string('name_admin')->nullable();
+            $table->string('email_admin')->nullable();
+            $table->string('contact_admin')->nullable();
+            $table->text('reponse')->nullable();
             $table->timestamps();
+            
         });
     }
 

@@ -11,7 +11,7 @@
             <div class="container">
                 <div class="card bg-light mt-3">
                     <div class="card-header">
-                        Import et Export des Moyennes
+                        Import des Moyennes
                     </div>
                     <div class="card-body">
                         <form action="{{ route('gestion_authClass.employee.import') }}" method="POST" enctype="multipart/form-data">
@@ -19,7 +19,7 @@
                             <input type="file" name="file" class="form-control" >
                             <br>
                             <button class="btn btn-success">Import Moyenne Data</button>
-                            <a class="btn btn-warning" href="{{ route('gestion_authClass.export-excel') }}">Export Moyenne Data</a>
+                            <!-- <a class="btn btn-warning" href="{{ route('gestion_authClass.export-excel') }}">Export Moyenne Data</a> -->
                         </form>
                     </div>
                 </div>

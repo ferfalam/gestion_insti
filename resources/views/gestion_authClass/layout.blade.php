@@ -82,12 +82,13 @@
                             href="{{route('gestion_authClass.deliber')}}"><i class="fas fa-table"></i><span>Fiche de
                                 déliberation</span></a>
                     </li>
+                    
+                    @endif
                     <li class="nav-item" role="presentation">
                         <a class="nav-link {{request()->is('gestion_authClass.classement') ? 'active':''}}"
                             href="{{route('gestion_authClass.classement')}}"><i
                                 class="fas fa-table"></i><span>Classement</span></a>
                     </li>
-                    @endif
                     <li class="nav-item" role="presentation">
                     
                                 <a class="nav-link" href="{{ route('gestion_authClass.deconnexion') }}"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 "></i>&nbsp;Deconnexion</a>

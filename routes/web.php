@@ -159,7 +159,9 @@ Route::group(["prefix"=>"gestion_authClass", "as"=>"gestion_authClass.", "middle
 
     Route::get('/demande', function () { return view('gestion_authClass.pages/demande'); })->name('demande');
 
-    Route::get('/demandeaff', function () { return view('gestion_authClass.pages/demandeaff');  })->name('demandeaff');
+    Route::get('/reponseDemande/{id}', 'GestionAuthAttClassement\DemandeAuthController@show')->name('reponseDemande');
+
+    Route::post('/updateReponse/{id}', 'GestionAuthAttClassement\DemandeAuthController@updateReponse')->name('updateReponse');
 
     Route::get('/deconnexion', 'GestionAuthAttClassement\ConnexionController@deconnexion')->name('deconnexion');
 
@@ -179,7 +181,14 @@ Route::group(["prefix"=>"gestion_authClass", "as"=>"gestion_authClass.", "middle
 
     Route::post('/classement','GestionAuthAttClassement\ClassementController@store')->name('dam');
 
+    Route::post('/classement','GestionAuthAttClassement\ClassementController@show')->name('showClassement');
+
     Route::get('/ficheDeliberation','GestionAuthAttClassement\FileController@ImportForm')->name('deliber');
+<<<<<<< HEAD
+=======
+
+    Route::get('/getClassementPdf','GestionAuthAttClassement\ClassementController@getClassementPdf')->name('getClassementPdf');
+>>>>>>> gesAuthClas
 
     Route::post('/import','GestionAuthAttClassement\FileController@Import')->name('employee.import');
 
