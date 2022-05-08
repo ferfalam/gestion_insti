@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\typestages;
 use App\Models\Ue;
 use App\Models\User;
 use App\Models\Field;
@@ -22,6 +23,15 @@ use App\Models\ShortcutsRequest;
 use Illuminate\Support\Facades\Hash;
 use App\Models\user_pedagogic_group_map;
 use App\Models\User_userGroup_Position_Service_Map;
+use App\Models\User_userGroup_Position_Service_Map;
+use App\Models\User_Position_Service_Field_Map;
+use App\Models\User_PedagogicGroup_Map;
+use App\Models\ShortcutsRequest;
+use App\Models\AcademicSemester;
+use App\Models\Evaluation_type;
+use App\Models\Profile;
+
+
 
 class DatabaseSeeder extends Seeder
 {
@@ -52,6 +62,13 @@ class DatabaseSeeder extends Seeder
          $user=User::create(['pseudo'=>"etudiant1",'email'=>"etu1@gmail.com",'password'=>Hash::make('12345678'),'statusId'=>1 , 'user_groupId'=>3]);
          $user=User::create(['pseudo'=>"etudiant2",'email'=>"etu2@gmail.com",'password'=>Hash::make('12345678'),'statusId'=>1 , 'user_groupId'=>3]);
          $user=User::create(['pseudo'=>"etudiant3",'email'=>"etu3@gmail.com",'password'=>Hash::make('12345678'),'statusId'=>1, 'user_groupId'=>3]);
+         $user=User::create(['pseudo'=>"superadmin",'email'=>"superadmin@gmail.com",'password'=>Hash::make('12345678'),'statusId'=>1, 'user_groupId'=>2]);
+         $user=User::create(['pseudo'=>"redacteur",'email'=>"redacteur@gmail.com",'password'=>Hash::make('12345678'),'statusId'=>1, 'user_groupId'=>6]);
+         $user=User::create(['pseudo'=>"partenaire",'email'=>"partenaire@gmail.com",'password'=>Hash::make('12345678'),'statusId'=>1, 'user_groupId'=>7]);
+         $user=User::create(['pseudo'=>"CD_GEI",'email'=>"cdgei@gmail.com",'password'=>Hash::make('12345678'),'statusId'=>1, 'user_groupId'=>5]);
+         $user=User::create(['pseudo'=>"CD_MS",'email'=>"cdms@gmail.com",'password'=>Hash::make('12345678'),'statusId'=>1, 'user_groupId'=>5]);
+         $user=User::create(['pseudo'=>"CD_GMP",'email'=>"cdgmp@gmail.com",'password'=>Hash::make('12345678'),'statusId'=>1, 'user_groupId'=>5]);
+         $user=User::create(['pseudo'=>"CD_GE",'email'=>"cdge@gmail.com",'password'=>Hash::make('12345678'),'statusId'=>1, 'user_groupId'=>5]);
 
          $field=Field::create(["systemName"=>"Maintenace des systèmes","name"=>" MS1","abbreviation"=>"MS1","description"=>" filiere","offer"=>"filiere"]);
          $field=Field::create(["systemName"=>"Génie mecanique et productique ","name"=>" GMP1","abbreviation"=>"GMP1","description"=>" filiere","offer"=>"filiere"]);
@@ -72,6 +89,7 @@ class DatabaseSeeder extends Seeder
          $pedagogic_groups=PedagogicGroup::create(["name"=>"Génie Electrique et Informatique","fieldId"=>"2","academicYearId"=>"1","studyYearId"=>"1","description"=>"GEI"]);
          $pedagogic_groups=PedagogicGroup::create(["name"=>"Génie Electrique et Informatique","fieldId"=>"3","academicYearId"=>"1","studyYearId"=>"1","description"=>"GEI"]);
          $pedagogic_groups=PedagogicGroup::create(["name"=>"Maintenance des Systèmes","fieldId"=>"4","academicYearId"=>"1","studyYearId"=>"1","description"=>"MS"]);
+         $pedagogic_groups=PedagogicGroup::create(["name"=>"GEI/A","fieldId"=>"4","academicYearId"=>"1","studyYearId"=>"1","description"=>"GEI/A"]);
 
 
          //chefService/Adjoint, collaborateur, chefCollaborateur, chefDivision, responsableClasse/Adjoint
@@ -95,6 +113,14 @@ class DatabaseSeeder extends Seeder
         $user_group_positions=User_userGroup_Position_Service_Map::create(["userId"=>"4","userGroupId"=>"5","serviceId"=>"3","positionId"=>"1"]);
         $user_group_positions=User_userGroup_Position_Service_Map::create(["userId"=>"5","userGroupId"=>"5","serviceId"=>"3","positionId"=>"1"]);
 
+        $user_positions_services_fields=User_Position_Service_Field_Map::create(["userId"=>"11","serviceId"=>"2","positionId"=>"1", "fieldId"=>"4"]);
+        $user_positions_services_fields=User_Position_Service_Field_Map::create(["userId"=>"12","serviceId"=>"2","positionId"=>"1", "fieldId"=>"1"]);
+        $user_positions_services_fields=User_Position_Service_Field_Map::create(["userId"=>"13","serviceId"=>"2","positionId"=>"1", "fieldId"=>"2"]);
+        $user_positions_services_fields=User_Position_Service_Field_Map::create(["userId"=>"14","serviceId"=>"2","positionId"=>"1", "fieldId"=>"3"]);
+
+        $user_pedagogic_group=User_PedagogicGroup_Map::create(["user_Id"=>"4", "pedagogic_group_Id"=>"5"]);
+
+
         $qualite=Qualite::create(["name"=>"Assistant"]);
         $qualite=Qualite::create(["name"=>"Ingenieur"]);
         $qualite=Qualite::create(["name"=>"Docteur"]);
@@ -107,16 +133,14 @@ class DatabaseSeeder extends Seeder
         $ues=Ue::create(["name"=>"Analyse numerique etapplication","abbreviation"=>"AVN","code"=>"2023","CT"=>"30","TD"=>"5","TP"=>"5","generalId"=>"1"]);
         $ues=Ue::create(["name"=>"POO","abbreviation"=>"java","code"=>"2023","CT"=>"25","TD"=>"5","TP"=>"3","generalId"=>"1"]);
 
-        $user_pedagogic_group=user_pedagogic_group_map::create(["user_Id"=>"4","pedagogic_group_Id"=>"4"]);
-
         $academic_semesters=AcademicSemester::create(["designation"=>"Semestre1","calendar"=>"Calendrier de l'année en cours","startDate"=>"2019-02-18","endDate"=>"2019-08-18","observation"=>"un observateur"]);
         $academic_semesters=AcademicSemester::create(["designation"=>"Semestre2","calendar"=>"Calendrier de l'année en cours","startDate"=>"2019-02-18","endDate"=>"2019-08-18","observation"=>"un observateur"]);
 
 
-        $shortcuts_request=ShortcutsRequest::create(["academic_year_Id"=>"1","academic_semester_Id"=>"1","field_Id"=>"4","pedagogic_group_Id"=>"4","ue_Id"=>"1"]);
-        $shortcuts_request=ShortcutsRequest::create(["academic_year_Id"=>"1","academic_semester_Id"=>"1","field_Id"=>"4","pedagogic_group_Id"=>"4","ue_Id"=>"2"]);
-        $shortcuts_request=ShortcutsRequest::create(["academic_year_Id"=>"1","academic_semester_Id"=>"1","field_Id"=>"4","pedagogic_group_Id"=>"4","ue_Id"=>"3"]);
-    $shortcuts_request=ShortcutsRequest::create(["academic_year_Id"=>"1","academic_semester_Id"=>"1","field_Id"=>"4","pedagogic_group_Id"=>"4","ue_Id"=>"4"]);
+        $shortcuts_request=ShortcutsRequest::create(["academic_year_Id"=>"1","academic_semester_Id"=>"1","field_Id"=>"4","pedagogic_group_Id"=>"5","ue_Id"=>"1"]);
+        $shortcuts_request=ShortcutsRequest::create(["academic_year_Id"=>"1","academic_semester_Id"=>"1","field_Id"=>"4","pedagogic_group_Id"=>"5","ue_Id"=>"2"]);
+        $shortcuts_request=ShortcutsRequest::create(["academic_year_Id"=>"1","academic_semester_Id"=>"1","field_Id"=>"4","pedagogic_group_Id"=>"5","ue_Id"=>"3"]);
+        $shortcuts_request=ShortcutsRequest::create(["academic_year_Id"=>"1","academic_semester_Id"=>"1","field_Id"=>"4","pedagogic_group_Id"=>"5","ue_Id"=>"4"]);
 
        $evaluation_types=Evaluation_type::create(["designation"=>"Devoir du professeur","description"=>""]);
        $evaluation_types=Evaluation_type::create(["designation"=>"Devoir de l'administration","description"=>""]);

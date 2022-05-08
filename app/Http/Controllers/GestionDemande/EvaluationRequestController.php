@@ -13,7 +13,7 @@ class EvaluationRequestController extends Controller
     public function create(){
 
         $idUser = Auth::user()->id;
-        $idPedagogicGroupe = DB::table('user_pedagogic_group_maps')->where('user_Id', $idUser)->value('pedagogic_group_Id');
+        $idPedagogicGroupe = DB::table('user__pedagogic_group__maps')->where('user_Id', $idUser)->value('pedagogic_group_Id');
        
         $ues = DB::table('shortcuts_requests')
                     ->leftJoin('ues', 'shortcuts_requests.ue_Id', '=', 'ues.id')
@@ -59,7 +59,7 @@ class EvaluationRequestController extends Controller
         $userLastName = DB::table('profiles')->where('user_id', $idUser)->value('com_givenName');
 
 
-        $idPedagogicGroupe = DB::table('user_pedagogic_group_maps')->where('user_Id', $idUser)->value('pedagogic_group_Id');
+        $idPedagogicGroupe = DB::table('user__pedagogic_group__maps')->where('user_Id', $idUser)->value('pedagogic_group_Id');
         $pedagogicGroupe = DB::table('pedagogic_groups')->where('id',$idPedagogicGroupe)->value('name');
         
         $idField = DB::table('shortcuts_requests')->where('pedagogic_group_Id', $idPedagogicGroupe)->value('field_Id');
@@ -130,9 +130,15 @@ class EvaluationRequestController extends Controller
     public function show($id){
         
 
+<<<<<<< HEAD
         $evaluation_requests = Evaluation_request::find($id);
         return view('gestion_demandes_reclamation_evaluation.personnels.voir_details_demande_evaluation'
          ,compact('evaluation_requests')
+=======
+        $evaluation_request = Evaluation_request::find($id);
+        return view('gestion_demandes_reclamation_evaluation.personnels.voir_details_demande_evaluation'
+         ,compact('evaluation_request')
+>>>>>>> gestion_demande_reclamation_evaluation
         );
     }
 }
