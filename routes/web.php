@@ -54,6 +54,12 @@ Route::get('/moduleGeneralSupprimee/{id}', 'GeneralController@deleteGeneral')->n
 Route::get('/moduleGeneral/{id}', 'GeneralController@findById')->name('generalById');
 Route::post('/mettreAJourModuleGeneral/{id}', 'GeneralController@updateGeneral')->name('updateGeneral');
 
+//Student registration
+Route::get('/formStudentRegistration', 'StudentRegistrationController@index')->name('newStudents');
+Route::post('/nouveauGroupePedagogique', 'StudentRegistrationController@storeStudent')->name('saveNewStudent');
+// Route::get('/GroupePedagogiqueSupprime/{id}', 'PedagogicGroupController@deleteGroupPedagogique')->name('deleteGroup');
+// Route::get('/GroupePedagogique/{id}', 'PedagogicGroupController@findById')->name('groupById');
+// Route::post('/MettreAJourGroupePedagogique/{id}', 'PedagogicGroupController@updateGroupPedagogique')->name('updateGroup');
 
 Route::group(["prefix"=>"gestion_salle", "as"=>"gestion_salle.", "middleware" => "auth"], function ()
 {

@@ -5,10 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class user_pedagogic_group_map extends Model
+class User_Position_Service_Field_Map extends Model
 {
     protected $fillable = [
-        'user_Id',
-        'pedagogic_group_Id',
+        'userId',
+        'serviceId',
+        'positionId',
+        'fieldId',
     ];
+    public $timestamps = false;
 }

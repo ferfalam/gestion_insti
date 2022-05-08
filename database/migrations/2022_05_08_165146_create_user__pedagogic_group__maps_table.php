@@ -13,10 +13,10 @@ class CreateUserPedagogicGroupMapsTable extends Migration
      */
     public function up()
     {
-        Schema::create('user_pedagogic_group_maps', function (Blueprint $table) {
+        Schema::create('user__pedagogic_group__maps', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_Id')->constrained('users');
-            $table->foreignId('pedagogic_group_Id')->constrained('pedagogic_groups');
+            $table->foreignId('pedagogic_group_Id')->nullable()->constrained('pedagogic_groups');
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ class CreateUserPedagogicGroupMapsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_pedagogic_group_maps');
+        Schema::dropIfExists('user__pedagogic_group__maps');
     }
 }
