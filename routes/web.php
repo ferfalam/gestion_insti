@@ -123,6 +123,8 @@ Route::group(["prefix"=>"gestion_authClass", "as"=>"gestion_authClass.", "middle
 
     Route::get('/reponseDemande/{id}', 'GestionAuthAttClassement\DemandeAuthController@show')->name('reponseDemande');
 
+    Route::post('/updateReponse/{id}', 'GestionAuthAttClassement\DemandeAuthController@updateReponse')->name('updateReponse');
+
     Route::get('/deconnexion', 'GestionAuthAttClassement\ConnexionController@deconnexion')->name('deconnexion');
     
     Route::post('/listdemande','GestionAuthAttClassement\DemandeAuthController@store')->name('dem');

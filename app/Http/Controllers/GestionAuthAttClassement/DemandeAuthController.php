@@ -97,6 +97,7 @@ class DemandeAuthController extends Controller
              'objet' => $request->objet,
              'message' => $request->message,
              'attestation'=>$request->status,
+             'status_demande'=>"Non_traiter",
              ]);
  
          $demande->save();
@@ -150,20 +151,35 @@ class DemandeAuthController extends Controller
       */
      public function update(Request $request, $id)
      {
-         //
+         
+         $profil=DB::table('profiles')->where('user_id',Auth::user()->id)->first();
          $demande=Demande::find($id);
          $request->validate([
-             'last_name',
-             'first_name',
-             'email',
-             'contact',
-             'entite' ,
-             'status',
-             'objet' ,
-             'redaction',
-         ]);
+            'recipient',
+            'entite' ,
+            'status',
+            'piece',
+            'objet',
+            'message',
+        ]);
+
+        
+        Demande::find($id)->update([
+            'user_id'=>$profil->user_id,
+            'name_d' => $profil->com_fullname,
+            'recipient'=>$request->recipient,
+            'email' => Auth::user()->email,
+            'contact' => $profil->com_phoneNumber,
+            'entite' => $request->entite,
+            'status' => $request->status,
+            'objet' => $request->objet,
+            'message' => $request->message,
+            'attestation'=>$request->status,
+            'status_demande'=>"Non_traiter",
+            ]);
+       
+            
  
-         $demande->update($request->all());
  
         //  return redirect('gestion_authClass.listdemande')->with('success');
          return redirect()->route('gestion_authClass.listdemande')->with('success');
@@ -173,29 +189,38 @@ class DemandeAuthController extends Controller
 
      public function updateReponse(Request $request, $id)
      {
-         //
+
          $demande=Demande::find($id);
+         $profil=DB::table('profiles')->where('user_id',Auth::user()->id)->first();
          $request->validate([
+            
+            'message',
+         ]);
+
+       
+ 
+        Demande::find($id)->update([
             'user_id'=>$demande->user_id,
-            'name_d' => $demande->com_fullname,
+            'name_d' => $demande->name_d,
             'recipient'=>$demande->recipient,
             'email' => $demande->email,
-            'contact' => $demande->com_phoneNumber,
+            'contact' => $demande->contact,
             'entite' => $demande->entite,
             'status' => $demande->status,
             'objet' => $demande->objet,
             'message' => $demande->message,
             'attestation'=>$demande->status,
-             'reponse',
-             'name_admin',
-             'email_admin',
-             'contact_admin',
+             'reponse'=>$request->message,
+             'name_admin'=>$profil->com_fullname,
+             'email_admin'=>Auth::user()->email,
+             'contact_admin'=>$profil->com_phoneNumber,
+             'status_demande'=>"Traiter",
          ]);
- 
-         $demande->update($request->all());
+
+         
  
         //  return redirect('gestion_authClass.listdemande')->with('success');
-         return redirect()->route('gestion_authClass.listdemande')->with('success');
+         return redirect()->route('gestion_authClass.demande_r')->with('success');
      }
  
      /**

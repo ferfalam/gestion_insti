@@ -123,7 +123,7 @@
                 </div>
 
                 <a class="btn btn-primary m-2" href="#" data-toggle="modal" data-target="#modal2"
-                    title="Retirer tous les produits du panier">Vider le panier</a>
+                    title="Retirer tous les produits du panier">Télécharger</a>
                 <div class="modal fade" id="modal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
                     aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered">

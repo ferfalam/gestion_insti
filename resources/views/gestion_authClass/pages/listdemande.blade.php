@@ -20,7 +20,9 @@
                             <th>Objet</th>
                             <th>Date d'envoie</th>
                             <th>Heure</th>
-                            <th>Voir</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                            
                         </tr>
                     </thead>
 
@@ -38,13 +40,30 @@
                             <td>{{$demandes->objet}}</td>
                             <td>{{explode(' ',$demandes->created_at)[0]}}</td>
                             <td> {{explode(' ',$demandes->created_at)[1]}}</td>
+                            @if($demandes->status_demande=="Traiter")
+                            <td class="badge badge-success">{{$demandes->status_demande}} </td>
+                            @elseif($demandes->status_demande=="Non_traiter")
+                            <td class="badge badge-danger">{{$demandes->status_demande}} </td>
+                            @endif
+
+                            @if($demandes->status_demande=="Traiter")
                             <td>
                                 <a class="btn btn-primary btn-sm"
-                                    href="{{route('gestion_authClass.edit2',$demandes->id)}}">
+                                    href="#">
 
                                     Voir
                                 </a>
                             </td>
+                            @elseif($demandes->status_demande=="Non_traiter")
+                            <td>
+                                <a class="btn btn-primary btn-sm"
+                                    href="{{route('gestion_authClass.edit2',$demandes->id)}}">
+
+                                    Lire
+                                </a>
+                            </td>
+                            @endif
+                            
                         </tr>
 
                         @empty
