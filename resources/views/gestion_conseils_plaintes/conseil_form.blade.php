@@ -51,7 +51,7 @@
                 <select class="select2 form-control select2-multiple"
                     name = "participants[]" multiple="multiple" data-placeholder="Ajouter des participants...">
                     @foreach ($users as $user)
-                    <option value="{{ $user -> id}}" >{{ $user -> pseudo}}</option>
+                    <option value="{{ $user -> id}}" >{{ $user -> profile -> com_fullname }}</option>
                     @endforeach
             </select>
             </div>

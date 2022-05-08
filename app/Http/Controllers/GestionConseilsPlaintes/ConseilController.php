@@ -123,18 +123,19 @@ class ConseilController extends Controller
     }
 
     public function update(Request $request, $conseil){
-        if(ConseilDiscipline::findOrFail($conseil)-> tenue == 0 ){
+        $ceconseil = ConseilDiscipline::findOrFail($conseil);
+        if($ceconseil-> tenue == 0 ){
             $request->validate([
                 'date' => 'required|after:today',
                 'heure' => 'required',
                 'lieu' => 'required',
                 'participants' => 'required',
             ]);
-            ConseilDiscipline::findOrFail($conseil)->update([
+            $ceconseil->update([
                 'date' => request('date'),
                 'heure' => request('heure'),
                 'lieu' => request('lieu'),
-                'maitre' => request('maitre') ?? null,
+
             ]);
 
             $parts = ConseilUsers::where('id_conseil', $conseil)-> get();
@@ -151,15 +152,29 @@ class ConseilController extends Controller
             }
         }
 
+        if ($ceconseil-> tenue == 1) {
 
-        if($request -> presents != null){
-            foreach($request -> presents as $key) {
-                ConseilPresent::create([
-                    'id_conseil' => $conseil,
-                    'id_present' => $key
-                ]);
+            if($request -> presents != null){
+                $parts = ConseilPresent::where('id_conseil', $conseil)-> get();
+                foreach($parts as $c){
+                $c->delete();
+                $request->session()->flash('alert-success', ' council is deleted successfully.');
             }
+                foreach($request -> presents as $key) {
+                    ConseilPresent::create([
+                        'id_conseil' => $conseil,
+                        'id_present' => $key
+                    ]);
+                }
+            }
+
+        if($request -> maitre != null){
+            $ceconseil ->update([
+                'maitre' => request('maitre') ?? null,
+            ]);
         }
+        }
+
         return redirect()->route('gestion_conseils_plaintes.liste_conseils');
     }
 

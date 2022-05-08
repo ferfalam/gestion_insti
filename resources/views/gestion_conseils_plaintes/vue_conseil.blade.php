@@ -96,7 +96,7 @@
     <p>Présents:</p>
     <ul>
         @forelse ($tile -> presents as $presents)
-        <li>{{ $presents -> present -> pseudo }}</li>
+        <li>{{ $presents -> present -> profile -> com_fullname }}</li>
         @empty
         <div class="">Aucun participant présent</div>
         @endforelse
@@ -105,7 +105,7 @@
     <ul>
         <li>
             @if ($tile -> maitre != null)
-        {{ $tile -> maitres -> pseudo}}
+        {{ $tile -> maitres -> profile -> com_fullname}}
     @else
     <div >Aucun maitre de séance</div>
     @endif

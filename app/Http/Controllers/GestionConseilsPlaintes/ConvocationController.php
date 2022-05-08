@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Convocation;
 use App\Models\Plainte;
 use App\Models\PlainteUser;
+use App\Models\PlainteTemoin;
 use App\Models\ConseilUsers;
 use App\Models\ConseilDiscipline;
 use Auth;
@@ -27,7 +28,17 @@ class ConvocationController extends Controller
     {
         $convoc = ConseilDiscipline::find($id);
         $convoques = PlainteUser::where('id_plainte', $convoc-> id)->get();
+        $temoins = PlainteTemoin::where('id_plainte', $convoc-> id)->get();
         foreach($convoques as $co ){
+            Convocation::create([
+                'id_conseil' => $id,
+                'id_user' => $co -> id_user,
+                'type' => 'Convocation'
+            ]);
+            Mail::to($co-> fautif -> email)
+            ->send(new ConvocationLetter(Convocation::find($id)));
+        }
+        foreach($temoins as $co ){
             Convocation::create([
                 'id_conseil' => $id,
                 'id_user' => $co -> id_user,
@@ -41,7 +52,6 @@ class ConvocationController extends Controller
         ]);
         return redirect()->route('gestion_conseils_plaintes.liste_convocations');
     }
-
 
     public function sendInvitations(Request $request, $id)
     {
