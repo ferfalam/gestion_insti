@@ -81,10 +81,8 @@ function  addNewLine() {
     cols += '<td ><input type="date" name="dure_jourArrive'+counter+'" style="width: 150px;" class="form-control" required></td>';
     cols += '<td ><input type="date" name="dure_jourRetour'+counter+'" style="width: 150px;" class="form-control" required></td>';
 
-
-    $(".chosen").select2();
-
     cols += '<td><button id="ibtnDel" class="ibtnDel btn btn-md btn-danger "  value="Supprimer">Supprimer</button></td>';
+    $(".chosen").select2();
     newRow.append(cols);
     $("table.order-list").append(newRow);
     document.getElementById('compteur').value=counter;
@@ -95,6 +93,7 @@ function  addNewLine() {
 $("table.order-list").on("click", ".ibtnDel", function (event) {
     $(this).closest("tr").remove();
 });
+
 
 </script>
 @endsection

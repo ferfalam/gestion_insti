@@ -23,6 +23,7 @@
                             <th>Objet</th>
                             <th>Date</th>
                             <th>Heure</th>
+                            <th>Status</th>
                             <th>Voir</th>
                         </tr>
                         </thead>
@@ -35,6 +36,11 @@
                             <td>{{$demandes->objet}}</td>
                             <td>{{explode(' ',$demandes->created_at)[0]}}</td>
                             <td> {{explode(' ',$demandes->created_at)[1]}}</td>
+                            @if($demandes->status_demande=="Traiter")
+                            <td class="badge badge-success">{{$demandes->status_demande}} </td>
+                            @elseif($demandes->status_demande=="Non_traiter")
+                            <td class="badge badge-danger">{{$demandes->status_demande}} </td>
+                            @endif
                             <td>
                                 <button class="btn btn-primary btn-sm" type="submit">
                                     <a href="{{route('gestion_authClass.edit2',$demandes->id)}}" style="color:white ;text-decoration:none">Voir</a>
@@ -48,16 +54,7 @@
                 @endforelse
 
                         </tbody>
-                        <!-- <tfoot>
-                                        <tr>
-                                            <td><strong>Name</strong></td>
-                                            <td><strong>Position</strong></td>
-                                            <td><strong>Office</strong></td>
-                                            <td><strong>Age</strong></td>
-                                            <td><strong>Start date</strong></td>
-                                            <td><strong>Salary</strong></td>
-                                        </tr>
-                                    </tfoot> -->
+                       
                     </table>
                 </div>
             </div>
@@ -65,3 +62,26 @@
     </div>
 
 @endsection
+@section('script')
+    <script>
+        (() => {
+            var advanced = false
+            $('#searchAdvanced').hide()
+
+            $('#advanced').click((e) => {
+                e.preventDefault()
+                advanced = !advanced
+                if (advanced) {
+                    $('#search').fadeOut(300)
+                    $('#searchAdvanced').show(600)
+                    $('#advanced').text("Recherche Simple")
+                }else{
+                    $('#searchAdvanced').fadeOut(300)
+                    $('#search').show(600)
+                    $('#advanced').text("Recherche Avancée")
+                }
+            })
+        })()
+    </script>
+@endsection
+

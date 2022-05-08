@@ -1,6 +1,7 @@
 @extends('gestion_authClass.layout')
 
 @section('main')
+<div class="container-fluid">
 
     <div class="card shadow mb-4">
         <div class="card-header py-3">
@@ -10,20 +11,22 @@
             <div class="container">
                 <div class="card bg-light mt-3">
                     <div class="card-header">
-                        Import et Export des Moyennes
+                        Import des Moyennes
                     </div>
                     <div class="card-body">
                         <form action="{{ route('gestion_authClass.employee.import') }}" method="POST" enctype="multipart/form-data">
                             @csrf
-                            <input type="file" name="file" class="form-control">
+                            <input type="file" name="file" class="form-control" >
                             <br>
                             <button class="btn btn-success">Import Moyenne Data</button>
-                            <a class="btn btn-warning" href="{{ route('gestion_authClass.export-excel') }}">Export Moyenne Data</a>
+                            <!-- <a class="btn btn-warning" href="{{ route('gestion_authClass.export-excel') }}">Export Moyenne Data</a> -->
                         </form>
                     </div>
                 </div>
             </div>
         </div>
+        
     </div>
+</div>
 @endsection
 

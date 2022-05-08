@@ -41,7 +41,7 @@
         <div id="wrapper">
             <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0">
                 <div class="container-fluid d-flex flex-column p-0"><a
-                        class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="#">
+                        class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="{{ route('home') }}">
                         <div class="sidebar-brand-icon"><i class="fas fa-school"></i></div>
                         <div class="sidebar-brand-text mx-3"><span>INSTI</span></div>
                     </a>
@@ -82,16 +82,8 @@
             </nav>
 
             <main class="w-100">
-                <nav class="navbar navbar-light navbar-expand bg-white shadow mb-4 topbar static-top">
-                    <div class="container-fluid"><button class="btn btn-link d-md-none rounded-circle me-3"
-                            id="sidebarToggleTop" type="button"><i class="fas fa-bars"></i></button>
-                        <!-- <form class="d-none d-sm-inline-block me-auto ms-md-3 my-2 my-md-0 mw-100 navbar-search">
-                        <div class="input-group"><input class="bg-light form-control border-0 small" type="text" placeholder="Search for ..."><button class="btn btn-primary py-0" type="button"><i class="fas fa-search"></i></button></div>
-                    </form> -->
-                        <!-- <ul class="navbar-nav flex-nowrap ms-auto">
-                            <li><a href="{{route('logout')}}">Logout</a></li>
-                        </ul> -->
-                    </div>
+                <nav class="navbar navbar-light navbar-expand mb-4 topbar static-top">
+                
                 </nav>
 
                 @if(session()->has('success'))

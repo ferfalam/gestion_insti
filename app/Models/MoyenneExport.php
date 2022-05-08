@@ -2,22 +2,40 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use App\Models\GestionAuthAttClassement\Employee;
+use App\Models\Moyenne;
+use App\Models\Employee;
+use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\GestionAuthAttClassement\Moyenne;
-use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
+use Maatwebsite\Excel\Concerns\FromCollection;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class MoyenneExport implements Fromcollection
+class MoyenneExport implements FromCollection,WithHeadings
 {
     use HasFactory;
 
-     /**
+    public function headings():array{
+        return[
+            'N°',
+            'Nom et Prénom',
+            'Genre',
+            'Filière',
+            'Matricule',
+            'Moyenne Année 1',
+            'Moyenne Année 2',
+            'Moyenne Année 3',
+            'Moyenne Générale',
+        ];
+    }
+    /**
     * @return \Illuminate\Support\Collection
     */
     public function collection()
     {
-        return Moyenne::all();
+       
+//        return Employee::all();
+        // return collect(Employee::getEmployee());
+        return Moyenne::all()->where('genre', 'M');
+        // return Moyenne::all()->where('filiere', $request->filiere)->where('genre', $request->annee);
     }
 }

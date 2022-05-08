@@ -79,31 +79,33 @@
                                     <div class="form-row">
                                         <div class="col">
                                             <div class="form-group">
-                                                <label for="nom"><strong>Nom</strong></label
+                                            @forelse ($profile as $profile)
+                                                <label for="nom"><strong>Nom et Prénom</strong></label
                                                 >
 
                                                 <input
                                                     class="form-control"
                                                     type="text"
-                                                    placeholder="{{explode(' ',Auth::user()->name)[0]}}"
+                                                    placeholder="{{$profile->com_fullname}}"
                                                     name="last_name"
                                                 />
                                             </div>
                                         </div>
-                                        <div class="col">
+                                        <!-- <div class="col">
                                             <div class="form-group">
                                                 <label for="prenom"
                                                 ><strong>Prenom</strong></label
                                                 >
 
-                                                <!-- <input
+                                                <input
                                                     class="form-control"
                                                     type="text"
-                                                    placeholder="{{explode(' ',Auth::user()->name)[1]}}"
+                                                    placeholder=""
                                                     name="first_name"
-                                                /> -->
+                                                />
+                                                
                                             </div>
-                                        </div>
+                                        </div> -->
                                     </div>
                                     <div class="form-row">
                                         <div class="col">
@@ -113,7 +115,7 @@
                                                 ><input
                                                     class="form-control"
                                                     type="text"
-                                                    placeholder="Date de naissance"
+                                                    placeholder="{{$profile->com_birthdate}}"
                                                     name="date"
                                                 />
                                             </div>
@@ -140,7 +142,7 @@
                                                 ><input
                                                     class="form-control"
                                                     type="text"
-                                                    placeholder="Telephone"
+                                                    placeholder="{{$profile->com_phoneNumber}}"
                                                     name="phone"
                                                 />
                                             </div>
@@ -159,6 +161,7 @@
                                             Save Settings
                                         </button>
                                     </div>
+                                    @endforeach
                                 </form>
                             </div>
                         </div>

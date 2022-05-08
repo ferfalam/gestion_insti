@@ -77,18 +77,13 @@
             cols += '<td><select class="custom-select chosen" required style="width: 100px;" name="selectGPE'+counter+'">@foreach ($gpe as $gpe)<option value="'+'{{$gpe->name}}">{{$gpe->name}}</option>@endforeach</select></td>';
             cols += '<td ><input type="number" name="mp'+counter+'" required style="width: 70px;" class="form-control"></td>';
             cols += '<td ><input type="number" name="me'+counter+'" required style="width: 70px;" class="form-control"></td>';
-            
-            $(".chosen").select2();
-
             cols += '<td><button id="ibtnDel" class="ibtnDel btn btn-md btn-danger " value="Supprimer">Supprimer</button></td>';
+            $(".chosen").select2();
             newRow.append(cols);
             $("table.order-list").append(newRow);
             document.getElementById('compteur').value=counter;
             counter++;
         }
-     
-
-
         $("table.order-list").on("click", ".ibtnDel", function (event) {
             $(this).closest("tr").remove(); 
         });

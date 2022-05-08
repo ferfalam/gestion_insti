@@ -32,7 +32,7 @@
         <div class="d-flex flex-column" id="content-wrapper">
 
 
-            <form data-bs-hover-animate="pulse" method="post" action="{{ route('gestion_deroulement_cours.saveFicheEtudiant') }}" novalidate>
+            <form data-bs-hover-animate="pulse" method="post" action="{{ route('gestion_deroulement_cours.saveFiche') }}" novalidate>
                 {{ csrf_field() }}
 
                 <h2 class="text-center" data-aos="fade-down" data-aos-duration="600" data-aos-delay="400" style="font-size: 29px;"><strong> Fiche de Déroulement des Cours </strong></h2>
@@ -56,14 +56,10 @@
                             <label style="font-weight: normal;"> Année d'Etude </label>
                             <select required="" class="form-control" name="yearstudy">
                                 <optgroup label="Année_Etude">
-
-                                        @foreach($annee_detude as $anne_etude)
-                                            <option>
-                                                {!!$anne_etude->name!!}
-                                            </option>
-                                        @endforeach
-
-                                    </optgroup>
+                                    @foreach(DB::table("academic_years")->get() as $annee_etude)
+                                        <option value='{{$annee_etude->id}}' selected=''> {{ $annee_etude->name }} </option>
+                                    @endforeach
+                                </optgroup>
                             </select>
                             {!! $errors->first('yearstudy', '<span class="error"> :message </span>') !!}
                         </div>
@@ -76,14 +72,11 @@
                         <div class="col" data-aos="fade-right" data-aos-duration="700" data-aos-delay="600">
                             <label style="font-weight: normal;"> Filière </label>
                             <select class="form-control" name="filiere" required="">
-                                    <optgroup label="Filière">
-
-                                        @foreach($filieres as $one_filiere)
-                                            <option>
-                                                {!!$one_filiere->name!!}
-                                            </option>
-                                        @endforeach
-                                    </optgroup>
+                                <optgroup label="Filière">
+                                    @foreach(DB::table("fields")->get() as $one_filiere)
+                                        <option value='{{$one_filiere->id}}' selected=''> {{ $one_filiere->name }} </option>
+                                    @endforeach
+                                </optgroup>
                             </select>
                             {!! $errors->first('filiere', '<span class="error"> :message </span>') !!}
 
@@ -91,18 +84,27 @@
 
                         <div class="col" data-aos="fade-left" data-aos-duration="700" data-aos-delay="600">
                             <label style="font-weight: normal;"> UE concerné </label>
-                                <select class="form-control" name="ue" required="">
-                                    <optgroup label="UE Concerné">
+                            <select class="form-control" name="ue" required="">
+                                <optgroup label="UE Concerné">
+                                    @foreach(DB::table("ues")->get() as $ue)
+                                        <option value='{{$ue->id}}' selected=''> {{ $ue->name }} </option>
+                                    @endforeach
+                                </optgroup>
+                            </select>
+                            {!! $errors->first('ue', '<span class="error"> :message </span>') !!}
+                        </div>
 
-                                        @foreach($ues as $ue)
-                                            <option>
-                                                {!!$ue->name!!}
-                                            </option>
-                                        @endforeach
-
-                                    </optgroup>
-                                </select>
-                                {!! $errors->first('ue', '<span class="error"> :message </span>') !!}
+                        <div class="col" data-aos="fade-left" data-aos-duration="700" data-aos-delay="600">
+                            <label style="font-weight: normal;"> Nature UE </label>
+                            <select class="form-control" name="nature_ue" required="">
+                                <optgroup label="Nature UE Concerné">
+                                       <option value='1'> Decouverte </option>
+                                       <option value='2'> Specialite </option>
+                                       <option value='3'> Fondamentale </option>
+                                       <option value='4'> Libre </option>
+                                </optgroup>
+                            </select>
+                            {!! $errors->first('nature ue', '<span class="error"> :message </span>') !!}
                         </div>
                     </div>
                 </div>
@@ -137,13 +139,9 @@
                             <label style="font-weight: normal;">Semestre concerné</label>
                             <select class="form-control" name="semester" required="">
                                 <optgroup label="Semestre Concerné">
-
-                                    @foreach($acad_semestre as $academique_semestre)
-                                        <option>
-                                            {!!$academique_semestre->designation!!}
-                                        </option>
+                                    @foreach(DB::table("academic_semesters")->get() as $acad_semestre)
+                                        <option value='{{$acad_semestre->id}}' selected=''> {{ $acad_semestre->designation }} </option>
                                     @endforeach
-
                                 </optgroup>
                             </select>
                             {!! $errors->first('semester', '<span class="error"> :message </span>') !!}
