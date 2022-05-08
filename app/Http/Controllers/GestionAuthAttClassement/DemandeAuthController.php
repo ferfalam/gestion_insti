@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\GestionAuthAttClassement;
 
 use App\Models\Demande;
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
 use Illuminate\Mail\Mailable;
+
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Redirect;
 
@@ -30,20 +32,11 @@ class DemandeAuthController extends Controller
     */
     public function index1()
     {
-    
+        
      return view('gestion_authClass.pages.demande');
     }
 
-     /**
-     * Display a listing of the resource.
-     *
-    * @return \Illuminate\Http\Response
-    */
-    public function damaff()
-    {
-     
-     return view('gestion_authClass.pages.demandeaff');
-    }
+    
  
      /**
       * Show the form for creating a new resource.
@@ -52,7 +45,7 @@ class DemandeAuthController extends Controller
       */
     public function create()
     {
-     $demande=Demande::all();
+     $demande=Demande::all()->where('user_id',Auth::user()->id);
      return view('gestion_authClass.pages.listdemande',compact('demande'));
     }
  
@@ -64,13 +57,10 @@ class DemandeAuthController extends Controller
       */
      public function store(Request $request)
      {
- 
+        $profil=DB::table('profiles')->where('user_id',Auth::user()->id)->first();
        
          $request->validate([
-             'name_d',
              'recipient',
-             'email',
-             'contact',
              'entite' ,
              'status',
              'piece',
@@ -94,13 +84,14 @@ class DemandeAuthController extends Controller
  
          ];
  
- 
+         
  
          $demande = Demande::create([
-             'name_d' => $request->name_d,
-             'genre_d'=>$request->recipient,
-             'email' => $request->email,
-             'contact' => $request->contact,
+             'user_id'=>$profil->user_id,
+             'name_d' => $profil->com_fullname,
+             'recipient'=>$request->recipient,
+             'email' => Auth::user()->email,
+             'contact' => $profil->com_phoneNumber,
              'entite' => $request->entite,
              'status' => $request->status,
              'objet' => $request->objet,
@@ -125,8 +116,8 @@ class DemandeAuthController extends Controller
      public function show($id)
      {
          $demande=Demande::find($id);
- //        return view('pages/updatede',compact('demande'));
-         return view('gestion_authClass.pages.demandeaff',compact('demande'));
+ 
+         return view('gestion_authClass.pages.demande',compact('demande'));
      }
  
      public function show2($id)
@@ -174,7 +165,37 @@ class DemandeAuthController extends Controller
  
          $demande->update($request->all());
  
-         return redirect('gestion_authClass.listdemande')->with('success');
+        //  return redirect('gestion_authClass.listdemande')->with('success');
+         return redirect()->route('gestion_authClass.listdemande')->with('success');
+     }
+
+
+
+     public function updateReponse(Request $request, $id)
+     {
+         //
+         $demande=Demande::find($id);
+         $request->validate([
+            'user_id'=>$demande->user_id,
+            'name_d' => $demande->com_fullname,
+            'recipient'=>$demande->recipient,
+            'email' => $demande->email,
+            'contact' => $demande->com_phoneNumber,
+            'entite' => $demande->entite,
+            'status' => $demande->status,
+            'objet' => $demande->objet,
+            'message' => $demande->message,
+            'attestation'=>$demande->status,
+             'reponse',
+             'name_admin',
+             'email_admin',
+             'contact_admin',
+         ]);
+ 
+         $demande->update($request->all());
+ 
+        //  return redirect('gestion_authClass.listdemande')->with('success');
+         return redirect()->route('gestion_authClass.listdemande')->with('success');
      }
  
      /**

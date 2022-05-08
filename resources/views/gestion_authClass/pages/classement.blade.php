@@ -2,49 +2,58 @@
 
 @section('main')
 
+
 <div class="container-fluid">
 
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <h2 class="text-primary font-weight-bold m-0" style="text-align:center;">Classement des étudiants</h2>
         </div>
+
         <div class="card-body">
-            <div class="card-header py-3" style="columns: 2">
-                <div>
-                    <div style="display: inline">
-                        <label for="">Filière</label>
+            <form method="POST" action="{{route('gestion_authClass.showClassement')}}">
+                @csrf
+                <div class="card-header py-3" style="columns: 2">
+                    <div>
+                        <div style="display: inline">
+                            <label for="">Filière</label>
+                        </div>
+                        <div style="display: inline">
+                            <select class="form-control" name="filiere" id="filiere" required=""
+                                value="{{old('filiere')}}">
+
+                                <option value="all">All</option>
+                                @foreach($filieres as $one_filiere)
+                                <option selected="">
+                                    {{$one_filiere->name}}
+                                </option>
+                                @endforeach
+
+                            </select>
+
+                        </div>
                     </div>
-                    <div style="display: inline">
-
-                        <select class="form-control" name="fili">
-                            <optgroup>
-                                <option value="GEI" name="GEI">GEI</option>
-                                <option value="GMP" name="GMP">GMP</option>
-                                <option value="MS" name="MS">MS</option>
-                                <option value="GE" name="GE">GE</option>
-                                <option value="GC" name="GC">GC</option>
-                            </optgroup>
-                        </select>
-
+                    <div>
+                        <div style="display: inline">
+                            <label for="">Promotion</label>
+                        </div>
+                        <div style="display: inline">
+                            <select class="form-control" name="annee">
+                                <optgroup>
+                                    <option value="2019-2020" selected="">2019-2020</option>
+                                    <option value="2020-2021">2020-2021</option>
+                                    <option value="2021-2022">2021-2022</option>
+                                    <option value="2022-2023">2022-2023</option>
+                                    <option value="2023-2024">2023-2024</option>
+                                </optgroup>
+                            </select>
+                        </div>
                     </div>
                 </div>
-                <div>
-                    <div style="display: inline">
-                        <label for="">Promotion</label>
-                    </div>
-                    <div style="display: inline">
-                        <select class="form-control" name="fili">
-                            <optgroup>
-                                <option value="GEI" selected="">2019-2020</option>
-                                <option value="GMP">2020-2021</option>
-                                <option value="MS">2021-2022</option>
-                                <option value="GE">2022-2023</option>
-                                <option value="GC">2023-2024</option>
-                            </optgroup>
-                        </select>
-                    </div>
-                </div>
-            </div>
+                <button class="btn btn-primary" type="submit">Charger</button>
+
+
+            </form>
             <div class="card-body">
                 <div class="row">
 
@@ -112,6 +121,64 @@
                                     </tfoot> -->
                     </table>
                 </div>
+
+                <a class="btn btn-primary m-2" href="#" data-toggle="modal" data-target="#modal2"
+                    title="Retirer tous les produits du panier">Vider le panier</a>
+                <div class="modal fade" id="modal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content modal-popup">
+                            <a href="#" class="close-link"><i class="icon_close_alt2"></i></a>
+
+                            <form method="GET" action="{{route('gestion_authClass.getClassementPdf')}}" class="popup-form">
+                                
+                                    @csrf
+                                    <div class="card-header py-3" style="columns: 2">
+                                        <div>
+                                            <div style="display: inline">
+                                                <label for="">Filière</label>
+                                            </div>
+                                            <div style="display: inline">
+                                                <select class="form-control" name="filiere" id="filiere" required=""
+                                                    value="{{old('filiere')}}">
+
+                                                    <option value="all">All</option>
+                                                    @foreach($filieres as $one_filiere)
+                                                    <option selected="">
+                                                        {{$one_filiere->name}}
+                                                    </option>
+                                                    @endforeach
+
+                                                </select>
+
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div style="display: inline">
+                                                <label for="">Promotion</label>
+                                            </div>
+                                            <div style="display: inline">
+                                                <select class="form-control" name="annee">
+                                                    <optgroup>
+                                                        <option value="2019-2020" selected="">2019-2020</option>
+                                                        <option value="2020-2021">2020-2021</option>
+                                                        <option value="2021-2022">2021-2022</option>
+                                                        <option value="2022-2023">2022-2023</option>
+                                                        <option value="2023-2024">2023-2024</option>
+                                                    </optgroup>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col text-center"> 
+                                    <button class="btn btn-primary" type="submit">Télécharger</button> </div>
+  
+                                </form>
+                        </div>
+                    </div>
+                </div>
+
+
             </div>
         </div>
     </div>

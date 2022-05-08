@@ -2,26 +2,17 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use App\Models\Employee;
-use Illuminate\Database\Eloquent\Model;
 use App\Models\Moyenne;
-use Maatwebsite\Excel\Concerns\FromCollection;
+use App\Models\Employee;
+use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\Model;
 use Maatwebsite\Excel\Concerns\WithHeadings;
+use Maatwebsite\Excel\Concerns\FromCollection;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class MoyenneExport implements FromCollection,WithHeadings
 {
     use HasFactory;
-
-    //  /**
-    // * @return \Illuminate\Support\Collection
-    // */
-    // public function collection()
-    // {
-    //     $filiere='GC';
-        
-    //     return Moyenne::all()->where('filiere', $filiere)->where('genre', 'M');
-    // }
 
     public function headings():array{
         return[
@@ -41,7 +32,10 @@ class MoyenneExport implements FromCollection,WithHeadings
     */
     public function collection()
     {
+       
 //        return Employee::all();
-        return collect(Employee::getEmployee());
+        // return collect(Employee::getEmployee());
+        return Moyenne::all()->where('genre', 'M');
+        // return Moyenne::all()->where('filiere', $request->filiere)->where('genre', $request->annee);
     }
 }

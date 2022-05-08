@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers\GestionAuthAttClassement;
 
-use App\Http\Controllers\Controller;
+use App\Models\Field;
 use App\Models\Moyenne;
+use PDF;
+use App\Models\AcademicYear;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Redirect;
 
@@ -30,10 +33,12 @@ class ClassementController extends Controller
  
     public function create()
     {
- 
+
+        $annee_detude = AcademicYear::all() ;
+        $filieres = Field::all() ;
         //  $moyenne=DB::select('SELECT * FROM Moyennes Order by moy_generale DESC')->where('filiere','GC');
-         $moyenne=Moyenne::all()->where('filiere','GC');
-         return view('gestion_authClass.pages.classement', compact('moyenne'));
+         $moyenne=Moyenne::all();
+         return view('gestion_authClass.pages.classement', compact('moyenne','annee_detude','filieres'));
  
     }
  
@@ -78,12 +83,32 @@ class ClassementController extends Controller
      /**
       * Display the specified resource.
       *
-      * @param  int  $id
+      * @param  \Illuminate\Http\Request  $request
       * @return \Illuminate\Http\Response
       */
-     public function show($id)
+     public function show(Request $request)
      {
-         //
+        $annee_detude = AcademicYear::all() ;
+        $filieres = Field::all() ;
+       
+        
+        $request->validate([
+            'filiere',
+            // 'annee',
+        ]);
+
+        
+        if ($request->filiere=='all') {
+            $moyenne=Moyenne::all();
+        } else {
+            $moyenne=Moyenne::all()->where('filiere',$request->filiere);
+        }
+        
+        
+
+        //  $moyenne=Moyenne::all()->where('filiere',$request->filiere)->where('moy_generale',$request->annee);
+         
+         return view('gestion_authClass.pages.classement', compact('moyenne','annee_detude','filieres'));
      }
  
      /**
@@ -119,4 +144,19 @@ class ClassementController extends Controller
      {
          //
      }
+
+
+     public function getClassementPdf(Request $request){
+
+        $request->validate([
+            'filiere',
+            // 'annee',
+        ]);
+
+        // $moyenne = Moyenne::all()->where('filiere', $request-)->where('genre', 'M');
+        $moyenne = Moyenne::all()->where('filiere', $request->filiere);
+        $pdf = PDF::loadView('gestion_authClass.pages.classementPdf',compact('moyenne','request'));
+        return $pdf->download('Classements.pdf');
+       
+    }
 }

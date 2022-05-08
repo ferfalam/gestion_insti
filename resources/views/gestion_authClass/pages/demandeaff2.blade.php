@@ -33,7 +33,7 @@
                     <div class="row" style=" margin-left: 50px; margin-right: 50px; margin-bottom: 40px">
                         <div class="col-6 col-md-4"></div>
                         <div class="col-6 col-md-4"></div>
-                        <div class="col-6 col-md-4"><p>{{$demande->genre_d}} de l'INSTI Lokossa</p></div>
+                        <div class="col-6 col-md-4"><p>{{$demande->recipient}} de l'INSTI Lokossa</p></div>
                     </div>
 
                     <div class="row" style="margin-left: 50px; margin-right: 50px; margin-bottom: 40px">
@@ -46,7 +46,7 @@
                     <!-- Columns are always 50% wide, on mobile and desktop -->
                     <div class="row">
                         <div class="col-4"></div>
-                        <div class="col-8">{{$demande->genre_d}},</div>
+                        <div class="col-8">{{$demande->recipient}},</div>
                     </div>
 
                     <div class="row" style="text-align: justify; margin-left: 50px; margin-right: 50px; margin-bottom: 40px">
@@ -70,7 +70,7 @@
 <button class="btn btn-primary" style="margin-top: 30px"><a href="{{route('gestion_authClass.medit',$demande->id)}}" style="color:white">Modifier</a></button>
 @endif
 @if (Auth::user()->email =='admin@insti.com')
-<button class="btn btn-primary" style="margin-top: 30px"><a href="{{route('gestion_authClass.medit',$demande->id)}}" style="color:white">Repondre</a></button>
+<button class="btn btn-primary" style="margin-top: 30px"><a href="{{route('gestion_authClass.reponseDemande',$demande->id)}}" style="color:white">Repondre</a></button>
 @endif   
 
 @endsection
