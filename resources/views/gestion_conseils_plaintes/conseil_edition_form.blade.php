@@ -38,36 +38,42 @@
         @endif
         <h2 class="text-center"><br><strong>Mettre à jour conseil de discipline</strong><br><br></h2>
 
+        @if ($conseil-> tenue == 0)
         <span>Participants</span><div class="form-group">
             <select class="select2 form-control select2-multiple"
                 name = "participants[]" multiple="multiple" data-placeholder="Ajouter des participants...">
                 @foreach ($users as $user)
-                <option value="{{ $user -> id}}" >{{ $user -> profile -> com_fullname}}</option>
+                <option value="{{ $user -> id}}" @if (in_array($user -> id, (array)$selected1))
+                    selected
+                @endif>{{ $user -> profile -> com_fullname}}</option>
                 @endforeach
             </select>
         </div>
 
-        <span>Date du conseil</span><div class="form-group"><input class="form-control" type="date" name="date" placeholder="Date de tenue"></div>
-        <span>Heure de conseil</span><div class="form-group"><input class="form-control" type="time" name="heure" placeholder="Heure"></div>
+        <span>Date du conseil</span><div class="form-group"><input class="form-control" type="date" name="date" placeholder="Date de tenue" value="{{ $conseil -> date}}"></div>
+        <span>Heure de conseil</span><div class="form-group"><input class="form-control" type="time" name="heure" placeholder="Heure" value="{{ $conseil -> heure}}"></div>
         <span>Lieu de conseil</span><div class="form-group">
             <select id="drop" class="form-control" placeholder="Lieu" name="lieu">
-
                 <option value="Salle des professeurs">Salle des professeurs</option>
                 <option value="Amphi GC">Amphi GC</option>
                 <option value="Salle P04">Salle P04</option>
             </select></div>
+        @endif
+
             @if ($conseil-> tenue == 1)
             <span>Présents</span><div class="form-group">
                 <select class="select2 form-control select2-multiple"
                     name = "presents[]" multiple="multiple" data-placeholder="Personnes présentes...">
                     @foreach ($users as $user)
-                    <option value="{{ $user -> id}}" >{{ $user -> profile -> com_fullname}}</option>
+                    <option value="{{ $user -> id}}"@if (in_array($user -> id, (array)$selected2))
+                        selected
+                    @endif >{{ $user -> profile -> com_fullname}}</option>
                     @endforeach
                 </select>
             </div>
             <span>Maitre de séance</span><div class="form-group">
                 <select class="form-control" id="drop1"
-                    name = "maitre"data-placeholder="Maitre de séance...">
+                    name = "maitre" data-placeholder="Maitre de séance...">
                     @foreach ($users as $user)
                     <option value="{{ $user -> id}}" >{{ $user -> profile -> com_fullname}}</option>
                     @endforeach

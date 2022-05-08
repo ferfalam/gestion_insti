@@ -71,11 +71,12 @@
             </div>
             <span>Description</span><div class="form-group"><textarea class="form-control" name="description" placeholder="Description" rows="4"></textarea></div>
 
-            <div class="form-group"><button class="btn btn-primary" type="submit" onclick="return confirm('Voulez-vous soumettre cette plainte? (Vérifiez bien les informations saisies)'">Envoyer</button></div>
+            <div class="form-group"><button class="btn btn-primary" type="submit"
+                {{-- onclick="return confirm('Voulez-vous soumettre cette plainte? (Vérifiez bien les informations saisies)'" --}}
+                >Envoyer</button></div>
         </form>
     </div>
-
-
+    @include('sweetalert::alert')
 @endsection
 
 @section('script')

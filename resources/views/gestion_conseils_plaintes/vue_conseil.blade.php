@@ -112,8 +112,9 @@
 
         </li>
     </ul>
+</div>
 
-    @if ($tile -> tenue == 0)
+@if ($tile -> tenue == 0)
     <div class="d-flex justify-content-center">
     <div style="margin-bottom: 0.1cm" class="btn-toolbar mx-auto">
         <form method="post" action="{{route('gestion_conseils_plaintes.envoi_convocation', $tile-> id)}}">
@@ -154,11 +155,8 @@
             @elseif ($tile ->tenue == 1  && $tile->rapport == 1)
             <a style="color: #ffffff" class="btn btn-primary mx-2" role="button" href="{{route('gestion_conseils_plaintes.formulaire_rapport', $tile-> id)}}">Télécharger le rapport</a>
             @endif
-
 </div>
 
-
-</div>
 </div>
 
 

@@ -10,6 +10,7 @@ use App\Models\User;
 use App\Http\Controllers\Controller;
 use PDF;
 use Auth;
+Use Alert;
 
 class PlainteController extends Controller
 {
@@ -130,6 +131,7 @@ class PlainteController extends Controller
                 ]);
             }
         }
+        toast('Votre plainte a été ajoutée!','success');
         return redirect()->route('gestion_conseils_plaintes.liste_plaintes');
     }
 

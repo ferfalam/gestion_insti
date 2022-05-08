@@ -6,6 +6,7 @@
     "license": "MIT",
     "require": {
         "php": "^7.3|^8.0",
+        "ext-json": "*",
         "aws/aws-sdk-php": "^3.222",
         "barryvdh/laravel-dompdf": "^1.0",
         "fruitcake/laravel-cors": "^2.0",
@@ -15,19 +16,12 @@
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.4",
         "maatwebsite/excel": "^3.1",
-<<<<<<< HEAD
+        "realrashid/sweet-alert": "^5.0",
+        "spatie/simple-excel": "^1.13",
         "symfony/http-client": "^5.4",
         "symfony/mailgun-mailer": "^5.4",
         "symfony/postmark-mailer": "^5.4",
-<<<<<<< HEAD
-=======
-        "spatie/simple-excel": "^1.13",
->>>>>>> f59079e1e80389dd8b0a468298ce5308baf933f2
         "yajra/laravel-datatables-oracle": "~9.0"
-=======
-        "yajra/laravel-datatables-oracle": "~9.0",
-      "ext-json": "*"
->>>>>>> 9d9d39ff2aba85d980f857007807b48968d48cf0
     },
     "require-dev": {
         "facade/ignition": "^2.5",
