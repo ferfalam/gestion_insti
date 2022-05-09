@@ -13,6 +13,9 @@ use App\Models\AcademicYear;
 use App\Models\Field;
 use App\Models\General;
 use App\Models\User_userGroup_Position_Service_Map;
+use App\Models\UserGroup;
+use App\Models\Services;
+use App\Models\Position;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
@@ -41,7 +44,11 @@ class DeliberationInfosController extends Controller
 
         $groupe = PedagogicGroup::where('id', $deliberation->groupId)->get()[0]->name; 
 
-        $auteur = User::where('id', $deliberation->authorId)->get()[0]->pseudo; 
+        if(Auth::user()->id == $deliberation->authorId){
+            $auteur = "Vous";
+        }else{
+            $auteur = User::where('id', $deliberation->authorId)->get()[0]->pseudo; 
+        }
 
         $annee = AcademicYear::where('id', $deliberation->yearId)->get()[0]->name; 
 
@@ -53,13 +60,23 @@ class DeliberationInfosController extends Controller
 
         // 1 - admin, 2 - superadmin, 3 - aprennant, 4 - enseignant, 5 - personnel, 6 - redacteur, 7 - partenaire 
 
-        $usergroupid = User_userGroup_Position_Service_Map::where('userId', Auth::user()->id)->get()[0]->userGroupId;
-        $positionid = User_userGroup_Position_Service_Map::where('userId', Auth::user()->id)->get()[0]->positionId;
-        $serviceid = User_userGroup_Position_Service_Map::where('userId', Auth::user()->id)->get()[0]->serviceId;
-        
-        if (in_array($usergroupid , array(1,2,4,5,6)) and in_array($serviceid, array(1,2,3,4)) and   in_array($positionid, array(1,3,4))){
+        $ug = UserGroup::where('id', User_userGroup_Position_Service_Map::where('userId', Auth::user()->id)->get()[0]->userGroupId)->get()[0]->name;
 
+        $p = Position::where('id', User_userGroup_Position_Service_Map::where('userId', Auth::user()->id)->get()[0]->positionId)->get()[0]->name;
+
+        $s = Services::where('id', User_userGroup_Position_Service_Map::where('userId', Auth::user()->id)->get()[0]->serviceId)->get()[0]->name;
+
+        if(Auth::user()->id == $deliberation->authorId){
+            return view('gestion_deliberations.authorDeliberationInfos',compact('deliberation', 'groupe', 'auteur','annee','participantspath', 'reportpath', 'hideticketpath', 'revealticketpath', 'ues', 'error'));    
+        }
+
+        if ($p == "chefService/Adjoint" and $s == "departement" and !(in_array($ug, array("apprenant","personnel", "redacteur", "partenaire"))) ){
             return view('gestion_deliberations.highDeliberationInfos',compact('deliberation', 'groupe', 'auteur','annee','participantspath', 'reportpath', 'hideticketpath', 'revealticketpath', 'ues', 'error'));    
+        }
+        
+        if (in_array($ug , array("admin","superadmin","enseignant","personnel","rédacteur")) and   in_array($p, array("chefService/Adjoint","chefCollaborateur","chefDivision")) and $s != "departement"){
+
+            return view('gestion_deliberations.interDeliberationInfos',compact('deliberation', 'groupe', 'auteur','annee','participantspath', 'reportpath', 'hideticketpath', 'revealticketpath', 'ues', 'error'));    
         }
         else {
             return view('gestion_deliberations.lowDeliberationInfos',compact('deliberation', 'groupe', 'auteur','annee','participantspath', 'revealticketpath', 'ues', 'error'));
@@ -85,7 +102,11 @@ class DeliberationInfosController extends Controller
 
             $groupe = PedagogicGroup::where('id', $deliberation->groupId)->get()[0]->name; 
     
-            $auteur = User::where('id', $deliberation->authorId)->get()[0]->pseudo; 
+            if(Auth::user()->id == $deliberation->authorId){
+                $auteur = "Vous";
+            }else{
+                $auteur = User::where('id', $deliberation->authorId)->get()[0]->pseudo; 
+            }
     
             $annee = AcademicYear::where('id', $deliberation->yearId)->get()[0]->name; 
     
@@ -93,27 +114,36 @@ class DeliberationInfosController extends Controller
             $reportpath = $deliberation['report'];
             $hideticketpath = $deliberation['hideTicket'];
             $revealticketpath = $deliberation['revealTicket'];
-            $error = "Ce document ne peut s'ouvrir dans le navigateur! ";
+            $error = "Ce document ne peut s'ouvrir dans le navigateur! Vous pouvez le télécharger.";
     
             // 1 - admin, 2 - superadmin, 3 - aprennant, 4 - enseignant, 5 - personnel, 6 - redacteur, 7 - partenaire 
     
-            $usergroupid = User_userGroup_Position_Service_Map::where('userId', Auth::user()->id)->get()[0]->userGroupId;
-            $positionid = User_userGroup_Position_Service_Map::where('userId', Auth::user()->id)->get()[0]->positionId;
-            $serviceid = User_userGroup_Position_Service_Map::where('userId', Auth::user()->id)->get()[0]->serviceId;
-            
-            if (in_array($usergroupid , array(1,2,4,5,6)) and in_array($serviceid, array(1,2,3,4)) and   in_array($positionid, array(1,3,4))){
-    
-                return view('gestion_deliberations.highDeliberationInfos',compact('deliberation', 'groupe', 'auteur','annee','participantspath', 'reportpath', 'hideticketpath', 'revealticketpath', 'ues', 'error'));    
-            }
-            else {
-                return view('gestion_deliberations.lowDeliberationInfos',compact('deliberation', 'groupe', 'auteur','annee','participantspath', 'revealticketpath',  'ues','error'));
-            }
+            $ug = UserGroup::where('id', User_userGroup_Position_Service_Map::where('userId', Auth::user()->id)->get()[0]->userGroupId)->get()[0]->name;
+
+        $p = Position::where('id', User_userGroup_Position_Service_Map::where('userId', Auth::user()->id)->get()[0]->positionId)->get()[0]->name;
+
+        $s = Services::where('id', User_userGroup_Position_Service_Map::where('userId', Auth::user()->id)->get()[0]->serviceId)->get()[0]->name;
+
+        if(Auth::user()->id == $deliberation->authorId){
+            return view('gestion_deliberations.authorDeliberationInfos',compact('deliberation', 'groupe', 'auteur','annee','participantspath', 'reportpath', 'hideticketpath', 'revealticketpath', 'ues', 'error'));    
+        }
+
+        if ($p == "chefService/Adjoint" and $s == "departement" and !(in_array($ug, array("apprenant","personnel", "redacteur", "partenaire"))) ){
+            return view('gestion_deliberations.highDeliberationInfos',compact('deliberation', 'groupe', 'auteur','annee','participantspath', 'reportpath', 'hideticketpath', 'revealticketpath', 'ues', 'error'));    
+        }
+        
+        if (in_array($ug , array("admin","superadmin","enseignant","personnel","rédacteur")) and   in_array($p, array("chefService/Adjoint","chefCollaborateur","chefDivision")) and $s != "departement"){
+
+            return view('gestion_deliberations.interDeliberationInfos',compact('deliberation', 'groupe', 'auteur','annee','participantspath', 'reportpath', 'hideticketpath', 'revealticketpath', 'ues', 'error'));    
+        }
+        else {
+            return view('gestion_deliberations.lowDeliberationInfos',compact('deliberation', 'groupe', 'auteur','annee','participantspath', 'revealticketpath', 'ues', 'error'));
+        }
         }  
             
     }
 
     public function change(Request $request){
-        if((Auth::user()->id) == $request->authid){
 
             $annees = AcademicYear::all();
             $ues = UE::all();
@@ -124,31 +154,6 @@ class DeliberationInfosController extends Controller
             $deliberation = Deliberation::where('id', $request->id)->get()[0]; 
 
             return view('gestion_deliberations.updateDeliberation', compact('annees', 'semestres', 'filieres', 'groupes', 'ues','deliberation')); 
-        } else{
-            $deliberation = Deliberation::where('id', $request->id)->get()[0]; 
-
-            $uesids = explode('.', $deliberation->uesIds); $ues = array();
-            foreach($uesids as $ueid){
-            $ueid = (int)$ueid; 
-            if($ueid != null){
-                $ues[] = Ue::where('id', $ueid)->get()[0]->abbreviation;
-            }   
-            }
-
-            $groupe = PedagogicGroup::where('id', $deliberation->groupId)->get()[0]->name; 
-    
-            $auteur = User::where('id', $deliberation->authorId)->get()[0]->pseudo; 
-    
-            $annee = AcademicYear::where('id', $deliberation->yearId)->get()[0]->name; 
-    
-            $participantspath = $deliberation['participants'];
-            $reportpath = $deliberation['report'];
-            $hideticketpath = $deliberation['hideTicket'];
-            $revealticketpath = $deliberation['revealTicket'];
-            $error = "Vous ne pouvez modifier ce document car vous n'en etes pas l'auteur.";
-            
-            return view('gestion_deliberations.highDeliberationInfos',compact('deliberation', 'groupe', 'auteur','annee','participantspath', 'reportpath', 'hideticketpath', 'revealticketpath', 'ues', 'error'));    
-        }
         
     }
 
@@ -178,7 +183,7 @@ class DeliberationInfosController extends Controller
             'delib_msq' => 'required|file|mimes:xls,xlsx,pdf',
             'semestre' => 'required|string',
             'begin_date' => 'required|date',
-            'end_date' => 'required|date',
+            'end_date' => 'required|date|after_or_equal:begin_date',
             'participants' => 'required|file|max:5120|mimes:pdf',
             'rapport' => 'required|file|max:5120|mimes:pdf',
             'ues' => 'required',
@@ -268,8 +273,6 @@ class DeliberationInfosController extends Controller
             $hideticketpath = $deliberation['hideTicket'];
             $revealticketpath = $deliberation['revealTicket'];
             
-
-        if((Auth::user()->id) == $request->authid){
             
             $delib = Deliberation::findOrFail($request->id);
 
@@ -290,13 +293,6 @@ class DeliberationInfosController extends Controller
             }else{
                 $error = "La suppression n'a pas été effectuée! ";
             return view('gestion_deliberations.highDeliberationInfos',compact('deliberation', 'groupe', 'auteur','annee','participantspath', 'reportpath', 'hideticketpath', 'revealticketpath', 'ues', 'error'));    
-
-            }
-
-        } else{
-            $error = "Vous ne pouvez modifier ce document! ";
-            return view('gestion_deliberations.highDeliberationInfos',compact('deliberation', 'groupe', 'auteur','annee','participantspath', 'reportpath', 'hideticketpath', 'revealticketpath', 'ues', 'error'));    
         }
-        
     }
 }

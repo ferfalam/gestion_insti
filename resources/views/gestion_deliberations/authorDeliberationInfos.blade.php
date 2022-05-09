@@ -27,11 +27,11 @@
         {{ $error }}
     </div>
     @endif
-    <!-- <div class='row justify-content-end'>
+    <div class='row justify-content-end'>
         <a class="btn btn-primary col-md-2" href=""
                                 onclick="event.preventDefault();
                                 document.getElementById('ch').submit();"> Modifier</a>
-        <button class="btn btn-primary col-md-2" type="button" data-toggle="modal" data-target="#supr"> Supprimer</button> -->
+        <button class="btn btn-primary col-md-2" type="button" data-toggle="modal" data-target="#supr"> Supprimer</button>
 
         <!-- Button trigger modal -->
 <!-- <button type="button" class="btn btn-primary" >

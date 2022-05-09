@@ -29,7 +29,7 @@
         "phpunit/phpunit": "^9.5.10"
     },
     "autoload": {
-        "files": ["app/Http/Controllers/GestionConseilPedagogique/Helper/notify.php"],
+        "files": ["app/Http/Controllers/GestionConseilPedagogique/Helper/notify.php", "app/Http/Controllers/GestionTfe/Helper.php"],
         "psr-4": {
             "App\\": "app/",
             "Database\\Factories\\": "database/factories/",

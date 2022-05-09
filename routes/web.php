@@ -280,7 +280,7 @@ Route::group(["prefix"=>"gestion_tfe", "as"=>"gestion_tfe." , "middleware" => "a
     Route::get('/search', ['as'=>'search','uses'=>'GestionTfe\SearchController@search']);
     Route::get('/',["as"=>'welcome', 'uses'=>'GestionTfe\TfeController@index']);
     Route::resource('/tfe',"GestionTfe\TfeController");
-        Route::get("/profil/{id}",'GestionTfe\ProfilController@index')->name('profil');
+        Route::get("/mon-tfe/{id}",'GestionTfe\ProfilController@index')->name('show');
         Route::get("/edit/{id}",'GestionTfe\TfeController@edit')->name('editTfe');
         Route::get("/update/{id}",'GestionTfe\TfeController@update')->name('updateTfe');
         Route::get("/delete/{id}",'GestionTfe\TfeController@destroy')->name('tfeDelete');

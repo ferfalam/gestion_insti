@@ -13,6 +13,9 @@ use App\Models\General;
 use App\Models\UE;
 use App\Models\PedagogicGroup;
 use App\Models\User_userGroup_Position_Service_Map;
+use App\Models\UserGroup;
+use App\Models\Services;
+use App\Models\Position;
 //use App\Models\DeliberationUEMap;
 
 class EnregistrerDeliberationsController extends Controller
@@ -26,24 +29,25 @@ class EnregistrerDeliberationsController extends Controller
     {
         // 1 - admin, 2 - superadmin, 3 - aprennant, 4 - enseignant, 5 - personnel, 6 - redacteur, 7 - partenaire 
 
-        $usergroupid = User_userGroup_Position_Service_Map::where('userId', Auth::user()->id)->get()[0]->userGroupId;
-        $positionid = User_userGroup_Position_Service_Map::where('userId', Auth::user()->id)->get()[0]->positionId;
-        $serviceid = User_userGroup_Position_Service_Map::where('userId', Auth::user()->id)->get()[0]->serviceId;
-        
-        if ($positionid == 1 and ($serviceid == 1 or $serviceid == 2)){
+        $ug = UserGroup::where('id', User_userGroup_Position_Service_Map::where('userId', Auth::user()->id)->get()[0]->userGroupId)->get()[0]->name;
 
+        $p = Position::where('id', User_userGroup_Position_Service_Map::where('userId', Auth::user()->id)->get()[0]->positionId)->get()[0]->name;
+
+        $s = Services::where('id', User_userGroup_Position_Service_Map::where('userId', Auth::user()->id)->get()[0]->serviceId)->get()[0]->name;
+
+        if ($p == "chefService/Adjoint" and $s == "departement" and !(in_array($ug, array("apprenant","personnel", "redacteur", "partenaire"))) ){
+            
             $annees = AcademicYear::all();
             $ues = UE::all();
             $filieres = Field::all();
             $semestres = General::where('content_type', 'semestre_annee')->get();
             $groupes = PedagogicGroup::all();
             return view('gestion_deliberations.enregistrerDeliberation', compact('annees', 'semestres', 'filieres', 'groupes', 'ues'));    
-        }
-        else {
-            return redirect()->action([IndexController::class, 'index'])->with('error', ' Vous ne pouvez pas enrégistrer de délibérations!');
-        }
 
+        }else{
 
+            return back()->withInput();
+        }
     }
 
     /**
@@ -60,11 +64,11 @@ class EnregistrerDeliberationsController extends Controller
         $request->validate([
             'annee' => 'required|integer',
             'groupePedagogique' => 'required|integer',            
-            'delib_af' => 'required|file|mimes:xls,xlsx,pdf',
-            'delib_msq' => 'required|file|mimes:xls,xlsx,pdf',
+            'delib_af' => 'required|file|mimes:xls,xlsx,pdf|max:10240',
+            'delib_msq' => 'required|file|mimes:xls,xlsx,pdf|max:10240',
             'semestre' => 'required|string',
             'begin_date' => 'required|date',
-            'end_date' => 'required|date',
+            'end_date' => 'required|date|after_or_equal:begin_date',
             'participants' => 'required|file|max:5120|mimes:pdf',
             'rapport' => 'required|file|max:5120|mimes:pdf',
             'ues' => 'required',

@@ -49,7 +49,6 @@
                         <li class="nav-item"><a class="nav-link {{ request() -> is('login')? 'active': '' }}"  href="{{ route('login')}}"><i class="far fa-user-circle"></i><span>Connexion</span></a></li>
                     @else
                         <li class="nav-item"><a class="nav-link {{ request() -> is('gestion_deliberation')? 'active': '' }}" href="{{ route('gestion_deliberation.index')}}"><i class="fas fa-tachometer-alt"></i><span>Accueil</span></a></li>
-                        <li class="nav-item"><a class="nav-link {{ request() -> is('gestion_deliberation/enregistrerDeliberation')? 'active': '' }}" href="{{ route('gestion_deliberation.nouvelledeliberation')}}"><i class="fas fa-user-circle"></i><span>Enrégistrer une délibération</span></a></li> 
                     @endif
                 </ul>
                 <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button></div>

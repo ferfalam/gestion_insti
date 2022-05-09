@@ -32,7 +32,7 @@
     <div id="wrapper">
         <!-- /*****************************-// -->
         
-        @include('layouts.fullContainer')
+        @include('GestionTfe.layouts.fullContainer')
 
         <div class="d-flex flex-column" id="content-wrapper"><div id="content">
             <nav class="navbar navbar-light navbar-expand bg-white shadow mb-4 topbar static-top">
@@ -42,7 +42,7 @@
             </nav>
             <main class="justify-content">
             <div class="container">
-        @include('flash::message')
+                
       </div>   
                 @yield('content')
             </main> 

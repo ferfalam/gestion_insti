@@ -54,7 +54,7 @@
                                         <label for="groupe_pedagogique"><strong>Filière</strong></label>
                                         <select class="form-control @error('groupe_pedagogique') is-invalid @enderror" name="groupe_pedagogique" id="entity" value="{{old('groupe_pedagogique') }}" >
                                           @foreach(Fields() as $field)
-                                            <option value="{{$field->abbreviation}}">{{$field->name}}({{$field->abbreviation}})</option>
+                                            <option value="{{$field->abbreviation}}">{{$field->name}}({{$field->systemName}})</option>
                                           @endforeach
                                         </select>
                                         @error('groupe_pedagogique')
@@ -62,7 +62,7 @@
                                                 <strong>{{ $message }}</strong>
                                             </span>
                                         @enderror
-                                    </div>
+                                    </div> 
                                 </div>
                             </div>
                     </div>

@@ -4,56 +4,17 @@
 <div>
     <div class="container-fluid">
         <!-- **********- -->
-        <h3 class="text-dark mb-4-m-8">Profile</h3>
+        <h3 class="text-dark mb-4-m-8">Mon TFE</h3>
         <div class="row">
            <div class="card-body text-center"><img class="rounded-circle mb-3 mt-4" src="{{asset('GestionTfe/images/account.jpg')}}" width="160" height="160" />
              <div class="mb-3">
-                <button class="btn btn-primary" type="button" onclick="event.preventDefult; alert('Vous ne pouvez éditer votre profil');">
-                    <a href="" style="color: white;">Editer le Profil</a>
-                </button>
                 @if($tfe!=null and $tfe->status==0)
-                <button class="btn btn-primary" type="button" >
-                    <a href="{{ route('gestion_tfe.tfe.edit',$tfe->id)}}" style="color: white;">Editer le Tfe</a></button>
+                <a class="btn btn-primary" href="{{ route('gestion_tfe.tfe.edit',$tfe->id)}}" style="color: white;">Editer le Tfe</a>
                @endif 
             </div>
         </div>
     </div>
     <!-- **********- -->
-
-    <div class="card shadow mb-3">
-        <div class="card-header" style="background-color: #4169e1;">
-           <p class="m-0 font-weight-bold text-center" style="font-size: 20px;color: white;">Informations personnelles</p>
-       </div>
-       <div class="card-body">
-        <div class="form-group row">
-            <div class="col-sm-6 mb-3 mb-sm-0">
-                <div class="mb-4">
-                    <label>{{__('Nom complet')}}</label>
-                    <input type="text" class="form-control" name="name" disabled="true" value="{{$profil->com_fullname }}" disabled="true"/>
-                </div>
-                <div>
-                    <label>{{__('Filière')}}</label>
-                    <input class="form-control" value="{{$filiere->abbreviation}}" disabled="true" id="entity">
-                </div>
-
-            </div>
-
-            <div class="col-sm-6 mb-3 mb-sm-0">
-                <div class="mb-4">
-                    <label>{{__('N° Matricule')}}</label>
-                    <input class="form-control" value="{{ $profil->com_registrationNumber}}" disabled="true">
-                </div>
-                <div>
-                   <label>{{__('Année d\'étude')}}</label>
-                   <input type="text" class="form-control" value="2022" disabled="true" />  
-
-               </div>
-           </div>
-       </div>
-       <div class="form-group">
-        <label>{{__('N° d\'enrégistrement')}}</label>
-        <input type="email" class="form-control" value="{{ $user==null? : $user->id}}"  disabled="true">
-    </div>
 </div>
 </div>  
 <!-- **********- -->

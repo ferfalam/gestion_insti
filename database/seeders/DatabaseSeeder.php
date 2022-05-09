@@ -52,6 +52,7 @@ class DatabaseSeeder extends Seeder
          $user=User::create(['pseudo'=>"etudiant1",'email'=>"etu1@gmail.com",'password'=>Hash::make('12345678'),'statusId'=>1 , 'user_groupId'=>3]);
          $user=User::create(['pseudo'=>"etudiant2",'email'=>"etu2@gmail.com",'password'=>Hash::make('12345678'),'statusId'=>1 , 'user_groupId'=>3]);
          $user=User::create(['pseudo'=>"etudiant3",'email'=>"etu3@gmail.com",'password'=>Hash::make('12345678'),'statusId'=>1, 'user_groupId'=>3]);
+         $user=User::create(['pseudo'=>"cd",'email'=>"cd@gmail.com",'password'=>Hash::make('12345678'),'statusId'=>1, 'user_groupId'=>4]);
 
          $field=Field::create(["systemName"=>"Maintenace des systèmes","name"=>" MS1","abbreviation"=>"MS1","description"=>" filiere","offer"=>"filiere"]);
          $field=Field::create(["systemName"=>"Génie mecanique et productique ","name"=>" GMP1","abbreviation"=>"GMP1","description"=>" filiere","offer"=>"filiere"]);
@@ -102,6 +103,7 @@ class DatabaseSeeder extends Seeder
         $user_group_positions=User_userGroup_Position_Service_Map::create(["userId"=>"3","userGroupId"=>"4","serviceId"=>"3","positionId"=>"2"]);
         $user_group_positions=User_userGroup_Position_Service_Map::create(["userId"=>"4","userGroupId"=>"5","serviceId"=>"3","positionId"=>"1"]);
         $user_group_positions=User_userGroup_Position_Service_Map::create(["userId"=>"5","userGroupId"=>"5","serviceId"=>"3","positionId"=>"1"]);
+        $user_group_positions=User_userGroup_Position_Service_Map::create(["userId"=>"8","userGroupId"=>"4","serviceId"=>"2","positionId"=>"1"]);
 
         $qualite=Qualite::create(["name"=>"Assistant"]);
         $qualite=Qualite::create(["name"=>"Ingenieur"]);
