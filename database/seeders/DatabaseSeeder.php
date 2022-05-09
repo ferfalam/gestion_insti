@@ -25,8 +25,9 @@ use Illuminate\Database\Seeder;
 use App\Models\AcademicSemester;
 use App\Models\ShortcutsRequest;
 use Illuminate\Support\Facades\Hash;
-use App\Models\user_pedagogic_group_map;
+use App\Models\User_PedagogicGroup_Map;
 use App\Models\User_userGroup_Position_Service_Map;
+use App\Models\User_Position_Service_Field_Map;
 
 class DatabaseSeeder extends Seeder
 {
