@@ -31,12 +31,12 @@
     <div class="container">
         <div class="row">
             <div style="padding-right:70px; padding-left:20px;" class="col-xs-9 col-xs">
-                
-                <form data-bs-hover-animate="pulse" method="post" action="{{ route('saveNewGroup') }}" novalidate>
-                    {{ csrf_field() }} 
-    
+
+                <form data-bs-hover-animate="pulse" method="post" action="{{ route('generality.saveNewGroup') }}" novalidate>
+                    {{ csrf_field() }}
+
                     <h2 class="text-center" data-aos="fade-down" data-aos-duration="600" data-aos-delay="400" style="font-size: 29px;"><strong> <br> Nouveau Groupe Pedagogique </strong></h2>
-                            
+
                         <div class="form-group" >
                             <label for="dsgn"> Designation </label> <br>
                             <div class="form-row">
@@ -46,13 +46,13 @@
                                 </div>
                             </div>
                         </div>
-    
+
                         {{--  Start insert id field  --}}
-    
-    
+
+
                         <div class="form-group">
-                            <div class="form-row">   
-        
+                            <div class="form-row">
+
                                 <div class="col" data-aos="fade-right" data-aos-duration="700" data-aos-delay="600">
                                     <label style="font-weight: normal;"> Filière Associee </label>
                                     <select class="form-control" name="filiere" required="">
@@ -64,7 +64,7 @@
                                     </select>
                                     {!! $errors->first('filiere', '<span class="error"> :message </span>') !!}
                                 </div>
-        
+
                                 <div class="col" data-aos="fade-left" data-aos-duration="700" data-aos-delay="600">
                                     <label style="font-weight: normal;"> Annee Academique </label>
                                     <select class="form-control" name="academicYear" required="">
@@ -89,16 +89,16 @@
                                                 <option value='{{$studyYear->id}}' selected=''> {{ $studyYear->name }} </option>
                                             @endforeach
                                         </optgroup>
-                                        
+
                                     </select>
                                     {!! $errors->first('annee d\'etude', '<span class="error"> :message </span>') !!}
                                 </div>
                             </div>
                         </div>
-                        
-        
+
+
                         {{-- End insert id domain generate --}}
-    
+
                         <div class="form-group">
                             <label style="font-weight: normal;"> Description </label>
                             <div class="form-row">
@@ -108,15 +108,15 @@
                                 </div>
                             </div>
                         </div>
-    
+
                         <div class="form-group">
                             <a style="float : right">
-                                <input name="bouton" class="btn btn-primary btn-block" data-aos="fade-up" data-aos-duration="750" data-aos-delay="600" type="submit" style="font-weight: bold;" value="Envoyer">   
+                                <input name="bouton" class="btn btn-primary btn-block" data-aos="fade-up" data-aos-duration="750" data-aos-delay="600" type="submit" style="font-weight: bold;" value="Envoyer">
                             </a>
                         </div>
-                  
+
                 </form>
-    
+
             </div>
             <div style="width: 40%;padding-top:40px;padding-left:20px;" class="col-xs-9 ">
                 <div>
@@ -124,23 +124,23 @@
                         <label> <strong> Aucun Groupe Pedagogique Enrégistrée </strong> </label> <br>
                     @else
                         <label> <strong> Liste des Groupes Pedagogiques existants </strong> </label> <br>
-        
+
                         @foreach($groupPedagogique as $grpPedag)
                             <div class="row">
                                 <ul>
-                                    <li> {!! $grpPedag->name!!} - {!! $grpPedag->fieldId !!} </li> 
+                                    <li> {!! $grpPedag->name!!} - {!! $grpPedag->fieldId !!} </li>
                                     <button class="btn btn-primary"> <a href="{{ route('groupById', ['id'=>$grpPedag->id]) }}"> Mettre à jour </a> </button>
                                     <button class="btn btn-danger"> <a href="{{ route('deleteGroup', ['id'=>$grpPedag->id]) }}"> Supprimer </a> </button>
                                 </ul>
                             </div>
                         @endforeach
-                    
-                    @endif  
-                
+
+                    @endif
+
                 </div>
             </div>
         </div>
     </div>
-    
+
 
 @endsection

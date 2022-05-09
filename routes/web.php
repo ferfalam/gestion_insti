@@ -54,12 +54,6 @@ Route::get('/moduleGeneralSupprimee/{id}', 'GeneralController@deleteGeneral')->n
 Route::get('/moduleGeneral/{id}', 'GeneralController@findById')->name('generalById');
 Route::post('/mettreAJourModuleGeneral/{id}', 'GeneralController@updateGeneral')->name('updateGeneral');
 
-//Student registration
-Route::get('/formStudentRegistration', 'StudentRegistrationController@index')->name('newStudents');
-Route::post('/nouveauGroupePedagogique', 'StudentRegistrationController@storeStudent')->name('saveNewStudent');
-// Route::get('/GroupePedagogiqueSupprime/{id}', 'PedagogicGroupController@deleteGroupPedagogique')->name('deleteGroup');
-// Route::get('/GroupePedagogique/{id}', 'PedagogicGroupController@findById')->name('groupById');
-// Route::post('/MettreAJourGroupePedagogique/{id}', 'PedagogicGroupController@updateGroupPedagogique')->name('updateGroup');
 
 Route::group(["prefix"=>"gestion_salle", "as"=>"gestion_salle.", "middleware" => "auth"], function ()
 {
@@ -71,27 +65,18 @@ Route::group(["prefix"=>"gestion_salle", "as"=>"gestion_salle.", "middleware" =>
 
 Route::group(["prefix"=>"gestion_demandes_reclamation_evaluation", "as"=>"gestion_demandes_reclamation_evaluation.", "middleware" => "auth"], function ()
 {
-    Route::get('/dashboard',[App\Http\Controllers\GestionDemande\Etudiant\DashboardController::class, 'index'])->name('dashboard_etudiant');
-    // Route::get('/personnel',[App\Http\Controllers\GestionDemande\Personnel\DashboardController::class, 'index'])->name('dashboard_personnel');
-    Route::get('/Faire_une_reclamation',[App\Http\Controllers\GestionDemande\ComplaintRequestController::class, 'create'])->name('reclamation');
-    Route::get('/Faire_demande_evaluation',[App\Http\Controllers\GestionDemande\EvaluationRequestController::class, 'create'])->name('evaluation');
-    Route::post('/soumettre_demande_reclamation',[App\Http\Controllers\GestionDemande\ComplaintRequestController::class, 'store'])->name('validation_reclamation');
-    Route::post('/soumettre_demande_evaluation',[App\Http\Controllers\GestionDemande\EvaluationRequestController::class, 'store'])->name('validation_demande_evaluation');
-    Route::get('/voir_demande_reclamation',[App\Http\Controllers\GestionDemande\ComplaintRequestController::class, 'show_all'])->name('voir_demande_reclamation');
-    Route::get('/voir_demande_evaluation',[App\Http\Controllers\GestionDemande\EvaluationRequestController::class, 'show_all'])->name('voir_demande_evaluation');
-    Route::get('/voir_demande_reclamation/{id}',[App\Http\Controllers\GestionDemande\ComplaintRequestController::class, 'show'])->name('voir_details_demande_reclamation');
-    Route::get('/voir_demande_evaluation/{id}',[App\Http\Controllers\GestionDemande\EvaluationRequestController::class, 'show'])->name('voir_details_demande_evaluation');
+    Route::get('/dashboard',[App\Http\Controllers\GestionDemande\Etudiant\DashboardController::class, 'index'])->name("dashboard_etudiant");
+    // Route::get('/personnel',[App\Http\Controllers\GestionDemande\Personnel\DashboardController::class, 'index'])->name("dashboard_personnel");
+    Route::get('/Faire_une_reclamation',[App\Http\Controllers\GestionDemande\ComplaintRequestController::class, 'create'])->name("reclamation");
+    Route::get('/Faire_demande_evaluation',[App\Http\Controllers\GestionDemande\EvaluationRequestController::class, 'create'])->name("evaluation");
+    Route::post('/soumettre_demande_reclamation',[App\Http\Controllers\GestionDemande\ComplaintRequestController::class, 'store'])->name("validation_reclamation");
+    Route::post('/soumettre_demande_evaluation',[App\Http\Controllers\GestionDemande\EvaluationRequestController::class, 'store'])->name("validation_demande_evaluation");
+    Route::get('/voir_demande_reclamation',[App\Http\Controllers\GestionDemande\ComplaintRequestController::class, 'show_all'])->name("voir_demande_reclamation");
+    Route::get('/voir_demande_evaluation',[App\Http\Controllers\GestionDemande\EvaluationRequestController::class, 'show_all'])->name("voir_demande_evaluation");
+    Route::get('/voir_demande_reclamation/{id}',[App\Http\Controllers\GestionDemande\ComplaintRequestController::class, 'show'])->name("voir_details_demande_reclamation");
+    Route::get('/voir_demande_evaluation/{id}',[App\Http\Controllers\GestionDemande\EvaluationRequestController::class, 'show'])->name("voir_details_demande_evaluation");
 
-    Route::get('/enregistrer_etudiant',[App\Http\Controllers\GestionDemande\StudentRegistrationController::class, 'create'])->name('enregistrer_etudiant');
-    Route::post('/enregistrement_etudiant',[App\Http\Controllers\GestionDemande\StudentRegistrationController::class, 'store'])->name('enregistrement_etudiant');
 
-    // Route::get('/voir_demande_reclamation/{complaint_requests}', [
-
-    //     'as' => 'voir_details_demande_reclamation',
-
-    //     'uses' => 'GestionDemande\ComplaintRequestController@show',
-
-    // ]);
     // Route::get('/logout',[App\Http\Controllers\Auth\LoginController::class, 'logout'])->name("logout");
 
 });
@@ -154,42 +139,36 @@ Route::group(["prefix"=>"gestion_enseignant", "as"=>"gestion_enseignant.","middl
 Route::group(["prefix"=>"gestion_authClass", "as"=>"gestion_authClass.", "middleware" => "auth"], function ()
 {
     Route::get('/', "GestionAuthAttClassement\AuthClassController@index")->name("index");
-
     Route::get('/profile', "GestionAuthAttClassement\AuthClassController@profile")->name("profile");
 
-    Route::get('/demande', function () { return view('gestion_authClass.pages/demande'); })->name('demande');
+    Route::get('/demande', function () {
+        return view('gestion_authClass.pages/demande');
+    })->name('demande');
 
-    Route::get('/reponseDemande/{id}', 'GestionAuthAttClassement\DemandeAuthController@show')->name('reponseDemande');
+    Route::get('/demandeaff', function () {
+        return view('gestion_authClass.pages/demandeaff');
+    })->name('demandeaff');
 
-    Route::post('/updateReponse/{id}', 'GestionAuthAttClassement\DemandeAuthController@updateReponse')->name('updateReponse');
-
-    Route::get('/deconnexion', 'GestionAuthAttClassement\ConnexionController@deconnexion')->name('deconnexion');
-
+    // Route::get('/updatede/{id}','App\Http\Controllers\DemandeeController@show')->middleware(['auth'])->name('showd');
+    // Route::get('/demande', "GestionAuthAttClassement\DemandeAuthController@index1")->name("demande");
     Route::post('/listdemande','GestionAuthAttClassement\DemandeAuthController@store')->name('dem');
-
-    Route::get('/updateDemande/{id}', 'GestionAuthAttClassement\DemandeAuthController@edit')->name('medit');
-
+    // Route::get('/demandeaff', "GestionAuthAttClassement\DemandeAuth@demaff")->name("demandeaff");
+    Route::get('/updatede/{id}', 'GestionAuthAttClassement\DemandeAuthController@show')->name('edit');
+    Route::get('/demandeaff/{id}', 'GestionAuthAttClassement\DemandeAuthController@edit')->name('medit');
     Route::get('/update/{id}', 'GestionAuthAttClassement\DemandeAuthController@show2')->name('edit2');
-
     Route::post('/updatede/{id}', 'GestionAuthAttClassement\DemandeAuthController@update')->name('update');
-
     Route::get('/listdemande','GestionAuthAttClassement\DemandeAuthController@create')->name('listdemande');
 
     Route::get('/demande_r','GestionAuthAttClassement\DemandeAuthController@index')->name('demande_r');
 
-    Route::get('/classement','GestionAuthAttClassement\ClassementController@create')->name('classement');
 
+    Route::get('/classement','GestionAuthAttClassement\ClassementController@create')->name('classement');
     Route::post('/classement','GestionAuthAttClassement\ClassementController@store')->name('dam');
 
-    Route::post('/classement','GestionAuthAttClassement\ClassementController@show')->name('showClassement');
-
     Route::get('/ficheDeliberation','GestionAuthAttClassement\FileController@ImportForm')->name('deliber');
-
-    Route::get('/getClassementPdf','GestionAuthAttClassement\ClassementController@getClassementPdf')->name('getClassementPdf');
-
     Route::post('/import','GestionAuthAttClassement\FileController@Import')->name('employee.import');
-
     Route::get('/export-excel','GestionAuthAttClassement\FileController@exportIntoExcel')->name('export-excel');
+
 
     Route::get('/send-mail', [\App\Http\Controllers\MailController::class, 'sendMail'])->middleware(['auth'])->name('send-mail');
 });
@@ -230,10 +209,6 @@ Route::group(["prefix"=>"gestion_entreprises_stage", "as"=>"gestion_entreprises_
     Route::post('/profile/image',[App\Http\Controllers\GestionDesEntreprisesDeStage\Profile::class, 'updateImage'])
         ->middleware(['auth'])
         ->name('profile.update.image');
-
-    Route::post('/enterprises/domaine',[\App\Http\Controllers\GestionDesEntreprisesDeStage\AddEnterpriseController::class, 'addDomain'])
-        ->middleware(['auth'])
-        ->name('enterprises.add.domaine');
 
     Route::get('/enterprise/inscription',[App\Http\Controllers\GestionDesEntreprisesDeStage\AddEnterpriseController::class, 'index'])
         ->middleware(['auth'])
@@ -305,7 +280,7 @@ Route::group(["prefix"=>"gestion_tfe", "as"=>"gestion_tfe." , "middleware" => "a
     Route::get('/search', ['as'=>'search','uses'=>'GestionTfe\SearchController@search']);
     Route::get('/',["as"=>'welcome', 'uses'=>'GestionTfe\TfeController@index']);
     Route::resource('/tfe',"GestionTfe\TfeController");
-        Route::get("/mon-tfe/{id}",'GestionTfe\ProfilController@index')->name('show');
+        Route::get("/profil/{id}",'GestionTfe\ProfilController@index')->name('profil');
         Route::get("/edit/{id}",'GestionTfe\TfeController@edit')->name('editTfe');
         Route::get("/update/{id}",'GestionTfe\TfeController@update')->name('updateTfe');
         Route::get("/delete/{id}",'GestionTfe\TfeController@destroy')->name('tfeDelete');
@@ -342,11 +317,6 @@ Route::group(["prefix"=>"gestion_conseils_plaintes", "as"=>"gestion_conseils_pla
     Route::get('/plaintes', 'GestionConseilsPlaintes\PlainteController@show')->name('liste_plaintes');
     Route::get('/conseils', 'GestionConseilsPlaintes\ConseilController@show')->name('liste_conseils');
     Route::get('/rapports', 'GestionConseilsPlaintes\RapportController@show')->name('liste_rapports');
-
-
-    Route::post('/telecharger/rapport{id}', 'GestionConseilsPlaintes\RapportController@downloadRapport')->name('telecharger_rapport');
-
-    Route::get('/plainte-model', 'GestionConseilsPlaintes\PlainteController@model')->name('model');
 
     Route::post('/rejet/{id}', 'GestionConseilsPlaintes\PlainteController@reject')->name('rejet_plainte');
     Route::post('/valider_conseil/{id}', 'GestionConseilsPlaintes\ConseilController@tenu')->name('tenu');

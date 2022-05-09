@@ -31,15 +31,15 @@
     <div class="container">
         <div class="row">
             <div style="padding-right:70px; padding-left:20px;" class="col-xs-9 col-xs">
-                
-                <form data-bs-hover-animate="pulse" method="post" action="{{ route('saveNewStudent') }}" enctype="multipart/form-data" novalidate>
-                    {{ csrf_field() }} 
-    
+
+                <form data-bs-hover-animate="pulse" method="post" action="{{ route('generality.saveNewStudent') }}" enctype="multipart/form-data" novalidate>
+                    {{ csrf_field() }}
+
                     <h2 class="text-center" data-aos="fade-down" data-aos-duration="600" data-aos-delay="400" style="font-size: 29px;"><strong> <br> Enregistrer les etudiants </strong></h2>
-                            
+
                         <div class="form-group">
-                            <div class="form-row">   
-        
+                            <div class="form-row">
+
                                 <div class="col" data-aos="fade-right" data-aos-duration="700" data-aos-delay="600">
                                     <label style="font-weight: normal;"> Filière Associee </label>
                                     <select class="form-control" name="filiere" required="">
@@ -77,16 +77,16 @@
                                 {{ $message }}
                             </span>
                             @enderror
-                           
+
 
                             <div class="element_btn">
                                 <input type="submit" value="Enregistrer" class="btn btn-primary">
                             </div>
-        
+
                         </div>
-                  
+
                 </form>
-    
+
             </div>
             <div style="width: 40%;padding-top:40px;padding-left:20px;" class="col-xs-9 ">
                 <div>
@@ -94,22 +94,22 @@
                         <label> <strong> Aucun Groupe Pedagogique Enrégistrée </strong> </label> <br>
                     @else
                         <label> <strong> Liste des Groupes Pedagogiques existants </strong> </label> <br>
-        
+
                         @foreach($student_infos as $student_info)
                             <div class="row">
                                 <ul>
-                                    <li> {!! $student_info->first_name!!} - {!! $student_info->last_name!!} - {!! $student_info->matricule!!} </li> 
-                                    
+                                    <li> {!! $student_info->first_name!!} - {!! $student_info->last_name!!} - {!! $student_info->matricule!!} </li>
+
                                 </ul>
                             </div>
                         @endforeach
-                    
-                    @endif  
-                
+
+                    @endif
+
                 </div>
             </div>
         </div>
     </div>
-    
+
 
 @endsection
