@@ -56,7 +56,7 @@ Route::post('/mettreAJourModuleGeneral/{id}', 'GeneralController@updateGeneral')
 
 //Student registration
 Route::get('/formStudentRegistration', 'StudentRegistrationController@index')->name('newStudents');
-Route::post('/nouveauGroupePedagogique', 'StudentRegistrationController@storeStudent')->name('saveNewStudent');
+Route::post('/nouveauStudentRegistration', 'StudentRegistrationController@storeStudent')->name('saveNewStudent');
 
 
 Route::group(["prefix"=>"gestion_salle", "as"=>"gestion_salle.", "middleware" => "auth"], function ()
