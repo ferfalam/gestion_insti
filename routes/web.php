@@ -167,7 +167,7 @@ Route::group(["prefix"=>"gestion_authClass", "as"=>"gestion_authClass.", "middle
 
     Route::post('/listdemande','GestionAuthAttClassement\DemandeAuthController@store')->name('dem');
 
-    Route::get('/reponseDemande/{id}', 'GestionAuthAttClassement\DemandeAuthController@edit')->name('medit');
+    Route::get('/updateDemande/{id}', 'GestionAuthAttClassement\DemandeAuthController@edit')->name('medit');
 
     Route::get('/update/{id}', 'GestionAuthAttClassement\DemandeAuthController@show2')->name('edit2');
 
