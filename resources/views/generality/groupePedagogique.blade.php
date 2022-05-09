@@ -32,7 +32,7 @@
         <div class="row">
             <div style="padding-right:70px; padding-left:20px;" class="col-xs-9 col-xs">
 
-                <form data-bs-hover-animate="pulse" method="post" action="{{ route('generality.saveNewGroup') }}" novalidate>
+                <form data-bs-hover-animate="pulse" method="post" action="{{ route('saveNewGroup') }}" novalidate>
                     {{ csrf_field() }}
 
                     <h2 class="text-center" data-aos="fade-down" data-aos-duration="600" data-aos-delay="400" style="font-size: 29px;"><strong> <br> Nouveau Groupe Pedagogique </strong></h2>
