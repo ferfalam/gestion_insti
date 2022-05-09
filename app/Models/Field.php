@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Field extends Model
 {
-    use HasFactory;
+    public $timestamps = false;
 
     protected $fillable = [
         'systemName',
@@ -16,4 +16,5 @@ class Field extends Model
         'description',
         'offer', // fichier à discuter
     ];
+    //public $timestamps = false;
 }

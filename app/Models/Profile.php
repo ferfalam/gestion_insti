@@ -4,23 +4,24 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\User;
 
 class Profile extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'userId',
+        'user_id',
         'com_fullname',
         'com_givenName',
-        'com_gender', 
-        'com_birthdate', 
+        'com_gender',
+        'com_birthdate',
         'com_birthPlace',
         'com_diploma',
         'com_registrationNumber',
-        'com_phoneNumber', 
-        'com_address'
-        'com_parentFullname', 
+        'com_phoneNumber',
+        'com_address',
+        'com_parentFullname',
         'com_parentGivenName',
         'com_parentPhoneNumber',
         'app_fieldId',
@@ -30,11 +31,16 @@ class Profile extends Model
         'ens_aditionalSpeciality',
         'ens_RIB',
         'ens_typeId',
-        'pers_grade', 
+        'pers_grade',
         'pers_typeId',
         'pers_index',
         'pers_ifu',
         'pers_startWorkDate',
         'pers_endWorkDate',
     ];
+    public function user(){
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
+
 }

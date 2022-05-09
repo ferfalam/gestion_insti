@@ -1,0 +1,130 @@
+*{
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+}
+
+/** */
+
+.m_body {
+    margin-top: 0.2em;
+    min-height: calc(100vh - 3.7em);    
+    /* background-color: #f2f6ff; */
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.main {
+    /* border: 2px solid black; */
+    height: max-content;
+    width: 82%;
+    position: relative;
+    background-color: rgb(255, 255, 255);
+    box-shadow: 1px 1px 7px rgb(202, 202, 202);
+    padding: 1em 1.5em;
+    border-radius: 5px;
+    margin-top: 3em;
+    margin-bottom: 2em;
+}
+
+/** */
+
+.dataTables_length{
+    margin: 12px;
+}
+
+.form-label{
+    font-size: 17px;
+}
+
+.center {
+    text-align: center;
+    margin: 0.7em;
+    margin-bottom: 1em;
+}
+
+.main_form form .element_ {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 3.5em;
+    background-color: #f9fbff;
+    padding: 5px 8px;
+    margin: 10px 0px;
+}
+
+.main_form form .element_ .sous_section {
+    flex: 0 70%;
+    /* border: 2px solid blue; */
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    height: 2.5em;
+    outline: none;
+}
+
+.main_form form .element_ .sous_section_divide {
+    flex: 0 70%;
+    /* border: 2px solid blue; */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 2.5em;
+    outline: none;
+}
+
+
+.main_form form .element_ .sous_section select{
+    flex: auto;
+    margin: 0px 4px;
+    height: 2.5em;
+    padding: 0px 1em;
+    outline: none;
+}
+
+
+.main_form form .element_ .sous_section input {
+    /* flex: 1 ; */
+    margin: 0px 4px;
+    height: 2.5em;
+    padding: 0px 1em;
+    
+}
+
+.limite {
+    margin-left: 2em !important;
+}
+
+.main_form form .element_ .sous_section .getFile {
+    background-color: #4e73df;
+    border-radius: 3px;
+    flex: 0 30%;
+    border: inherit;
+    outline: none;
+    color: white;
+}
+
+.main_form form .element_ .sous_section .getFile:hover{
+    /* background-color: red; */
+    box-shadow: 2.5px 0px 1px rgb(74, 63, 219);
+}
+
+.element_btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 3.5em;
+    padding: 5px;
+    margin: 10px 0px;
+}
+
+@media (max-width: 700px) {
+    .main{
+        width: 23em;
+    }
+
+    .main_heaider {
+        padding: 0.5em 2.5em;
+    }
+}
