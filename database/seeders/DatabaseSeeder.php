@@ -20,13 +20,13 @@ use App\Models\Evaluation_type;
 
 use App\Models\Demande;
 use App\Models\Moyenne;
-
 use Illuminate\Database\Seeder;
 use App\Models\AcademicSemester;
 use App\Models\ShortcutsRequest;
 use Illuminate\Support\Facades\Hash;
 use App\Models\user_pedagogic_group_map;
 use App\Models\User_userGroup_Position_Service_Map;
+use App\Models\User_Position_Service_Map;
 
 class DatabaseSeeder extends Seeder
 {
