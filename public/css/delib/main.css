@@ -2,6 +2,14 @@ table {
   position: relative;
 }
 
+form .row div {
+  margin: 5px;
+}
+
+.b{
+  padding: 24px 10px;
+}
+
 .deliberation {
   height: 2em;
   width: 2em;
@@ -11,7 +19,7 @@ table {
   overflow: hidden;
   position: relative;
   border-radius: 2px;
-  background-image: url("../../images/deliberation/pdf.jpg");
+  /*background-image: url("../../images/deliberation/pdf.jpg");*/
   -o-object-fit: cover;
      object-fit: cover;
 }

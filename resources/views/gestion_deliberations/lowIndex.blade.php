@@ -1,4 +1,4 @@
-@extends('gestion_deliberations.layout')
+@extends('gestion_deliberations.lowLayout')
 
 @section('content')
 <div class="d-flex flex-column" id="content-wrapper">

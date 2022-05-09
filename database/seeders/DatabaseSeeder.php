@@ -109,6 +109,7 @@ class DatabaseSeeder extends Seeder
         $user_group_positions=User_userGroup_Position_Service_Map::create(["userId"=>"3","userGroupId"=>"4","serviceId"=>"3","positionId"=>"2"]);
         $user_group_positions=User_userGroup_Position_Service_Map::create(["userId"=>"4","userGroupId"=>"5","serviceId"=>"3","positionId"=>"1"]);
         $user_group_positions=User_userGroup_Position_Service_Map::create(["userId"=>"5","userGroupId"=>"5","serviceId"=>"3","positionId"=>"1"]);
+        $user_group_positions=User_userGroup_Position_Service_Map::create(["userId"=>"8","userGroupId"=>"4","serviceId"=>"2","positionId"=>"1"]);
 
         $user_positions_services_fields=User_Position_Service_Field_Map::create(["userId"=>"11","serviceId"=>"2","positionId"=>"1", "fieldId"=>"4"]);
         $user_positions_services_fields=User_Position_Service_Field_Map::create(["userId"=>"12","serviceId"=>"2","positionId"=>"1", "fieldId"=>"1"]);

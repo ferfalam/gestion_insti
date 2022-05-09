@@ -26,12 +26,12 @@ class ProfilController extends Controller
              $status='En attente';
           }
        }
-       $user=Auth::user();
+       /*$user=Auth::user();
        $profil=Profile::where("userId","=",$user->id)->get()->first();
-       $field=Field::findOrFail($profil->app_fieldId);
+       $field=Field::findOrFail($profil->app_fieldId);*/
 
        
      
-        return view('GestionTfe.tfe.profil',['user'=>$user,'tfe'=>$tfe,'status'=>$status,"profil"=>$profil,"filiere"=>$field]);
+        return view('GestionTfe.tfe.show',['tfe'=>$tfe,'status'=>$status]);
     }
 }

@@ -11,6 +11,10 @@ use App\Models\Field;
 use App\Models\PedagogicGroup;
 use App\Models\General;
 use Illuminate\Support\Facades\DB;
+use App\Models\UserGroup;
+use App\Models\Services;
+use App\Models\Position;
+use App\Models\User_userGroup_Position_Service_Map;
 
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
@@ -36,12 +40,27 @@ class IndexController extends Controller
      */
     public function index()
     {
+
+         // 1 - admin, 2 - superadmin, 3 - apprenant, 4 - enseignant, 5 - personnel, 6 - redacteur, 7 - partenaire 
         $annees = AcademicYear::all(); 
         $deliberations = Deliberation::all();
         $filieres = Field::all();
         $groupes = PedagogicGroup::all();
         $semestres = General::where('content_type', 'semestre_annee')->get();
-        return view('gestion_deliberations.index', compact('deliberations', 'annees', 'filieres', 'groupes', 'semestres'));
+
+        $ug = UserGroup::where('id', User_userGroup_Position_Service_Map::where('userId', Auth::user()->id)->get()[0]->userGroupId)->get()[0]->name;
+
+        $p = Position::where('id', User_userGroup_Position_Service_Map::where('userId', Auth::user()->id)->get()[0]->positionId)->get()[0]->name;
+
+        $s = Services::where('id', User_userGroup_Position_Service_Map::where('userId', Auth::user()->id)->get()[0]->serviceId)->get()[0]->name;
+
+        if ($p == "chefService/Adjoint" and $s == "departement" and !(in_array($ug, array("apprenant","personnel", "redacteur", "partenaire"))) ){
+            return view('gestion_deliberations.index', compact('deliberations', 'annees', 'filieres', 'groupes', 'semestres',));
+        }else{
+            return view('gestion_deliberations.lowIndex', compact('deliberations', 'annees', 'filieres', 'groupes', 'semestres',));
+        }
+        
+        
     }
 
     public function show(Request $request){
@@ -50,7 +69,7 @@ class IndexController extends Controller
         if(strrchr($request->path, '.') == '.pdf'){
             readfile(Storage::path($request->path));
         } else{
-            return redirect(route('gestion_deliberations.index'))->with('error', 'Ce fichier ne peut être lu dans le navigateur! ');
+            return redirect(route('gestion_deliberations.index'))->with('error', "Ce fichier ne peut s'ouvrir dans le navigateur! Vous pouvez le télécharger.");
 
         }
     }
@@ -173,7 +192,17 @@ class IndexController extends Controller
             ->where('groupId', $request->groupe)
             ->get();
         }
-        return view('gestion_deliberations.index', compact('deliberations', 'annees', 'filieres', 'groupes', 'semestres'));
+        $ug = UserGroup::where('id', User_userGroup_Position_Service_Map::where('userId', Auth::user()->id)->get()[0]->userGroupId)->get()[0]->name;
+
+        $p = Position::where('id', User_userGroup_Position_Service_Map::where('userId', Auth::user()->id)->get()[0]->positionId)->get()[0]->name;
+
+        $s = Services::where('id', User_userGroup_Position_Service_Map::where('userId', Auth::user()->id)->get()[0]->serviceId)->get()[0]->name;
+
+        if ($p == "chefService/Adjoint" and $s == "departement" and !(in_array($ug, array("apprenant","personnel", "redacteur", "partenaire"))) ){
+            return view('gestion_deliberations.index', compact('deliberations', 'annees', 'filieres', 'groupes', 'semestres',));
+        }else{
+            return view('gestion_deliberations.lowIndex', compact('deliberations', 'annees', 'filieres', 'groupes', 'semestres',));
+        }
         }
     }
 

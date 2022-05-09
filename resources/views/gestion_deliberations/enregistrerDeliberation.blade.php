@@ -40,9 +40,9 @@
                                 <label for="">Semestre</label>
                                 <div class="sous_section">
                                     <select name="semestre" id="semestre" class="form-control @error('semestre') is-invalid @enderror">
-                                        <option value="semestre1" >Semestre1 </option>
-                                        <option value="semestre2" >Semestre2</option>
-                                        <option value="semestres1&2" >Semestres 1 et 2 </option>
+                                        <option value="semestre1">Semestre1</option>
+                                        <option value="semestre2">Semestre2</option>
+                                        <option value="semestres1&2">Semestres 1 et 2</option>
                                     </select>
                                 </div>
                             </div>
@@ -93,10 +93,10 @@
                             @enderror
 
                             <div class="element_ row d-flex ">
-                                <label class="col-md-3" for="">UEs</label>
+                                <label class="col-md-2" for="">UEs</label>
                                 <div class="col-md-9 row d-flex justify-content-center">
                                     @foreach($ues as $ue)
-                                    <div class="custom-control custom-checkbox col-md-2 col-sm-2">
+                                    <div class="col-md-2 col-sm-2">
                                         <input type="checkbox" name ="ues[]" value="{{$ue->id}}">
                                         <label>{{$ue->abbreviation}}</label>
                                     </div>
