@@ -17,18 +17,17 @@ use App\Models\Typestages;
 use App\Models\AcademicYear;
 use App\Models\PedagogicGroup;
 use App\Models\Evaluation_type;
+
+use App\Models\Profile;
+use App\Models\Demande;
+use App\Models\Moyenne;
+
 use Illuminate\Database\Seeder;
 use App\Models\AcademicSemester;
 use App\Models\ShortcutsRequest;
 use Illuminate\Support\Facades\Hash;
 use App\Models\user_pedagogic_group_map;
 use App\Models\User_userGroup_Position_Service_Map;
-use App\Models\User_Position_Service_Field_Map;
-use App\Models\User_PedagogicGroup_Map;
-use App\Models\Demande;
-use App\Models\Moyenne;
-
-
 
 class DatabaseSeeder extends Seeder
 {
@@ -264,6 +263,7 @@ class DatabaseSeeder extends Seeder
             "ens_typeId" => "2",
         ]);
 
+
         $profil = Profile::create([
             'user_id' => "8",
             "com_fullname" => "INSTI SuperAdmin",
@@ -438,6 +438,24 @@ class DatabaseSeeder extends Seeder
             'moy_annee3' => 15,
             'moy_generale'=>15,
             ]);
+<<<<<<< HEAD
 
+=======
+
+=======
+        $typeStage = Typestages::create(
+            [
+                'libelle' => "Académique",
+            ]
+        );
+
+        $typeStage = Typestages::create(
+            [
+                'libelle' => "Professionnel",
+            ]
+        );
+
+>>>>>>> a7a76d4a6557488b7c01616899a2d1da46f73e58
+>>>>>>> gesAuthClas
     }
 }
