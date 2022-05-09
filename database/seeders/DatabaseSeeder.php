@@ -18,7 +18,6 @@ use App\Models\AcademicYear;
 use App\Models\PedagogicGroup;
 use App\Models\Evaluation_type;
 
-use App\Models\Profile;
 use App\Models\Demande;
 use App\Models\Moyenne;
 
@@ -438,24 +437,6 @@ class DatabaseSeeder extends Seeder
             'moy_annee3' => 15,
             'moy_generale'=>15,
             ]);
-<<<<<<< HEAD
 
-=======
-
-=======
-        $typeStage = Typestages::create(
-            [
-                'libelle' => "Académique",
-            ]
-        );
-
-        $typeStage = Typestages::create(
-            [
-                'libelle' => "Professionnel",
-            ]
-        );
-
->>>>>>> a7a76d4a6557488b7c01616899a2d1da46f73e58
->>>>>>> gesAuthClas
     }
 }
