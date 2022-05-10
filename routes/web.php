@@ -58,6 +58,7 @@ Route::post('/mettreAJourModuleGeneral/{id}', 'GeneralController@updateGeneral')
 Route::get('/formStudentRegistration', 'StudentRegistrationController@index')->name('newStudents');
 Route::post('/nouveauStudentRegistration', 'StudentRegistrationController@storeStudent')->name('saveNewStudent');
 
+Route::get('/logout',[App\Http\Controllers\Auth\LoginController::class, 'logout'])->name("logout");
 
 Route::group(["prefix"=>"gestion_salle", "as"=>"gestion_salle.", "middleware" => "auth"], function ()
 {
@@ -80,13 +81,8 @@ Route::group(["prefix"=>"gestion_demandes_reclamation_evaluation", "as"=>"gestio
     Route::get('/voir_demande_reclamation/{id}',[App\Http\Controllers\GestionDemande\ComplaintRequestController::class, 'show'])->name("voir_details_demande_reclamation");
     Route::get('/voir_demande_evaluation/{id}',[App\Http\Controllers\GestionDemande\EvaluationRequestController::class, 'show'])->name("voir_details_demande_evaluation");
 
-
-    // Route::get('/logout',[App\Http\Controllers\Auth\LoginController::class, 'logout'])->name("logout");
-
+    //Route::get('/logout',[App\Http\Controllers\Auth\LoginController::class, 'logout'])->name("logout");
 });
-
-
-
 
 
 Route::group(["prefix"=>"gestion_enseignant", "as"=>"gestion_enseignant.","middleware" => "auth"], function ()
@@ -110,13 +106,11 @@ Route::group(["prefix"=>"gestion_enseignant", "as"=>"gestion_enseignant.","middl
 
     Route::post('/programmerMission',[App\Http\Controllers\GestionDesEnseignants\AddMissionController::class,"traitement"])->name('store_programmerMission');
 
-
     Route::get('/profile',[App\Http\Controllers\GestionDesEnseignants\ProfilController::class,"affichage"])->name('show_profil');
 
     Route::post('/profilPass',[App\Http\Controllers\GestionDesEnseignants\ProfilController::class,"traitement1"])->name('show_profil_pass');
 
     Route::post('/profilInfo',[App\Http\Controllers\GestionDesEnseignants\ProfilController::class,"traitement2"])->name('show_profil_info');
-
 
     Route::get('/mission',[App\Http\Controllers\GestionDesEnseignants\MissionController::class,"affichage"])->name('show_mission');
 
@@ -339,9 +333,7 @@ Route::group(["prefix"=>"gestion_conseils_plaintes", "as"=>"gestion_conseils_pla
     Route::post('/telechargement/convocation/{id}', 'GestionConseilsPlaintes\PDFController@telechargerConvocation')->name('telechargerConvocation');
     Route::post('/telechargement/invitation/{id}', 'GestionConseilsPlaintes\PDFController@telechargerInvitation')->name('telechargerInvitation');
 
-
 });
-
 
 // gestion des conseils pédagogique et de département
 

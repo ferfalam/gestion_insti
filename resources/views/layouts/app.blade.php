@@ -47,6 +47,8 @@
                             <li class="nav-item"><a class="nav-link {{ request()->routeIs('newField') ? 'active' : '' }}"
                                     href="{{ route('newField', []) }}"><i
                                         class="fa-solid fa-gear"></i><span>Généralité</span></a></li>
+                            <li class="nav-item" role="presentation">
+                                 <a class="nav-link" href="{{ route('logout') }}"><i class="fas fa-sign-out-alt fa-sm "></i><span>Déconnexion</span></a></li>
                         </ul>
                     @endguest
                     <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0"
@@ -83,7 +85,7 @@
                                     </div>
                                 </div> --}}
                             </li>
-                        </ul> 
+                        </ul>
                     </div>
                 </nav>
 
