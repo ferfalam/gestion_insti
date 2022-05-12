@@ -55,7 +55,7 @@ class TfeController extends Controller
         $tfe=Tfe::create($data);
        
        
-        return redirect(route('gestion_tfe.tfe.',compact('id')));
+        return redirect(route('gestion_tfe.tfe',compact('id')));
        }
        else{
         return redirect()->back()->with('error', 'Vous avez déjà un tfe');

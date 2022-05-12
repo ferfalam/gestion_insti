@@ -1,5 +1,5 @@
 
-@extends('layouts.app')
+@extends('GestionTfe.layouts.app')
 
 @section('content')
  <div class="container-fluid">
@@ -172,7 +172,7 @@
     </div>
 </footer>
 </div>
-@stop
+@endsection
 
 <style>
    @media(max-width: 45rem){
