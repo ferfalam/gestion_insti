@@ -25,9 +25,9 @@
 <div class="col">
     <form action="{{ route('gestion_tfe.search') }}" id="form4" method="get">
         <select class="form-control" name="search" id="search" >
-            <option value="@_GEI"> Génie Electrique et Informatique (GEI)</option>
-            <option value="@_GME"> Génie Electrique et Informatique (GEI)</option>
-            <option value="@_GC"> Génie Civil (GC)</option>
+              @foreach(Fields() as $field)
+                <option value="@_{{$field->abbreviation}}">{{$field->name}}({{$field->systemName}})</option>
+            @endforeach
         </select>               
     </form>                 
 </div>

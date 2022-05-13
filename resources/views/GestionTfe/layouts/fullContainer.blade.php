@@ -17,7 +17,10 @@
                 </li>
                 @else
                 <li class="nav-item" role="presentation">
-                    <a class="nav-link" href="{{ route('gestion_tfe.tfe.show', has_tfe()->id) }}"><i class="fas fa-user-circle"></i><span>{{ __("Mon tfe") }}</span></a>
+                    <a class="nav-link" href="{{ route('gestion_tfe.profil', has_tfe()->id) }}"><i class="fas fa-bookmark"></i><span>{{ __("Mon tfe") }}</span></a>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link" href="{{ route('gestion_tfe.tfe.show', has_tfe()->id) }}"><i class="fas fa-book"></i><span>{{ __("Document tfe") }}</span></a>
                 </li>
                 @endif
             </ul>

@@ -290,10 +290,18 @@ Route::group(["prefix"=>"gestion_tfe", "as"=>"gestion_tfe." , "middleware" => "a
     Route::get('/search', ['as'=>'search','uses'=>'GestionTfe\SearchController@search']);
     Route::get('/',["as"=>'welcome', 'uses'=>'GestionTfe\TfeController@index']);
     Route::resource('/tfe',"GestionTfe\TfeController");
-    Route::get("/profil/{id}",'GestionTfe\ProfilController@index')->name('profil');
+    Route::get("/Mon-tfe/{id}",'GestionTfe\ProfilController@index')->name('profil');
     Route::get("/edit/{id}",'GestionTfe\TfeController@edit')->name('editTfe');
     Route::get("/update/{id}",'GestionTfe\TfeController@update')->name('updateTfe');
     Route::get("/delete/{id}",'GestionTfe\TfeController@destroy')->name('tfeDelete');
+
+
+    //****************** Middleware is_admin  **********************
+    Route::group(['middleware'=>['is_admin']],  function () {
+        Route::get('/admin/tfe','GestionTfe\Admin\AdminController@index')->name('dashboard');
+        Route::get('/admin/tfe/dashboard/{id}/{status}','GestionTfes\Admin\myStatusController@index')->name('status');
+     });
+        //************************************************************
 });
 
 Route::group(["prefix"=>"gestion_conseils_plaintes", "as"=>"gestion_conseils_plaintes.", "middleware" => "auth" ], function ()

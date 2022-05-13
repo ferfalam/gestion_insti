@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('GestionTfe.layouts.app')
 
 @section('content')
 <div class="fluid-container">
@@ -64,9 +64,9 @@
 
                             <div class="col-md-6">
                                 <select class="form-control @error('groupe_pedagogique') is-invalid @enderror" name="groupe_pedagogique" id="entity" value="{{ $tfe->groupe_pedagogique }}" >
-                                    <option value="GEI"> Génie Electrique et Informatique (GEI)</option>
-                                    <option value="GME"> Génie Electrique et Informatique (GEI)</option>
-                                    <option value="GC"> Génie Civil (GC)</option>
+                                        @foreach(Fields() as $field)
+                                            <option value="{{$field->abbreviation}}">{{$field->name}}({{$field->systemName}})</option>
+                                          @endforeach
                                 </select>
 
                                 @error('groupe_pedagogique')
@@ -137,7 +137,7 @@
                             <label for="email_maitre_memoire" class="col-md-4 col-form-label text-md-right">{{ __('Email du maitre mémoire') }}</label>
 
                             <div class="col-md-6">
-                                <input id="email_maitre_memoire" type="text" class="form-control @error('email_maitre_memoire') is-invalid @enderror" name="email_maitre_memoire" value="{{ $tfe->email_maitre_memoire}}">
+                                <input id="email_maitre_memoire" type="text" class="form-control @error('email_maitre_memoire') is-invalid @enderror" name="email_maitre_memoire" value="{{ $tfe->email_maitre_memoire}}"/>
 
                                 @error('email_maitre_memoire')
                                     <span class="invalid-feedback" role="alert">
@@ -151,7 +151,7 @@
                             <label for="document" class="col-md-4 col-form-label text-md-right">{{ __('Document') }}</label>
 
                             <div class="col-md-6">
-                                <input id="document" type="file" class="form-control @error('document') is-invalid @enderror" name="document"  value="{{ $document->path }}">
+                                <input id="document" type="file" class="form-control @error('document') is-invalid @enderror" name="document"  value="{{ $document->path }}"/>
 
                                 @error('document')
                                     <span class="invalid-feedback" role="alert">
