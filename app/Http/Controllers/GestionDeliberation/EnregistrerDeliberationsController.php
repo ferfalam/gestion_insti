@@ -10,9 +10,10 @@ use App\Models\Deliberation;
 use App\Models\AcademicYear;
 use App\Models\Field;
 use App\Models\General;
-use App\Models\UE;
+use App\Models\Ue;
 use App\Models\PedagogicGroup;
 use App\Models\User_userGroup_Position_Service_Map;
+use App\Models\User_Position_Service_Field_Map;
 use App\Models\UserGroup;
 use App\Models\Services;
 use App\Models\Position;
@@ -35,7 +36,9 @@ class EnregistrerDeliberationsController extends Controller
 
         $s = Services::where('id', User_userGroup_Position_Service_Map::where('userId', Auth::user()->id)->get()[0]->serviceId)->get()[0]->name;
 
-        if ($p == "chefService/Adjoint" and $s == "departement" and !(in_array($ug, array("apprenant","personnel", "redacteur", "partenaire"))) ){
+        
+
+        if ($p == "chefService/Adjoint" and $s == "departement" and !(in_array($ug, array("apprenant", "partenaire"))) ){
 
             $annees = AcademicYear::all();
             $ues = UE::all();
@@ -48,6 +51,58 @@ class EnregistrerDeliberationsController extends Controller
 
             return back()->withInput();
         }
+
+        // $usergroupid = Auth::user()->user_groupId;
+        
+
+        // $positionid = User_Position_Service_Field_Map::where('userId', Auth::user()->id)->value('positionId');
+        // $serviceid = User_Position_Service_Field_Map::where('userId', Auth::user()->id)->value('serviceId');
+
+        // $fieldid = User_Position_Service_Field_Map::where('userId', Auth::user()->id)->value('fieldId');
+
+        // $pedagogic_groupid = PedagogicGroup::where('fieldId', $fieldid)->value('id');
+        
+        // if($usergroupid == 5 and $serviceid == 2 and $positionid == 1){
+
+        //     $annees = AcademicYear::all();
+
+        //     $ues = UE::all();
+        //     $filieres = Field::find($fieldid);
+
+        //     $groupes = DB::table('fields')
+        //             ->leftJoin('pedagogic_groups', 'fields.id', '=', 'pedagogic_groups.fieldId')
+        //             ->where('pedagogic_groups.fieldId','=', $fieldid)
+        //             ->select('pedagogic_groups.name as name')
+        //             ->get();
+
+        //     $semestres = General::where('content_type', 'semestre_annee')->get();
+        //     // $groupes = PedagogicGroup::find($pedagogic_groupid);
+
+        //     return view('gestion_deliberations.enregistrerDeliberation', compact('annees', 'semestres', 'filieres', 'groupes', 'ues'));   
+             
+        // }elseif($usergroupid == 1 and $usergroupid == 2){
+
+        //     $annees = AcademicYear::all();
+        //     $ues = UE::all();
+        //     $filieres = Field::all();
+        //     $semestres = General::where('content_type', 'semestre_annee')->get();
+        //     $groupes = PedagogicGroup::all();
+        //     return view('gestion_deliberations.enregistrerDeliberation', compact('annees', 'semestres', 'filieres', 'groupes', 'ues'));    
+
+        // }elseif($usergroupid == 5 and $serviceid == 1){
+
+        //     $annees = AcademicYear::all();
+        //     $ues = UE::all();
+        //     $filieres = Field::all();
+        //     $semestres = General::where('content_type', 'semestre_annee')->get();
+        //     $groupes = PedagogicGroup::all();
+
+        //     return view('gestion_deliberations.enregistrerDeliberation', compact('annees', 'semestres', 'filieres', 'groupes', 'ues')); 
+        // } else {
+
+        //     return back()->withInput();
+        // }
+
     }
 
     /**
