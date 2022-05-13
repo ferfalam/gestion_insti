@@ -40,7 +40,7 @@
                         <p style="color: rgb(193,15,15); font-size: 10px; " data-aos="fade-right" data-aos-duration="700" data-aos-delay="600" >{{$message}}</p>
                         @enderror
                     </div>
-                    <div class="col"><input class="form-control" type="number" data-aos="fade-left" data-aos-duration="700" data-aos-delay="600" name="capacite" placeholder="Capacite d'acceuil" value="{{ old('capacite') }}" >
+                    <div class="col"><input class="form-control" type="number" min="0" data-aos="fade-left" data-aos-duration="700" data-aos-delay="600" name="capacite" placeholder="Capacite d'acceuil" value="{{ old('capacite') }}" >
                         @error("capacite")
                         <p style="color: rgb(193,15,15); font-size: 10px; " data-aos="fade-right" data-aos-duration="700" data-aos-delay="600" >{{$message}}</p>
                         @enderror
@@ -51,7 +51,7 @@
                 <div class="form-row " style="align-items: center;">
                     <div class="col" data-aos="fade-right" data-aos-duration="700" data-aos-delay="600">
                         <label style="font-weight: normal;">Domaines d'intervention</label><br>
-                        <select class="form-control" name="domaines[]" multiple="multiple" style="height: 80px; border-color: #0b2e13">
+                        <select class="form-control" name="domaines[]" multiple="multiple" id="domaines" style="height: 80px; border-color: #0b2e13">
                             <optgroup label="Domaines">
                                 @foreach(DB::table("domaines")->get() as $domaine)<option value='{{$domaine->id}}' selected=''>{{$domaine->libelle}}</option>@endforeach
                             </optgroup>
@@ -68,8 +68,8 @@
             </div>
             <div class="form-group">
                 <div class="form-row">
-                    <div class="col" data-aos="fade-right" data-aos-duration="700" data-aos-delay="600"><label style="font-weight: normal;">Partenariat avec l'INSTI</label><select class="form-control" name="partenariat"><optgroup label="Partenariat avec l'INSTI"><option value="1" selected="">oui</option><option value="0">Non</option></optgroup></select></div>
-                    <div class="col" data-aos="fade-left" data-aos-duration="700" data-aos-delay="600"><label style="font-weight: normal;">Date de signature du partenariat</label><input class="form-control" type="date" name="Pdate" value="{{ old('Pdate') }}" >
+                    <div class="col-6" data-aos="fade-right" data-aos-duration="700" data-aos-delay="600"><label style="font-weight: normal;">Partenariat avec l'INSTI</label><select class="form-control" name="partenariat" id="partenariat"><optgroup label="Partenariat avec l'INSTI"><option value="1" selected="" {{ old('partenariat')=="1"?"selected":"" }}>oui</option><option value="0" {{ old('partenariat')=="0"?"selected":"" }}>Non</option></optgroup></select></div>
+                    <div class="col-6" data-aos="fade-left" id="partenariat-date-div" data-aos-duration="700" data-aos-delay="600"><label style="font-weight: normal;">Date de signature du partenariat</label><input class="form-control" type="date" name="Pdate" value="{{ old('Pdate') }}" >
                         @error("Pdate")<p style="color: rgb(193,15,15); font-size: 10px; " data-aos="fade-right" data-aos-duration="700" data-aos-delay="600" >{{str_replace("pdate","date",$message)}}</p>@enderror
                     </div>
                 </div>
@@ -156,12 +156,22 @@
 @endif
 
 <script type="text/javascript">
-    $(document).ready(function() {
-        // $('#domaines').multiselect({
-        //     includeSelectAllOption: true,
-        //     nonSelectedText: 'Sélectionnez les domaines'
-        // });
-    });
+    let pdiv = $("#partenariat-date-div")
+
+    if($("#partenariat").val()==="0"){
+        pdiv.addClass("d-none")
+    }else {
+        pdiv.removeClass("d-none")
+    }
+
+    $("#partenariat").on("change", function (e){
+        console.log($(this).val()==="0")
+        if($(this).val()==="0"){
+            pdiv.addClass("d-none")
+            return;
+        }
+       pdiv.removeClass("d-none")
+    })
 
     $("#add-domain").on("click", function (e){
         if($("#new-domain-ctn").hasClass("d-none")) {
@@ -182,6 +192,7 @@
                         let o = new Option(result["libelle"], result["id"]);
                         $(o).html(result["libelle"]);
                         $("#domaines").append(o);
+                        console.log($("#domaines"));
                         toastr.success("Le domaine à été ajouter", 'Succès')
                         $("#new-domain-ctn input").val("")
                     },
@@ -195,6 +206,7 @@
         }
 
     })
+
 </script>
 
 </body>
