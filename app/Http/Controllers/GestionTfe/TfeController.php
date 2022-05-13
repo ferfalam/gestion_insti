@@ -53,12 +53,13 @@ class TfeController extends Controller
         $data["user_id"]=Auth::user()->id;
         $data = Arr::add($data, 'document_id', $id);
         $tfe=Tfe::create($data);
+        $id=$tfe->id;
        
        
-        return redirect(route('gestion_tfe.tfe.',compact('id')));
+        return redirect()->route('gestion_tfe.profil',compact('id'))->withMessage('1');
        }
        else{
-        return redirect()->back()->with('error', 'Vous avez déjà un tfe');
+        return redirect()->back()->withMessage("-1");
        }
     }
     

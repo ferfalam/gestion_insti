@@ -26,12 +26,7 @@ class ProfilController extends Controller
              $status='En attente';
           }
        }
-       /*$user=Auth::user();
-       $profil=Profile::where("userId","=",$user->id)->get()->first();
-       $field=Field::findOrFail($profil->app_fieldId);*/
-
-       
-     
+        
         return view('GestionTfe.tfe.show',['tfe'=>$tfe,'status'=>$status]);
     }
 }

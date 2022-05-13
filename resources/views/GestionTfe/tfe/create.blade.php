@@ -1,8 +1,23 @@
 
-@extends('layouts.app')
+@extends('GestionTfe.layouts.app')
 
 @section('content')
  <div class="container-fluid">
+        @if(session()->has('message'))
+           <script>
+               if("{{session('message')}}"=="-1"){
+                swal({
+                   title: "Votre tfe n'a pas été soumit",
+                   icon: 'error'
+               }) 
+               }else{
+                swal({
+                   title: "Félicitation Tfe soumit avec success",
+                   icon: 'success'
+               })   
+               }
+           </script>
+        @endif
     <form method="POST" action="{{ route('gestion_tfe.tfe.store') }}" enctype="multipart/form-data">
         <h3 class="text-dark mb-4">Ajouter un tfe</h3>
         <div class="row mb-3">
@@ -172,7 +187,7 @@
     </div>
 </footer>
 </div>
-@stop
+@endsection
 
 <style>
    @media(max-width: 45rem){

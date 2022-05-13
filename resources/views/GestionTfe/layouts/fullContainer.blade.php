@@ -2,8 +2,8 @@
     <div class="col-lg-4">
         <div class="container-fluid d-flex flex-column p-0">
             <a class="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="#">
-                <div class="sidebar-brand-icon rotate-n-15"><i class="fas fa-laugh-wink"></i></div>
-                <div class="sidebar-brand-text mx-3"><span>INSTI TFE</span></div>
+                 <div class="sidebar-brand-icon"><i class="fas fa-school"></i></div>
+                 <div class="sidebar-brand-text mx-3"><span>INSTI</span></div>
             </a>
             <hr class="sidebar-divider my-0">
             <ul class="nav navbar-nav text-light" id="accordionSidebar">
@@ -17,7 +17,10 @@
                 </li>
                 @else
                 <li class="nav-item" role="presentation">
-                    <a class="nav-link" href="{{ route('gestion_tfe.tfe.show', has_tfe()->id) }}"><i class="fas fa-user-circle"></i><span>{{ __("Mon tfe") }}</span></a>
+                    <a class="nav-link" href="{{ route('gestion_tfe.profil', has_tfe()->id) }}"><i class="fas fa-bookmark"></i><span>{{ __("Mon tfe") }}</span></a>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link" href="{{ route('gestion_tfe.tfe.show', has_tfe()->id) }}"><i class="fas fa-book"></i><span>{{ __("Document tfe") }}</span></a>
                 </li>
                 @endif
             </ul>
