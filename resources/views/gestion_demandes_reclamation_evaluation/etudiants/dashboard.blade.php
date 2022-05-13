@@ -82,7 +82,7 @@
             </nav>
 
             <main class="w-100">
-                <nav class="navbar navbar-light navbar-expand mb-4 topbar static-top">
+                <nav class="navbar navbar-light navbar-expand bg-white shadow mb-4 topbar static-top">
                 
                 </nav>
 

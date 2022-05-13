@@ -31,7 +31,7 @@ class ComplaintRequestController extends Controller
         );
     }
 
-        /**
+    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -111,11 +111,49 @@ class ComplaintRequestController extends Controller
     }
 
     public function show_all(){
-        $all_complaint_requests = Complaint_request::all();
 
-        return view('gestion_demandes_reclamation_evaluation.personnels.voir_liste_demandes_reclamation'
-         ,compact('all_complaint_requests')
-        );
+        $usergroupid = Auth::user()->user_groupId;
+
+        $positionid = User_Position_Service_Field_Map::where('userId', Auth::user()->id)->value('positionId');
+        $serviceid = User_Position_Service_Field_Map::where('userId', Auth::user()->id)->value('serviceId');
+        $fieldid = User_Position_Service_Field_Map::where('userId', Auth::user()->id)->value('fieldId');
+
+        
+        if($usergroupid == 5 and $serviceid == 2 and $positionid == 1){
+
+            $all_complaint_requests = Complaint_request::find($fieldid);
+
+            return view('gestion_demandes_reclamation_evaluation.personnels.voir_liste_demandes_reclamation'
+             ,compact('all_complaint_requests')
+            );
+    
+             
+        }elseif($usergroupid == 1 and $usergroupid == 2){
+
+            
+            $all_complaint_requests = Complaint_request::all();
+
+            return view('gestion_demandes_reclamation_evaluation.personnels.voir_liste_demandes_reclamation'
+             ,compact('all_complaint_requests')
+            );
+            
+
+        }elseif($usergroupid == 5 and $serviceid == 1){
+
+            $all_complaint_requests = Complaint_request::all();
+
+            return view('gestion_demandes_reclamation_evaluation.personnels.voir_liste_demandes_reclamation'
+             ,compact('all_complaint_requests')
+            );
+            
+        }elseif($usergroupid == 3 ){
+
+            $all_complaint_requests = Complaint_request::find($fieldid);
+
+            return view('gestion_demandes_reclamation_evaluation.personnels.voir_liste_demandes_reclamation'
+             ,compact('all_complaint_requests')
+            );
+        }
 
     }
 

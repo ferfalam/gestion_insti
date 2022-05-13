@@ -28,6 +28,12 @@ class RedirectionController extends Controller
             case 'Personnel':
                 return redirect()->route('/dashboard_personnel');
                 break;
+            case 'admin':
+                return redirect()->route('/dashboard_personnel');
+                break;
+            case 'superadmin':
+                return redirect()->route('/dashboard_personnel');
+                break;
             default:
                 return route('home');
                 break;

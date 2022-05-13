@@ -67,13 +67,6 @@
                                     <span>Voir demande d'evaluation</span>
                                 </a>
                             </li>
-
-                            <!-- <li class="nav-item">
-                                <a class="nav-link" href="{{ route('gestion_demandes_reclamation_evaluation.enregistrer_etudiant') }}">
-                                    <i class="fas fa-table"></i>
-                                    <span>Enregistrer les etudiants</span>
-                                </a>
-                            </li> -->
                             
                         @endif
                     </ul>
@@ -83,7 +76,7 @@
             </nav>
 
             <main class="w-100">
-                <nav class="navbar navbar-light navbar-expand mb-4 topbar static-top">
+                <nav class="navbar navbar-light navbar-expand bg-white shadow mb-4 topbar static-top">
                     
                 </nav>
 
