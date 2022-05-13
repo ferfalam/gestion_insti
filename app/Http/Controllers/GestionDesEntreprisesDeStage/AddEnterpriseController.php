@@ -87,13 +87,12 @@ class AddEnterpriseController extends Controller
             'capacite' => 'required|integer',
             'domaines' => 'required',
             'partenariat' => 'required|boolean',
-            'Pdate' => 'date',
+            'Pdate' => 'required_if:partenariat,==,1',
             'startdate' => 'required|string',
             'enddate' => 'required|date',
             'photo' => 'image|mimes:jpeg,jpg,png,bmp,svg|max:1048576',
             'password' => (isset($request->password))?['confirmed', Rules\Password::defaults()]:[],
         ]);
-
 
         if (isset($request->password)) {
             $user = new User();

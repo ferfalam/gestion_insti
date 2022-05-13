@@ -55,7 +55,3 @@
 
     </script>
 @endsection
-
-@section("footer")
-    @include("gestion_entreprises_stage.layouts.footer")
-@endsection

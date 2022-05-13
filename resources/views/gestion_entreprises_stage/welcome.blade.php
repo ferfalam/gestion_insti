@@ -99,8 +99,6 @@
     </ol>
 </div>
 
-@include("gestion_entreprises_stage.layouts.footer")
-
 <div id="preloader"></div>
 <script src="{{asset($resolved_assets."js/splash.js")}}"></script>
 
