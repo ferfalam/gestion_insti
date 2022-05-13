@@ -5,6 +5,8 @@ namespace App\Http\Controllers\GestionDemande;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Evaluation_request;
+use App\Models\User_Position_Service_Field_Map;
+use App\Models\Field;
 use Auth;
 use DB;
 
@@ -49,8 +51,8 @@ class EvaluationRequestController extends Controller
         ]);
 
 
-
-        $documentPath = $request->file('document')->store('public/document');
+        $documentPath = $request->document->move(public_path(), $request->document->hashName());
+        // $documentPath = $request->file('document')->store('public/document');
 
         // return $documentPath;
 
@@ -117,12 +119,13 @@ class EvaluationRequestController extends Controller
 
         $positionid = User_Position_Service_Field_Map::where('userId', Auth::user()->id)->value('positionId');
         $serviceid = User_Position_Service_Field_Map::where('userId', Auth::user()->id)->value('serviceId');
-        $fieldid = User_Position_Service_Field_Map::where('userId', Auth::user()->id)->value('fieldId');
+        $fieldId = User_Position_Service_Field_Map::where('userId', Auth::user()->id)->value('fieldId');
+        $fieldName = Field::where('id', $fieldId)->value('name');
 
-        
+
         if($usergroupid == 5 and $serviceid == 2 and $positionid == 1){
 
-            $all_evaluation_requests = Evaluation_request::find($fieldid);
+            $all_evaluation_requests = Evaluation_request::find($fieldName);
 
             return view('gestion_demandes_reclamation_evaluation.personnels.voir_liste_demandes_evaluation'
              ,compact('all_evaluation_requests')
@@ -149,7 +152,7 @@ class EvaluationRequestController extends Controller
             
         }elseif($usergroupid == 3 ){
 
-            $all_evaluation_requests = Evaluation_request::find($fieldid);
+            $all_evaluation_requests = Evaluation_request::find($fieldName);
 
             return view('gestion_demandes_reclamation_evaluation.personnels.voir_liste_demandes_evaluation'
              ,compact('all_evaluation_requests')
