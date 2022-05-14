@@ -124,15 +124,15 @@ class ComplaintRequestController extends Controller
         
         if($usergroupid == 5 and $serviceid == 2 and $positionid == 1){
 
-            $all_complaint_requests = Complaint_request::find($fieldName);
-            return $all_complaint_requests;
+         
+            $all_complaint_requests = Complaint_request::where('field', $fieldName)->get();
 
             return view('gestion_demandes_reclamation_evaluation.personnels.voir_liste_demandes_reclamation'
              ,compact('all_complaint_requests')
             );
     
              
-        }elseif($usergroupid == 1 and $usergroupid == 2){
+        }elseif($usergroupid == 1 or $usergroupid == 2){
 
             
             $all_complaint_requests = Complaint_request::all();
@@ -152,9 +152,9 @@ class ComplaintRequestController extends Controller
             
         }elseif($usergroupid == 3 ){
 
-            $all_complaint_requests = Complaint_request::find($fieldName);
+            $all_complaint_requests = Complaint_request::where('field', $fieldName)->get();
 
-            return view('gestion_demandes_reclamation_evaluation.personnels.voir_liste_demandes_reclamation'
+            return view('gestion_demandes_reclamation_evaluation.etudiants.dashboard'
              ,compact('all_complaint_requests')
             );
         }
