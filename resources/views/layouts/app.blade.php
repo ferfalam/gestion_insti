@@ -42,11 +42,23 @@
                             <li class="nav-item"><a class="nav-link"
                                     href="{{ route('login') }}"><i
                                         class="far fa-user-circle"></i><span>Connexion</span></a></li>
+                        </ul>
+                    @else
+                        <ul class="navbar-nav text-light" id="accordionSidebar">
+                            <li class="nav-item"><a class="nav-link {{ request()->routeIs('newField') ? 'active' : '' }}"
+                                    href="{{ route('newField', []) }}"><i
+                                        class="fa-solid fa-gear"></i><span>Généralité</span></a></li>
+                            <li class="nav-item" role="presentation">
+                                 <a class="nav-link" href="{{ route('logout') }}"><i class="fas fa-sign-out-alt fa-sm "></i><span>Déconnexion</span></a></li>
+                        </ul>
+
+                    
 
                     @endguest
                     <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0"
                             id="sidebarToggle" type="button"></button></div>
                 </div>
+            </nav>
 
             <main class="w-100">
                 <nav class="navbar navbar-light navbar-expand bg-white shadow mb-4 topbar static-top">
