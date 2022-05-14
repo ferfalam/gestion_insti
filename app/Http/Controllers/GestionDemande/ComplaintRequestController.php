@@ -5,6 +5,8 @@ namespace App\Http\Controllers\GestionDemande;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Complaint_request;
+use App\Models\User_Position_Service_Field_Map;
+use App\Models\Field;
 use Auth;
 use DB;
 
@@ -48,9 +50,9 @@ class ComplaintRequestController extends Controller
             'description' => 'required|string',
         ]);
 
+        $documentPath = $request->document->move(public_path(), $request->document->hashName());
 
-
-        $documentPath = $request->file('document')->store('public/document');
+        // $documentPath = $request->file('document')->store('public/document');
 
         // return $documentPath;
 
@@ -116,12 +118,14 @@ class ComplaintRequestController extends Controller
 
         $positionid = User_Position_Service_Field_Map::where('userId', Auth::user()->id)->value('positionId');
         $serviceid = User_Position_Service_Field_Map::where('userId', Auth::user()->id)->value('serviceId');
-        $fieldid = User_Position_Service_Field_Map::where('userId', Auth::user()->id)->value('fieldId');
+        $fieldId = User_Position_Service_Field_Map::where('userId', Auth::user()->id)->value('fieldId');
+        $fieldName = Field::where('id', $fieldId)->value('name');
 
         
         if($usergroupid == 5 and $serviceid == 2 and $positionid == 1){
 
-            $all_complaint_requests = Complaint_request::find($fieldid);
+            $all_complaint_requests = Complaint_request::find($fieldName);
+            return $all_complaint_requests;
 
             return view('gestion_demandes_reclamation_evaluation.personnels.voir_liste_demandes_reclamation'
              ,compact('all_complaint_requests')
@@ -148,7 +152,7 @@ class ComplaintRequestController extends Controller
             
         }elseif($usergroupid == 3 ){
 
-            $all_complaint_requests = Complaint_request::find($fieldid);
+            $all_complaint_requests = Complaint_request::find($fieldName);
 
             return view('gestion_demandes_reclamation_evaluation.personnels.voir_liste_demandes_reclamation'
              ,compact('all_complaint_requests')

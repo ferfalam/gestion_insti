@@ -70,7 +70,7 @@ class DeliberationInfosController extends Controller
             return view('gestion_deliberations.authorDeliberationInfos',compact('deliberation', 'groupe', 'auteur','annee','participantspath', 'reportpath', 'hideticketpath', 'revealticketpath', 'ues', 'error'));    
         }
 
-        if ($p == "chefService/Adjoint" and $s == "departement" and !(in_array($ug, array("apprenant","personnel", "redacteur", "partenaire"))) ){
+        if ($p == "chefService/Adjoint" and $s == "departement" and !(in_array($ug, array("apprenant", "partenaire"))) ){
             return view('gestion_deliberations.highDeliberationInfos',compact('deliberation', 'groupe', 'auteur','annee','participantspath', 'reportpath', 'hideticketpath', 'revealticketpath', 'ues', 'error'));    
         }
         
@@ -128,7 +128,7 @@ class DeliberationInfosController extends Controller
             return view('gestion_deliberations.authorDeliberationInfos',compact('deliberation', 'groupe', 'auteur','annee','participantspath', 'reportpath', 'hideticketpath', 'revealticketpath', 'ues', 'error'));    
         }
 
-        if ($p == "chefService/Adjoint" and $s == "departement" and !(in_array($ug, array("apprenant","personnel", "redacteur", "partenaire"))) ){
+        if ($p == "chefService/Adjoint" and $s == "departement" and !(in_array($ug, array("apprenant", "partenaire"))) ){
             return view('gestion_deliberations.highDeliberationInfos',compact('deliberation', 'groupe', 'auteur','annee','participantspath', 'reportpath', 'hideticketpath', 'revealticketpath', 'ues', 'error'));    
         }
         
