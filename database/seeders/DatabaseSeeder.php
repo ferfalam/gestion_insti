@@ -117,9 +117,13 @@ class DatabaseSeeder extends Seeder
         $user_positions_services_fields=User_Position_Service_Field_Map::create(["userId"=>"12","serviceId"=>"2","positionId"=>"1", "fieldId"=>"1"]);
         $user_positions_services_fields=User_Position_Service_Field_Map::create(["userId"=>"13","serviceId"=>"2","positionId"=>"1", "fieldId"=>"2"]);
         $user_positions_services_fields=User_Position_Service_Field_Map::create(["userId"=>"14","serviceId"=>"2","positionId"=>"1", "fieldId"=>"3"]);
+        $user_positions_services_fields=User_Position_Service_Field_Map::create(["userId"=>"4", "fieldId"=>"4"]);
+        $user_positions_services_fields=User_Position_Service_Field_Map::create(["userId"=>"5", "fieldId"=>"1"]);
+        $user_positions_services_fields=User_Position_Service_Field_Map::create(["userId"=>"6", "fieldId"=>"2"]);
+        $user_positions_services_fields=User_Position_Service_Field_Map::create(["userId"=>"7", "fieldId"=>"3"]);
 
         $user_pedagogic_group=User_PedagogicGroup_Map::create(["user_Id"=>"4", "pedagogic_group_Id"=>"5"]);
-
+        $user_pedagogic_group=User_PedagogicGroup_Map::create(["user_Id"=>"5", "pedagogic_group_Id"=>"4"]);
 
         $qualite=Qualite::create(["name"=>"Assistant"]);
         $qualite=Qualite::create(["name"=>"Ingenieur"]);

@@ -125,14 +125,14 @@ class EvaluationRequestController extends Controller
 
         if($usergroupid == 5 and $serviceid == 2 and $positionid == 1){
 
-            $all_evaluation_requests = Evaluation_request::find($fieldName);
+            $all_evaluation_requests = Evaluation_request::where('field', $fieldName)->get();
 
             return view('gestion_demandes_reclamation_evaluation.personnels.voir_liste_demandes_evaluation'
              ,compact('all_evaluation_requests')
             );
     
              
-        }elseif($usergroupid == 1 and $usergroupid == 2){
+        }elseif($usergroupid == 1 or $usergroupid == 2){
 
             
             $all_evaluation_requests = Evaluation_request::all();
@@ -152,7 +152,7 @@ class EvaluationRequestController extends Controller
             
         }elseif($usergroupid == 3 ){
 
-            $all_evaluation_requests = Evaluation_request::find($fieldName);
+            $all_evaluation_requests = Evaluation_request::where('field', $fieldName)->get();
 
             return view('gestion_demandes_reclamation_evaluation.personnels.voir_liste_demandes_evaluation'
              ,compact('all_evaluation_requests')
