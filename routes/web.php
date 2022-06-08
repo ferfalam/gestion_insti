@@ -29,7 +29,6 @@ use App\Http\Controllers\GestionDeliberation\DeliberationInfosController;
 
 Auth::routes();
 
-<<<<<<< HEAD
 //Filiere
 Route::get('/formFiliere', 'FieldController@index')->name('newField');
 Route::post('/nouvelleFiliere', 'FieldController@storeFiliere')->name('saveNewField');
@@ -60,9 +59,6 @@ Route::get('/formStudentRegistration', 'StudentRegistrationController@index')->n
 Route::post('/nouveauStudentRegistration', 'StudentRegistrationController@storeStudent')->name('saveNewStudent');
 
 Route::get('/logout',[App\Http\Controllers\Auth\LoginController::class, 'logout'])->name("logout");
-=======
-Route::get('generality', 'GenralityController@index')->name('generality.index');
->>>>>>> 99e07aa (start with generality setting)
 
 Route::group(["prefix"=>"gestion_salle", "as"=>"gestion_salle.", "middleware" => "auth"], function ()
 {
