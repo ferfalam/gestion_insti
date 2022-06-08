@@ -3,9 +3,15 @@
 namespace App\Http\Controllers\GestionSalleDeClasse;
 
 use App\Http\Controllers\Controller;
+use App\Models\AcademicSemester;
+use App\Models\AcademicYear;
+use App\Models\Field;
+use App\Models\PedagogicGroup;
+use App\Models\Ue;
+use App\Models\User;
 use Illuminate\Http\Request;
 
-class SheduleController extends Controller
+class SheduleController extends ScheduleBaseController
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +20,11 @@ class SheduleController extends Controller
      */
     public function index()
     {
-        return view('gestion_salles.shedule.index');
+        $this->fields = Field::orderBy('systemName')->get();
+        $this->semesters = AcademicSemester::orderBy('designation')->get();
+        $this->years = AcademicYear::orderBy('startDate', 'DESC')->get();
+        $this->groups = PedagogicGroup::orderBy('name')->get();
+        return view('gestion_salles.shedule.index',$this->data);
     }
 
     /**
@@ -24,7 +34,13 @@ class SheduleController extends Controller
      */
     public function create()
     {
-        return view('gestion_salles.shedule.create');
+        $this->fields = Field::orderBy('systemName')->get();
+        $this->ues = Ue::orderBy('name')->get();
+        $this->semesters = AcademicSemester::orderBy('designation')->get();
+        $this->years = AcademicYear::orderBy('startDate', 'DESC')->get();
+        $this->users = User::join('profiles', 'profiles.user_id', 'users.id')->join('user_groups', 'user_groups.id', 'users.user_groupId')->where('user_groups.name', 'enseignant')->orderBy('profiles.com_fullname')->get();
+        // dd($this->users);
+        return view('gestion_salles.shedule.create', $this->data);
     }
 
     /**

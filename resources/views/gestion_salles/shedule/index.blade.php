@@ -2,6 +2,7 @@
 
 @section('style')
 	<link rel="stylesheet" type="text/css" href="{{asset('css/main.css')}}">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <style>
         a {
             text-decoration: none
@@ -37,32 +38,44 @@
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="field">Filière</label>
-                                    <select class="form-control" name="field" id="field">
+                                    <select class="form-control select2" name="field"  id="field">
                                         <option value="none">---</option>
+                                        @foreach ($fields as $field)
+                                        <option value="{{$field->id}}"> {{$field->systemName}} </option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="semestre">Semestre</label>
-                                    <select class="form-control" name="semestre" id="semestre">
+                                    <select class="form-control select2" name="semestre" id="semestre">
                                         <option value="none">---</option>
+                                        @foreach ($semesters as $semester)
+                                            <option value="{{$semester->id}}">{{$semester->designation}}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="year">Année d'étude</label>
-                                    <select class="form-control" name="year" id="year">
+                                    <select class="form-control select2" name="year" id="year">
                                         <option value="none">---</option>
+                                        @foreach ($years as $year)
+                                            <option value="{{$year->id}}">{{\Carbon\Carbon::createFromFormat('Y-m-d', $year->startDate)->format('Y')}} - {{\Carbon\Carbon::createFromFormat('Y-m-d', $year->endDate)->format('Y')}}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="gp">Groupe Pédagogique</label>
-                                    <select class="form-control" name="gp" id="gp">
+                                    <select class="form-control select2" name="gp" id="gp">
                                         <option value="none">---</option>
+                                        @foreach ($groups as $group)
+                                            <option value="{{$group->id}}">{{$group->name}}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
@@ -202,4 +215,11 @@
 
 @section('script')
     {{-- <script src="{{asset('js/main.js')}}"></script> --}}
+
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('.select2').select2();
+        });
+    </script>
 @endsection

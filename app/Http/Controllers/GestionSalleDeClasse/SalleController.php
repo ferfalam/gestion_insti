@@ -3,10 +3,13 @@
 namespace App\Http\Controllers\GestionSalleDeClasse;
 
 use App\Http\Controllers\Controller;
+use App\Models\AcademicSemester;
+use App\Models\AcademicYear;
+use App\Models\Field;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class SalleController extends Controller
+class SalleController extends ScheduleBaseController
 {
     public function index()
     {

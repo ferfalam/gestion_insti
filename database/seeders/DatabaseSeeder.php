@@ -39,7 +39,7 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
          $status=Status::create(['name'=>'Bloquer','notation'=>1,'description'=>"Description diu status créer"]);
-         $status=Status::create(['name'=>'Bloquer','notation'=>2,'description'=>"Description diu status créer"]);
+         $status=Status::create(['name'=>'Actif','notation'=>2,'description'=>"Description diu status créer"]);
 
          //admin,superadmin,apprenant,enseignant,personnel,redacteur,partenaire
          $user_groups=UserGroup::create(["name"=>"admin","description"=>"Admin"]);
@@ -85,7 +85,6 @@ class DatabaseSeeder extends Seeder
          $pedagogic_groups=PedagogicGroup::create(["name"=>"Génie Electrique et Informatique","fieldId"=>"3","academicYearId"=>"1","studyYearId"=>"1","description"=>"GEI"]);
          $pedagogic_groups=PedagogicGroup::create(["name"=>"Maintenance des Systèmes","fieldId"=>"4","academicYearId"=>"1","studyYearId"=>"1","description"=>"MS"]);
          $pedagogic_groups=PedagogicGroup::create(["name"=>"GEI/A","fieldId"=>"4","academicYearId"=>"1","studyYearId"=>"1","description"=>"GEI/A"]);
-
 
          //chefService/Adjoint, collaborateur, chefCollaborateur, chefDivision, responsableClasse/Adjoint
          $position=Position::create(["name"=>"chefService/Adjoint","description"=>" le chefService/Adjoint "]);

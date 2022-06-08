@@ -49,7 +49,8 @@ class User extends Authenticatable
     function profile(){
         return $this->hasOne(Profile::class, 'user_id');
     }
-    function user_group(){
+
+    function userGroup(){
         return $this->belongsTo(UserGroup::class, 'user_groupId');
     }
 }
