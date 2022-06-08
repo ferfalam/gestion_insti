@@ -32,11 +32,7 @@
                     </div>
                 </div>
             </div>
-<<<<<<< HEAD
             <div class="col-md-4 mb-2">
-=======
-            <div class="col-md-4 mb-2"">
->>>>>>> 99e07aa (start with generality setting)
                 <div class="card">
                     <div class="card-header">Gestion des salles et emploi du temps</div>
 
