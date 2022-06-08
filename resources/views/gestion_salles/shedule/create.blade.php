@@ -2,6 +2,8 @@
 
 @section('style')
 	<link rel="stylesheet" type="text/css" href="{{asset('css/main.css')}}">
+
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <style>
         a {
             text-decoration: none
@@ -35,26 +37,27 @@
                             <div class="col col-md-6">
                                 <div class="form-group">
                                     <label for="year">Année d'étude</label>
-                                    <select name="year" class="form-control" id="year">
-                                        <option value="1">1ère année</option>
-                                        <option value="2">2ème année</option>
-                                        <option value="3">3ème année</option>
+                                    <select name="year" class="form-control select2" id="year">
+                                        @foreach ($years as $year)
+                                            <option value="{{$year->id}}">{{\Carbon\Carbon::createFromFormat('Y-m-d', $year->startDate)->format('Y')}} - {{\Carbon\Carbon::createFromFormat('Y-m-d', $year->endDate)->format('Y')}}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
                             <div class="col col-md-6">
                                 <div class="form-group">
                                     <label for="semestre">Semestre</label>
-                                    <select name="semestre" class="form-control" id="semestre">
-                                        <option value="1">Semestre 1</option>
-                                        <option value="2">Semestre 2</option>
-                                        <option value="3">Semestre 3</option>
-                                        <option value="4">Semestre 4</option>
-                                        <option value="5">Semestre 5</option>
-                                        <option value="6">Semestre 6</option>
+                                    <select name="semestre" class="form-control select2" id="semestre">
+                                        @foreach ($semesters as $semester)
+                                            <option value="{{$semester->id}}">{{$semester->designation}}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="scheduleFile">Emploi du temps PDF</label>
+                            <input name="emploi_fic" type="file" class="form-control" id="scheduleFile">
                         </div>
                         <legend>Unité d'Ensignement</legend>
                         <div id="ue">
@@ -63,18 +66,22 @@
                                     <div class="col col-md-6">
                                         <div class="form-group">
                                             <label for="matiere">UE</label>
-                                            <select name="semestre" class="form-control" id="semestre">
-                                                <option value="1">POO(Programmation Orientée Objet)</option>
+                                            <select name="matiere" class="form-control select2" id="matiere">
+                                                @foreach ($ues as $ue)
+                                                    <option value="{{$ue->id}}">{{$ue->name}}</option>
+                                                @endforeach
                                             </select>
                                         </div>
-
                                     </div>
                                     <div class="col col-md-6">
                                         <div class="form-group">
                                             <label for="enseignant">Nom & prénom de l'enseignant</label>
-                                            <input type="text" name="enseignant" class="form-control" id="enseignant">
+                                            <select name="enseignant" class="form-control select2" id="ue">
+                                                @foreach ($users as $user)
+                                                    <option value="{{$user->id}}">{{$user->com_fullname}}</option>
+                                                @endforeach
+                                            </select>
                                         </div>
-
                                     </div>
                                 </div>
                                 <div class="row">
@@ -90,19 +97,15 @@
                                             <label for="endTime">Heure de fin</label>
                                             <input type="time" name="endTime" class="form-control" id="endTime">
                                         </div>
-
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group">
-                                <label for="scheduleFile">Fichier</label>
-                                <input name="emploi_fic" type="file" class="form-control" id="scheduleFile">
-                            </div>
                         <div class="pb-2">
                             <div class="block">
                                 <button class="btn bg-primary rounded py-2 px-4 text-white " id="add">+</button>
-                                <button class="btn bg-danger rounded py-2 px-4 text-white  " id="delete">🗑️</button>
+                                {{-- 🗑️ --}}
+                                <button class="btn bg-danger rounded py-2 px-4 text-white  " id="delete">-</button>
                                 <button type="submit" class=" btn bg-primary py-2 px-4 rounded text-white" id="submit">
                                     Enregistrer
                                 </button>
@@ -117,6 +120,12 @@
 
 @section('script')
     {{-- <script src="{{asset('js/main.js')}}"></script> --}}
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('.select2').select2();
+        });
+    </script>
     <script>
         $('button#add').click((e)=>{
             e.preventDefault()
