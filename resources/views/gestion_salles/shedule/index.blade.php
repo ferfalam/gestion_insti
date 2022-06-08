@@ -16,10 +16,14 @@
             </div>
             <div class="col-md-4 text-right">
 <<<<<<< HEAD
+<<<<<<< HEAD
                 <a href="{{ route('gestion_salle.shedule.create', []) }}" class="btn btn-primary">Ajouter un emploi du temps</a>
 =======
                 <a href="#" class="btn btn-primary">Ajouter un emploi du temps</a>
 >>>>>>> 99e07aa (start with generality setting)
+=======
+                <a href="{{ route('gestion_salle.shedule.create', []) }}" class="btn btn-primary">Ajouter un emploi du temps</a>
+>>>>>>> df5f2bb (add schedule formé)
             </div>
         </div><!-- end title -->
     </div><!-- end section -->
