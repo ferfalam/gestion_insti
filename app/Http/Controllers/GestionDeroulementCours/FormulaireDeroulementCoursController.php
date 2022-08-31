@@ -9,23 +9,14 @@ use App\Models\PedagogicGroup;
 use App\Models\AcademicSemester;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use App\Models\FichesDeroulementCours;
 use Illuminate\Auth\Events\Registered;
 
 class FormulaireDeroulementCoursController extends Controller
 {
 
-    // public function show(){
-
-    //     $admin = auth()->user()->user_groupId;
-    //     if($admin == 1){
-    //         $query = Plainte::all();
-    //     } else {
     //         $query = Plainte::where('id_plaignant', auth()->user()->id)->get();
-    //     }
-
-    //     return view('gestion_conseils_plaintes.complaints_user', compact('query'));
-    // }
 
     /**
       * Create fiche de remplissage des cours
@@ -33,7 +24,12 @@ class FormulaireDeroulementCoursController extends Controller
       */
     public function createFormDeroulementCours()
     {
+        $idUserRole = Auth::user()->user_groupId;
+        if($idUserRole == 3)
+        {
         return view( 'gestion_deroulement_cours.fiche.formulaireDeroulementCours');
+        }
+        else {return view ('gestion_deroulement_cours.accueil');}
     }
 
     /**
@@ -53,6 +49,9 @@ class FormulaireDeroulementCoursController extends Controller
       */
     public function storeFormDeroulementCours(Request $request)
     {
+        $idUserRole = Auth::user()->user_groupId;
+        if($idUserRole == 3)
+        {
         $this->validate( $request , [
             'name' => 'required|min:3',
             'surname' => 'required|min:3',
@@ -88,11 +87,18 @@ class FormulaireDeroulementCoursController extends Controller
         $this->success = true;
 
         return view('gestion_deroulement_cours.accueil');
+        }
+        else {return view ('gestion_deroulement_cours.accueil');}
+
     }
 
 
     public function findById($id)
     {
+        $idUserRole = Auth::user()->user_groupId;
+        if($idUserRole == 3)
+        {
+
         $flight = FichesDeroulementCours::findorFail($id);
 
         $studyYears = AcademicYear::all(); 
@@ -101,35 +107,48 @@ class FormulaireDeroulementCoursController extends Controller
         $ues = PedagogicGroup::all();
 
         return view('gestion_deroulement_cours.fiche.updateFicheDeroulementCours', compact('flight','studyYears','semesters','filieres','ues'))->with('Success'); 
+        }
+        else {return view ('gestion_deroulement_cours.accueil');}
+
     }
 
     public function updateFormDeroulementCours($id, Request $request)
     {
-        $flight = FichesDeroulementCours::findorFail($id);
-        $flight-> update([
-            'name'=> $request->name,
-            'surname'=> $request->surname,
-            'studyYearsId'=> $request->yearstudy,
-            'fieldsId'=> $request->filiere,
-            'ueId'=> $request->ue,
-            'dateDeroulement'=> $request->date,
-            'startTimeCours'=> $request->starttime,
-            'endTimeCours'=> $request->endtime,
-            'semestreId'=> $request->semester,
-            'nature_ue'=> $request->nature_ue,
-            'observation'=> $request->observation
-        ]);
+        $idUserRole = Auth::user()->user_groupId;
+        if($idUserRole == 3)
+        {
+            $flight = FichesDeroulementCours::findorFail($id);
+            $flight-> update([
+                'name'=> $request->name,
+                'surname'=> $request->surname,
+                'studyYearsId'=> $request->yearstudy,
+                'fieldsId'=> $request->filiere,
+                'ueId'=> $request->ue,
+                'dateDeroulement'=> $request->date,
+                'startTimeCours'=> $request->starttime,
+                'endTimeCours'=> $request->endtime,
+                'semestreId'=> $request->semester,
+                'nature_ue'=> $request->nature_ue,
+                'observation'=> $request->observation
+            ]);
 
-        return view('gestion_deroulement_cours.accueil')->with('Success');
+            return view('gestion_deroulement_cours.accueil')->with('Success');
+        }
+        else { return view('gestion_deroulement_cours.accueil');}
     
     }
 
     public function deleteFormDeroulementCours ($id,Request $request) 
     {
-        $flight = FichesDeroulementCours::findorFail($id);
-        $flight->delete();
+        $idUserRole = Auth::user()->user_groupId;
+        if($idUserRole == 3)
+        {
+            $flight = FichesDeroulementCours::findorFail($id);
+            $flight->delete();
 
-        return view('gestion_deroulement_cours.accueil');
+            return view('gestion_deroulement_cours.accueil');
+        }
+        else { return view('gestion_deroulement_cours.accueil');  }
     }
 
 

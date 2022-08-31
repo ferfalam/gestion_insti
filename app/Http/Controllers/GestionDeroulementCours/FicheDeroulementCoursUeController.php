@@ -6,10 +6,14 @@ use App\Models\Ue;
 use App\Models\Enseignant;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use App\Models\FichesDeroulementCours;
 
 class FicheDeroulementCoursUeController extends Controller
 {
+    public function __construct(){
+        $this->middleware('auth');
+    }
     
     /**
      * For to read all Fiche created.
@@ -17,20 +21,32 @@ class FicheDeroulementCoursUeController extends Controller
      */
     public function showFormDeroulementCoursByUes( Request $request )
     {
-        $fichesDeroulementCours = FichesDeroulementCours::all() ;
-        $ues = Ue::all() ;
+       
+        $idUserRole = Auth::user()->user_groupId;
+        if($idUserRole == 3)
+        {
+            $fichesDeroulementCours = FichesDeroulementCours::all() ;
+            $ues = Ue::all() ;
 
-        return view ('gestion_deroulement_cours.fiche.showFicheByUe', compact('fichesDeroulementCours','ues'));
+            return view ('gestion_deroulement_cours.fiche.showFicheByUe', compact('fichesDeroulementCours','ues'));
+        }
+        else{ return view('gestion_deroulement_cours.accueil');}
+        
     }
 
     public function showFormDeroulementCoursByUe($id){
 
+        $idUserRole = Auth::user()->user_groupId;
+        if($idUserRole == 3)
+        {
         $flight = FichesDeroulementCours::where('ueId', $id)->get();
         
         //     dd( $heureEnd->format("H"), $heureStart);
         // <td>{{ $item-> created_at -> format("d F Y à H:i") }}</td>
 
         return view('gestion_deroulement_cours.fiche.vueFicheDeCoursSortant', compact('flight'));
+        } 
+        else {return view ('gestion_deroulement_cours.accueil');}
     }
 
     public function showFormDeroulementCoursByEnseignants( Request $request ){
